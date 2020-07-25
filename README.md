@@ -13,8 +13,8 @@
 > ! [PDF版本下载](https://github.com/kelthuzadx/Cpp17TheCompleteGuideChinese/blob/master/public/Cpp17TheCompleteGuide.pdf),仅供翻译参考
 
 # 目录
-+ 第一部分 基本语言特性
-  + 第一章 结构化绑定
++ [第一部分 基本语言特性](part1/README.md)
+  + [第一章 结构化绑定](part1/cp1.md)
   + 第二章 带初始化的if和switch
   + 第三章 内联变量
   + 第四章 聚合扩展

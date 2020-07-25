@@ -1,10 +1,16 @@
-#《C++ 17 The Complete Guide》翻译
+# 《C++ 17 The Complete Guide》翻译
+
 > ! 2020.7开始更新
+
 > ! 看目录就知道这书质量有多高了
+
 > ！目录章节只是简单翻译一下，后期可能调整
+
 > ! 我没有版权，我没有版权，我没有版权
+
 > ！本书要求读者具有C++基础
-> ! [PDF版本下载](),仅供翻译参考
+
+> ! [PDF版本下载](https://github.com/kelthuzadx/Cpp17TheCompleteGuideChinese/blob/master/public/Cpp17TheCompleteGuide.pdf),仅供翻译参考
 
 # 目录
 + 第一部分 基本语言特性

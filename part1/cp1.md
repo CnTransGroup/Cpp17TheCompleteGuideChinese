@@ -217,3 +217,47 @@ auto [_,val2] = getStruct(); // ERROR: name _ already used
 嵌套或者非平坦的对象分解是不支持的。（译注：指的是形如OCaml等语言的这种`let a,(b,c) = (3,(4,2));;`模式匹配能力）
 
 接下来的章节讨论本节列表提到的各种情况。
+
+### 1.2.1 结构体和类
+到目前为止，已经演示了很多关于结构体和类的简单示例了。
+
+如果类和结构体用到了继承，那么结构化绑定的使用就很受限了。所有非静态数据成员必须出现在同一个类。（换句话说，这些数据成员要么全是该类的，要么全是基类的）。
+```cpp
+struct B {
+  int a = 1;
+  int b = 2;
+};
+
+struct D1 : B {
+};
+auto [x, y] = D1{}; // OK
+
+struct D2 : B {
+  int c = 3;
+};
+
+auto [i, j, k] = D2{}; // Compile-Time ERROR
+```
+
+### 1.2.1 原生数组
+下面的代码使用有两个元素的C-style数组初始化x和y：
+```cpp
+int arr[] = { 47, 11 };
+auto [x, y] = arr; // x and y are ints initialized by elems of arr
+auto [z] = arr; // ERROR: number of elements doesn’t fit
+```
+这种方式只能出现在数组长度已知的情况下。如果将数组作为参数传递，这样写就行不通，因为数组作为参数传递会发生类型退化，变成指针类型。
+
+C++允许我们返回带长度的数组引用，如果有函数返回这种带长度的数组引用，那么也可以使用结构化绑定：
+```cpp
+auto getArr() -> int(&)[2]; // getArr() returns reference to raw int array
+...
+auto [x, y] = getArr(); // x and y are ints initialized by elems of returned array
+```
+你也可以对`std::array`使用结构化绑定，但是这需要使用似若tuple的API，这也是下一节的内容。
+
+### 1.2.3 `std::paor`,`std::tuple`和`std::array`
+结构化绑定是可扩展的，你可以为任何类型添加结构化绑定机制。标准库为`std::paor`,`std::tuple`和`std::array`都添加了该机制。
+
+#### `std::array`
+举个例子，下面的代码用返回四个元素的`std::array<>`的`getArray()`初始化i，j，k和l。

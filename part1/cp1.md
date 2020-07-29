@@ -260,4 +260,145 @@ auto [x, y] = getArr(); // x and y are ints initialized by elems of returned arr
 结构化绑定是可扩展的，你可以为任何类型添加结构化绑定机制。标准库为`std::paor`,`std::tuple`和`std::array`都添加了该机制。
 
 #### `std::array`
-举个例子，下面的代码用返回四个元素的`std::array<>`的`getArray()`初始化i，j，k和l。
+举个例子，下面的`getArray()`将返回四个元素的`std::array<>`，并用它初始化i，j，k和l。
+```cpp
+std::array<int,4> getArray();
+...
+auto [i,j,k,l] = getArray(); // i,j,k,l name the 4 elements of the copied return value
+```
+i，j，k和l分别绑定到`getArray()`返回的四个元素上。
+
+写操作也是支持的，但这要求用来初始化结构化绑定的值不是一个临时的返回值：
+```cpp
+std::array<int,4> stdarr { 1, 2, 3, 4 };
+...
+auto& [i,j,k,l] = stdarr;
+i += 10; // modifies std::array[0]
+```
+
+#### `std::tuple`
+下面的代码使用`getTuple()`返回有三个元素的`std::tuple<>`来初始化a，b和c：
+```cpp
+std::tuple<char,float,std::string> getTuple();
+...
+auto [a,b,c] = getTuple();    // a,b,c have types and values of returned tuple
+```
+
+#### `std::pair`
+另一个例子是处理关联型/无序型容器的`insert()`调用的返回值，使用结构化绑定使代码可读性更强，可以清晰的表达自己的意图，而不是依赖于`std::tuple`通用的first和second：
+```cpp
+std::map<std::string, int> coll;
+...
+auto [pos,ok] = coll.insert({"new",42});
+if (!ok) {
+  // if insert failed, handle error using iterator pos:
+  ...
+}
+```
+在C++17之前，必须使用下面的代码检查返回数据：
+```cpp
+auto ret = coll.insert({"new",42});
+if (!ret.second){
+  // if insert failed, handle error using iterator ret.first
+  ...
+}
+```
+注意，在这个例子中，C++17甚至还提供一种表达力更强的带初始化的if：
+
+#### 为pair和tuple的结构化绑定赋值
+在声明了结构化绑定之后，通常你不能一次性修改全部结构化绑定，因为结构化绑定是一次性声明所有而不是一次性使用所有。然而，如果重新赋的值是`std::pair<>`或者`std::tuple<>`那么你可以使用`std::tie()`。
+
+也就是说，你可以写出下面的代码：
+```cpp
+std::tuple<char,float,std::string> getTuple();
+...
+auto [a,b,c] = getTuple(); // a,b,c have types and values of returned tuple
+...
+std::tie(a,b,c) = getTuple(); // a,b,c get values of next returned tuple
+```
+这种方式在实现循环调用且每次循环赋予一对返回值的过程中尤其有用，比如下面子啊循环中使用searcher的代码：
+```cpp
+std::boyer_moore_searcher bm{sub.begin(), sub.end()};
+for (auto [beg, end] = bm(text.begin(), text.end());
+  beg != text.end();
+  std::tie(beg,end) = bm(end, text.end())) {
+  ...
+}
+```
+
+## 1.3
+前面提到过，只要你的类型实现了似若tuple的API，那么就可以针对该类型使用结构化绑定，就和标准库的`std::pair<>`,`std::tuple<>`和`std::array<>`意义。
+
+#### 只读结构化绑定
+下面的代码展示了如何为类型Customer添加结构化绑定功能，Customer的定义如下
+```cpp
+// lang/customer1.hpp
+#include <string>
+#include <utility> // for std::move()
+class Customer {
+private:
+  std::string first;
+  std::string last;
+  long val;
+public:
+  Customer (std::string f, std::string l, long v)
+      : first(std::move(f)), last(std::move(l)), val(v) {
+  }
+  std::string getFirst() const {
+    return first;
+  }
+  std::string getLast() const {
+    return last;
+  }
+  long getValue() const {
+    return val;
+  }
+};
+```
+我们可以提供似若tuple的API：
+```cpp
+// lang/structbind1.hpp
+#include "customer1.hpp" #include <utility> // for tuple-like API
+// provide a tuple-like API for class Customer for structured bindings:
+template<>
+struct std::tuple_size<Customer> {
+  static constexpr int value = 3; // we have 3 attributes
+};
+template<>
+struct std::tuple_element<2, Customer> {
+  using type = long; // last attribute is a long
+};
+template<std::size_t Idx>
+struct std::tuple_element<Idx, Customer> {
+  using type = std::string; // the other attributes are strings
+};
+// define specific getters:
+template<std::size_t> auto get(const Customer& c);
+template<> auto get<0>(const Customer& c) { return c.getFirst(); }
+template<> auto get<1>(const Customer& c) { return c.getLast(); }
+template<> auto get<2>(const Customer& c) { return c.getValue(); }
+```
+代码Customer有三个成员，还有为三个成员准备的getter：
++ 表示first name的成员，`std::string`类型
++ 表示last nane的成员，`std::string`类型
++ 表示value的成员，long类型
+
+获取Customer成员个数的函数是`std::tuple_size`的特化：
+```cpp
+template<>
+struct std::tuple_size<Customer> {
+  static constexpr int value = 3; // we have 3 attributes
+};
+```
+获取成员类型的函数是`std::tuple_element`的特化：
+```cpp
+template<>
+struct std::tuple_element<2, Customer> {
+  using type = long; // last attribute is a long
+};
+template<std::size_t Idx>
+struct std::tuple_element<Idx, Customer> {
+  using type = std::string; // the other attributes are strings
+};
+```
+第三个成员类型是long，需要为它（index 2）编写全特化代码。其它成员是`std::stinrg`类型，部分特化（比全特化优先级低）即可。

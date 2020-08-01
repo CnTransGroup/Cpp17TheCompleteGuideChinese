@@ -326,7 +326,7 @@ for (auto [beg, end] = bm(text.begin(), text.end());
 }
 ```
 
-## 1.3
+## 1.3 为结构化绑定提供似若tuple的API
 前面提到过，只要你的类型实现了似若tuple的API，那么就可以针对该类型使用结构化绑定，就和标准库的`std::pair<>`,`std::tuple<>`和`std::array<>`意义。
 
 #### 只读结构化绑定
@@ -401,4 +401,197 @@ struct std::tuple_element<Idx, Customer> {
   using type = std::string; // the other attributes are strings
 };
 ```
-第三个成员类型是long，需要为它（index 2）编写全特化代码。其它成员是`std::stinrg`类型，部分特化（比全特化优先级低）即可。
+第三个成员类型是long，需要为它（index 2）编写全特化代码。其它成员是`std::stinrg`类型，部分特化（比全特化优先级低）即可。这里指定的类型与`decltype`产生的类型一致。
+
+最终，我们在同一个命名空间为Customer类型定义相应的`get<>()`函数重载：
+```cpp
+template<std::size_t> auto get(const Customer& c);
+template<> auto get<0>(const Customer& c) { return c.getFirst(); }
+template<> auto get<1>(const Customer& c) { return c.getLast(); }
+template<> auto get<2>(const Customer& c) { return c.getValue(); }
+```
+在这里，我们声明了模板函数，然后为所有情况都写出来对应的全特化形式。
+
+注意，模板函数的全特化必须与模板函数的签名一致（也包括一致的返回类型）。原因是我们只提供了特定的“实现”，而不是声明新的函数。下面的代码不能通过编译：
+```cpp
+template<std::size_t> auto get(const Customer& c);
+template<> std::string get<0>(const Customer& c) { return c.getFirst(); }
+template<> std::string get<1>(const Customer& c) { return c.getLast(); }
+template<> long get<2>(const Customer& c) { return c.getValue(); }
+```
+通过使用新的**编译时if特性**，我们可以所有特化形式的`get<>()`组合到一个函数里面：
+```cpp
+template<std::size_t I> auto get(const Customer& c) {
+  static_assert(I < 3);
+  if constexpr (I == 0) {
+    return c.getFirst();
+  }
+  else if constexpr (I == 1) {
+    return c.getLast();
+  }
+  else { // I == 2
+    return c.getValue();
+  } 
+}
+```
+有了这些API，就能对Customer的对象使用结构化绑定了：
+```cpp
+#include <iostream>
+int main()
+{
+  Customer c("Tim", "Starr", 42);
+  auto [f, l, v] = c;
+  std::cout << "f/l/v: " << f << ' ' << l << ' ' << v << '\n';
+// modify structured bindings:
+  std::string s = std::move(f);
+  l = "Waters";
+  v += 10;
+  std::cout << "f/l/v: " << f << ' ' << l << ' ' << v <<'\n';
+  std::cout << "c: " << c.getFirst() << ' '
+  << c.getLast() << ' ' << c.getValue() << '\n';
+  std::cout << "s: " << s << '\n';
+}
+```
+和往常一样，结构化绑定f，l和v是新的匿名变量的成员的别名，新的匿名变量经由c初始化。初始化为每个成员调用相应的getter函数。因此，在初始化后，修改c不会影响到结构化绑定（反之亦然）。所以，程序的输出如下：
+```cpp
+f/l/v: Tim Starr 42
+f/l/v:  Waters 52
+c: Tim Starr 42
+s: Tim
+```
+你也可以在迭代一个由Customer元素构成的vector的过程中使用结构化绑定：
+```cpp
+std::vector<Customer> coll;
+...
+for (const auto& [first, last, val] : coll) {
+  std::cout << first << ' ' << last << ": " << val << '\n'; 
+}
+```
+对结构化绑定使用`decltype`仍然回产出它的类型，而不是匿名变量的类型。这意味着`decltype(first)`是`const std::string`。
+
+#### 允许针对结构化绑定的写操作
+似若tuple的API可以可以使用产生引用的函数。这使得我们可以允许针对结构化绑定的写操作发生。考虑下面的代码，它为Customer提供了读取和修改成员的API：
+```cpp
+// lang/customer2.hpp
+#include <string>
+#include <utility> // for std::move()
+class Customer {
+private:
+  std::string first;
+  std::string last;
+  long val;
+public:
+  Customer (std::string f, std::string l, long v)
+      : first(std::move(f)), last(std::move(l)), val(v) {
+  }
+  const std::string& firstname() const {
+    return first;
+  }
+  std::string& firstname() {
+    return first;
+  }
+  const std::string& lastname() const {
+    return last;
+  }
+  std::string& lastname() {
+    return last;
+  }
+  long value() const {
+    return val;
+  }
+  long& value() {
+    return val;
+  }
+};
+```
+要支持读写操作，我们还得为常量引用和非常量引用准备getter重载：
+```cpp
+// lang/structbind2.hpp
+#include "customer2.hpp" 
+#include < utility> // for tuple-like API
+// provide a tuple-like API for class Customer for structured bindings:
+template <> struct std::tuple_size<Customer> {
+  static constexpr int value = 3; // we have 3 attributes
+};
+template <> struct std::tuple_element<2, Customer> {
+  using type = long; // last attribute is a long
+};
+template <std::size_t Idx> struct std::tuple_element<Idx, Customer> {
+  using type = std::string; // the other attributes are strings
+};
+// define specific getters:
+template <std::size_t I> decltype(auto) get(Customer &c) {
+  static_assert(I < 3);
+  if constexpr (I == 0) {
+    return c.firstname();
+  } else if constexpr (I == 1) {
+    return c.lastname();
+  } else { // I == 2
+    return c.value();
+  }
+}
+template <std::size_t I> decltype(auto) get(const Customer &c) {
+  static_assert(I < 3);
+  if constexpr (I == 0) {
+    return c.firstname();
+  } else if constexpr (I == 1) {
+    return c.lastname();
+  } else { // I == 2
+    return c.value();
+  }
+}
+template <std::size_t I> decltype(auto) get(Customer &&c) {
+  static_assert(I < 3);
+  if constexpr (I == 0) {
+    return std::move(c.firstname());
+  } else if constexpr (I == 1) {
+    return std::move(c.lastname());
+  } else { // I == 2
+    return c.value();
+  }
+}
+```
+你应该写出这三个重载，来处理常量对象，非常量对象，以及可移动对象。为了返回引用，你应该使用`decltype(auto)`。
+
+还是之前那样，我们可以使用新的**编译时if特性**，来简化我们的实现，尤其是getter的返回类型不一样时，它更有用。没有编译时if特性，我们只能写出所有的全特化：
+```cpp
+template<std::size_t> decltype(auto) get(Customer& c);
+template<> decltype(auto) get<0>(Customer& c) { return c.firstname(); }
+template<> decltype(auto) get<1>(Customer& c) { return c.lastname(); }
+template<> decltype(auto) get<2>(Customer& c) { return c.value(); }
+```
+模板函数声明的签名必须与全特化的一致（包括返回类型）。下面的代码不能编译：
+```cpp
+template<std::size_t> decltype(auto) get(Customer& c);
+template<> std::string& get<0>(Customer& c) { return c.firstname(); }
+template<> std::string& get<1>(Customer& c) { return c.lastname(); }
+template<> long& get<2>(Customer& c) { return c.value(); }
+```
+做完这些后，你就能使用结构化绑定读取或者修改Customer的成员了：
+```cpp
+#include "structbind2.hpp" 
+#include <iostream>
+int main() {
+  Customer c("Tim", "Starr", 42);
+  auto [f, l, v] = c;
+  std::cout << "f/l/v: " << f << ' ' << l << ' ' << v << '\n';
+  // modify structured bindings via references:
+  auto &&[f2, l2, v2] = c;
+  std::string s = std::move(f2);
+  f2 = "Ringo";
+  v2 += 10;
+  std::cout << "f2/l2/v2: " << f2 << ' ' << l2 << ' ' << v2 << '\n';
+  std::cout << "c: " << c.firstname() << ' ' << c.lastname() << ✬ ✬ << c.value() << '\n';
+  std::cout << "s: " << s << '\n'; 
+}
+```
+它会输出：
+```bash
+f/l/v: Tim Starr 42
+f2/l2/v2: Ringo Starr 52
+c: Ringo Starr 52
+s: Tim
+```
+
+## 1.4 后记
+结构化绑定最初由Herb Sutter，Bjarne Stroustrup和Gabriel Dos Reis在[https://wg21.link/p0144r0](https://wg21.link/p0144r0)中提出，当时使用花括号而不是方括号。最后这个特性的公认措辞是由Jens Maurer在[https://wg21.link/p0217r3](https://wg21.link/p0217r3)中给出。

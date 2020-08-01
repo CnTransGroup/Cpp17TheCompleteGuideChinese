@@ -15,7 +15,7 @@
 # 目录
 + [第一部分 基本语言特性](part1/README.md)
   + [第一章 结构化绑定](part1/cp1.md)
-  + 第二章 带初始化的if和switch
+  + [第二章 带初始化的if和switch](part1/cp2.md)
   + 第三章 内联变量
   + 第四章 聚合扩展
   + 第五章 强制拷贝消除或者传递unmaterialized对象

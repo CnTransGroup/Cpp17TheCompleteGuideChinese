@@ -17,7 +17,7 @@
   + [第一章 结构化绑定](part1/cp1.md)
   + [第二章 带初始化的if和switch](part1/cp2.md)
   + [第三章 内联变量](part1/cp3.md)
-  + 第四章 聚合扩展
+  + [第四章 聚合扩展](part1/cp4.md)
   + 第五章 强制拷贝消除或者传递unmaterialized对象
   + 第六章 Lambda扩展
   + 第七章 新属性和属性相关特性

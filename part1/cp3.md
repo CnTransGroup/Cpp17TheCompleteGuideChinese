@@ -167,3 +167,91 @@ constexpr int D::n; // C++11/C++14: definition
 当使用C++17构建，在class中的声明本身就是一个定义，所以这段代码就算没有前面的定义也是有效的。前面的定义也是可以的，但是已经废弃。
 
 ## 3.4 内联变量和thread_local
+使用thread_local你可以让每个线程拥有一个内联变量：
+```cpp
+struct ThreadData {
+  inline static thread_local std::string name; // unique name per thread
+...
+};
+
+inline thread_local std::vector<std::string> cache; // one cache per thread
+```
+为了演示一个完整的例子，考虑下面的头文件：
+```cpp
+// lang/inlinethreadlocal.hpp
+#include <string>
+#include <iostream>
+
+struct MyData {
+  inline static std::string gName = "global"; // unique in program
+  inline static thread_local std::string tName = "tls"; // unique per thread
+  std::string lName = "local"; // for each object
+  ...
+  void print(const std::string& msg) const {
+    std::cout << msg << '\n';
+    std::cout << "- gName: " << gName << '\n';
+    std::cout << "- tName: " << tName << '\n';
+    std::cout << "- lName: " << lName << '\n'; }
+};
+
+inline thread_local MyData myThreadData; // one object per thread
+```
+你可以在有`main()`的翻译单元使用它：
+```cpp
+// lang/inlinethreadlocal1.cpp
+#include "inlinethreadlocal.hpp" 
+#include <thread>
+void foo();
+
+int main()
+{
+  myThreadData.print("main() begin:");
+  myThreadData.gName = "thread1 name";
+  myThreadData.tName = "thread1 name";
+  myThreadData.lName = "thread1 name";
+  myThreadData.print("main() later:");
+  std::thread t(foo);
+  t.join();
+  myThreadData.print("main() end:");
+}
+```
+你可以在另一个定义`foo()`的翻译单元使用头文件，其中`foo()`被不同的线程调用：
+```cpp
+// lang/inlinethreadlocal2.cpp
+#include "inlinethreadlocal.hpp"
+
+void foo()
+{
+  myThreadData.print("foo() begin:");
+  myThreadData.gName = "thread2 name";
+  myThreadData.tName = "thread2 name";
+  myThreadData.lName = "thread2 name";
+  myThreadData.print("foo() end:");
+}
+```
+程序的输出如下：
+```text
+main() begin:
+- gName: global
+- tName: tls
+- lName: local
+main() later:
+- gName: thread1 name
+- tName: thread1 name
+- lName: thread1 name
+foo() begin:
+- gName: thread1 name
+- tName: tls
+- lName: local
+foo() end:
+- gName: thread2 name
+- tName: thread2 name
+- lName: thread2 name
+main() end:
+- gName: thread2 name
+- tName: thread1 name
+- lName: thread1 name
+```
+
+## 3.5 后记
+David Krauss的文档[https://wg21.link/n4147]( https://wg21.link/n4147)是内联变量产生的动机。内联变量最初由Hal Finkel和Richard Smith在[https://wg21.link/n4424](https://wg21.link/n4424)中提出。最后这个特性的公认措辞是由Hal Finkel和Richard Smith在[ https://wg21.link/p0386r2]( https://wg21.link/p0386r2)中给出。

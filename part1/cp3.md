@@ -129,3 +129,41 @@ inline MyType MyType::max{0};
 参见另一个使用内联变量的例子，它会**使用头文件跟踪所有new调用**。
 
 ## 3.3 constexpr隐式包含inline
+对于static数据成员，constexpr现在隐式包含inline的语义，所以下面的声明在C++17后会**定义**static数据成员n：
+```cpp
+struct D {
+  static constexpr int n = 5; // C++11/C++14: declaration
+                              // since C++17: definition
+};
+```
+换句话说，它与下面的代码一样：
+```cpp
+struct D {
+  inline static constexpr int n = 5;
+};
+```
+在C++17之前,有时候你也可以只声明不定义。考虑下面的声明：
+```cpp
+struct D {
+  static constexpr int n = 5;
+};
+```
+如果不需要`D::n`的定义，这就足够了，例如，`D::n`只通过值传递的话：
+```cpp
+std::cout << D::n; // OK (ostream::operator<<(int) gets D::n by value)
+```
+如果`D::n`是传引用到非内联函数，并且/或者函数调用没有优化，那么就是无效的。比如：
+```cpp
+int inc(const int& i);
+std::cout << inc(D::n); // usually an ERROR
+```
+这段代码违背了一处定义规则（ODR）。当使用带优化的编译器构建时，它可能正常工作，或者抛出链接时错误指出缺少定义。当使用不带优化的编译器时，几乎可以确定这段代码会由于缺少`D::n`的定义而拒绝编译：
+
+因此，在C++17前，你不得不在相同的翻译单元定义`D::n`：
+```cpp
+constexpr int D::n; // C++11/C++14: definition
+                    // since C++17: redundant declaration (deprecated)
+```
+当使用C++17构建，在class中的声明本身就是一个定义，所以这段代码就算没有前面的定义也是有效的。前面的定义也是可以的，但是已经废弃。
+
+## 3.4 内联变量和thread_local

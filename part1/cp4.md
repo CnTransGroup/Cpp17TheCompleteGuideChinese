@@ -46,4 +46,86 @@ MoreData z{}; // OK: value/done have values 0/false
 ```
 如果这个看起来太危险了，你还是最好提供一个构造函数。
 
+## 4.2 使用扩展的聚合初始化
+关于这个特性的常见用法是列表初始化一个C风格的数据结构，该数据结构继承自一个类，然后添加了一些数据成员或者操作。比如：
+```cpp
+struct Data {
+  const char* name;
+  double value;
+};
+struct PData : Data {
+  bool critical;
+  void print() const {
+    std::cout << ✬[✬ << name << ✬,✬ << value << "]\n"; }
+};
 
+PData y{{"test1", 6.778}, false};
+y.print();
+```
+这里里面的花括号会传递给基类Data的数据成员。
+
+你可以跳过一些初始值。这种情况下这些元素是零值初始化（zero initalized）（调用默认构造函数或者将基本数据类型初始化为0，false或者nullptr）。比如：
+```cpp
+PData a{};          // zero-initialize all elements
+PData b{{"msg"}};   // same as {{"msg",0.0},false}
+PData c{{}, true};  // same as {{nullptr,0.0},true}
+PData d;            // values of fundamental types are unspecified
+```
+注意使用空的花括号和不使用花括号的区别。
++ a零值初始化所有成员，所以name被默认构造，double value被初始化为0.0，bool flag被初始化为false。
++ d只调用name的默认构造函数。所有其它的成员都没用被初始化，所以值是未指定的（unspecified）。
+
+你也可以继承非聚合体来创建一个聚合体。比如：
+```cpp
+struct MyString : std::string {
+  void print() const {
+    if (empty()) {
+      std::cout << "<undefined>\n"; }
+    else {
+      std::cout << c_str() << '\n'; } }
+};
+
+MyString x{{"hello"}};
+MyString y{"world"};
+```
+甚至还可以继承多个非聚合体：
+```cpp
+template<typename T>
+struct D : std::string, std::complex<T>
+{
+  std::string data;
+};
+```
+然后使用下面的代码初始化它们：
+```cpp
+D<float> s{{"hello"}, {4.5,6.7}, "world"};        // OK since C++17
+D<float> t{"hello", {4.5, 6.7}, "world"};         // OK since C++17
+std::cout << s.data;                              // outputs: ”world”
+std::cout << static_cast<std::string>(s);         // outputs: ”hello”
+std::cout << static_cast<std::complex<float>>(s); // outputs: (4.5,6.7)
+```
+内部花括号的值（initializer_lists）会传递给基类，其传递顺序遵循基类声明的顺序。
+
+这项新特性还有助于用很少的代码定义**lambdas重载**。
+
+## 4.3 聚合体定义
+总结一下，C++17的聚合体（aggregate）定义如下：
++ 是个数组
++ 或者是个类类型（class，struct，union），其中
+  + 没有用户声明的构造函数或者explicit构造函数
+  + 没有使用using声明继承的构造函数
+  + 没有private或者protected的非static数据成员
+  + 没有virtual函数
+  + 没有virtual，private或者protected基类
+
+为了让聚合体可以使用，还要求聚合体没有private或者protected基类成员或者构造函数在初始化的时候使用。
+
+C++17还引入了一种新的type trait即`is_aggregate<>`来检查一个类型是否是聚合体：
+```cpp
+template<typename T>
+struct D : std::string, std::complex<T> {
+  std::string data;
+};
+D<float> s{{"hello"}, {4.5,6.7}, "world"}; // OK since C++17
+std::cout << std::is_aggregate<decltype(s)>::value; // outputs: 1 (true)
+```

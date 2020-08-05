@@ -129,3 +129,35 @@ struct D : std::string, std::complex<T> {
 D<float> s{{"hello"}, {4.5,6.7}, "world"}; // OK since C++17
 std::cout << std::is_aggregate<decltype(s)>::value; // outputs: 1 (true)
 ```
+
+## 4.4 向后不兼容
+注意，下面示例中的代码将不再能通过编译：
+```cpp
+// lang/aggr14.cpp
+struct Derived;
+struct Base {
+  friend struct Derived;
+private:
+  Base() {
+  }
+};
+struct Derived : Base {
+};
+int main()
+{
+  Derived d1{}; // ERROR since C++17
+  Derived d2; // still OK (but might not initialize)
+}
+```
+C++17之前，Derived不是一个聚合体，所以：
+```cpp
+Derived d1{};
+```
+调用Derived隐式定义的默认构造函数，它默认调用基类Base的默认构造函数。虽然基类的默认构造函数是private，但是通过子类的默认构造函数调用它是有效的，因为子类被声明为一个friend类。
+
+C++17开始，Derived是一个聚合体，没有隐式的默认构造函数。所以这个初始化被认为是聚合初始化，聚合初始化不允许调用基类的默认构造函数。不管基类是不是friend都不行。
+
+## 4.5 后记
+内联变量最初由Oleg Smolsky在[https://wg21.link/n4404](https://wg21.link/n4404)中提出。最后这个特性的公认措辞是由Oleg Smolsky在[ https://wg21.link/p0017r1](https://wg21.link/p0017r1)中给出。
+
+新的type trait即`std::is_aggregate<>`最初作为美国国家机构对C++ 17标准化的评论而引入。（参见[https://wg21.link/lwg2911](https://wg21.link/lwg2911)）

@@ -64,6 +64,81 @@ MyClass bar(MyClass obj) // copy elision for passed temporaries
 ```
 传递一个临时量（即纯右值（prvalue））到函数作为实参，不会发生拷贝/移动操作，但是返回这个参数仍然需要拷贝/移动操作，因为返回的对象有名字。
 
-作为这一改变的部分，值分类表（value categories）修改和新增了很多术语。
+作为这一改变的部分，值范畴（value categories）修改和新增了很多术语。
 
 ## 5.2 临时量强制拷贝消除的好处
+强制拷贝消除的一个好处是，很明显，如果拷贝操作开心较大时会得到更好的性能。虽然移动语言显著减少了拷贝开销，但是完全不执行拷贝能极大的提示性能。这可能会减少使用出参（译注：所谓出参即可out parameter，是指使用参数来传递返回信息，通常是一个指针或者引用）代替返回一个值（假设这个值是由返回语句创建的）的需求。
+
+另一个好处是现在只要写一个工厂函数它总是能工作，因为现在的工厂函数可以返回对象，即便对象不允许拷贝/移动。比如，考虑下面的泛型工厂函数：
+```cpp
+// lang/factory.hpp
+#include <utility>
+template <typename T, typename... Args>
+T create(Args&&... args)
+{
+  ...
+  return T{std::forward<Args>(args)...};
+}
+```
+这个函数现在甚至可以用于`std::atomic<>`这种类型，该类型既没有定义拷贝构造函数也没有定义移动构造函数：
+```cpp
+// lang/factory.cpp
+#include "factory.hpp" 
+#include <memory>
+#include <atomic>
+
+int main() {
+    int i = create<int>(42);
+    std::unique_ptr<int> up = create<std::unique_ptr<int>>(new int{42});
+    std::atomic<int> ai = create<std::atomic<int>>(42);
+}
+```
+这个特性带来的另一个效果是，如果类有显式delete的移动构造函数，你现在可以返回临时值，然后用它初始化对象：
+```cpp
+class CopyOnly {
+public:
+    CopyOnly() {
+    }
+    CopyOnly(int) {
+    }
+    CopyOnly(const CopyOnly&) = default;
+    CopyOnly(CopyOnly&&) = delete; // explicitly deleted
+};
+
+CopyOnly ret() {
+    return CopyOnly{}; // OK since C++17
+}
+
+CopyOnly x = 42; // OK since C++17
+```
+x的初始化代码在C++17之前是无效的，因为拷贝初始化需要将42转换为一个临时对象，然后临时对象原则上需要提供一个移动构造函数，尽管不会用到它。（）
+
+## 5.3 值范畴的解释
+强制拷贝消除带来的额外工作是值范畴（value categories）的一些修改。
+
+### 5.3.1 值范畴
+在C++中的每个表达式都有一个值范畴。这个值范畴描述了表达式可以做什么。
+
+#### 值范畴的历史
+从C语言历史的角度来看，在赋值语句中只有lvalue（左值）和rvalue（右值）：
+```cpp
+  x = 42;
+```
+表达式x是lvalue，因为它可以出现在赋值语句的左边，表达式42是rvalue，因为它只能出现在赋值语句的右边。但是因为ANSI-C，事情变得更复杂一些，因为x如果声明为`const int`就不能在赋值语句的左边了，但是它仍然是个（不具可修改性的）lvalue。
+
+C++11我们有了可移动的对象，这些对象在语义上是只能出现在赋值语句右边，但是可以被修改，因为赋值语句可以盗取它们的值。基于这个原因，新的值范畴xvalue被引入，并且之前的值范畴rvalue有了新名字即prvalue。
+
+#### C++11后的值范畴
+C++11后，值范畴如图5.1描述的那样：我们的核心值范畴是lvalue，prvalue（pure rvalue，纯右值），xvalue（eXpiring value，将亡值）。组合得到的值范畴有：glvalue（generalized lvalue，泛化左值，是lvalue和xvalue的结合）以及rvalue（是xvalue和prvalue的结合）。
+
+<img src="../public/fig5-1.jpg" align="center"/>
+<p align="center">图5.1 C++11后的值范畴</p>
+
+lvalue的例子有：
++ 一个表达式只包含变量，函数或者成员的名字
++ 一个表达式是字符串字面值
++ 内置一元操作符`*`的结果（即对原生指针解引用）
++ 返回左值引用（`type&`）的函数的返回值
+
+prvalue的例子有：
++ 除字符串字面值外的其他字面值（或者用户定义的字面值，）

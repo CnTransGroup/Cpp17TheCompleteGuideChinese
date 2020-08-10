@@ -180,7 +180,7 @@ int y = x; // x here is an lvalue
 ```
 第一个语句中3是prvalue，它用来初始化变量x（不是lvalue）。第二个语句中x是lvalue（对它求值会会发现它包含值3）。然后作为lvallue的x转换为prvalue，用来初始化变量y。
 
-## 5.3.2 C++17的值范畴
+### 5.3.2 C++17的值范畴
 C++17没有改变既有的值范畴，但是阐述了它们的语义（如图5.2所示）
 
 <img src="../public/fig5-2.jpg" align="center"/>
@@ -191,4 +191,48 @@ C++17没有改变既有的值范畴，但是阐述了它们的语义（如图5.2
 + prvalue：初始化表达式
 xvalue被认为是一个特殊的位置，表示有一个变量它的资源可以重用（通常因为它接近它的生命周期结尾）。
 
-C++17引入了一个新术语，即具体化（materialization），表示在某个时刻一个prvalue成为临时对象。因此，临时变量具体化转换（temporary materialization conversion）即prvalue到xvalue的转换。/
+C++17引入了一个新术语，具体化（materialization），表示在某个时刻一个prvalue成为临时对象。因此，临时变量具体化转换（temporary materialization conversion）是指prvalue到xvalue的转换。
+
+任何时刻，期待出现glvalue（lvalue或xvalue）的地方出现prvalue都是有效的，创建一个临时变量并通过prvalue初始化，然后prvallue被替换为xvalue。因此在上面的例子中，严格来说：
+```cpp
+void f(const X& p); // accepts an expression of any value category,
+                    // but expects a glvalue
+f(X());             // passes a prvalue materialized as xvalue
+```
+因为例子中的`f()`有一个引用参数，它期待一个glvalue实参。然而，表达式`X()`是一个prvalue。临时具体化规则因此生效，表达式`X()`转换为一个xvalue并使用默认构造函数初始化临时变量。
+
+注意具体化不意味着我们创建了一个新的/不同的对象。lvalue引用仍然绑定xvalue和prvalue，虽然后者总是转换到xvalue。
+
+在这些改变后，拷贝消除意义非凡，因为prvalue不再要求可移动，我们只传递一个初始值，这个值迟早会具体化然后初始化一个对象。
+
+## 5.4 未具体化返回值传递
+未具体化返回值传递是指所有形式的返回临时对象（prvalue）的值：
++ 当返回一个不是字符串字面值的字面值：
+```cpp
+int f1() {    // return int by value
+  return 42;
+}
+```
++ 当返回类型为临时变量的值或者使用auto：
+```cpp
+auto f2() {   // return deduced type by value
+  ...
+  return MyType{...};
+}
+```
++ 当返回临时对象，并且类型用`decltype(auto)`推导：
+```cpp
+decltype(auto) f3() {   // return temporary from return statement by value
+  ...
+  return MyType{...};
+}
+```
+记住如果用于初始化的表达式（这里是返回语句）会创建一个临时变量（prvalue），那么用`decltype(auto)`声明的类型是值。
+
+上述所有形式我们都返回一个prvalue的值，我们不需要任何拷贝/移动的支持。
+
+## 5.5 后记
+强制拷贝消除最初由Richard Smith在[https://wg21.link/p0135r0](https://wg21.link/p0135r0)中提出。最后这个特性的公认措辞是由Richard Smith在[https://wg21.link/p0135r1](https://wg21.link/p0135r1)中给出。
+
+
+> 这一章翻译的不好，后面我会修订

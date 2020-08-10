@@ -128,7 +128,7 @@ x的初始化代码在C++17之前是无效的，因为拷贝初始化需要将42
 
 C++11我们有了可移动的对象，这些对象在语义上是只能出现在赋值语句右边，但是可以被修改，因为赋值语句可以盗取它们的值。基于这个原因，新的值范畴xvalue被引入，并且之前的值范畴rvalue有了新名字即prvalue。
 
-#### C++11后的值范畴
+#### C++11的值范畴
 C++11后，值范畴如图5.1描述的那样：我们的核心值范畴是lvalue，prvalue（pure rvalue，纯右值），xvalue（eXpiring value，将亡值）。组合得到的值范畴有：glvalue（generalized lvalue，泛化左值，是lvalue和xvalue的结合）以及rvalue（是xvalue和prvalue的结合）。
 
 <img src="../public/fig5-1.jpg" align="center"/>
@@ -141,4 +141,54 @@ lvalue的例子有：
 + 返回左值引用（`type&`）的函数的返回值
 
 prvalue的例子有：
-+ 除字符串字面值外的其他字面值（或者用户定义的字面值，）
++ 除字符串字面值外的其他字面值（或者用户定义的字面值，其中与之关联的字面值操作符的返回类型标示值的范畴）
++ 内置一元操作符`&`的结果（即获取表达式地址）
++ 内置算术运算符的结果
++ 返回值的函数的返回值
+
+xvalue的例子有：
++ 返回右值引用（`type&&`，尤其是返回`std::move()`）的函数的返回值
++ 右值引用到对象类型的转换
+
+大概来说：
++ 所有使用名字的表达式是lvalue
++ 所有字符串字面值表达式是lvalue
++ 所有其他字面值（4.2，true，nullptr）是prvalue
++ 所有临时变量（尤其是返回值的函数返回的对象）是prvalue
++ `std::move()`的结果是xvalue
+
+举个例子：
+```cpp
+class X {
+};
+
+X v;
+const X c;
+
+void f(const X&);   // accepts an expression of any value category
+void f(X&&);        // accepts prvalues and xvalues only, but is a better match
+
+f(v);               // passes a modifiable lvalue to the first f()
+f(c);               // passes a non-modifiable lvalue to the first f()
+f(X());             // passes a prvalue to the second f()
+f(std::move(v));    // passes an xvalue to the second f()
+```
+值得强调的是，严格来说，glvalue，prvalue和xvalue是针对表达式的， 不是针对值的（这意味着这些值用词不当）。举个例子，一个变量本身不是一个lvalue，只有一个变量放到表达式里才标示这个变量是lvalue：
+```cpp
+int x = 3; // x here is a variable, not an lvalue
+int y = x; // x here is an lvalue
+```
+第一个语句中3是prvalue，它用来初始化变量x（不是lvalue）。第二个语句中x是lvalue（对它求值会会发现它包含值3）。然后作为lvallue的x转换为prvalue，用来初始化变量y。
+
+## 5.3.2 C++17的值范畴
+C++17没有改变既有的值范畴，但是阐述了它们的语义（如图5.2所示）
+
+<img src="../public/fig5-2.jpg" align="center"/>
+<p align="center">图5.1 C++17后的值范畴</p>
+
+现在解释值范畴的主要方式是认为我们有两类表达式：
++ glvalue：对象/函数位置的表达式
++ prvalue：初始化表达式
+xvalue被认为是一个特殊的位置，表示有一个变量它的资源可以重用（通常因为它接近它的生命周期结尾）。
+
+C++17引入了一个新术语，即具体化（materialization），表示在某个时刻一个prvalue成为临时对象。因此，临时变量具体化转换（temporary materialization conversion）即prvalue到xvalue的转换。/

@@ -46,7 +46,7 @@ auto squared4 = [](auto val) constexpr {
   return val*val;
 };
 ```
-对于显示或隐示的constexpr lambda，函数调用操作符是constexpr。换句话说，下面的定义：
+如果lambda式显式或隐式的constexpr，那么函数调用操作符也会是constexpr。换句话说，下面的定义：
 ```cpp
 auto squared = [](auto val) { // implicitly constexpr since C++17
   return val*val;
@@ -63,3 +63,125 @@ class CompilerSpecificName {
     }
 };
 ```
+生成的闭包类型的函数调用操作符是自动附加constexpr的。在C++17中，如果lambda显式定义为constexpr或者隐式定义为constexpr（就像这个例子），那么生成的函数调用运算符也会是constexpr。
+
+## 6.2 传递this的拷贝到lambda
+当在成员函数中使用lambda时，你不能隐式的访问调用这个成员函数的对象的成员。也就是说，在lambda内部，如果不捕获this，那么你不能使用这个对象的成员：
+```cpp
+class C {
+private:
+    std::string name;
+public:
+    ...
+    void foo() {
+        auto l1 = [] { std::cout << name << '\n'; }; // ERROR
+        auto l2 = [] { std::cout << this->name << '\n'; }; // ERROR
+        ...
+    }
+};
+```
+C++11和C++14中可以传this引用或者传this值：
+```cpp
+class C {
+private:
+    std::string name;
+public:
+    ...
+    void foo() {
+        auto l1 = [this] { std::cout << name << '\n'; }; // OK
+        auto l2 = [=] { std::cout << name << '\n'; }; // OK
+        auto l3 = [&] { std::cout << name << '\n'; }; // OK
+        ...
+    }
+};
+```
+然而，问题是即使是传递this的值，其底层捕获的仍然是引自对象（即只有*指针*被拷贝）。如果lambda的生命周期超过了对象的生命周期，这就会出现问题。一个重要的例子是当用lambda为新线程定义task，它应该使用对象的拷贝来避免任何并发或者生命周期问题。另一个原因可能只是传递一个对象的副本当前状态。
+
+C++14有一个临时的解决方案，但是它读起来不好，工作起来也不好：
+```cpp
+class C {
+private:
+    std::string name;
+public:
+    ...
+    void foo() {
+        auto l1 = [thisCopy=*this] { std::cout << thisCopy.name << '\n'; };
+        ...
+    }
+};
+```
+举个例子，就算使用`=`或`&`捕获了对象，开发者仍然可能不小心用到`this`：
+```cpp
+auto l1 = [&, thisCopy=*this] {
+            thisCopy.name = "new name";
+            std::cout << name << '\n'; // OOPS: still the old name
+};
+```
+C++17开始，你可以显式地通过`*this`说明你想捕获当前对象的复制：
+```cpp
+class C {
+private:
+    std::string name;
+public:
+    ...
+    void foo() {
+        auto l1 = [*this] { std::cout << name << '\n'; };
+        ...
+    }
+};
+```
+捕获`*this`意味着当前对象的复制传递到了lambda。
+
+在捕获了`*this`的情况下你仍然可以捕获其他this，只要没有与其他的发生冲突：
+```cpp
+auto l2 = [&, *this] { ... };     // OK
+auto l3 = [this, *this] { ... };  // ERROR
+```
+这里一个完整的例子：
+```cpp
+// lang/lambdathis.cpp
+#include <iostream>
+#include <string>
+#include <thread>
+
+class Data {
+private:
+    std::string name;
+public:
+    Data(const std::string& s) : name(s) {
+    }
+    auto startThreadWithCopyOfThis() const {
+        // start and return new thread using this after 3 seconds:
+        using namespace std::literals;
+        std::thread t([*this] {
+            std::this_thread::sleep_for(3s);
+            std::cout << name << '\n';
+        });
+        return t;
+    }
+};
+
+int main()
+{
+    std::thread t;
+    {
+        Data d{"c1"};
+        t = d.startThreadWithCopyOfThis();
+    } // d is no longer valid
+    t.join();
+}
+```
+lambda用`*this`获取对象拷贝，即d。因此，即便是d的析构函数被调用后线程再使用传递的对象也没有问题。
+
+如果我们使用`[this],[=]`或`[&]`捕获this，线程会产生未定义行为，因为在lambda打印name时，lambda使用的是已经析构后的对象的成员。
+
+## 6.3 捕获引用
+通过使用新的utility库函数，你现在可以**捕获const对象引用**。
+
+
+## 6.4 后记
+constexpr最初由 Faisal Vali, Ville Voutilainen和Gabriel Dos Reis在[https://wg21.link/n4487](https://wg21.link/n4487)中提出。最后这个特性的公认措辞是由Faisal Vali, Jens
+Maurer和Richard Smith在[https://wg21.link/p0170r1](https://wg21.link/p0170r1)中给出。
+
+捕获`*this`最初由H. Carter Edwards, Christian Trott, Hal Finkel, Jim Reus, Robin Maffeo和Ben Sander在[https://wg21.link/p0018r0](https://wg21.link/p0018r0)中提出。最后这个特性的公认措辞是由 H. Carter Edwards, Daveed Vandevoorde, Christian Trott, Hal Finkel,
+Jim Reus, Robin Maffeo和Ben Sander在[https://wg21.link/p0180r3](https://wg21.link/p0180r3)中给出。

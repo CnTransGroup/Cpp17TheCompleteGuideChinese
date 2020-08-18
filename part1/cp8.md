@@ -108,6 +108,68 @@ i = i++ + i; // still undefined behavior
 
 另一个使用new表达式求值顺序的例子是**在传值之前插入空格的函数**。
 
+#### 向后兼容
+新的求值顺序的保证可能影响既有程序的输出。这不是理论上可能，是真的。考虑下面的代码：
+```cpp
+#include <iostream>
+#include <vector>
+
+void print10elems(const std::vector<int>& v) 
+{
+    for (int i=0; i<10; ++i) {
+        std::cout << "value: " << v.at(i) << '\n';
+    }
+}
+
+int main()
+{
+    try {
+        std::vector<int> vec{7, 14, 21, 28};
+        print10elems(vec);
+    }
+    catch (const std::exception& e) { // handle standard exception
+        std::cerr << "EXCEPTION: " << e.what() << '\n'; }
+    catch (...) { // handle any other exception
+        std::cerr << "EXCEPTION of unknown type\n"; 
+    } 
+}
+```
+因为这里的`vector<>`只有4个元素，程序会在`print10elems()`的循环中，调用`at()`时遇到无效索引抛出异常：
+```cpp
+std::cout << "value: " << v.at(i) << "\n";
+```
+在C++17之前，可能输出：
+```
+value: 7
+value: 14
+value: 21
+value: 28
+EXCEPTION: ...
+```
+因为`at()`可以在"value "输出之前求值，所以对于错误的索引可能直接跳过不输出"value "。
+
+自C++17之后，保证输出：
+```
+value: 7
+value: 14
+value: 21
+value: 28
+value: EXCEPTION: ...
+```
+因为"value "一定在`at()`调用之前执行。
+
+## 8.3 宽松的基于整数的枚举初始化
+对于有固定基本类型的枚举，C++17允许你使用带整数的列表初始化。
+```cpp
+// unscoped enum with underlying type:
+enum MyInt : char { };
+MyInt i1{42};     // C++17 OK (C++17之前错误)
+MyInt i2 = 42;    // 仍然错误
+MyInt i3(42);     // 仍然错误
+MyInt i4 = {42};  // 仍然错误
+```
+
+
 
 ## 8.9 预处理条件`__has_include`
 C++17扩展了预处理起，可以检查一个特定的头文件是否被include。比如：

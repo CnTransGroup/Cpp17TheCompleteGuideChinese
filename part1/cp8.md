@@ -159,7 +159,7 @@ value: EXCEPTION: ...
 因为"value "一定在`at()`调用之前执行。
 
 ## 8.3 宽松的基于整数的枚举初始化
-对于有固定基本类型的枚举，C++17允许你使用带整数的列表初始化。
+对于有固定基本类型的枚举，C++17允许你使用带数值的列表初始化。
 ```cpp
 // unscoped enum with underlying type:
 enum MyInt : char { };
@@ -167,8 +167,64 @@ MyInt i1{42};     // C++17 OK (C++17之前错误)
 MyInt i2 = 42;    // 仍然错误
 MyInt i3(42);     // 仍然错误
 MyInt i4 = {42};  // 仍然错误
-```
 
+enum class Weekday { mon, tue, wed, thu, fri, sat, sun };
+Weekday s1{0};    // C++17 OK (C++17之前错误)
+Weekday s2 = 0;   // 仍然错误
+Weekday s3(0);    // 仍然错误
+Weekday s4 = {0}; // 仍然错误
+```
+类似的，如果Weekday有基本类型：
+```cpp
+// scoped enum with specified underlying type:
+enum class Weekday : char { mon, tue, wed, thu, fri, sat, sun };
+Weekday s1{0};    // C++17 OK (C++17之前错误)
+Weekday s2 = 0;   // 仍然错误
+Weekday s3(0);    // 仍然错误
+Weekday s4 = {0}; // 仍然错误
+```
+对于没有指定基本类型的未限域枚举（不带class的enum），你仍然不能使用带数值的列表初始化：
+```cpp
+enum Flag { bit1=1, bit2=2, bit3=4 };
+Flag f1{0}; // 仍然错误
+```
+注意，列表初始化还是不允许变窄（narrowing），因此你不能传递浮点值：
+```cpp
+enum MyInt : char { };
+MyInt i5{42.2}; // 仍然错误
+```
+之所以提出这个特性，是想实现一种技巧，即基于原有的整数类型定义另一种新的枚举类型，就像上面MyInt一样。
+
+实际上，C++17的标准库中的`std::byte`也提供这个功能，它直接使用了这个特性。
+
+## 8.4 修复带auto和直接列表初始化一起使用产生的矛盾行为
+C++11引入了统一初始化后，结果证明它和auto搭配会不幸地产生反直觉的矛盾行为：
+```cpp
+int x{42};      // initializes an int
+int y{1,2,3};   // ERROR
+auto a{42};     // initializes a std::initializer_list<int>
+auto b{1,2,3};  // OK: initializes a std::initializer_list<int>
+```
+这些使用直接列表初始化（direct list initialization，不带`=`的花括号）造成的前后不一致行为已经得到修复，现在程序行为如下：
+```cpp
+int x{42};      // initializes an int
+int y{1,2,3};   // ERROR
+auto a{42};     // initializes an int now
+auto b{1,2,3};  // ERROR now
+```
+注意这是一个非常大的改变，甚至可能悄悄的改变程序的行为。出于这个原因，编译器接受这个改变，但是通常也提供C++11版本的模式。对于主流编译器，比如Visual Studio 2015，g++5和clang3.8同时接受两种模式。
+
+还请注意拷贝列表初始化（copy list initialization，带`=`的花括号）的行为是不变的，当使用auto时初始化一个`std::initializer_list<>`：
+```cpp
+auto c = {42}; // still initializes a std::initializer_list<int>
+auto d = {1,2,3}; // still OK: initializes a std::initializer_list<int>
+```
+因此，现在的直接列表初始化（不带`=`）和拷贝列表初始化（带`=`）有另一个显著区别：
+```cpp
+auto a{42}; // initializes an int now
+auto c = {42}; // still initializes a std::initializer_list<int>
+```
+推荐的方式是总是使用直接列表初始化（不带`=`的花括号）来初始化变量和对象。
 
 
 ## 8.9 预处理条件`__has_include`

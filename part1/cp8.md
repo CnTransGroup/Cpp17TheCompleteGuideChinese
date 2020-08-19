@@ -226,6 +226,53 @@ auto c = {42}; // still initializes a std::initializer_list<int>
 ```
 推荐的方式是总是使用直接列表初始化（不带`=`的花括号）来初始化变量和对象。
 
+## 8.5 十六进制浮点字面值
+C++17标准化了十六进制的浮点值字面值（有些编译器早已在C++17之前就支持了）。这种方式尤其适用于要求精确的浮点表示（对于双精度浮点值，没法保证精确值的存在）。
+
+举个例子：
+```cpp
+// lang/hexfloat.cpp
+#include <iostream>
+#include <iomanip>
+
+int main() {
+  // init list of floating-point values:
+  std::initializer_list<double> values{
+      0x1p4, // 16
+      0xA, // 10
+      0xAp2, // 40
+      5e0, // 5
+      0x1.4p+2, // 5
+      1e5, // 100000
+      0x1.86Ap+16, // 100000
+      0xC.68p+2, // 49.625
+  };
+  
+  // print all values both as decimal and hexadecimal value:
+  for (double d : values) {
+    std::cout << "dec: " << std::setw(6) << std::defaultfloat << d
+              << " hex: " << std::hexfloat << d << '\n';
+  }
+}
+```
+这个程序使用不同的方式定义了不同的浮点值，其中包括使用十六进制浮点记法。新的记法是base为2的科学表示法：
++ significant/mantissa写作十六进制方式
++ exponent写作数值方式，解释为base为2
+
+比如说，`0xAp2`是指定数值40（10乘以2的次方）。这个值也可以表示为`0x1.4p+5`，表示1.25乘以32（0.4是十六进制的四分之一，2的5次方是32）。
+
+程序输出如下：
+```
+dec: 16     hex: 0x1p+4
+dec: 10     hex: 0x1.4p+3
+dec: 40     hex: 0x1.4p+5
+dec: 5      hex: 0x1.4p+2
+dec: 5      hex: 0x1.4p+2
+dec: 100000 hex: 0x1.86ap+16
+dec: 100000 hex: 0x1.86ap+16
+dec: 49.625 hex: 0x1.8dp+5
+```
+如你说见，这个例子的浮点记法早已在C++11的`std::hexfloat`操作符上就已经支持了。
 
 ## 8.9 预处理条件`__has_include`
 C++17扩展了预处理起，可以检查一个特定的头文件是否被include。比如：

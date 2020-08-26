@@ -95,4 +95,70 @@ SZ推导为6，因为模板参数类型传递了一个六个字符的字符串�
 
 你甚至可以推导出**用作基类的lambda**的类型，或者推导出**auto模板参数**类型。
 
-### 9.1 默认拷贝
+### 9.1.1 默认拷贝
+如果类模板参数推导发现一个行为更像是拷贝初始化，它就倾向于这么认为。比如，在用一个元素初始化`std::vector`后：
+```cpp
+std::vector v1{42}; // vector<int> with one element
+```
+用这个vector去初始化另一个vector：
+```cpp
+std::vector v2{v1}; // v2 also is vector<int>
+```
+v2会被解释为`vector<int>`而不是`vector<vector<int>>`
+
+又比如，这个规则适用于下面所有初始化形式：
+```cpp
+std::vector v3(v1); // v3 also is vector<int>
+std::vector v4 = {v1}; // v4 also is vector<int>
+auto v5 = std::vector{v1}; // v5 also is vector<int>
+```
+如果传递多个元素时，就不能被解释为拷贝初始化，此时initializer list的类型会成为新vector的元素类型：
+```cpp
+std::vector vv{v, v}; // vv is vector<vector<int>>
+```
+那么问题来了，如果传递可变参数模板，那么类模板参数推导会发生什么：
+```cpp
+template<typename... Args>
+auto make_vector(const Args&... elems) {
+  return std::vector{elems...};
+}
+
+std::vector<int> v{1, 2, 3};
+auto x1 = make_vector(v, v); // vector<vector<int>>
+auto x2 = make_vector(v); // vector<int> or vector<vector<int>> ?
+```
+当前，不同的编译器有不同的处理方式，这个问题还在讨论中。
+
+### 9.1.2 推导lambda的类型
+有了类模板参数推导，我们现在终于可以用lambda的类型实例化类模板类。举个例子，我们可以提供一个泛型类，然后包装一下callback，并统计调用了多少次callback：
+```cpp
+// tmpl/classarglambda.hpp
+#include <utility> // for std::forward()
+
+template<typename CB>
+class CountCalls
+{
+private:
+  CB callback; // callback to call
+  long calls = 0; // counter for calls
+public:
+  CountCalls(CB cb) : callback(cb) {
+  }
+  template<typename... Args>
+  auto operator() (Args&&... args) {
+    ++calls;
+    return callback(std::forward<Args>(args)...);
+  }
+  long count() const {
+    return calls;
+  }
+};
+```
+这里，构造函数接受一个callback，然后包装一下，用它的类型来推导出模板参数CB。比如，我们可以传一个lambda：
+```cpp
+CountCalls sc([](auto x, auto y) {
+                   return x > y;
+             });
+```
+这意味着sc的类型被推导为`CountCalls<TypeOfTheLambda>`。
+

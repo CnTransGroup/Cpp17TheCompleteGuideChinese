@@ -256,8 +256,8 @@ auto [x, y] = getArr(); // x and y are ints initialized by elems of returned arr
 ```
 你也可以对`std::array`使用结构化绑定，但是这需要使用似若tuple的API，这也是下一节的内容。
 
-### 1.2.3 `std::paor`,`std::tuple`和`std::array`
-结构化绑定是可扩展的，你可以为任何类型添加结构化绑定机制。标准库为`std::paor`,`std::tuple`和`std::array`都添加了该机制。
+### 1.2.3 `std::pair`,`std::tuple`和`std::array`
+结构化绑定是可扩展的，你可以为任何类型添加结构化绑定机制。标准库为`std::pair`,`std::tuple`和`std::array`都添加了该机制。
 
 #### `std::array`
 举个例子，下面的`getArray()`将返回四个元素的`std::array<>`，并用它初始化i，j，k和l。

@@ -1,16 +1,11 @@
 # 《C++ 17 The Complete Guide》翻译
 
-> ! 2020.7开始更新
-
-> ! 这书章节比较多，但是大部分章节都比较短，翻译起来比较轻松，语言也比较简洁，代码明了，入厕必备读物，个人强烈推荐
-
-> ！目录章节只是简单翻译一下，后期可能调整
-
-> ! 我没有版权，我没有版权，我没有版权
-
-> ！本书要求读者具有C++基础
-
-> ! [PDF版本下载](https://github.com/kelthuzadx/Cpp17TheCompleteGuideChinese/blob/master/public/Cpp17TheCompleteGuide.pdf),仅供翻译参考
+> ! 2020.7开始更新<br/>
+> ! 这书章节比较多，但是大部分章节都比较短，语言简洁，代码明了，入厕必备读物，个人推荐<br/>
+> ！目录章节只是简单翻译一下，后期可能调整<br/>
+> ! 我没有版权，我没有版权，我没有版权<br/>
+> ！本书要求读者具有C++基础<br/>
+> ! [PDF版本下载](https://github.com/kelthuzadx/Cpp17TheCompleteGuideChinese/blob/master/public/Cpp17TheCompleteGuide.pdf),仅供翻译参考<br/>
 
 # 目录
 + [第一部分 基本语言特性](part1/README.md)
@@ -24,7 +19,7 @@
   + [第八章 其他语言特性](part1/cp8.md)
 + [第二部分 模板特性](part2/README.md)
   + [第九章 类模板参数推导](part2/cp9.md)
-  + 第十章 编译时If
+  + 第十章 编译期If
   + 第十一章 折叠表达式
   + 第十二章 String作为模板参数
   + 第十三章 用占位符类型如auto作为模板参数

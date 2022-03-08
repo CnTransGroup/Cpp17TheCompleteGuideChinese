@@ -1,11 +1,12 @@
 # 《C++ 17 The Complete Guide》翻译
 
 > ! 2020.7开始更新<br/>
+> ! 对于“信雅达”，个人权重排序是“达雅信”<br/>
 > ! 这书章节比较多，但是大部分章节都比较短，语言简洁，代码明了，入厕必备读物，个人推荐<br/>
 > ！目录章节只是简单翻译一下，后期可能调整<br/>
 > ! 我没有版权，我没有版权，我没有版权<br/>
 > ！本书要求读者具有C++基础<br/>
-> ! [PDF版本下载](https://github.com/kelthuzadx/Cpp17TheCompleteGuideChinese/blob/master/public/Cpp17TheCompleteGuide.pdf),仅供翻译参考<br/>
+> ! [英文PDF版本下载](https://github.com/kelthuzadx/Cpp17TheCompleteGuideChinese/blob/master/public/Cpp17TheCompleteGuide.pdf),仅供翻译参考<br/>
 
 # 目录
 + [第一部分 基本语言特性](part1/README.md)
@@ -18,8 +19,8 @@
   + [第七章 新属性和属性相关特性](part1/cp7.md)
   + [第八章 其他语言特性](part1/cp8.md)
 + [第二部分 模板特性](part2/README.md)
-  + [第九章 类模板参数推导](part2/cp9.md)
-  + 第十章 编译时If
+  + [第九章 类模板参数推导](part2/cp9.md) **进行中**
+  + [第十章 编译期if](part2/cp10.md)
   + [第十一章 折叠表达式](part2/cp11.md)
   + 第十二章 String作为模板参数
   + 第十三章 用占位符类型如auto作为模板参数
@@ -42,6 +43,17 @@
   + 第二十七章 多态类型资源（PMR）
   + 第二十八章 对齐数据上的new和delete
   + 第二十九章 其他专业库的改动
+
+## 贡献者
+
+感谢所有参与翻译/勘误/建议的贡献者们~
+<a href="https://github.com/kelthuzadx/Cpp17TheCompleteGuideChinese/graphs/contributors"><img src="https://opencollective.com/Cpp17TheCompleteGuideChinese/contributors.svg?width=890&button=false" /></a>
+
+## 赞助翻译
+
+ 🙏 [[Become a backer](https://opencollective.com/Cpp17TheCompleteGuideChinese#backer)]
+
+<a href="https://opencollective.com/Cpp17TheCompleteGuideChinese#backers" target="_blank"><img src="https://opencollective.com/Cpp17TheCompleteGuideChinese/backers.svg?width=890"></a>
 
 # 译注
 + 原文中带跳转到另一章节的文字用`**word**`标注

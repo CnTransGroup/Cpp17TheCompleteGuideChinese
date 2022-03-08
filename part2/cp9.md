@@ -245,3 +245,118 @@ std::pair<typename std::vector<int>::iterator,typename std::vector<int>::iterato
 ```cpp
 std::pair p(v.begin(), v.end());
 ```
+然而，`std::make_pair()`也是一个很好的例子，它说明了有时候工具函数不只是做模板参数推导一件事情。事实上，`std::make_pair()`也会类型退化，这意味着传入的string字面值会转换为`const char*`：
+```cpp
+auto q = std::make_pair("hi", "world"); // pair of pointers
+```
+在这个例子中，q的类型是`std::pair<const char*, const char*>`。
+
+使用类模板参数推导，情况变得更复杂。让我们看看一个简单的类声明，它有点像`std::pair`：
+```cpp
+template<typename T1, typename T2>
+struct Pair1 {
+  T1 first;
+  T2 second;
+  Pair1(const T1& x, const T2& y) : first{x}, second{y} {
+  }
+};
+```
+重点是元素通过引用传递。根据语言规则，当使用引用传递一个模板类型的实参时，形参不会_类型退化_，所谓类型退化是指将原生数组类型转换为原生指针类型这样一种机制。所以，当这样调用的时候：
+```cpp
+Pair1p1{"hi","world"};//deduces pair of arrays of different size, but...
+```
+T1被推导为`char[3]`，T2被推导为`char[6]`。基本上，这个推导是有效地。然而，当我们使用T1和T2类型去声明成员**first**和**second**时，结果是，它们被声明为：
+```cpp
+char first[3];
+char second[6];
+```
+并且从一个左值数组初始化出新数组是不被允许的。编译过程就像这样：
+```cpp
+const char x[3] = "hi";
+const char y[6] = "world";
+char first[3] {x}; // ERROR
+char second[6] {y}; // ERROR
+```
+注意如果直接使用值传递，然后用它的类型来声明成员就不会有这个问题：
+```cpp
+template<typename T1, typename T2>
+struct Pair2 {
+  T1 first;
+  T2 second;
+  Pair2(T1 x, T2 y) : first{x}, second{y} {
+  }
+};
+```
+如果我们这样调用：
+```cpp
+Pair2 p2{"hi", "world"}; // deduces pair of pointers
+```
+T1和T2将会被推导为`const char*`。
+因为类`std::pair<>`被声明，所以构造函数使用引用传参，你可能期望看到下面的初始化代码不会被编译：
+```cpp
+std::pair p{"hi", "world"}; // seems to deduce pair of arrays of different size, but...
+```
+但是它可以编。原因是我们用到了**推导规则**
+
+## 9.2 推导规则
+你可以定义特定的**推导规则**来提供额外的类模板实参推导能力，或者修复已经存在的、由构造函数定义的推导。举个例子，你可以定义一个规则，无论何时Pair3被推导，类型推导看起来就像在操作值传递的参数一样：
+```cpp
+template<typename T1, typename T2>
+struct Pair3 {
+  T1 first;
+  T2 second;
+  Pair3(const T1& x, const T2& y) : first{x}, second{y} {
+  }
+};
+// deduction guide for the constructor:
+template<typename T1, typename T2>
+Pair3(T1, T2) -> Pair3<T1, T2>;
+```
+这里`->`左边是什么我们想推导什么。在这里例子中，我们想推导一个构造函数，其参数是值传递，类型是任意T1和T2。在`->`右边是我们想定义的推导结果。本例中，Pair3进行实例化。
+
+你可能争辩说，这不就是构造函数做的事情吗。然而，构造函数的参数是引用传递，这里是值传递，不一样。通常来说，即使在模板外面，值传递的实参也会_类型退化_，而引用传递的实参不会退化。_类型退化_意味着原始数组转换为指针，顶级修饰符，比如const和引用符号，会被忽略。
+
+没有类型推导规则，下面的声明：
+```cpp
+Pair3 p3{"hi", "world"};
+```
+x的类型，即T1是`const char[3]`，y的类型，即T2是`const char[6]`。
+
+因为有类型推导，模板参数会类型华为，意味着传递的数组或者字符串字面值会退化为对应的指针类型。现在当我们声明：
+```cpp
+Pair3 p3{"hi", "world"};
+```
+推导规则被应用，两个参数类型都是`const char*`。推导后的类型就像我们直接这样写：
+```cpp
+Pair3<const char*, const char*> p3{"hi", "world"};
+```
+注意，此时构造函数仍然是引用传参。推导规则只影响模板类型的推导，不影响T1、T2被推导后的构造函数调用。
+
+### 9.2.1 使用推导规则强制类型退化
+正如上面例子演示的那样，通常，这些重载规则的一个常见用途是确保一个模板参数T在推导过程中类型进行退化。考虑一个传统的类模板：
+```cpp
+template<typename T>
+struct C {
+  C(const T&) {
+  }
+  ...
+};
+```
+如果我们这里传一个字符串字面值"hello"，T被推导为字符串字面值的类型，即`const char[6]`：
+```cpp
+C x{"hello"}; // T deduced as const char[6]
+```
+原因是当引用传值时，模板类型推导不会将它退化成对应的指针类型。
+带上一个简单的推导规则：
+```cpp
+template<typename T> C(T) -> C<T>;
+```
+我们就修复了这个问题：
+```cpp
+C x{"hello"}; // T deduced as const char*
+```
+现在，因为推导规则是值传递，它的类型发生退化，所以"hello"的类型T最终是`const char*`。
+出于这个原因，对于任意类模板，其构造函数带引用传递的参数，都给出这样一个推导规则是很合理的。C++标准库为pair和tuple提供了对应的推导规则（参见9.2.6）。
+
+### 9.2.2 非模板推导规则
+to translate

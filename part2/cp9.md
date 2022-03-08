@@ -162,3 +162,86 @@ CountCalls sc([](auto x, auto y) {
 ```
 这意味着sc的类型被推导为`CountCalls<TypeOfTheLambda>`。
 
+通过这种方式，我们可以计算传递给排序函数的sc的调用次数：
+```cpp
+std::sort(v.begin(), v.end(),
+          td::ref(sc));
+std::cout << "sorted with " << sc.count() << " calls\n";
+```
+包装后的lambda通过引用的方式传递给排序函数，因为如若不然`std::sort()`只会计算传递给他的lambda的拷贝的调用，毕竟是传值的方式。
+
+然而，我没可以传递包装后的lambda给`std::for_each`，因为这个算法可以返回传递给他的callback的拷贝：
+```cpp
+auto fo = std::for_each(v.begin(), v.end(),
+                        CountCalls([](auto i) {
+                                      std::cout << "elem: " << i << '\n';
+                        }));
+std::cout << "output with " << fo.count() << " calls\n";
+```
+
+### 9.1.3 非部分类模板参数推导
+不像函数模板那样，类模板参数不能部分推导（显示模板参数的一部分）。比如：
+```cpp
+template<typename T1, typename T2, typename T3 = T2>
+class C {
+public:
+  C (T1 x = T1{}, T2 y = T2{}, T3 z = T3{}) {
+    ...
+  }
+  ...
+};
+// all deduced:
+C c1(22, 44.3, "hi"); // OK: T1 is int, T2 is double, T3 is const char*
+C c2(22, 44.3); // OK: T1 is int, T2 and T3 are double
+C c3("hi", "guy"); // OK: T1, T2, and T3 are const char*
+// only some deduced:
+C<string> c4("hi", "my"); // ERROR: only T1 explicitly defined
+C<> c5(22, 44.3); // ERROR: neither T1 not T2 explicitly defined
+C<> c6(22, 44.3, 42); // ERROR: neither T1 nor T2 explicitly defined
+// all specified:
+C<string,string,int> c7; // OK: T1,T2 are string, T3 is int
+C<int,string> c8(52, "my"); // OK: T1 is int,T2 and T3 are strings
+C<string,string> c9("a", "b", "c"); // OK: T1,T2,T3 are strings
+```
+因为第三个模板参数类型有默认值，所以如果已经指定了第二个就可以省略第三个。
+
+如果i想知道为什么不支持偏特化，下面是造成这个抉择的原因：
+```cpp
+std::tuple<int> t(42, 43); // still ERROR
+```
+`std::tuple`是一个可变参数模板，所以你可以指定任意数量的参数。在这种情况下，到底是认为这是只指定了一个类型的而导致的错误还是有意为之很难说清。看起来是有问题的。后期有更多考量后，偏特化也有可能加入C++标准。尽管目前没有。
+
+
+不幸的是，缺少部分特化就不能解决一个常见代码需求。对于关联容器的排序规则，或者无序容器的hash函数，我们仍然不能简单的传一个lambda：
+```cpp
+std::set<Cust> coll([](const Cust& x, const Cust& y) { // still ERROR
+  return x.name() > y.name();
+});
+```
+我们还是得指定lambda的类型，因此需要像下面这样写：
+```cpp
+auto sortcrit = [](const Cust& x, const Cust& y) {
+  return x.name() > y.name();
+};
+std::set<Cust, decltype(sortcrit)> coll(sortcrit); // OK
+```
+
+### 9.1.4 类模板参数推导代替便捷的工具函数。
+有了类模板参数推导，我们可以不再使用那些目的仅是推导传的参数的类型的便捷工具函数。
+
+最明显的是`make_pair`，他允许我们不指定传的参数的类型。比如，对于v：
+```cpp
+std::vector<int> v;
+```
+我们可以使用
+```cpp
+auto p = std::make_pair(v.begin(), v.end());
+```
+来代替
+```cpp
+std::pair<typename std::vector<int>::iterator,typename std::vector<int>::iterator> p(v.begin(), v.end());
+```
+现在，`make_pair()`不再需要了，可以直接这么写：
+```cpp
+std::pair p(v.begin(), v.end());
+```

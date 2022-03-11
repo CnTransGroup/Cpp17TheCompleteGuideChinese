@@ -23,7 +23,7 @@
   + [第十章 编译期if](part2/cp10.md)
   + [第十一章 折叠表达式](part2/cp11.md)
   + [第十二章 String作为模板参数](part2/cp12.md)
-  + [第十三章 auto作为模板参数占位符](part2/cp13.md) **翻译中**
+  + [第十三章 auto作为模板参数占位符](part2/cp13.md)
   + 第十四章 扩展Using声明
 + 第三部分 新的标准库组件
   + 第十五章 `std::optional<>`

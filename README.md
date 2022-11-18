@@ -19,7 +19,7 @@
   + [第七章 新属性和属性相关特性](part1/cp7.md)
   + [第八章 其他语言特性](part1/cp8.md)
 + [第二部分 模板特性](part2/README.md)
-  + [第九章 类模板参数推导](part2/cp9.md) **翻译中**
+  + [第九章 类模板参数推导](part2/cp9.md)
   + [第十章 编译期if](part2/cp10.md)
   + [第十一章 折叠表达式](part2/cp11.md)
   + [第十二章 String作为模板参数](part2/cp12.md)
@@ -55,6 +55,7 @@
 
 <a href="https://opencollective.com/Cpp17TheCompleteGuideChinese#backers" target="_blank"><img src="https://opencollective.com/Cpp17TheCompleteGuideChinese/backers.svg?width=890"></a>
 
-# 译注
-+ 原文中带跳转到另一章节的文字用`**word**`标注
+## 译注
++ 作为对原文的补充，译者会在某些位置写`（译注，）`；
++ 原文中带跳转到另一章节的文字用`**word**`标注，并写上`（参考 x.x.x 节）`；
 + 对于译者认为中文翻译容易给让造成困惑的地方，使用括号标出英文原文。

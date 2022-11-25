@@ -26,7 +26,7 @@
   + [第十三章 auto作为模板参数占位符](part2/cp13.md)
   + [第十四章 扩展Using声明](part2/cp14.md)  **翻译中**
 + 第三部分 新的标准库组件
-  + [第十五章 `std::optional<>`](part3/cp15.md)  **翻译中**
+  + [第十五章 `std::optional<>`](part3/cp15.md)
   + 第十六章 `std::variant<>`
   + 第十七章 `std::any`
   + 第十八章 `std::byte`

@@ -7,6 +7,7 @@
 > ! 我没有版权，我没有版权，我没有版权<br/>
 > ！本书要求读者具有C++基础<br/>
 > ! [英文PDF版本下载](https://github.com/kelthuzadx/Cpp17TheCompleteGuideChinese/blob/master/public/Cpp17TheCompleteGuide.pdf),仅供翻译参考<br/>
+> ! [在线阅读](https://cntransgroup.github.io/Cpp17TheCompleteGuideChinese/)
 
 # 目录
 + [第一部分 基本语言特性](part1/README.md)

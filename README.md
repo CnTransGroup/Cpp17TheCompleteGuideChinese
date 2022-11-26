@@ -10,24 +10,24 @@
 > ! [在线阅读](https://cntransgroup.github.io/Cpp17TheCompleteGuideChinese/)
 
 # 目录
-+ [第一部分 基本语言特性](part1/README.md)
-  + [第一章 结构化绑定](part1/cp1.md)
-  + [第二章 带初始化的if和switch](part1/cp2.md)
-  + [第三章 内联变量](part1/cp3.md)
-  + [第四章 聚合扩展](part1/cp4.md)
-  + [第五章 强制拷贝消除或者传递未具体化对象](part1/cp5.md)
-  + [第六章 Lambda扩展](part1/cp6.md)
-  + [第七章 新属性和属性相关特性](part1/cp7.md)
-  + [第八章 其他语言特性](part1/cp8.md)
-+ [第二部分 模板特性](part2/README.md)
-  + [第九章 类模板参数推导](part2/cp9.md)
-  + [第十章 编译期if](part2/cp10.md)
-  + [第十一章 折叠表达式](part2/cp11.md)
-  + [第十二章 String作为模板参数](part2/cp12.md)
-  + [第十三章 auto作为模板参数占位符](part2/cp13.md)
-  + [第十四章 扩展Using声明](part2/cp14.md)  **翻译中**
++ [第一部分 基本语言特性](src/part1/README.md)
+  + [第一章 结构化绑定](src/part1/cp1.md)
+  + [第二章 带初始化的if和switch](src/part1/cp2.md)
+  + [第三章 内联变量](src/part1/cp3.md)
+  + [第四章 聚合扩展](src/part1/cp4.md)
+  + [第五章 强制拷贝消除或者传递未具体化对象](src/part1/cp5.md)
+  + [第六章 Lambda扩展](src/part1/cp6.md)
+  + [第七章 新属性和属性相关特性](src/part1/cp7.md)
+  + [第八章 其他语言特性](src/part1/cp8.md)
++ [第二部分 模板特性](src/part2/README.md)
+  + [第九章 类模板参数推导](src/part2/cp9.md)
+  + [第十章 编译期if](src/part2/cp10.md)
+  + [第十一章 折叠表达式](src/part2/cp11.md)
+  + [第十二章 String作为模板参数](src/part2/cp12.md)
+  + [第十三章 auto作为模板参数占位符](src/part2/cp13.md)
+  + [第十四章 扩展Using声明](src/part2/cp14.md)  **翻译中**
 + 第三部分 新的标准库组件
-  + [第十五章 `std::optional<>`](part3/cp15.md)
+  + [第十五章 `std::optional<>`](src/part3/cp15.md)
   + 第十六章 `std::variant<>`
   + 第十七章 `std::any`
   + 第十八章 `std::byte`

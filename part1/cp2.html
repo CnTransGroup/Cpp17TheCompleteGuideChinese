@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第二章 带初始化的if和switch - C++ 17 The Complete Guide</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../part1/index.html">第一部分 基本语言特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part1/cp1.html">第一章 结构化绑定</a></li><li class="chapter-item expanded "><a href="../part1/cp2.html" class="active">第二章 带初始化的if和switch</a></li><li class="chapter-item "><a href="../part1/cp3.html">第三章 内联变量</a></li><li class="chapter-item "><a href="../part1/cp4.html">第四章 聚合扩展</a></li><li class="chapter-item "><a href="../part1/cp5.html">第五章 强制拷贝消除或者传递未具体化对象</a></li><li class="chapter-item "><a href="../part1/cp6.html">第六章 Lambda扩展</a></li><li class="chapter-item "><a href="../part1/cp7.html">第七章 新属性和属性相关特性</a></li><li class="chapter-item "><a href="../part1/cp8.html">第八章 其他语言特性</a></li></ol></li><li class="chapter-item expanded "><a href="../part2/index.html">第二部分 模板特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part2/cp9.html">第九章 类模板参数推导</a></li><li class="chapter-item "><a href="../part2/cp10.html">第十章 编译期if</a></li><li class="chapter-item "><a href="../part2/cp11.html">第十一章 折叠表达式</a></li><li class="chapter-item "><a href="../part2/cp12.html">第十二章 String作为模板参数</a></li><li class="chapter-item "><a href="../part2/cp13.html">第十三章 auto作为模板参数占位符</a></li><li class="chapter-item "><a href="../part2/cp14.html">第十四章 扩展Using声明</a></li></ol></li><li class="chapter-item expanded "><div>第三部分 新的标准库组件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part3/cp15.html">第十五章 std::optional&lt;&gt;</a></li><li class="chapter-item "><div>第十六章 std::variant&lt;&gt;</div></li><li class="chapter-item "><div>第十七章 std::any</div></li><li class="chapter-item "><div>第十八章 std::byte</div></li><li class="chapter-item "><div>第十九章 String View</div></li><li class="chapter-item "><div>第二十章 文件系统库</div></li></ol></li><li class="chapter-item expanded "><div>第四部分 标准库扩展和修改</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十一章 Type Trait扩展</div></li><li class="chapter-item "><div>第二十二章 并行STL算法</div></li><li class="chapter-item "><div>第二十三章 子字符串和子序列搜索</div></li><li class="chapter-item "><div>第二十四章 其他工具函数和算法</div></li><li class="chapter-item "><div>第二十五章 容器扩展</div></li><li class="chapter-item "><div>第二十六章 多线程和兵法</div></li></ol></li><li class="chapter-item expanded "><div>第五部分 专业工具</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十七章 多态类型资源（PMR）</div></li><li class="chapter-item "><div>第二十八章 对齐数据上的new和delete</div></li><li class="chapter-item "><div>第二十九章 其他专业库的改动</div></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">C++ 17 The Complete Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/CnTransGroup/Cpp17TheCompleteGuideChinese" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第二章-带初始化的if和switch"><a class="header" href="#第二章-带初始化的if和switch">第二章 带初始化的if和switch</a></h1>
+<p>现在<strong>if</strong>和<strong>switch</strong>控制结构允许我们在普通的条件语句或者选择语句之外再指定一个初始化语句。</p>
+<p>比如，你可以这样写：</p>
+<pre><code class="language-cpp">if (status s = check(); s != status::success) {
+    return s;
+}
+</code></pre>
+<p>其中初始化语句是：</p>
+<pre><code class="language-cpp">status s = check();
+</code></pre>
+<p>它初始化s，然后用if判断s是否是有效状态。</p>
+<h2 id="21-带初始化的if"><a class="header" href="#21-带初始化的if">2.1 带初始化的if</a></h2>
+<p>任何在if语句内初始化的值的生命周期都持续到then代码块或者else代码块（如果有的话）的最后。比如：</p>
+<pre><code class="language-cpp">if (std::ofstream strm = getLogStrm(); coll.empty()) {
+    strm &lt;&lt; &quot;&lt;no data&gt;\n&quot;; 
+}
+else {
+    for (const auto&amp; elem : coll) {
+        strm &lt;&lt; elem &lt;&lt; '\n'; 
+    } 
+}
+// strm no longer declared
+</code></pre>
+<p>strm的析构函数回在then代码块或者else代码块的最后调用。</p>
+<p>另一个例子是执行一些依赖某些条件的任务的时候使用锁：</p>
+<pre><code class="language-cpp">if (std::lock_guard&lt;std::mutex&gt; lg{collMutex}; !coll.empty()) {
+    std::cout &lt;&lt; coll.front() &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>因为有<strong>类模板参数推导</strong>，也可以这样写：</p>
+<pre><code class="language-cpp">if (std::lock_guard lg{collMutex}; !coll.empty()) {
+    std::cout &lt;&lt; coll.front() &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>任何情况下，上面的代码都等价于：</p>
+<pre><code class="language-cpp">{
+    std::lock_guard&lt;std::mutex&gt; lg{collMutex};
+    if (!coll.empty()) {
+        std::cout &lt;&lt; coll.front() &lt;&lt; '\n'; 
+    } 
+}
+</code></pre>
+<p>区别在于lg是在if语句的作用域中定义的，因此与条件在相同的作用域（声明性区域）中，就像for循环中初始化的情况一样。</p>
+<p>任何被初始化的对象都必须有一个名字。否则，初始化语句会长久一个立即销毁大的临时值。举个例子，初始化一个没有名字的lock guard，其后的条件检查不是在加锁环境下进行的：</p>
+<pre><code class="language-cpp">if (std::lock_guard&lt;std::mutex&gt;{collMutex}; // run-time ERROR:
+        !coll.empty()) { // - no longer locked
+    std::cout &lt;&lt; coll.front() &lt;&lt; '\n'; // - no longer locked
+} 
+</code></pre>
+<p>一般来说，一个<code>_</code>作为名字也是可以的（一些程序员喜欢它，另一些讨厌它因为它污染全局命名空间）：</p>
+<pre><code class="language-cpp">if (std::lock_guard&lt;std::mutex&gt; _{collMutex}; // OK, but...
+    !coll.empty()) {
+  std::cout &lt;&lt; coll.front() &lt;&lt; '\n';
+}
+</code></pre>
+<p>接下来是第三个例子，考虑一段代码，插入新元素到map或者unordered map。你可以检查操作是否成功，就像下面一样：</p>
+<pre><code class="language-cpp">std::map&lt;std::string, int&gt; coll;
+... 
+if (auto [pos, ok] = coll.insert({&quot;new&quot;, 42}); !ok) {
+  // if insert failed, handle error using iterator pos:
+  const auto &amp;[key, val] = *pos;
+  std::cout &lt;&lt; &quot;already there: &quot; &lt;&lt; key &lt;&lt; '\n';
+}
+</code></pre>
+<p>这段代码还是用了结构化绑定，给返回值和元素插入的位置pos分别赋予了名字，而不是first和second。在C++17前，上面相应的检查必须像下面一样规范：</p>
+<pre><code class="language-cpp">auto ret = coll.insert({&quot;new&quot;, 42});
+if (!ret.second) {
+  // if insert failed, handle error using iterator ret.first
+  const auto &amp;elem = *(ret.first);
+  std::cout &lt;&lt; &quot;already there: &quot; &lt;&lt; elem.first &lt;&lt; '\n';
+}
+</code></pre>
+<p>注意这种带if的初始化也能用于编译时if特性。</p>
+<h2 id="22-带初始化的switch"><a class="header" href="#22-带初始化的switch">2.2 带初始化的switch</a></h2>
+<p>使用带初始化的switch语句允许我们在检查条件并决定控制流跳转到哪个case执行之前初始化一个对象。</p>
+<p>比如，我们可以先初始化一个<strong>文件系统路径</strong>，再根据路径的类型选择对应的处理方式：</p>
+<pre><code class="language-cpp">using namespace std::filesystem;
+... 
+switch (path p(name); status(p).type()) {
+case file_type::not_found:
+  std::cout &lt;&lt; p &lt;&lt; &quot; not found\n&quot;;
+  break;
+case file_type::directory:
+  std::cout &lt;&lt; p &lt;&lt; &quot;:\n&quot;;
+  for (auto &amp;e : std::filesystem::directory_iterator(p)) {
+    std::cout &lt;&lt; &quot;- &quot; &lt;&lt; e.path() &lt;&lt; '\n';
+  }
+  break;
+default:
+  std::cout &lt;&lt; p &lt;&lt; &quot; exists\n&quot;;
+  break;
+}
+</code></pre>
+<p>初始化的p能在整个switch语句中使用。</p>
+<h2 id="23-后记"><a class="header" href="#23-后记">2.3 后记</a></h2>
+<p>带初始化的if和switch最初由Thomas Koppe在<a href="https://wg21.link/p0305r0">https://wg21.link/p0305r0</a>中提出，当时只有带初始化的if没有带初始化的switch。最后这个特性的公认措辞是由Thomas Koppe在<a href="https://wg21.link/p0305r1">https://wg21.link/p0305r1</a>中给出。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../part1/cp1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../part1/cp3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../part1/cp1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../part1/cp3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

@@ -1,0 +1,3725 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>C++ 17 The Complete Guide</title>
+        <meta name="robots" content="noindex" />
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="part1/index.html">第一部分 基本语言特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="part1/cp1.html">第一章 结构化绑定</a></li><li class="chapter-item "><a href="part1/cp2.html">第二章 带初始化的if和switch</a></li><li class="chapter-item "><a href="part1/cp3.html">第三章 内联变量</a></li><li class="chapter-item "><a href="part1/cp4.html">第四章 聚合扩展</a></li><li class="chapter-item "><a href="part1/cp5.html">第五章 强制拷贝消除或者传递未具体化对象</a></li><li class="chapter-item "><a href="part1/cp6.html">第六章 Lambda扩展</a></li><li class="chapter-item "><a href="part1/cp7.html">第七章 新属性和属性相关特性</a></li><li class="chapter-item "><a href="part1/cp8.html">第八章 其他语言特性</a></li></ol></li><li class="chapter-item expanded "><a href="part2/index.html">第二部分 模板特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="part2/cp9.html">第九章 类模板参数推导</a></li><li class="chapter-item "><a href="part2/cp10.html">第十章 编译期if</a></li><li class="chapter-item "><a href="part2/cp11.html">第十一章 折叠表达式</a></li><li class="chapter-item "><a href="part2/cp12.html">第十二章 String作为模板参数</a></li><li class="chapter-item "><a href="part2/cp13.html">第十三章 auto作为模板参数占位符</a></li><li class="chapter-item "><a href="part2/cp14.html">第十四章 扩展Using声明</a></li></ol></li><li class="chapter-item expanded "><div>第三部分 新的标准库组件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="part3/cp15.html">第十五章 std::optional&lt;&gt;</a></li><li class="chapter-item "><div>第十六章 std::variant&lt;&gt;</div></li><li class="chapter-item "><div>第十七章 std::any</div></li><li class="chapter-item "><div>第十八章 std::byte</div></li><li class="chapter-item "><div>第十九章 String View</div></li><li class="chapter-item "><div>第二十章 文件系统库</div></li></ol></li><li class="chapter-item expanded "><div>第四部分 标准库扩展和修改</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十一章 Type Trait扩展</div></li><li class="chapter-item "><div>第二十二章 并行STL算法</div></li><li class="chapter-item "><div>第二十三章 子字符串和子序列搜索</div></li><li class="chapter-item "><div>第二十四章 其他工具函数和算法</div></li><li class="chapter-item "><div>第二十五章 容器扩展</div></li><li class="chapter-item "><div>第二十六章 多线程和兵法</div></li></ol></li><li class="chapter-item expanded "><div>第五部分 专业工具</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十七章 多态类型资源（PMR）</div></li><li class="chapter-item "><div>第二十八章 对齐数据上的new和delete</div></li><li class="chapter-item "><div>第二十九章 其他专业库的改动</div></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">C++ 17 The Complete Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/CnTransGroup/Cpp17TheCompleteGuideChinese" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第一部分"><a class="header" href="#第一部分">第一部分</a></h1>
+<h1 id="基本语言特性"><a class="header" href="#基本语言特性">基本语言特性</a></h1>
+<p>这一部分会引入新的C++17核心语言特性，它们都与泛型编程（即模板）无关。它们对于应用开发者的日常编程工作有很大的帮助。因此每个使用C++17的C++程序员都应该知道它们。</p>
+<p>关于新的模板的核心语言特性会在第二部分提到。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第一章--结构化绑定"><a class="header" href="#第一章--结构化绑定">第一章  结构化绑定</a></h1>
+<p>结构化绑定允许你使用对象的成员或者说元素来初始化多个变量。</p>
+<p>举个例子，假如你定义了一个包含两个不同成员的结构：</p>
+<pre><code class="language-cpp">struct MyStruct {
+  int i = 0;
+  std::string s;
+};
+
+MyStruct ms;
+</code></pre>
+<p>只需使用下面的声明，你就可以将这个结构体的成员直接绑定到新名字上</p>
+<pre><code class="language-cpp">auto [u,v] = ms;
+</code></pre>
+<p>在这里，名字u和v就被称为结构化绑定（structured bindings）。在某种程度上，它们分解了对象并用来初始化自己（在有些地方它们也被称为分解声明（decompose  declarations））。</p>
+<p>结构化绑定对于那些返回结构体或者数组的函数来说尤其有用。举个例子，假设你有一个返回结构体的函数：</p>
+<pre><code class="language-cpp">MyStruct getStruct() {
+  return MyStruct{42, &quot;hello&quot;};
+}
+</code></pre>
+<p>你可以直接为函数返回的数据成员赋予两个局部名字：</p>
+<pre><code class="language-cpp">auto[id,val] = getStruct(); // id and val name i and s of returned struct
+</code></pre>
+<p>在这里，id和val分别表示返回的数据成员i和s。它们的类型分别是int和<code>std::string</code> ，可以当新变量使用。</p>
+<pre><code class="language-cpp">if (id &gt; 30) {
+  std::cout &lt;&lt; val;
+}
+</code></pre>
+<p>使用结构化绑定的好处是可以直接通过名字访问值，并且由于名字可以传递语义信息，使得代码可读性也大大提高。</p>
+<p>下面的示例展示了结构化绑定如何改善代码可读性。在没有结构化绑定的时候，要想迭代处理<code>std::map&lt;&gt;</code>的所有元素，需要这么写：</p>
+<pre><code class="language-cpp">for (const auto&amp; elem : mymap) {
+  std::cout &lt;&lt; elem.first &lt;&lt; &quot;: &quot; &lt;&lt; elem.second &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>代码中的elem是表示键和值的<code>std::pair</code>，它们在<code>std::pair</code>中分别用first和second表示，你可以使用这两个名字去访问键和值。使用结构化绑定后，代码可读性大大提高：</p>
+<pre><code class="language-cpp">for (const auto&amp; [key,val] : mymap) {
+  std::cout &lt;&lt; key &lt;&lt; &quot;: &quot; &lt;&lt; val &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>我们可以直接使用每个元素的键和值，key和value清晰的表示了它们的语义。</p>
+<h2 id="11-结构化绑定的细节"><a class="header" href="#11-结构化绑定的细节">1.1 结构化绑定的细节</a></h2>
+<p>为了理解结构化绑定，了解其中设计的一个匿名变量是很重要的。结构化绑定引入的新名字都是指代的这个匿名变量的成员/元素的。</p>
+<h3 id="绑定到匿名变量"><a class="header" href="#绑定到匿名变量">绑定到匿名变量</a></h3>
+<p>初始化代码的最精确的行为：</p>
+<pre><code class="language-cpp">auto [u,v] = ms;
+</code></pre>
+<p>可以看成我们初始化一个匿名变量e，然后让结构化绑定u和v成为这个新对象的别名，类似下面：</p>
+<pre><code class="language-cpp">auto e = ms;
+aliasname u = e.i;
+aliasname v = e.s;
+</code></pre>
+<p>注意u和v不是<code>e.i</code>和<code>e.s</code>的引用。它们只是这两个成员的别名。因此，<code>decltype(u)</code>的类型与成员i的类型一致，<code>decltype(v)</code>的类型与成员s的类型一致。因为匿名变量e没有名字，所以我们不能直接访问这个已经初始化的变量。所以</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; u &lt;&lt; ' ' &lt;&lt; v &lt;&lt; ✬\n✬;
+</code></pre>
+<p>输出<code>e.i</code>和<code>e.s</code>的值，它们是<code>ms.i</code>和<code>ms.s</code>的一份拷贝。</p>
+<p>e和结构化绑定的存活时间一样长，当结构化绑定离开作用域时，e也会析构。</p>
+<p>这样做的后果，除非使用引用，否则修改通过结构化绑定的值不会影响到初始化它的对象（反之亦然）：</p>
+<pre><code class="language-cpp">MyStruct ms{42,&quot;hello&quot;};
+auto [u,v] = ms;
+ms.i = 77;
+std::cout &lt;&lt; u;    // prints 42
+u = 99;
+std::cout &lt;&lt; ms.i; // prints 77
+</code></pre>
+<p>u和<code>ms.i</code>地址是不一样的。</p>
+<p>当对返回值使用结构化绑定的时候，上面的规则一样成立。下面代码的初始化：</p>
+<pre><code class="language-cpp">auto [u,v] = getStruct();
+</code></pre>
+<p>和我们使用<code>getStruct()</code>的返回值初始化匿名变量e，然后用u和v作为e的成员别名效果一样，类似下面：</p>
+<pre><code class="language-cpp">auto e = getStruct();
+aliasname u = e.i;
+aliasname v = e.s;
+</code></pre>
+<p>换句话说，结构化绑定将绑定到一个新的对象，它由返回值初始化，而不是直接绑定到返回值本身。</p>
+<p>对于匿名变量e，内存地址和对齐也是存在的，以至于如果成员有对齐，结构化绑定也会有对齐。比如：</p>
+<pre><code class="language-cpp">auto [u,v] = ms;
+assert(&amp;((MyStruct*)&amp;u)-&gt;s == &amp;v); // OK
+</code></pre>
+<p><code>((MyStruct*)&amp;u)</code>会产生一个指向匿名变量的指针。</p>
+<h3 id="使用修饰符"><a class="header" href="#使用修饰符">使用修饰符</a></h3>
+<p>我们在结构化绑定过程中使用一些修饰符，如const和引用。再次强调，这些修饰符修饰的是匿名变量e。虽说是对匿名变量使用修饰符，但是通常也可以看作对结构化绑定使用修饰符，尽管存在一些额例外。</p>
+<p>下面的例子中，我们对结构化绑定使用const引用：</p>
+<pre><code class="language-cpp">const auto&amp; [u,v] = ms; // a reference, so that u/v refer to ms.i/ms.s
+</code></pre>
+<p>这里，匿名变量被声明为const引用，这意味着对ms使用const引用修饰，然后再将u和v作为i和s的别名。后续对ms成员的修改会直接影响到u和v：</p>
+<pre><code class="language-cpp">ms.i = 77;      // affects the value of u
+std::cout &lt;&lt; u; // prints 77
+</code></pre>
+<p>如果使用非const引用，你甚至可以通过对结构化绑定的修改，影响到初始化它的对象：</p>
+<pre><code class="language-cpp">MyStruct ms{42,&quot;hello&quot;};
+auto&amp; [u,v] = ms;       // the initialized entity is a reference to ms
+ms.i = 77;              // affects the value of u
+std::cout &lt;&lt; u;         // prints 77
+u = 99;                 // modifies ms.i
+std::cout &lt;&lt; ms.i;      // prints 99
+</code></pre>
+<p>如果初始化对象是临时变量，对它使用结构化绑定，此时临时值的生命周期会扩展：</p>
+<pre><code class="language-cpp">MyStruct getStruct();
+...
+const auto&amp; [a,b] = getStruct();
+std::cout &lt;&lt; &quot;a: &quot; &lt;&lt; a &lt;&lt; '\n'; // OK
+</code></pre>
+<h3 id="修饰符并非修饰结构化绑定"><a class="header" href="#修饰符并非修饰结构化绑定">修饰符并非修饰结构化绑定</a></h3>
+<p>如题，修饰符修饰的是匿名变量。它们没必要修饰结构化绑定。事实上：</p>
+<pre><code class="language-cpp">const auto&amp; [u,v] = ms;  // a reference, so that u/v refer to ms.i/ms.s
+</code></pre>
+<p>u和v都没有声明为引用。上面只是对匿名变量e的引用。u和v的类型需要ms的成员一致。根据我们最开始的定义可以知道，<code>decltype(u)</code>是int，<code>decltype(v)</code>是<code>std::string</code>。</p>
+<p>当指定对齐宽度的时候也有一些不同。</p>
+<pre><code class="language-cpp">alignas(16) auto [u,v] = ms;
+</code></pre>
+<p>在这里，我们将初始化后的匿名对象对齐而不是结构化绑定u和v。这意味着u作为第一个成员，被强制对齐到16位，而v不是。</p>
+<p>同样的原因，尽管使用了auto，结构化绑定的类型也不会类型退化（术语退化（decay）描述的是当参数值传递的时候发生的类型转换，这意味着数组会转换为指针，最外面的修饰符如const和引用会被忽略）。例如，如果我们有一个包含多个原生数组的结构体：</p>
+<pre><code class="language-cpp">struct S{
+    const char x[6];
+    const char y[3];
+};
+</code></pre>
+<p>然后</p>
+<pre><code class="language-cpp">S s1{};
+auto [a, b] = s1; // a and b get the exact member types
+</code></pre>
+<p>a的类型仍然是<code>const char[6]</code>。原因仍然是修饰符并非修饰结构化绑定而是修饰初始化结构化绑定的对象。这一点和使用auto初始化新对象很不一样，它会发生类型退化：</p>
+<pre><code class="language-cpp">auto a2 = a;    // a2 gets decayed type of a
+</code></pre>
+<h3 id="移动语义"><a class="header" href="#移动语义">移动语义</a></h3>
+<p>即将介绍到，结构化绑定也支持移动语义。在下面的声明中：</p>
+<pre><code class="language-cpp">MyStruct ms = { 42, &quot;Jim&quot; };
+auto&amp;&amp; [v,n] = std::move(ms);  // entity is rvalue reference to ms
+</code></pre>
+<p>结构化绑定v和n指向匿名变量中的成员，该匿名变量是ms的右值引用。ms仍然持有它的值:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; &quot;ms.s: &quot; &lt;&lt; ms.s &lt;&lt; '\n'; // prints &quot;Jim&quot;
+</code></pre>
+<p>但是你可以移动赋值n，它与<code>ms.s</code>关联：</p>
+<pre><code class="language-cpp">std::string s = std::move(n); // moves ms.s to s
+std::cout &lt;&lt; &quot;ms.s: &quot; &lt;&lt; ms.s &lt;&lt; '\n'; // prints unspecified value
+std::cout &lt;&lt; &quot;n: &quot; &lt;&lt; n &lt;&lt; '\n'; // prints unspecified value
+std::cout &lt;&lt; &quot;s: &quot; &lt;&lt; s &lt;&lt; '\n'; // prints &quot;Jim&quot;
+</code></pre>
+<p>通常，移动后的对象的状态是有效的，只是包含了未指定的值（unspecified value）。因此，输出它的值是没有问题的，但是不能断言输出的东西一定是什么。</p>
+<p>这一点和直接移动ms的值给匿名变量稍有不同：</p>
+<pre><code class="language-cpp">MyStruct ms = { 42, &quot;Jim&quot; };
+auto [v,n] = std::move(ms); // new entity with moved-from values from ms
+</code></pre>
+<p>此时匿名对象是一个新对象，它用移动后的ms的值来初始化。所以ms失去了他们的值：</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; &quot;ms.s: &quot; &lt;&lt; ms.s &lt;&lt; '\n'; // prints unspecified value
+std::cout &lt;&lt; &quot;n: &quot; &lt;&lt; n &lt;&lt; '\n'; // prints &quot;Jim&quot;
+</code></pre>
+<p>你仍然可以移动n并赋值，或者用它赋予一个新的值，但是不会影响<code>ms.s</code>：</p>
+<pre><code class="language-cpp">std::string s = std::move(n); // moves n to s
+n = &quot;Lara&quot;;
+std::cout &lt;&lt; &quot;ms.s: &quot; &lt;&lt; ms.s &lt;&lt; '\n'; // prints unspecified value
+std::cout &lt;&lt; &quot;n: &quot; &lt;&lt; n &lt;&lt; '\n'; // prints &quot;Lara&quot;
+std::cout &lt;&lt; &quot;s: &quot; &lt;&lt; s &lt;&lt; '\n'; // prints &quot;Jim&quot;
+</code></pre>
+<h2 id="12-结构化绑定可以在哪使用"><a class="header" href="#12-结构化绑定可以在哪使用">1.2 结构化绑定可以在哪使用</a></h2>
+<p>原则上，结构化绑定可以用于公有成员，原始C-style数组，以及“似若tuple”的对象：</p>
+<ul>
+<li>如果结构体或者类中，所有非静态数据成员都是public，那么你可以使用结构化绑定来绑定非静态数据成员</li>
+<li>对于原生数组，你可以使用结构化绑定来绑定每个元素</li>
+<li>对于任何类型，你都可以使用似若tuple的API来进行绑定。对于类型type，API可以粗糙的概括为下列内容：
+<ul>
+<li><code>std::tuple_size&lt;type&gt;::value</code>返回元素数量</li>
+<li><code>std::tupel_element&lt;idx,type&gt;::type</code>返回第idx个元素的类型</li>
+<li>一个全局的或者成员函数<code>get&lt;idx&gt;()</code>返回第idx个元素的值</li>
+</ul>
+</li>
+</ul>
+<p>如果结构体或者累提供这些似若tuple的API，那么就可以使用它们。</p>
+<p>任何情况下都要求元素或者数据成员的数量必须匹配结构化绑定的名字的个数。你不能跳过任何一个元素，也不能使用同一个名字两次。但是你可以看使用非常段的名字如&quot;_&quot;（很多程序员倾向于用下划线，但是也有些人讨厌它，不允许它出现在全局命名空间中），但是在一个作用域它也只能出现一次：</p>
+<pre><code class="language-cpp">auto [_,val1] = getStruct(); // OK
+auto [_,val2] = getStruct(); // ERROR: name _ already used
+</code></pre>
+<p>嵌套或者非平坦的对象分解是不支持的。（译注：指的是形如OCaml等语言的这种<code>let a,(b,c) = (3,(4,2));;</code>模式匹配能力）</p>
+<p>接下来的章节讨论本节列表提到的各种情况。</p>
+<h3 id="121-结构体和类"><a class="header" href="#121-结构体和类">1.2.1 结构体和类</a></h3>
+<p>到目前为止，已经演示了很多关于结构体和类的简单示例了。</p>
+<p>如果类和结构体用到了继承，那么结构化绑定的使用就很受限了。所有非静态数据成员必须出现在同一个类。（换句话说，这些数据成员要么全是该类的，要么全是基类的）。</p>
+<pre><code class="language-cpp">struct B {
+  int a = 1;
+  int b = 2;
+};
+
+struct D1 : B {
+};
+auto [x, y] = D1{}; // OK
+
+struct D2 : B {
+  int c = 3;
+};
+
+auto [i, j, k] = D2{}; // Compile-Time ERROR
+</code></pre>
+<h3 id="121-原生数组"><a class="header" href="#121-原生数组">1.2.1 原生数组</a></h3>
+<p>下面的代码使用有两个元素的C-style数组初始化x和y：</p>
+<pre><code class="language-cpp">int arr[] = { 47, 11 };
+auto [x, y] = arr; // x and y are ints initialized by elems of arr
+auto [z] = arr; // ERROR: number of elements doesn’t fit
+</code></pre>
+<p>这种方式只能出现在数组长度已知的情况下。如果将数组作为参数传递，这样写就行不通，因为数组作为参数传递会发生类型退化，变成指针类型。</p>
+<p>C++允许我们返回带长度的数组引用，如果有函数返回这种带长度的数组引用，那么也可以使用结构化绑定：</p>
+<pre><code class="language-cpp">auto getArr() -&gt; int(&amp;)[2]; // getArr() returns reference to raw int array
+...
+auto [x, y] = getArr(); // x and y are ints initialized by elems of returned array
+</code></pre>
+<p>你也可以对<code>std::array</code>使用结构化绑定，但是这需要使用似若tuple的API，这也是下一节的内容。</p>
+<h3 id="123-stdpairstdtuple和stdarray"><a class="header" href="#123-stdpairstdtuple和stdarray">1.2.3 <code>std::pair</code>,<code>std::tuple</code>和<code>std::array</code></a></h3>
+<p>结构化绑定是可扩展的，你可以为任何类型添加结构化绑定机制。标准库为<code>std::pair</code>,<code>std::tuple</code>和<code>std::array</code>都添加了该机制。</p>
+<h4 id="stdarray"><a class="header" href="#stdarray"><code>std::array</code></a></h4>
+<p>举个例子，下面的<code>getArray()</code>将返回四个元素的<code>std::array&lt;&gt;</code>，并用它初始化i，j，k和l。</p>
+<pre><code class="language-cpp">std::array&lt;int,4&gt; getArray();
+...
+auto [i,j,k,l] = getArray(); // i,j,k,l name the 4 elements of the copied return value
+</code></pre>
+<p>i，j，k和l分别绑定到<code>getArray()</code>返回的四个元素上。</p>
+<p>写操作也是支持的，但这要求用来初始化结构化绑定的值不是一个临时的返回值：</p>
+<pre><code class="language-cpp">std::array&lt;int,4&gt; stdarr { 1, 2, 3, 4 };
+...
+auto&amp; [i,j,k,l] = stdarr;
+i += 10; // modifies std::array[0]
+</code></pre>
+<h4 id="stdtuple"><a class="header" href="#stdtuple"><code>std::tuple</code></a></h4>
+<p>下面的代码使用<code>getTuple()</code>返回有三个元素的<code>std::tuple&lt;&gt;</code>来初始化a，b和c：</p>
+<pre><code class="language-cpp">std::tuple&lt;char,float,std::string&gt; getTuple();
+...
+auto [a,b,c] = getTuple();    // a,b,c have types and values of returned tuple
+</code></pre>
+<h4 id="stdpair"><a class="header" href="#stdpair"><code>std::pair</code></a></h4>
+<p>另一个例子是处理关联型/无序型容器的<code>insert()</code>调用的返回值，使用结构化绑定使代码可读性更强，可以清晰的表达自己的意图，而不是依赖于<code>std::tuple</code>通用的first和second：</p>
+<pre><code class="language-cpp">std::map&lt;std::string, int&gt; coll;
+...
+auto [pos,ok] = coll.insert({&quot;new&quot;,42});
+if (!ok) {
+  // if insert failed, handle error using iterator pos:
+  ...
+}
+</code></pre>
+<p>在C++17之前，必须使用下面的代码检查返回数据：</p>
+<pre><code class="language-cpp">auto ret = coll.insert({&quot;new&quot;,42});
+if (!ret.second){
+  // if insert failed, handle error using iterator ret.first
+  ...
+}
+</code></pre>
+<p>注意，在这个例子中，C++17甚至还提供一种表达力更强的带初始化的if：</p>
+<h4 id="为pair和tuple的结构化绑定赋值"><a class="header" href="#为pair和tuple的结构化绑定赋值">为pair和tuple的结构化绑定赋值</a></h4>
+<p>在声明了结构化绑定之后，通常你不能一次性修改全部结构化绑定，因为结构化绑定是一次性声明所有而不是一次性使用所有。然而，如果重新赋的值是<code>std::pair&lt;&gt;</code>或者<code>std::tuple&lt;&gt;</code>那么你可以使用<code>std::tie()</code>。</p>
+<p>也就是说，你可以写出下面的代码：</p>
+<pre><code class="language-cpp">std::tuple&lt;char,float,std::string&gt; getTuple();
+...
+auto [a,b,c] = getTuple(); // a,b,c have types and values of returned tuple
+...
+std::tie(a,b,c) = getTuple(); // a,b,c get values of next returned tuple
+</code></pre>
+<p>这种方式在实现循环调用且每次循环赋予一对返回值的过程中尤其有用，比如下面子啊循环中使用searcher的代码：</p>
+<pre><code class="language-cpp">std::boyer_moore_searcher bm{sub.begin(), sub.end()};
+for (auto [beg, end] = bm(text.begin(), text.end());
+  beg != text.end();
+  std::tie(beg,end) = bm(end, text.end())) {
+  ...
+}
+</code></pre>
+<h2 id="13-为结构化绑定提供似若tuple的api"><a class="header" href="#13-为结构化绑定提供似若tuple的api">1.3 为结构化绑定提供似若tuple的API</a></h2>
+<p>前面提到过，只要你的类型实现了似若tuple的API，那么就可以针对该类型使用结构化绑定，就和标准库的<code>std::pair&lt;&gt;</code>,<code>std::tuple&lt;&gt;</code>和<code>std::array&lt;&gt;</code>意义。</p>
+<h4 id="只读结构化绑定"><a class="header" href="#只读结构化绑定">只读结构化绑定</a></h4>
+<p>下面的代码展示了如何为类型Customer添加结构化绑定功能，Customer的定义如下</p>
+<pre><code class="language-cpp">// lang/customer1.hpp
+#include &lt;string&gt;
+#include &lt;utility&gt; // for std::move()
+class Customer {
+private:
+  std::string first;
+  std::string last;
+  long val;
+public:
+  Customer (std::string f, std::string l, long v)
+      : first(std::move(f)), last(std::move(l)), val(v) {
+  }
+  std::string getFirst() const {
+    return first;
+  }
+  std::string getLast() const {
+    return last;
+  }
+  long getValue() const {
+    return val;
+  }
+};
+</code></pre>
+<p>我们可以提供似若tuple的API：</p>
+<pre><code class="language-cpp">// lang/structbind1.hpp
+#include &quot;customer1.hpp&quot; #include &lt;utility&gt; // for tuple-like API
+// provide a tuple-like API for class Customer for structured bindings:
+template&lt;&gt;
+struct std::tuple_size&lt;Customer&gt; {
+  static constexpr int value = 3; // we have 3 attributes
+};
+template&lt;&gt;
+struct std::tuple_element&lt;2, Customer&gt; {
+  using type = long; // last attribute is a long
+};
+template&lt;std::size_t Idx&gt;
+struct std::tuple_element&lt;Idx, Customer&gt; {
+  using type = std::string; // the other attributes are strings
+};
+// define specific getters:
+template&lt;std::size_t&gt; auto get(const Customer&amp; c);
+template&lt;&gt; auto get&lt;0&gt;(const Customer&amp; c) { return c.getFirst(); }
+template&lt;&gt; auto get&lt;1&gt;(const Customer&amp; c) { return c.getLast(); }
+template&lt;&gt; auto get&lt;2&gt;(const Customer&amp; c) { return c.getValue(); }
+</code></pre>
+<p>代码Customer有三个成员，还有为三个成员准备的getter：</p>
+<ul>
+<li>表示first name的成员，<code>std::string</code>类型</li>
+<li>表示last nane的成员，<code>std::string</code>类型</li>
+<li>表示value的成员，long类型</li>
+</ul>
+<p>获取Customer成员个数的函数是<code>std::tuple_size</code>的特化：</p>
+<pre><code class="language-cpp">template&lt;&gt;
+struct std::tuple_size&lt;Customer&gt; {
+  static constexpr int value = 3; // we have 3 attributes
+};
+</code></pre>
+<p>获取成员类型的函数是<code>std::tuple_element</code>的特化：</p>
+<pre><code class="language-cpp">template&lt;&gt;
+struct std::tuple_element&lt;2, Customer&gt; {
+  using type = long; // last attribute is a long
+};
+template&lt;std::size_t Idx&gt;
+struct std::tuple_element&lt;Idx, Customer&gt; {
+  using type = std::string; // the other attributes are strings
+};
+</code></pre>
+<p>第三个成员类型是long，需要为它（index 2）编写全特化代码。其它成员是<code>std::stinrg</code>类型，部分特化（比全特化优先级低）即可。这里指定的类型与<code>decltype</code>产生的类型一致。</p>
+<p>最终，我们在同一个命名空间为Customer类型定义相应的<code>get&lt;&gt;()</code>函数重载：</p>
+<pre><code class="language-cpp">template&lt;std::size_t&gt; auto get(const Customer&amp; c);
+template&lt;&gt; auto get&lt;0&gt;(const Customer&amp; c) { return c.getFirst(); }
+template&lt;&gt; auto get&lt;1&gt;(const Customer&amp; c) { return c.getLast(); }
+template&lt;&gt; auto get&lt;2&gt;(const Customer&amp; c) { return c.getValue(); }
+</code></pre>
+<p>在这里，我们声明了模板函数，然后为所有情况都写出来对应的全特化形式。</p>
+<p>注意，模板函数的全特化必须与模板函数的签名一致（也包括一致的返回类型）。原因是我们只提供了特定的“实现”，而不是声明新的函数。下面的代码不能通过编译：</p>
+<pre><code class="language-cpp">template&lt;std::size_t&gt; auto get(const Customer&amp; c);
+template&lt;&gt; std::string get&lt;0&gt;(const Customer&amp; c) { return c.getFirst(); }
+template&lt;&gt; std::string get&lt;1&gt;(const Customer&amp; c) { return c.getLast(); }
+template&lt;&gt; long get&lt;2&gt;(const Customer&amp; c) { return c.getValue(); }
+</code></pre>
+<p>通过使用新的<strong>编译时if特性</strong>，我们可以所有特化形式的<code>get&lt;&gt;()</code>组合到一个函数里面：</p>
+<pre><code class="language-cpp">template&lt;std::size_t I&gt; auto get(const Customer&amp; c) {
+  static_assert(I &lt; 3);
+  if constexpr (I == 0) {
+    return c.getFirst();
+  }
+  else if constexpr (I == 1) {
+    return c.getLast();
+  }
+  else { // I == 2
+    return c.getValue();
+  } 
+}
+</code></pre>
+<p>有了这些API，就能对Customer的对象使用结构化绑定了：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+int main()
+{
+  Customer c(&quot;Tim&quot;, &quot;Starr&quot;, 42);
+  auto [f, l, v] = c;
+  std::cout &lt;&lt; &quot;f/l/v: &quot; &lt;&lt; f &lt;&lt; ' ' &lt;&lt; l &lt;&lt; ' ' &lt;&lt; v &lt;&lt; '\n';
+// modify structured bindings:
+  std::string s = std::move(f);
+  l = &quot;Waters&quot;;
+  v += 10;
+  std::cout &lt;&lt; &quot;f/l/v: &quot; &lt;&lt; f &lt;&lt; ' ' &lt;&lt; l &lt;&lt; ' ' &lt;&lt; v &lt;&lt;'\n';
+  std::cout &lt;&lt; &quot;c: &quot; &lt;&lt; c.getFirst() &lt;&lt; ' '
+  &lt;&lt; c.getLast() &lt;&lt; ' ' &lt;&lt; c.getValue() &lt;&lt; '\n';
+  std::cout &lt;&lt; &quot;s: &quot; &lt;&lt; s &lt;&lt; '\n';
+}
+</code></pre>
+<p>和往常一样，结构化绑定f，l和v是新的匿名变量的成员的别名，新的匿名变量经由c初始化。初始化为每个成员调用相应的getter函数。因此，在初始化后，修改c不会影响到结构化绑定（反之亦然）。所以，程序的输出如下：</p>
+<pre><code class="language-cpp">f/l/v: Tim Starr 42
+f/l/v:  Waters 52
+c: Tim Starr 42
+s: Tim
+</code></pre>
+<p>你也可以在迭代一个由Customer元素构成的vector的过程中使用结构化绑定：</p>
+<pre><code class="language-cpp">std::vector&lt;Customer&gt; coll;
+...
+for (const auto&amp; [first, last, val] : coll) {
+  std::cout &lt;&lt; first &lt;&lt; ' ' &lt;&lt; last &lt;&lt; &quot;: &quot; &lt;&lt; val &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>对结构化绑定使用<code>decltype</code>仍然回产出它的类型，而不是匿名变量的类型。这意味着<code>decltype(first)</code>是<code>const std::string</code>。</p>
+<h4 id="允许针对结构化绑定的写操作"><a class="header" href="#允许针对结构化绑定的写操作">允许针对结构化绑定的写操作</a></h4>
+<p>似若tuple的API可以可以使用产生引用的函数。这使得我们可以允许针对结构化绑定的写操作发生。考虑下面的代码，它为Customer提供了读取和修改成员的API：</p>
+<pre><code class="language-cpp">// lang/customer2.hpp
+#include &lt;string&gt;
+#include &lt;utility&gt; // for std::move()
+class Customer {
+private:
+  std::string first;
+  std::string last;
+  long val;
+public:
+  Customer (std::string f, std::string l, long v)
+      : first(std::move(f)), last(std::move(l)), val(v) {
+  }
+  const std::string&amp; firstname() const {
+    return first;
+  }
+  std::string&amp; firstname() {
+    return first;
+  }
+  const std::string&amp; lastname() const {
+    return last;
+  }
+  std::string&amp; lastname() {
+    return last;
+  }
+  long value() const {
+    return val;
+  }
+  long&amp; value() {
+    return val;
+  }
+};
+</code></pre>
+<p>要支持读写操作，我们还得为常量引用和非常量引用准备getter重载：</p>
+<pre><code class="language-cpp">// lang/structbind2.hpp
+#include &quot;customer2.hpp&quot; 
+#include &lt; utility&gt; // for tuple-like API
+// provide a tuple-like API for class Customer for structured bindings:
+template &lt;&gt; struct std::tuple_size&lt;Customer&gt; {
+  static constexpr int value = 3; // we have 3 attributes
+};
+template &lt;&gt; struct std::tuple_element&lt;2, Customer&gt; {
+  using type = long; // last attribute is a long
+};
+template &lt;std::size_t Idx&gt; struct std::tuple_element&lt;Idx, Customer&gt; {
+  using type = std::string; // the other attributes are strings
+};
+// define specific getters:
+template &lt;std::size_t I&gt; decltype(auto) get(Customer &amp;c) {
+  static_assert(I &lt; 3);
+  if constexpr (I == 0) {
+    return c.firstname();
+  } else if constexpr (I == 1) {
+    return c.lastname();
+  } else { // I == 2
+    return c.value();
+  }
+}
+template &lt;std::size_t I&gt; decltype(auto) get(const Customer &amp;c) {
+  static_assert(I &lt; 3);
+  if constexpr (I == 0) {
+    return c.firstname();
+  } else if constexpr (I == 1) {
+    return c.lastname();
+  } else { // I == 2
+    return c.value();
+  }
+}
+template &lt;std::size_t I&gt; decltype(auto) get(Customer &amp;&amp;c) {
+  static_assert(I &lt; 3);
+  if constexpr (I == 0) {
+    return std::move(c.firstname());
+  } else if constexpr (I == 1) {
+    return std::move(c.lastname());
+  } else { // I == 2
+    return c.value();
+  }
+}
+</code></pre>
+<p>你应该写出这三个重载，来处理常量对象，非常量对象，以及可移动对象。为了返回引用，你应该使用<code>decltype(auto)</code>。</p>
+<p>还是之前那样，我们可以使用新的<strong>编译时if特性</strong>，来简化我们的实现，尤其是getter的返回类型不一样时，它更有用。没有编译时if特性，我们只能写出所有的全特化：</p>
+<pre><code class="language-cpp">template&lt;std::size_t&gt; decltype(auto) get(Customer&amp; c);
+template&lt;&gt; decltype(auto) get&lt;0&gt;(Customer&amp; c) { return c.firstname(); }
+template&lt;&gt; decltype(auto) get&lt;1&gt;(Customer&amp; c) { return c.lastname(); }
+template&lt;&gt; decltype(auto) get&lt;2&gt;(Customer&amp; c) { return c.value(); }
+</code></pre>
+<p>模板函数声明的签名必须与全特化的一致（包括返回类型）。下面的代码不能编译：</p>
+<pre><code class="language-cpp">template&lt;std::size_t&gt; decltype(auto) get(Customer&amp; c);
+template&lt;&gt; std::string&amp; get&lt;0&gt;(Customer&amp; c) { return c.firstname(); }
+template&lt;&gt; std::string&amp; get&lt;1&gt;(Customer&amp; c) { return c.lastname(); }
+template&lt;&gt; long&amp; get&lt;2&gt;(Customer&amp; c) { return c.value(); }
+</code></pre>
+<p>做完这些后，你就能使用结构化绑定读取或者修改Customer的成员了：</p>
+<pre><code class="language-cpp">#include &quot;structbind2.hpp&quot; 
+#include &lt;iostream&gt;
+int main() {
+  Customer c(&quot;Tim&quot;, &quot;Starr&quot;, 42);
+  auto [f, l, v] = c;
+  std::cout &lt;&lt; &quot;f/l/v: &quot; &lt;&lt; f &lt;&lt; ' ' &lt;&lt; l &lt;&lt; ' ' &lt;&lt; v &lt;&lt; '\n';
+  // modify structured bindings via references:
+  auto &amp;&amp;[f2, l2, v2] = c;
+  std::string s = std::move(f2);
+  f2 = &quot;Ringo&quot;;
+  v2 += 10;
+  std::cout &lt;&lt; &quot;f2/l2/v2: &quot; &lt;&lt; f2 &lt;&lt; ' ' &lt;&lt; l2 &lt;&lt; ' ' &lt;&lt; v2 &lt;&lt; '\n';
+  std::cout &lt;&lt; &quot;c: &quot; &lt;&lt; c.firstname() &lt;&lt; ' ' &lt;&lt; c.lastname() &lt;&lt; ✬ ✬ &lt;&lt; c.value() &lt;&lt; '\n';
+  std::cout &lt;&lt; &quot;s: &quot; &lt;&lt; s &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>它会输出：</p>
+<pre><code class="language-bash">f/l/v: Tim Starr 42
+f2/l2/v2: Ringo Starr 52
+c: Ringo Starr 52
+s: Tim
+</code></pre>
+<h2 id="14-后记"><a class="header" href="#14-后记">1.4 后记</a></h2>
+<p>结构化绑定最初由Herb Sutter，Bjarne Stroustrup和Gabriel Dos Reis在<a href="https://wg21.link/p0144r0">https://wg21.link/p0144r0</a>中提出，当时使用花括号而不是方括号。最后这个特性的公认措辞是由Jens Maurer在<a href="https://wg21.link/p0217r3">https://wg21.link/p0217r3</a>中给出。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第二章-带初始化的if和switch"><a class="header" href="#第二章-带初始化的if和switch">第二章 带初始化的if和switch</a></h1>
+<p>现在<strong>if</strong>和<strong>switch</strong>控制结构允许我们在普通的条件语句或者选择语句之外再指定一个初始化语句。</p>
+<p>比如，你可以这样写：</p>
+<pre><code class="language-cpp">if (status s = check(); s != status::success) {
+    return s;
+}
+</code></pre>
+<p>其中初始化语句是：</p>
+<pre><code class="language-cpp">status s = check();
+</code></pre>
+<p>它初始化s，然后用if判断s是否是有效状态。</p>
+<h2 id="21-带初始化的if"><a class="header" href="#21-带初始化的if">2.1 带初始化的if</a></h2>
+<p>任何在if语句内初始化的值的生命周期都持续到then代码块或者else代码块（如果有的话）的最后。比如：</p>
+<pre><code class="language-cpp">if (std::ofstream strm = getLogStrm(); coll.empty()) {
+    strm &lt;&lt; &quot;&lt;no data&gt;\n&quot;; 
+}
+else {
+    for (const auto&amp; elem : coll) {
+        strm &lt;&lt; elem &lt;&lt; '\n'; 
+    } 
+}
+// strm no longer declared
+</code></pre>
+<p>strm的析构函数回在then代码块或者else代码块的最后调用。</p>
+<p>另一个例子是执行一些依赖某些条件的任务的时候使用锁：</p>
+<pre><code class="language-cpp">if (std::lock_guard&lt;std::mutex&gt; lg{collMutex}; !coll.empty()) {
+    std::cout &lt;&lt; coll.front() &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>因为有<strong>类模板参数推导</strong>，也可以这样写：</p>
+<pre><code class="language-cpp">if (std::lock_guard lg{collMutex}; !coll.empty()) {
+    std::cout &lt;&lt; coll.front() &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>任何情况下，上面的代码都等价于：</p>
+<pre><code class="language-cpp">{
+    std::lock_guard&lt;std::mutex&gt; lg{collMutex};
+    if (!coll.empty()) {
+        std::cout &lt;&lt; coll.front() &lt;&lt; '\n'; 
+    } 
+}
+</code></pre>
+<p>区别在于lg是在if语句的作用域中定义的，因此与条件在相同的作用域（声明性区域）中，就像for循环中初始化的情况一样。</p>
+<p>任何被初始化的对象都必须有一个名字。否则，初始化语句会长久一个立即销毁大的临时值。举个例子，初始化一个没有名字的lock guard，其后的条件检查不是在加锁环境下进行的：</p>
+<pre><code class="language-cpp">if (std::lock_guard&lt;std::mutex&gt;{collMutex}; // run-time ERROR:
+        !coll.empty()) { // - no longer locked
+    std::cout &lt;&lt; coll.front() &lt;&lt; '\n'; // - no longer locked
+} 
+</code></pre>
+<p>一般来说，一个<code>_</code>作为名字也是可以的（一些程序员喜欢它，另一些讨厌它因为它污染全局命名空间）：</p>
+<pre><code class="language-cpp">if (std::lock_guard&lt;std::mutex&gt; _{collMutex}; // OK, but...
+    !coll.empty()) {
+  std::cout &lt;&lt; coll.front() &lt;&lt; '\n';
+}
+</code></pre>
+<p>接下来是第三个例子，考虑一段代码，插入新元素到map或者unordered map。你可以检查操作是否成功，就像下面一样：</p>
+<pre><code class="language-cpp">std::map&lt;std::string, int&gt; coll;
+... 
+if (auto [pos, ok] = coll.insert({&quot;new&quot;, 42}); !ok) {
+  // if insert failed, handle error using iterator pos:
+  const auto &amp;[key, val] = *pos;
+  std::cout &lt;&lt; &quot;already there: &quot; &lt;&lt; key &lt;&lt; '\n';
+}
+</code></pre>
+<p>这段代码还是用了结构化绑定，给返回值和元素插入的位置pos分别赋予了名字，而不是first和second。在C++17前，上面相应的检查必须像下面一样规范：</p>
+<pre><code class="language-cpp">auto ret = coll.insert({&quot;new&quot;, 42});
+if (!ret.second) {
+  // if insert failed, handle error using iterator ret.first
+  const auto &amp;elem = *(ret.first);
+  std::cout &lt;&lt; &quot;already there: &quot; &lt;&lt; elem.first &lt;&lt; '\n';
+}
+</code></pre>
+<p>注意这种带if的初始化也能用于编译时if特性。</p>
+<h2 id="22-带初始化的switch"><a class="header" href="#22-带初始化的switch">2.2 带初始化的switch</a></h2>
+<p>使用带初始化的switch语句允许我们在检查条件并决定控制流跳转到哪个case执行之前初始化一个对象。</p>
+<p>比如，我们可以先初始化一个<strong>文件系统路径</strong>，再根据路径的类型选择对应的处理方式：</p>
+<pre><code class="language-cpp">using namespace std::filesystem;
+... 
+switch (path p(name); status(p).type()) {
+case file_type::not_found:
+  std::cout &lt;&lt; p &lt;&lt; &quot; not found\n&quot;;
+  break;
+case file_type::directory:
+  std::cout &lt;&lt; p &lt;&lt; &quot;:\n&quot;;
+  for (auto &amp;e : std::filesystem::directory_iterator(p)) {
+    std::cout &lt;&lt; &quot;- &quot; &lt;&lt; e.path() &lt;&lt; '\n';
+  }
+  break;
+default:
+  std::cout &lt;&lt; p &lt;&lt; &quot; exists\n&quot;;
+  break;
+}
+</code></pre>
+<p>初始化的p能在整个switch语句中使用。</p>
+<h2 id="23-后记"><a class="header" href="#23-后记">2.3 后记</a></h2>
+<p>带初始化的if和switch最初由Thomas Koppe在<a href="https://wg21.link/p0305r0">https://wg21.link/p0305r0</a>中提出，当时只有带初始化的if没有带初始化的switch。最后这个特性的公认措辞是由Thomas Koppe在<a href="https://wg21.link/p0305r1">https://wg21.link/p0305r1</a>中给出。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第三章-内联变量"><a class="header" href="#第三章-内联变量">第三章 内联变量</a></h1>
+<p>C++的一个优点是它支持header-only（译注：即只有头文件）的库。然而，截止C++17，header-only的库也不能有全局变量或者对象出现。</p>
+<p>C++17后，你可以在头文件中使用inline定义变量，如果这个变量被多个翻译单元（translation unit）使用，它们都会指向相同对象：</p>
+<pre><code class="language-cpp">class MyClass {
+  static inline std::string name = &quot;&quot;; // OK since C++17
+  ...
+};
+inline MyClass myGlobalObj; // OK even if included/defined by multiple CPP files
+</code></pre>
+<h2 id="31-内联变量的动机"><a class="header" href="#31-内联变量的动机">3.1 内联变量的动机</a></h2>
+<p>C++不允许在class内部初始化非const静态成员：</p>
+<pre><code class="language-cpp">class MyClass {
+  static std::string name = &quot;&quot;;  // Compile-Time ERROR
+  ...
+};
+</code></pre>
+<p>在class外面定义这个变量定义这个变量，且变量定义是在头文件中，多个CPP文件包含它，仍然会引发错误：</p>
+<pre><code class="language-cpp">class MyClass {
+  static std::string name; // OK
+  ...
+};
+MyClass::name = &quot;&quot;; // Link ERROR if included by multiple CPP files
+</code></pre>
+<p>根据一处定义规则（one definition 入了，ODR），每个翻译单元只能定义变量最多一次。</p>
+<p>即便有预处理保护（译注：也叫头文件保护，header guard）也没有用：</p>
+<pre><code class="language-cpp">#ifndef MYHEADER_HPP
+#define MYHEADER_HPP
+class MyClass {
+  static std::string name; // OK
+  ...
+};
+MyClass.name = &quot;&quot;; // Link ERROR if included by multiple CPP files
+#endif
+</code></pre>
+<p>不是因为头文件可能被包含多次，问题是两个不同的CPP如果都包含这个头文件，那么<code>MyClass.name</code>可能定义两次。</p>
+<p>同样的原因，如果你在头文件中定义一个变量，你会得到一个链接时错误：</p>
+<pre><code class="language-cpp">class MyClass {
+  ...
+};
+MyClass myGlobalObject; // Link ERROR if included by multiple CPP files
+</code></pre>
+<h4 id="临时解决方案"><a class="header" href="#临时解决方案">临时解决方案</a></h4>
+<p>这里有一些临时的应对措施：</p>
+<ul>
+<li>你可以在class/struct内初始化一个static const整型数据成员：</li>
+</ul>
+<pre><code class="language-cpp">class MyClass {
+  static const bool trace = false;
+  ...
+};
+</code></pre>
+<ul>
+<li>你可以定义一个返回局部static对象的内联函数：</li>
+</ul>
+<pre><code class="language-cpp">inline std::string getName() {
+  static std::string name = &quot;initial value&quot;;
+  return name;
+}
+</code></pre>
+<ul>
+<li>你可以定义一个static成员函数返回它的值：</li>
+</ul>
+<pre><code class="language-cpp">std::string getMyGlobalObject() {
+  static std::string myGlobalObject = &quot;initial value&quot;;
+  return myGlobalObject;
+}
+</code></pre>
+<ul>
+<li>你可以使用变量模板（C++14及以后）：</li>
+</ul>
+<pre><code class="language-cpp">template&lt;typename T = std::string&gt;
+T myGlobalObject = &quot;initial value&quot;;
+</code></pre>
+<ul>
+<li>你可以继承一个包含static成员的类模板：</li>
+</ul>
+<pre><code class="language-cpp">template&lt;typename Dummy&gt;
+class MyClassStatics
+{
+  static std::string name;
+};
+template&lt;typename Dummy&gt;
+std::string MyClassStatics&lt;Dummy&gt;::name = &quot;initial value&quot;;
+class MyClass : public MyClassStatics&lt;void&gt; {
+  ...
+};
+</code></pre>
+<p>但是这些方法都有不小的负载，可读性也比较差，想要使用全局变量也比较困难。除此之外，全局变量的初始化可能会推迟到它第一次使用的时候，这使得应用程序不能在启动的时候把对象初始化好。（比如用一个对象监控进程）。</p>
+<h2 id="32-使用内联变量"><a class="header" href="#32-使用内联变量">3.2 使用内联变量</a></h2>
+<p>现在，有了inline，你可以在头文件中定义一个全局可用的变量，它可以被多个CPP文件包含：</p>
+<pre><code class="language-cpp">class MyClass {
+  static inline std::string name = &quot;&quot;; // OK since C++17
+  ...
+};
+inline MyClass myGlobalObj; // OK even if included/defined by multiple CPP files
+</code></pre>
+<p>初始化发生在第一个包含该头文件的翻译单元。</p>
+<p>形式化来说，在变量前使用inline和将函数声明为inline有相同的语义：</p>
+<ul>
+<li>如果每个定义都是相同的，那么它可以在多个翻译单元定义</li>
+<li>它必须在使用它的每个翻译单元中定义</li>
+</ul>
+<p>两者都是通过包含来自同一头文件的定义来实现的。最终程序的行为就像是只有一个变量。</p>
+<p>你甚至可以在头文件中定义原子类型的变量：</p>
+<pre><code class="language-cpp">inline std::atomic&lt;bool&gt; ready{false};
+</code></pre>
+<p>注意，对于<code>std::atomic</code>，通常在定义它的时候你还得初始化它。</p>
+<p>这意味着，你仍然必须保证在你初始化它之前类型是完全的（complete）。比如，如果一个struct或者class有一个static成员，类型是自身，那么该成员只能在该类型被声明后才能使用。</p>
+<pre><code class="language-cpp">struct MyType {
+  int value;
+  MyType(int i) : value{i} {
+  }
+// one static object to hold the maximum value of this type:
+  static MyType max; // can only be declared here
+  ...
+};
+inline MyType MyType::max{0};
+</code></pre>
+<p>参见另一个使用内联变量的例子，它会<strong>使用头文件跟踪所有new调用</strong>。</p>
+<h2 id="33-constexpr隐式包含inline"><a class="header" href="#33-constexpr隐式包含inline">3.3 constexpr隐式包含inline</a></h2>
+<p>对于static数据成员，constexpr现在隐式包含inline的语义，所以下面的声明在C++17后会<strong>定义</strong>static数据成员n：</p>
+<pre><code class="language-cpp">struct D {
+  static constexpr int n = 5; // C++11/C++14: declaration
+                              // since C++17: definition
+};
+</code></pre>
+<p>换句话说，它与下面的代码一样：</p>
+<pre><code class="language-cpp">struct D {
+  inline static constexpr int n = 5;
+};
+</code></pre>
+<p>在C++17之前,有时候你也可以只声明不定义。考虑下面的声明：</p>
+<pre><code class="language-cpp">struct D {
+  static constexpr int n = 5;
+};
+</code></pre>
+<p>如果不需要<code>D::n</code>的定义，这就足够了，例如，<code>D::n</code>只通过值传递的话：</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; D::n; // OK (ostream::operator&lt;&lt;(int) gets D::n by value)
+</code></pre>
+<p>如果<code>D::n</code>是传引用到非内联函数，并且/或者函数调用没有优化，那么就是无效的。比如：</p>
+<pre><code class="language-cpp">int inc(const int&amp; i);
+std::cout &lt;&lt; inc(D::n); // usually an ERROR
+</code></pre>
+<p>这段代码违背了一处定义规则（ODR）。当使用带优化的编译器构建时，它可能正常工作，或者抛出链接时错误指出缺少定义。当使用不带优化的编译器时，几乎可以确定这段代码会由于缺少<code>D::n</code>的定义而拒绝编译：</p>
+<p>因此，在C++17前，你不得不在相同的翻译单元定义<code>D::n</code>：</p>
+<pre><code class="language-cpp">constexpr int D::n; // C++11/C++14: definition
+                    // since C++17: redundant declaration (deprecated)
+</code></pre>
+<p>当使用C++17构建，在class中的声明本身就是一个定义，所以这段代码就算没有前面的定义也是有效的。前面的定义也是可以的，但是已经废弃。</p>
+<h2 id="34-内联变量和thread_local"><a class="header" href="#34-内联变量和thread_local">3.4 内联变量和thread_local</a></h2>
+<p>使用thread_local你可以让每个线程拥有一个内联变量：</p>
+<pre><code class="language-cpp">struct ThreadData {
+  inline static thread_local std::string name; // unique name per thread
+...
+};
+
+inline thread_local std::vector&lt;std::string&gt; cache; // one cache per thread
+</code></pre>
+<p>为了演示一个完整的例子，考虑下面的头文件：</p>
+<pre><code class="language-cpp">// lang/inlinethreadlocal.hpp
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+
+struct MyData {
+  inline static std::string gName = &quot;global&quot;; // unique in program
+  inline static thread_local std::string tName = &quot;tls&quot;; // unique per thread
+  std::string lName = &quot;local&quot;; // for each object
+  ...
+  void print(const std::string&amp; msg) const {
+    std::cout &lt;&lt; msg &lt;&lt; '\n';
+    std::cout &lt;&lt; &quot;- gName: &quot; &lt;&lt; gName &lt;&lt; '\n';
+    std::cout &lt;&lt; &quot;- tName: &quot; &lt;&lt; tName &lt;&lt; '\n';
+    std::cout &lt;&lt; &quot;- lName: &quot; &lt;&lt; lName &lt;&lt; '\n'; }
+};
+
+inline thread_local MyData myThreadData; // one object per thread
+</code></pre>
+<p>你可以在有<code>main()</code>的翻译单元使用它：</p>
+<pre><code class="language-cpp">// lang/inlinethreadlocal1.cpp
+#include &quot;inlinethreadlocal.hpp&quot; 
+#include &lt;thread&gt;
+void foo();
+
+int main()
+{
+  myThreadData.print(&quot;main() begin:&quot;);
+  myThreadData.gName = &quot;thread1 name&quot;;
+  myThreadData.tName = &quot;thread1 name&quot;;
+  myThreadData.lName = &quot;thread1 name&quot;;
+  myThreadData.print(&quot;main() later:&quot;);
+  std::thread t(foo);
+  t.join();
+  myThreadData.print(&quot;main() end:&quot;);
+}
+</code></pre>
+<p>你可以在另一个定义<code>foo()</code>的翻译单元使用头文件，其中<code>foo()</code>被不同的线程调用：</p>
+<pre><code class="language-cpp">// lang/inlinethreadlocal2.cpp
+#include &quot;inlinethreadlocal.hpp&quot;
+
+void foo()
+{
+  myThreadData.print(&quot;foo() begin:&quot;);
+  myThreadData.gName = &quot;thread2 name&quot;;
+  myThreadData.tName = &quot;thread2 name&quot;;
+  myThreadData.lName = &quot;thread2 name&quot;;
+  myThreadData.print(&quot;foo() end:&quot;);
+}
+</code></pre>
+<p>程序的输出如下：</p>
+<pre><code class="language-text">main() begin:
+- gName: global
+- tName: tls
+- lName: local
+main() later:
+- gName: thread1 name
+- tName: thread1 name
+- lName: thread1 name
+foo() begin:
+- gName: thread1 name
+- tName: tls
+- lName: local
+foo() end:
+- gName: thread2 name
+- tName: thread2 name
+- lName: thread2 name
+main() end:
+- gName: thread2 name
+- tName: thread1 name
+- lName: thread1 name
+</code></pre>
+<h2 id="35-后记"><a class="header" href="#35-后记">3.5 后记</a></h2>
+<p>David Krauss的文档<a href="https://wg21.link/n4147">https://wg21.link/n4147</a>是内联变量产生的动机。内联变量最初由Hal Finkel和Richard Smith在<a href="https://wg21.link/n4424">https://wg21.link/n4424</a>中提出。最后这个特性的公认措辞是由Hal Finkel和Richard Smith在<a href="https://wg21.link/p0386r2"> https://wg21.link/p0386r2</a>中给出。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第四章-聚合扩展"><a class="header" href="#第四章-聚合扩展">第四章 聚合扩展</a></h1>
+<p>C++中有一种初始化对象的方式叫做聚合初始化（aggregate initialization），它允许用花括号聚集多个值来初始化。</p>
+<pre><code class="language-cpp">struct Data {
+  std::string name;
+  double value;
+};
+
+Data x{&quot;test1&quot;, 6.778};
+</code></pre>
+<p>从C++17开始，聚合还支持带基类的数据结构，所以下面这种数据结构用列表初始化也是允许的：</p>
+<pre><code class="language-cpp">struct MoreData : Data {
+  bool done;
+};
+MoreData y{{&quot;test1&quot;, 6.778}, false};
+</code></pre>
+<p>正如你看到的，聚合初始化现在支持嵌套的花括号传给基类的成员来初始化。</p>
+<p>对于带有成员的子对象的初始化，如果基类或子对象只有一个值，则可以跳过嵌套的大括号：</p>
+<pre><code class="language-cpp">MoreData y{&quot;test1&quot;, 6.778, false};
+</code></pre>
+<h2 id="41-扩展聚合初始化的动机"><a class="header" href="#41-扩展聚合初始化的动机">4.1 扩展聚合初始化的动机</a></h2>
+<p>如果没有这项特性的话，继承一个类之后就不能使用聚合初始化了，需要你为新类定义一个构造函数：</p>
+<pre><code class="language-cpp">struct Cpp14Data : Data {
+  bool done;
+  Cpp14Data (const std::string&amp; s, double d, bool b)
+      : Data{s,d}, done{b} {
+  }
+};
+Cpp14Data y{&quot;test1&quot;, 6.778, false};
+</code></pre>
+<p>现在，有了这个特性我们可以自由的使用嵌套的花括号，如果只传递一个值还可以省略它：</p>
+<pre><code class="language-cpp">MoreData x{{&quot;test1&quot;, 6.778}, false}; // OK since C++17
+MoreData y{&quot;test1&quot;, 6.778, false}; // OK
+</code></pre>
+<p>注意，因为它现在是聚合体，其它初始化方式也是可以的：</p>
+<pre><code class="language-cpp">MoreData u; // OOPS: value/done are uninitialized
+MoreData z{}; // OK: value/done have values 0/false
+</code></pre>
+<p>如果这个看起来太危险了，你还是最好提供一个构造函数。</p>
+<h2 id="42-使用扩展的聚合初始化"><a class="header" href="#42-使用扩展的聚合初始化">4.2 使用扩展的聚合初始化</a></h2>
+<p>关于这个特性的常见用法是列表初始化一个C风格的数据结构，该数据结构继承自一个类，然后添加了一些数据成员或者操作。比如：</p>
+<pre><code class="language-cpp">struct Data {
+  const char* name;
+  double value;
+};
+struct PData : Data {
+  bool critical;
+  void print() const {
+    std::cout &lt;&lt; ✬[✬ &lt;&lt; name &lt;&lt; ✬,✬ &lt;&lt; value &lt;&lt; &quot;]\n&quot;; }
+};
+
+PData y{{&quot;test1&quot;, 6.778}, false};
+y.print();
+</code></pre>
+<p>这里里面的花括号会传递给基类Data的数据成员。</p>
+<p>你可以跳过一些初始值。这种情况下这些元素是零值初始化（zero initalized）（调用默认构造函数或者将基本数据类型初始化为0，false或者nullptr）。比如：</p>
+<pre><code class="language-cpp">PData a{};          // zero-initialize all elements
+PData b{{&quot;msg&quot;}};   // same as {{&quot;msg&quot;,0.0},false}
+PData c{{}, true};  // same as {{nullptr,0.0},true}
+PData d;            // values of fundamental types are unspecified
+</code></pre>
+<p>注意使用空的花括号和不使用花括号的区别。</p>
+<ul>
+<li>a零值初始化所有成员，所以name被默认构造，double value被初始化为0.0，bool flag被初始化为false。</li>
+<li>d只调用name的默认构造函数。所有其它的成员都没用被初始化，所以值是未指定的（unspecified）。</li>
+</ul>
+<p>你也可以继承非聚合体来创建一个聚合体。比如：</p>
+<pre><code class="language-cpp">struct MyString : std::string {
+  void print() const {
+    if (empty()) {
+      std::cout &lt;&lt; &quot;&lt;undefined&gt;\n&quot;; }
+    else {
+      std::cout &lt;&lt; c_str() &lt;&lt; '\n'; } }
+};
+
+MyString x{{&quot;hello&quot;}};
+MyString y{&quot;world&quot;};
+</code></pre>
+<p>甚至还可以继承多个非聚合体：</p>
+<pre><code class="language-cpp">template&lt;typename T&gt;
+struct D : std::string, std::complex&lt;T&gt;
+{
+  std::string data;
+};
+</code></pre>
+<p>然后使用下面的代码初始化它们：</p>
+<pre><code class="language-cpp">D&lt;float&gt; s{{&quot;hello&quot;}, {4.5,6.7}, &quot;world&quot;};        // OK since C++17
+D&lt;float&gt; t{&quot;hello&quot;, {4.5, 6.7}, &quot;world&quot;};         // OK since C++17
+std::cout &lt;&lt; s.data;                              // outputs: ”world”
+std::cout &lt;&lt; static_cast&lt;std::string&gt;(s);         // outputs: ”hello”
+std::cout &lt;&lt; static_cast&lt;std::complex&lt;float&gt;&gt;(s); // outputs: (4.5,6.7)
+</code></pre>
+<p>内部花括号的值（initializer_lists）会传递给基类，其传递顺序遵循基类声明的顺序。</p>
+<p>这项新特性还有助于用很少的代码定义<strong>lambdas重载</strong>。</p>
+<h2 id="43-聚合体定义"><a class="header" href="#43-聚合体定义">4.3 聚合体定义</a></h2>
+<p>总结一下，C++17的聚合体（aggregate）定义如下：</p>
+<ul>
+<li>是个数组</li>
+<li>或者是个类类型（class，struct，union），其中
+<ul>
+<li>没有用户声明的构造函数或者explicit构造函数</li>
+<li>没有使用using声明继承的构造函数</li>
+<li>没有private或者protected的非static数据成员</li>
+<li>没有virtual函数</li>
+<li>没有virtual，private或者protected基类</li>
+</ul>
+</li>
+</ul>
+<p>为了让聚合体可以使用，还要求聚合体没有private或者protected基类成员或者构造函数在初始化的时候使用。</p>
+<p>C++17还引入了一种新的type trait即<code>is_aggregate&lt;&gt;</code>来检查一个类型是否是聚合体：</p>
+<pre><code class="language-cpp">template&lt;typename T&gt;
+struct D : std::string, std::complex&lt;T&gt; {
+  std::string data;
+};
+D&lt;float&gt; s{{&quot;hello&quot;}, {4.5,6.7}, &quot;world&quot;}; // OK since C++17
+std::cout &lt;&lt; std::is_aggregate&lt;decltype(s)&gt;::value; // outputs: 1 (true)
+</code></pre>
+<h2 id="44-向后不兼容"><a class="header" href="#44-向后不兼容">4.4 向后不兼容</a></h2>
+<p>注意，下面示例中的代码将不再能通过编译：</p>
+<pre><code class="language-cpp">// lang/aggr14.cpp
+struct Derived;
+struct Base {
+  friend struct Derived;
+private:
+  Base() {
+  }
+};
+struct Derived : Base {
+};
+int main()
+{
+  Derived d1{}; // ERROR since C++17
+  Derived d2; // still OK (but might not initialize)
+}
+</code></pre>
+<p>C++17之前，Derived不是一个聚合体，所以：</p>
+<pre><code class="language-cpp">Derived d1{};
+</code></pre>
+<p>调用Derived隐式定义的默认构造函数，它默认调用基类Base的默认构造函数。虽然基类的默认构造函数是private，但是通过子类的默认构造函数调用它是有效的，因为子类被声明为一个friend类。</p>
+<p>C++17开始，Derived是一个聚合体，没有隐式的默认构造函数。所以这个初始化被认为是聚合初始化，聚合初始化不允许调用基类的默认构造函数。不管基类是不是friend都不行。</p>
+<h2 id="45-后记"><a class="header" href="#45-后记">4.5 后记</a></h2>
+<p>内联变量最初由Oleg Smolsky在<a href="https://wg21.link/n4404">https://wg21.link/n4404</a>中提出。最后这个特性的公认措辞是由Oleg Smolsky在<a href="https://wg21.link/p0017r1"> https://wg21.link/p0017r1</a>中给出。</p>
+<p>新的type trait即<code>std::is_aggregate&lt;&gt;</code>最初作为美国国家机构对C++ 17标准化的评论而引入。（参见<a href="https://wg21.link/lwg2911">https://wg21.link/lwg2911</a>）</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第五章-强制拷贝消除或者传递unmaterialized对象"><a class="header" href="#第五章-强制拷贝消除或者传递unmaterialized对象">第五章 强制拷贝消除或者传递unmaterialized对象</a></h1>
+<p>本章的主题可以从两个角度来看：</p>
+<ul>
+<li>C++17引入了新的规则，在确定条件下可以强制消除拷贝：以前临时对象传值或者返回临时对象期间发生的拷贝操作的消除是可选的，现在是强制的。</li>
+<li>因此，我们处理传递未具体化对象的值以进行初始化
+我将从技术上介绍这个特性，然后讨论具体化（materialization）的效果和相关术语。</li>
+</ul>
+<h2 id="51-临时量强制拷贝消除的动机"><a class="header" href="#51-临时量强制拷贝消除的动机">5.1 临时量强制拷贝消除的动机</a></h2>
+<p>标准伊始，C++就明确允许一些拷贝操作可以被省略（消除），不调用拷贝构造函数会失去可能存在的副作用，从而可能影响程序的行为，即便这样也在所不惜。强制拷贝消除的场景之一是使用临时对象初始化新对象。这个情况经常发生，尤其是以值传递方式将临时对象传递给一个函数，或者函数返回临时对象。举个例子：</p>
+<pre><code class="language-cpp">class MyClass
+{
+  ...
+};
+void foo(MyClass param) { // param is initialized by passed argument
+  ...
+}
+MyClass bar() {
+  return MyClass(); // returns temporary
+}
+
+int main()
+{
+  foo(MyClass());       // pass temporary to initialize param
+  MyClass x = bar();    // use returned temporary to initialize x
+  foo(bar());           // use returned temporary to initialize param
+}
+</code></pre>
+<p>但是，由于这些拷贝消除优化不是强制的，要拷贝的对象必须提供隐式或显式的拷贝或移动构造函数。也就是说，尽管拷贝/移动构造函数一般不会调用，但是也必须存在。如果没有定义拷贝/移动构造函数，那么代码不能通过编译。</p>
+<p>因此，下面MyClass的定义的代码编译不了：</p>
+<pre><code class="language-cpp">class MyClass
+{
+public:
+  ...
+  // no copy/move constructor defined:
+  MyClass(const MyClass&amp;) = delete;
+  MyClass(MyClass&amp;&amp;) = delete;
+  ...
+};
+</code></pre>
+<p>这里没有拷贝构造函数就足够了，因为仅当没有用户声明的拷贝构造（或者拷贝赋值运算符）时移动构造函数才隐式可用。</p>
+<p>C++17后，临时变量初始化新对象期间发生的拷贝是强制消除的。事实上，在后面我们会看到，我们简单的传值作为实参初始化或者返回一个值，该值会接下来用于具体化（materalize）一个新对象。</p>
+<p>这意味着就算MyClass类完全没有表示启用拷贝操作，上面的例子也能通过编译。</p>
+<p>然而，请注意其他可选的拷贝消除仍然是可选的，仍然要求一个可调用的拷贝或者移动构造函数，比如：</p>
+<pre><code class="language-cpp">MyClass foo()
+{
+  MyClass obj;
+  ...
+  return obj;    // still requires copy/move support
+}
+</code></pre>
+<p>在这里，<code>foo()</code>里面的obj是一个带名字的变量（即左值（lvalue））。所以会发生命名的返回值优化（named return value optimization，NRVO），它要求类型支持拷贝或者移动操作。即便obj是一个参数也仍然如此：</p>
+<pre><code class="language-cpp">MyClass bar(MyClass obj) // copy elision for passed temporaries
+{
+  ...
+  return obj; // still requires copy/move support
+}
+</code></pre>
+<p>传递一个临时量（即纯右值（prvalue））到函数作为实参，不会发生拷贝/移动操作，但是返回这个参数仍然需要拷贝/移动操作，因为返回的对象有名字。</p>
+<p>作为这一改变的部分，值范畴（value categories）修改和新增了很多术语。</p>
+<h2 id="52-临时量强制拷贝消除的好处"><a class="header" href="#52-临时量强制拷贝消除的好处">5.2 临时量强制拷贝消除的好处</a></h2>
+<p>强制拷贝消除的一个好处是，很明显，如果拷贝操作开心较大时会得到更好的性能。虽然移动语言显著减少了拷贝开销，但是完全不执行拷贝能极大的提示性能。这可能会减少使用出参（译注：所谓出参即可out parameter，是指使用参数来传递返回信息，通常是一个指针或者引用）代替返回一个值（假设这个值是由返回语句创建的）的需求。</p>
+<p>另一个好处是现在只要写一个工厂函数它总是能工作，因为现在的工厂函数可以返回对象，即便对象不允许拷贝/移动。比如，考虑下面的泛型工厂函数：</p>
+<pre><code class="language-cpp">// lang/factory.hpp
+#include &lt;utility&gt;
+template &lt;typename T, typename... Args&gt;
+T create(Args&amp;&amp;... args)
+{
+  ...
+  return T{std::forward&lt;Args&gt;(args)...};
+}
+</code></pre>
+<p>这个函数现在甚至可以用于<code>std::atomic&lt;&gt;</code>这种类型，该类型既没有定义拷贝构造函数也没有定义移动构造函数：</p>
+<pre><code class="language-cpp">// lang/factory.cpp
+#include &quot;factory.hpp&quot; 
+#include &lt;memory&gt;
+#include &lt;atomic&gt;
+
+int main() {
+    int i = create&lt;int&gt;(42);
+    std::unique_ptr&lt;int&gt; up = create&lt;std::unique_ptr&lt;int&gt;&gt;(new int{42});
+    std::atomic&lt;int&gt; ai = create&lt;std::atomic&lt;int&gt;&gt;(42);
+}
+</code></pre>
+<p>这个特性带来的另一个效果是，如果类有显式delete的移动构造函数，你现在可以返回临时值，然后用它初始化对象：</p>
+<pre><code class="language-cpp">class CopyOnly {
+public:
+    CopyOnly() {
+    }
+    CopyOnly(int) {
+    }
+    CopyOnly(const CopyOnly&amp;) = default;
+    CopyOnly(CopyOnly&amp;&amp;) = delete; // explicitly deleted
+};
+
+CopyOnly ret() {
+    return CopyOnly{}; // OK since C++17
+}
+
+CopyOnly x = 42; // OK since C++17
+</code></pre>
+<p>x的初始化代码在C++17之前是无效的，因为拷贝初始化需要将42转换为一个临时对象，然后临时对象原则上需要提供一个移动构造函数，尽管不会用到它。（）</p>
+<h2 id="53-值范畴的解释"><a class="header" href="#53-值范畴的解释">5.3 值范畴的解释</a></h2>
+<p>强制拷贝消除带来的额外工作是值范畴（value categories）的一些修改。</p>
+<h3 id="531-值范畴"><a class="header" href="#531-值范畴">5.3.1 值范畴</a></h3>
+<p>在C++中的每个表达式都有一个值范畴。这个值范畴描述了表达式可以做什么。</p>
+<h4 id="值范畴的历史"><a class="header" href="#值范畴的历史">值范畴的历史</a></h4>
+<p>从C语言历史的角度来看，在赋值语句中只有lvalue（左值）和rvalue（右值）：</p>
+<pre><code class="language-cpp">  x = 42;
+</code></pre>
+<p>表达式x是lvalue，因为它可以出现在赋值语句的左边，表达式42是rvalue，因为它只能出现在赋值语句的右边。但是因为ANSI-C，事情变得更复杂一些，因为x如果声明为<code>const int</code>就不能在赋值语句的左边了，但是它仍然是个（不具可修改性的）lvalue。</p>
+<p>C++11我们有了可移动的对象，这些对象在语义上是只能出现在赋值语句右边，但是可以被修改，因为赋值语句可以盗取它们的值。基于这个原因，新的值范畴xvalue被引入，并且之前的值范畴rvalue有了新名字即prvalue。</p>
+<h4 id="c11的值范畴"><a class="header" href="#c11的值范畴">C++11的值范畴</a></h4>
+<p>C++11后，值范畴如图5.1描述的那样：我们的核心值范畴是lvalue，prvalue（pure rvalue，纯右值），xvalue（eXpiring value，将亡值）。组合得到的值范畴有：glvalue（generalized lvalue，泛化左值，是lvalue和xvalue的结合）以及rvalue（是xvalue和prvalue的结合）。</p>
+<img src="part1/../../public/fig5-1.jpg" align="center"/>
+<p align="center">图5.1 C++11后的值范畴</p>
+<p>lvalue的例子有：</p>
+<ul>
+<li>一个表达式只包含变量，函数或者成员的名字</li>
+<li>一个表达式是字符串字面值</li>
+<li>内置一元操作符<code>*</code>的结果（即对原生指针解引用）</li>
+<li>返回左值引用（<code>type&amp;</code>）的函数的返回值</li>
+</ul>
+<p>prvalue的例子有：</p>
+<ul>
+<li>除字符串字面值外的其他字面值（或者用户定义的字面值，其中与之关联的字面值操作符的返回类型标示值的范畴）</li>
+<li>内置一元操作符<code>&amp;</code>的结果（即获取表达式地址）</li>
+<li>内置算术运算符的结果</li>
+<li>返回值的函数的返回值</li>
+</ul>
+<p>xvalue的例子有：</p>
+<ul>
+<li>返回右值引用（<code>type&amp;&amp;</code>，尤其是返回<code>std::move()</code>）的函数的返回值</li>
+<li>右值引用到对象类型的转换</li>
+</ul>
+<p>大概来说：</p>
+<ul>
+<li>所有使用名字的表达式是lvalue</li>
+<li>所有字符串字面值表达式是lvalue</li>
+<li>所有其他字面值（4.2，true，nullptr）是prvalue</li>
+<li>所有临时变量（尤其是返回值的函数返回的对象）是prvalue</li>
+<li><code>std::move()</code>的结果是xvalue</li>
+</ul>
+<p>举个例子：</p>
+<pre><code class="language-cpp">class X {
+};
+
+X v;
+const X c;
+
+void f(const X&amp;);   // accepts an expression of any value category
+void f(X&amp;&amp;);        // accepts prvalues and xvalues only, but is a better match
+
+f(v);               // passes a modifiable lvalue to the first f()
+f(c);               // passes a non-modifiable lvalue to the first f()
+f(X());             // passes a prvalue to the second f()
+f(std::move(v));    // passes an xvalue to the second f()
+</code></pre>
+<p>值得强调的是，严格来说，glvalue，prvalue和xvalue是针对表达式的， 不是针对值的（这意味着这些值用词不当）。举个例子，一个变量本身不是一个lvalue，只有一个变量放到表达式里才标示这个变量是lvalue：</p>
+<pre><code class="language-cpp">int x = 3; // x here is a variable, not an lvalue
+int y = x; // x here is an lvalue
+</code></pre>
+<p>第一个语句中3是prvalue，它用来初始化变量x（不是lvalue）。第二个语句中x是lvalue（对它求值会会发现它包含值3）。然后作为lvallue的x转换为prvalue，用来初始化变量y。</p>
+<h3 id="532-c17的值范畴"><a class="header" href="#532-c17的值范畴">5.3.2 C++17的值范畴</a></h3>
+<p>C++17没有改变既有的值范畴，但是阐述了它们的语义（如图5.2所示）</p>
+<img src="part1/../../public/fig5-2.jpg" align="center"/>
+<p align="center">图5.1 C++17后的值范畴</p>
+<p>现在解释值范畴的主要方式是认为我们有两类表达式：</p>
+<ul>
+<li>glvalue：对象/函数位置的表达式</li>
+<li>prvalue：初始化表达式
+xvalue被认为是一个特殊的位置，表示有一个变量它的资源可以重用（通常因为它接近它的生命周期结尾）。</li>
+</ul>
+<p>C++17引入了一个新术语，具体化（materialization），表示在某个时刻一个prvalue成为临时对象。因此，临时变量具体化转换（temporary materialization conversion）是指prvalue到xvalue的转换。</p>
+<p>任何时刻，期待出现glvalue（lvalue或xvalue）的地方出现prvalue都是有效的，创建一个临时变量并通过prvalue初始化，然后prvallue被替换为xvalue。因此在上面的例子中，严格来说：</p>
+<pre><code class="language-cpp">void f(const X&amp; p); // accepts an expression of any value category,
+                    // but expects a glvalue
+f(X());             // passes a prvalue materialized as xvalue
+</code></pre>
+<p>因为例子中的<code>f()</code>有一个引用参数，它期待一个glvalue实参。然而，表达式<code>X()</code>是一个prvalue。临时具体化规则因此生效，表达式<code>X()</code>转换为一个xvalue并使用默认构造函数初始化临时变量。</p>
+<p>注意具体化不意味着我们创建了一个新的/不同的对象。lvalue引用仍然绑定xvalue和prvalue，虽然后者总是转换到xvalue。</p>
+<p>在这些改变后，拷贝消除意义非凡，因为prvalue不再要求可移动，我们只传递一个初始值，这个值迟早会具体化然后初始化一个对象。</p>
+<h2 id="54-未具体化返回值传递"><a class="header" href="#54-未具体化返回值传递">5.4 未具体化返回值传递</a></h2>
+<p>未具体化返回值传递是指所有形式的返回临时对象（prvalue）的值：</p>
+<ul>
+<li>当返回一个不是字符串字面值的字面值：</li>
+</ul>
+<pre><code class="language-cpp">int f1() {    // return int by value
+  return 42;
+}
+</code></pre>
+<ul>
+<li>当返回类型为临时变量的值或者使用auto：</li>
+</ul>
+<pre><code class="language-cpp">auto f2() {   // return deduced type by value
+  ...
+  return MyType{...};
+}
+</code></pre>
+<ul>
+<li>当返回临时对象，并且类型用<code>decltype(auto)</code>推导：</li>
+</ul>
+<pre><code class="language-cpp">decltype(auto) f3() {   // return temporary from return statement by value
+  ...
+  return MyType{...};
+}
+</code></pre>
+<p>记住如果用于初始化的表达式（这里是返回语句）会创建一个临时变量（prvalue），那么用<code>decltype(auto)</code>声明的类型是值。</p>
+<p>上述所有形式我们都返回一个prvalue的值，我们不需要任何拷贝/移动的支持。</p>
+<h2 id="55-后记"><a class="header" href="#55-后记">5.5 后记</a></h2>
+<p>强制拷贝消除最初由Richard Smith在<a href="https://wg21.link/p0135r0">https://wg21.link/p0135r0</a>中提出。最后这个特性的公认措辞是由Richard Smith在<a href="https://wg21.link/p0135r1">https://wg21.link/p0135r1</a>中给出。</p>
+<blockquote>
+<p>这一章翻译的不好，后面我会修订</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第六章-lambda扩展"><a class="header" href="#第六章-lambda扩展">第六章 Lambda扩展</a></h1>
+<p>C++11引入了lambda，C++14引入了泛型lambda，这是一个成功的故事。lambda允许我们将功能指定为参数，这让定制函数的行为变得更加容易。</p>
+<p>C++ 17进一步改进，允许lambda用在更多的地方。</p>
+<h2 id="61-constexpr-lambda"><a class="header" href="#61-constexpr-lambda">6.1 constexpr lambda</a></h2>
+<p>自C++17后，只要可能，lambda就隐式地用constexpr修饰。也就是说，任何lambda都可以用于编译时上下文，前提是它使用的特性对编译时上下文有效（例如，仅字符串字面值，无静态变量，无virutal变量，无try/catch，无new/delete）。</p>
+<p>举个例子，你可以传一个值给lambda，然后用计算的结果作为编译时的<code>std::array&lt;&gt;</code>大小：</p>
+<pre><code class="language-cpp">auto squared = [](auto val) { // implicitly constexpr since C++17
+  return val*val;
+};
+std::array&lt;int,squared(5)&gt; a; // OK since C++17 =&gt; std::array&lt;int,25&gt;
+</code></pre>
+<p>如果在不允许constexpr的上下文使用这个特性就不行，但是你仍然可以在运行时傻姑娘上下文使用lambda：</p>
+<pre><code class="language-cpp">he lambda in run-time contexts:
+auto squared2 = [](auto val) {      // implicitly constexpr since C++17
+  static int calls = 0;             // OK, but disables lambda for constexpr contexts
+  ...
+  return val*val;
+};
+std::array&lt;int,squared2(5)&gt; a;      // ERROR: static variable in compile-time context
+std::cout &lt;&lt; squared2(5) &lt;&lt; '\n';   // OK
+</code></pre>
+<p>要知道是否一个lambda在一个编译时上下文有效，你可以将它声明为constexpr：</p>
+<pre><code class="language-cpp">auto squared3 = [](auto val) constexpr {    // OK since C++17
+  return val*val;
+};
+</code></pre>
+<p>还可以指定返回类型，语法如下：</p>
+<pre><code class="language-cpp">auto squared3i = [](int val) constexpr -&gt; int { // OK since C++17
+  return val*val;
+};
+</code></pre>
+<p>constexpr对于函数的一般规则仍然有效：如果lambda在运行时上下文中使用，相应的功能在运行时执行。</p>
+<p>然而，在不允许编译时上下文的地方使用constexpr lambda会得到一个编译时错误：</p>
+<pre><code class="language-cpp">auto squared4 = [](auto val) constexpr {
+  static int calls=0; // ERROR: static variable in compile-time context
+  ...
+  return val*val;
+};
+</code></pre>
+<p>如果lambda式显式或隐式的constexpr，那么函数调用操作符也会是constexpr。换句话说，下面的定义：</p>
+<pre><code class="language-cpp">auto squared = [](auto val) { // implicitly constexpr since C++17
+  return val*val;
+};
+</code></pre>
+<p>会转换为闭包类型：</p>
+<pre><code class="language-cpp">class CompilerSpecificName {
+  public:
+    ...
+    template&lt;typename T&gt;
+    constexpr auto operator() (T val) const {
+      return val*val;
+    }
+};
+</code></pre>
+<p>生成的闭包类型的函数调用操作符是自动附加constexpr的。在C++17中，如果lambda显式定义为constexpr或者隐式定义为constexpr（就像这个例子），那么生成的函数调用运算符也会是constexpr。</p>
+<h2 id="62-传递this的拷贝到lambda"><a class="header" href="#62-传递this的拷贝到lambda">6.2 传递this的拷贝到lambda</a></h2>
+<p>当在成员函数中使用lambda时，你不能隐式的访问调用这个成员函数的对象的成员。也就是说，在lambda内部，如果不捕获this，那么你不能使用这个对象的成员：</p>
+<pre><code class="language-cpp">class C {
+private:
+    std::string name;
+public:
+    ...
+    void foo() {
+        auto l1 = [] { std::cout &lt;&lt; name &lt;&lt; '\n'; }; // ERROR
+        auto l2 = [] { std::cout &lt;&lt; this-&gt;name &lt;&lt; '\n'; }; // ERROR
+        ...
+    }
+};
+</code></pre>
+<p>C++11和C++14中可以传this引用或者传this值：</p>
+<pre><code class="language-cpp">class C {
+private:
+    std::string name;
+public:
+    ...
+    void foo() {
+        auto l1 = [this] { std::cout &lt;&lt; name &lt;&lt; '\n'; }; // OK
+        auto l2 = [=] { std::cout &lt;&lt; name &lt;&lt; '\n'; }; // OK
+        auto l3 = [&amp;] { std::cout &lt;&lt; name &lt;&lt; '\n'; }; // OK
+        ...
+    }
+};
+</code></pre>
+<p>然而，问题是即使是传递this的值，其底层捕获的仍然是引自对象（即只有<em>指针</em>被拷贝）。如果lambda的生命周期超过了对象的生命周期，这就会出现问题。一个重要的例子是当用lambda为新线程定义task，它应该使用对象的拷贝来避免任何并发或者生命周期问题。另一个原因可能只是传递一个对象的副本当前状态。</p>
+<p>C++14有一个临时的解决方案，但是它读起来不好，工作起来也不好：</p>
+<pre><code class="language-cpp">class C {
+private:
+    std::string name;
+public:
+    ...
+    void foo() {
+        auto l1 = [thisCopy=*this] { std::cout &lt;&lt; thisCopy.name &lt;&lt; '\n'; };
+        ...
+    }
+};
+</code></pre>
+<p>举个例子，就算使用<code>=</code>或<code>&amp;</code>捕获了对象，开发者仍然可能不小心用到<code>this</code>：</p>
+<pre><code class="language-cpp">auto l1 = [&amp;, thisCopy=*this] {
+            thisCopy.name = &quot;new name&quot;;
+            std::cout &lt;&lt; name &lt;&lt; '\n'; // OOPS: still the old name
+};
+</code></pre>
+<p>C++17开始，你可以显式地通过<code>*this</code>说明你想捕获当前对象的复制：</p>
+<pre><code class="language-cpp">class C {
+private:
+    std::string name;
+public:
+    ...
+    void foo() {
+        auto l1 = [*this] { std::cout &lt;&lt; name &lt;&lt; '\n'; };
+        ...
+    }
+};
+</code></pre>
+<p>捕获<code>*this</code>意味着当前对象的复制传递到了lambda。</p>
+<p>在捕获了<code>*this</code>的情况下你仍然可以捕获其他this，只要没有与其他的发生冲突：</p>
+<pre><code class="language-cpp">auto l2 = [&amp;, *this] { ... };     // OK
+auto l3 = [this, *this] { ... };  // ERROR
+</code></pre>
+<p>这里一个完整的例子：</p>
+<pre><code class="language-cpp">// lang/lambdathis.cpp
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;thread&gt;
+
+class Data {
+private:
+    std::string name;
+public:
+    Data(const std::string&amp; s) : name(s) {
+    }
+    auto startThreadWithCopyOfThis() const {
+        // start and return new thread using this after 3 seconds:
+        using namespace std::literals;
+        std::thread t([*this] {
+            std::this_thread::sleep_for(3s);
+            std::cout &lt;&lt; name &lt;&lt; '\n';
+        });
+        return t;
+    }
+};
+
+int main()
+{
+    std::thread t;
+    {
+        Data d{&quot;c1&quot;};
+        t = d.startThreadWithCopyOfThis();
+    } // d is no longer valid
+    t.join();
+}
+</code></pre>
+<p>lambda用<code>*this</code>获取对象拷贝，即d。因此，即便是d的析构函数被调用后线程再使用传递的对象也没有问题。</p>
+<p>如果我们使用<code>[this],[=]</code>或<code>[&amp;]</code>捕获this，线程会产生未定义行为，因为在lambda打印name时，lambda使用的是已经析构后的对象的成员。</p>
+<h2 id="63-捕获引用"><a class="header" href="#63-捕获引用">6.3 捕获引用</a></h2>
+<p>通过使用新的utility库函数，你现在可以<strong>捕获const对象引用</strong>。</p>
+<h2 id="64-后记"><a class="header" href="#64-后记">6.4 后记</a></h2>
+<p>constexpr最初由 Faisal Vali, Ville Voutilainen和Gabriel Dos Reis在<a href="https://wg21.link/n4487">https://wg21.link/n4487</a>中提出。最后这个特性的公认措辞是由Faisal Vali, Jens
+Maurer和Richard Smith在<a href="https://wg21.link/p0170r1">https://wg21.link/p0170r1</a>中给出。</p>
+<p>捕获<code>*this</code>最初由H. Carter Edwards, Christian Trott, Hal Finkel, Jim Reus, Robin Maffeo和Ben Sander在<a href="https://wg21.link/p0018r0">https://wg21.link/p0018r0</a>中提出。最后这个特性的公认措辞是由 H. Carter Edwards, Daveed Vandevoorde, Christian Trott, Hal Finkel,
+Jim Reus, Robin Maffeo和Ben Sander在<a href="https://wg21.link/p0180r3">https://wg21.link/p0180r3</a>中给出。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第七章-新属性和属性相关特性"><a class="header" href="#第七章-新属性和属性相关特性">第七章 新属性和属性相关特性</a></h1>
+<p>C++11开始，你可以指定属性（attribute，一种规范的注解，可以启用或者禁用一些warning）。C++17还引入了新的属性。此外，属性现在可以在更多的地方使用，并且有一些额外的便利。</p>
+<h2 id="71-nodiscard属性"><a class="header" href="#71-nodiscard属性">7.1 <code>[[nodiscard]]</code>属性</a></h2>
+<p>新属性<code>[[nodiscard]]</code>用于鼓励编译器，当发现函数返回值没有被使用的时候，产生一个warning。</p>
+<p>通常，这个属性可以用于通知一些返回值没有使用的错误行为。错误行为可能是：</p>
+<ul>
+<li><strong>内存泄漏</strong>，比如没有使用已经分配并返回的内存</li>
+<li><strong>不符合期望，或者非直观行为</strong>，比如没有使用返回值时候可能产生的一些不同寻常/不符合期望的行为</li>
+<li><strong>不必要的负载</strong>，比如如果没有使用返回值，这个调用过程相当于无操作。</li>
+</ul>
+<p>这是一些例子，它们展示了这个属性的是有用的：</p>
+<ul>
+<li>分配资源必须由另一个函数释放的函数应标记为
+<code>[[nodiscard]]</code>。 一个典型的例子是分配内存的函数，例如<code>malloc()</code>或分配器的成员函数<code>allocate()</code>。
+但是请注意，某些函数可能会返回一个值，后续无需再针对这个值做其他调用。 例如，程序员调用大小为零字节的C函数<code>realloc(0</code>以释放内存，这个函数的返回值就不必保存以后再调用<code>free()</code></li>
+<li>一个关于不使用返回值那么函数的行为将会改变的例子是<code>std::async</code>（由C++11引入）。它的目的是异步启动任务，并返回一个句柄以等待其结束（并使用结果）。当返回值没使用时，这个调用会成为同步调用，因为未使用的返回值的析构函数会立即调用，即立刻开始等待任务结束。 因此，不使用返回值会与<code>std::async()</code>的设计目的相矛盾。 这种情况下用<code>[[nodiscard]]</code>让编译器对此发出警告。</li>
+<li>另一个例子是成员函数<code>empty()</code>，它检查对象是否没有元素。程序员有时候可能错误的调用这个函数来清空容器（译注：即误以为empty做动词）</li>
+</ul>
+<pre><code class="language-cpp">cont.empty();
+</code></pre>
+<p>这种对<code>empty()</code>的误用可以被检查出来，因为它的返回值没有被使用。将成员函数标注这个属性即可：</p>
+<pre><code class="language-cpp">class MyContainer {
+  ...
+public:
+  [[nodiscard]] bool empty() const noexcept;
+  ...
+};
+</code></pre>
+<p>尽管这个是C++17引入的，但是标准库至今都没有使用它。对于C++17来说，应用此功能的建议来得太晚了。因此关于这个特性的关键动机，即为<code>std::async()</code>的声明添加现在都没有完成。对于上述所有示例，下一个C++标准将附带相应的修复程序（具体参见已经接受的提案<a href="https://wg21.link/p0600r1">https://wg21.link/p0600r1</a>）。为了使代码更具可移植性，你应该使用它，而不是使用不可移植的方式（比如gcc或者clang的<code>[[gnu:warn_unused_result]]</code>）来标注函数。当定义<code>operator new()</code>时你应该为函数标记<code>[[nodiscard]]</code>。</p>
+<h2 id="72-maybe_unused属性"><a class="header" href="#72-maybe_unused属性">7.2 <code>[[maybe_unused]]</code>属性</a></h2>
+<p>新属性<code>[[maybe_unused]]</code>可以用来避免编译器为未被使用的名字或者对象发出警告。</p>
+<p>这个属性可以用在类声明上、类型定义<code>typedef</code>或者<code>using</code>上、变量、非静态数据成员、函数、枚举类型或者枚举值。</p>
+<p>这个属性的一个应用是标记那些不是必要的参数：</p>
+<pre><code class="language-cpp">void foo(int val, [[maybe_unused]] std::string msg)
+{
+#ifdef DEBUG
+  log(msg);
+#endif
+  ...
+}
+</code></pre>
+<p>另一个例子是标记可能不会使用的成员</p>
+<pre><code class="language-cpp">class MyStruct {
+  char c;
+  int i;
+  [[maybe_unused]] char makeLargerSize[100];
+  ...
+};
+</code></pre>
+<p>注意，你不能为一个语句标注<code>[[maybe_unused]]</code>。基于这个原因，你不能使用让<code>[[maybe_unused]]</code>与<code>[[nodiscard]]</code>相见：</p>
+<pre><code class="language-cpp">int main()
+{
+  foo(); // WARNING: return value not used
+  [[maybe_unused]] foo(); // ERROR: attribute not allowed here
+  [[maybe_unused]] auto x = foo(); // OK
+}
+</code></pre>
+<h2 id="73-fallthrough属性"><a class="header" href="#73-fallthrough属性">7.3 <code>[[fallthrough]]</code>属性</a></h2>
+<p>新属性<code>[[fallthrough]]</code>可以让编译器不警告那些switch中的某个case没有break，导致其他case被相继执行的情况。</p>
+<p>比如：</p>
+<pre><code class="language-cpp">void commentPlace(int place)
+{
+  switch (place) {
+    case 1:
+      std::cout &lt;&lt; &quot;very &quot;;
+      [[fallthrough]];
+    case 2:
+      std::cout &lt;&lt; &quot;well\n&quot;;
+      break;
+    default:
+      std::cout &lt;&lt; &quot;OK\n&quot;;
+      break; 
+  } 
+}
+</code></pre>
+<p>传递1会输出</p>
+<pre><code>very well
+</code></pre>
+<p>同时执行了case 1和case 2。</p>
+<p>注意这个属性必须被用在空语句中。因此，你需要在它尾巴上加个分号。</p>
+<p>在switch的最后一条语句使用这个属性是不允许的。</p>
+<h2 id="74-通用属性扩展"><a class="header" href="#74-通用属性扩展">7.4 通用属性扩展</a></h2>
+<p>下面的特性在C++17zhong被启用：</p>
+<ol>
+<li>现在允许为namespace标记属性。比如，你可以像下面代码一样弃用一个命名空间：</li>
+</ol>
+<pre><code class="language-cpp">namespace [[deprecated]] DraftAPI {
+  ...
+}
+</code></pre>
+<p>也可以用于inline namespace和匿名namespace。
+2. 枚举值现在也可以标注属性。</p>
+<p>比如，你可以引入新的枚举值代替原有的枚举值，然后弃用原有枚举值：</p>
+<pre><code class="language-cpp">enum class City { Berlin = 0,
+                  NewYork = 1,
+                  Mumbai = 2, Bombay [[deprecated]] = Mumbai,
+                  ... };
+</code></pre>
+<p>Mumbai和Bombay都表示相同的city数值，但是Bombay已经弃用。注意标记枚举值时，语法上需要将属性放到枚举值名字的后面。</p>
+<ol start="3">
+<li>用户定义的属性它们通常在自己的namespace定义，你现在可以使用using来避免重复书写namespace。换句话说，以前写法是：</li>
+</ol>
+<pre><code class="language-cpp">[[MyLib::WebService, MyLib::RestService, MyLib::doc(&quot;html&quot;)]] void foo();
+</code></pre>
+<p>现在你可以这么写：</p>
+<pre><code class="language-cpp">[[using MyLib: WebService, RestService, doc(&quot;html&quot;)]] void foo();
+</code></pre>
+<p>注意用了using之后再书写namespace前缀会出错的：</p>
+<pre><code class="language-cpp">[[using MyLib: MyLib::doc(&quot;html&quot;)]] void foo(); // ERROR
+</code></pre>
+<h2 id="75-后记"><a class="header" href="#75-后记">7.5 后记</a></h2>
+<p>这三个属性最初由Andrew Tomazos在<a href="https://wg21.link/p0068r0">https://wg21.link/p0068r0</a>中提出。最后<code>[[nodiscard]]</code>的公认措辞是由Andrew Tomazos在<a href="https://wg21.link/p0189r1">https://wg21.link/p0189r1</a>中给出。<code>[[maybe_unused]]</code>的公认措辞是由Andrew Tomazos在<a href="https://wg21.link/p0212r1">https://wg21.link/p0212r1</a>中给出。<code>[[fallthrough]]</code>的公认措辞是由Andrew Tomazos在<a href="https://wg21.link/p0188r1">https://wg21.link/p0188r1</a>中给出。</p>
+<p>允许namespace和枚举值标注属性这个特性最初由 Richard Smith在<a href="https://wg21.link/n4196">https://wg21.link/n4196</a>中提出。最后的公认措辞是由 Richard Smith在<a href="https://wg21.link/n4266">https://wg21.link/n4266</a>中给出。</p>
+<p>属性允许使用using这个特性最初由J. Daniel Garcia, Luis M. Sanchez, Massimo
+Torquati, Marco Danelutto和Peter Sommerlad在<a href="https://wg21.link/p0028r0">https://wg21.link/p0028r0</a>中提出。最后的公认措辞是由J. Daniel Garcia and Daveed Vandevoorde在<a href="https://wg21.link/P0028R4">https://wg21.link/P0028R4</a>中给出。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第八章-其他语言特性"><a class="header" href="#第八章-其他语言特性">第八章 其他语言特性</a></h1>
+<p>有一些小的C++核心语言特性改动，它们会在本章描述。</p>
+<h2 id="81-嵌套命名空间"><a class="header" href="#81-嵌套命名空间">8.1 嵌套命名空间</a></h2>
+<p>最早这个提案是在2003年提出的，C++标准委员会现在终于最终接受了它：</p>
+<pre><code class="language-cpp">namespace A::B::C {
+  ...
+}
+</code></pre>
+<p>它等价于:</p>
+<pre><code class="language-cpp">namespace A {
+  namespace B {
+    namespace C {
+      ...
+    }
+  }
+}
+</code></pre>
+<p>嵌套的inline命名空间还不支持。这是因为如果用了inline就不知道到底inline是针对最后一个还是对所有命名空间使用。</p>
+<h2 id="82-定于表达式求值顺序"><a class="header" href="#82-定于表达式求值顺序">8.2 定于表达式求值顺序</a></h2>
+<p>很多代码库和C++书籍包含的代码首先给出符合直觉的假设，然后代码上看起来是有效的，但是严格来讲，这些代码可能产生未定义行为。一个例子是使用寻找并替换子字符串：</p>
+<pre><code class="language-cpp">std::string s = &quot;I heard it even works if you don't believe&quot;;
+s.replace(0,8,&quot;&quot;).replace(s.find(&quot;even&quot;),4,&quot;sometimes&quot;)
+                 .replace(s.find(&quot;you don✬t&quot;),9,&quot;I&quot;);
+</code></pre>
+<p>直觉上看起来这段代码是有效的，它将前8个字符替换为空，“even”替换为“sometimes”，将“you don't”替换为“I”：</p>
+<pre><code class="language-cpp">it sometimes works if I believe
+</code></pre>
+<p>然而，在C++17之前，结果是不保证的，因为，虽然<code>find()</code>调用返回从何处开始替换，但是当整个语句执行并且在结果被需要之前，这个调用可能在任何时候执行。实际上，所有<code>find()</code>，即计算待替换的起始索引，都可能在任何替换发生前被执行，因此结果是：</p>
+<pre><code class="language-cpp">it sometimes works if I believe
+</code></pre>
+<p>其他结果也是可能的：</p>
+<pre><code class="language-cpp">it sometimes workIdon’t believe
+it even worsometiIdon’t believe
+it even worsometimesf youIlieve
+</code></pre>
+<p>另一个例子是使用输出运算符来打印计算后的表达式的值：</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; f() &lt;&lt; g() &lt;&lt; h();
+</code></pre>
+<p>通常的假设是<code>f()</code>在<code>g()</code>之前被调用，两者又都在<code>h()</code>之前被调用。然而，这个假设是错误的。<code>f()</code>，<code>g()</code>和<code>h()</code>可以按任意顺序调用，这可能导致一些奇怪的，甚至是糟糕的结果，尤其是当这些调用互相依赖时</p>
+<p>具体来说，考虑下面的例子，在C++17之前，这段代码会产生未定义行为：</p>
+<pre><code class="language-cpp">i = 0;
+std::cout &lt;&lt; ++i &lt;&lt; ' ' &lt;&lt; --i &lt;&lt; '\n';
+</code></pre>
+<p>在C++17之前，他可能输出<code>1 0</code>，也可能输出<code>0 -1</code>，甚至是<code>0 0</code>。不管i是int还是用户定义的类型，都可能这样。（对于基本类型，一些编译器至少会warning这个问题）。</p>
+<p>要修复这个未定义行为，一些运算符/操作符的求值被挑战，因此现在它们有确定的求值顺序：</p>
+<ul>
+<li>对于
+<ul>
+<li><code>e1 [ e2 ]</code></li>
+<li><code>e1 . e2</code></li>
+<li><code>e1 .* e2</code></li>
+<li><code>e1 -&gt;* e2</code></li>
+<li><code>e1 &lt;&lt; e2</code></li>
+<li><code>e1 &gt;&gt; e2</code>
+e1保证在e2之前求值，它们的求值顺序是从左至右。</li>
+</ul>
+</li>
+</ul>
+<p>然而，相同函数的不同实参的求值顺序仍然是未定义的。即：</p>
+<pre><code class="language-cpp">e1.f(a1,a2,a3)
+</code></pre>
+<p>e1保证在a1 a2 a3之前求值。但是a1 a2 a3的求职顺序仍然是未定义的。</p>
+<ul>
+<li>所有赋值运算符
+<ul>
+<li><code>e2 = e1</code></li>
+<li><code>e2 += e1</code></li>
+<li><code>e2 *= e1</code></li>
+<li><code>...</code>
+右手边的e1会先于左手变的e2被求值。</li>
+</ul>
+</li>
+<li>最后，new表达式中
+<ul>
+<li><code>new Type(e)</code>
+分配行为保证在e之前求值，初始化新的值保证在任何使用初始化的值之前被求值。</li>
+</ul>
+</li>
+</ul>
+<p>上述所有保证对基本类型和用户定义类型都有效。</p>
+<p>这样做的效果是，C++17后：</p>
+<pre><code class="language-cpp">std::string s = &quot;I heard it even works if you don't believe&quot;;
+s.replace(0,8,&quot;&quot;).replace(s.find(&quot;even&quot;),4,&quot;sometimes&quot;)
+                 .replace(s.find(&quot;you don✬t&quot;),9,&quot;I&quot;);
+</code></pre>
+<p>保证会改变s的值，变成：</p>
+<pre><code>it always works if you use C++17
+</code></pre>
+<p>因此，每个<code>find()</code>之前的替换都会在<code>find()</code>之前被求值。</p>
+<p>另一个结果是，下面的语句</p>
+<pre><code class="language-cpp">i = 0;
+std::cout &lt;&lt; ++i &lt;&lt; ' ' &lt;&lt; --i &lt;&lt; '\n';
+</code></pre>
+<p>其输出保证是<code>1 0</code>。</p>
+<p>然而，对于其他大多数运算符而言，求值顺序仍然未定义。举个例子：</p>
+<pre><code class="language-cpp">i = i++ + i; // still undefined behavior
+</code></pre>
+<p>这里右手变的i可能在递增之前或者递增之后传递给左手变。</p>
+<p>另一个使用new表达式求值顺序的例子是<strong>在传值之前插入空格的函数</strong>。</p>
+<h4 id="向后兼容"><a class="header" href="#向后兼容">向后兼容</a></h4>
+<p>新的求值顺序的保证可能影响既有程序的输出。这不是理论上可能，是真的。考虑下面的代码：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+void print10elems(const std::vector&lt;int&gt;&amp; v) 
+{
+    for (int i=0; i&lt;10; ++i) {
+        std::cout &lt;&lt; &quot;value: &quot; &lt;&lt; v.at(i) &lt;&lt; '\n';
+    }
+}
+
+int main()
+{
+    try {
+        std::vector&lt;int&gt; vec{7, 14, 21, 28};
+        print10elems(vec);
+    }
+    catch (const std::exception&amp; e) { // handle standard exception
+        std::cerr &lt;&lt; &quot;EXCEPTION: &quot; &lt;&lt; e.what() &lt;&lt; '\n'; }
+    catch (...) { // handle any other exception
+        std::cerr &lt;&lt; &quot;EXCEPTION of unknown type\n&quot;; 
+    } 
+}
+</code></pre>
+<p>因为这里的<code>vector&lt;&gt;</code>只有4个元素，程序会在<code>print10elems()</code>的循环中，调用<code>at()</code>时遇到无效索引抛出异常：</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; &quot;value: &quot; &lt;&lt; v.at(i) &lt;&lt; &quot;\n&quot;;
+</code></pre>
+<p>在C++17之前，可能输出：</p>
+<pre><code>value: 7
+value: 14
+value: 21
+value: 28
+EXCEPTION: ...
+</code></pre>
+<p>因为<code>at()</code>可以在&quot;value &quot;输出之前求值，所以对于错误的索引可能直接跳过不输出&quot;value &quot;。</p>
+<p>自C++17之后，保证输出：</p>
+<pre><code>value: 7
+value: 14
+value: 21
+value: 28
+value: EXCEPTION: ...
+</code></pre>
+<p>因为&quot;value &quot;一定在<code>at()</code>调用之前执行。</p>
+<h2 id="83-宽松的基于整数的枚举初始化"><a class="header" href="#83-宽松的基于整数的枚举初始化">8.3 宽松的基于整数的枚举初始化</a></h2>
+<p>对于有固定基本类型的枚举，C++17允许你使用带数值的列表初始化。</p>
+<pre><code class="language-cpp">// unscoped enum with underlying type:
+enum MyInt : char { };
+MyInt i1{42};     // C++17 OK (C++17之前错误)
+MyInt i2 = 42;    // 仍然错误
+MyInt i3(42);     // 仍然错误
+MyInt i4 = {42};  // 仍然错误
+
+enum class Weekday { mon, tue, wed, thu, fri, sat, sun };
+Weekday s1{0};    // C++17 OK (C++17之前错误)
+Weekday s2 = 0;   // 仍然错误
+Weekday s3(0);    // 仍然错误
+Weekday s4 = {0}; // 仍然错误
+</code></pre>
+<p>类似的，如果Weekday有基本类型：</p>
+<pre><code class="language-cpp">// scoped enum with specified underlying type:
+enum class Weekday : char { mon, tue, wed, thu, fri, sat, sun };
+Weekday s1{0};    // C++17 OK (C++17之前错误)
+Weekday s2 = 0;   // 仍然错误
+Weekday s3(0);    // 仍然错误
+Weekday s4 = {0}; // 仍然错误
+</code></pre>
+<p>对于没有指定基本类型的未限域枚举（不带class的enum），你仍然不能使用带数值的列表初始化：</p>
+<pre><code class="language-cpp">enum Flag { bit1=1, bit2=2, bit3=4 };
+Flag f1{0}; // 仍然错误
+</code></pre>
+<p>注意，列表初始化还是不允许变窄（narrowing），因此你不能传递浮点值：</p>
+<pre><code class="language-cpp">enum MyInt : char { };
+MyInt i5{42.2}; // 仍然错误
+</code></pre>
+<p>之所以提出这个特性，是想实现一种技巧，即基于原有的整数类型定义另一种新的枚举类型，就像上面MyInt一样。</p>
+<p>实际上，C++17的标准库中的<code>std::byte</code>也提供这个功能，它直接使用了这个特性。</p>
+<h2 id="84-修复带auto和直接列表初始化一起使用产生的矛盾行为"><a class="header" href="#84-修复带auto和直接列表初始化一起使用产生的矛盾行为">8.4 修复带auto和直接列表初始化一起使用产生的矛盾行为</a></h2>
+<p>C++11引入了统一初始化后，结果证明它和auto搭配会不幸地产生反直觉的矛盾行为：</p>
+<pre><code class="language-cpp">int x{42};      // initializes an int
+int y{1,2,3};   // ERROR
+auto a{42};     // initializes a std::initializer_list&lt;int&gt;
+auto b{1,2,3};  // OK: initializes a std::initializer_list&lt;int&gt;
+</code></pre>
+<p>这些使用直接列表初始化（direct list initialization，不带<code>=</code>的花括号）造成的前后不一致行为已经得到修复，现在程序行为如下：</p>
+<pre><code class="language-cpp">int x{42};      // initializes an int
+int y{1,2,3};   // ERROR
+auto a{42};     // initializes an int now
+auto b{1,2,3};  // ERROR now
+</code></pre>
+<p>注意这是一个非常大的改变，甚至可能悄悄的改变程序的行为。出于这个原因，编译器接受这个改变，但是通常也提供C++11版本的模式。对于主流编译器，比如Visual Studio 2015，g++5和clang3.8同时接受两种模式。</p>
+<p>还请注意拷贝列表初始化（copy list initialization，带<code>=</code>的花括号）的行为是不变的，当使用auto时初始化一个<code>std::initializer_list&lt;&gt;</code>：</p>
+<pre><code class="language-cpp">auto c = {42}; // still initializes a std::initializer_list&lt;int&gt;
+auto d = {1,2,3}; // still OK: initializes a std::initializer_list&lt;int&gt;
+</code></pre>
+<p>因此，现在的直接列表初始化（不带<code>=</code>）和拷贝列表初始化（带<code>=</code>）有另一个显著区别：</p>
+<pre><code class="language-cpp">auto a{42}; // initializes an int now
+auto c = {42}; // still initializes a std::initializer_list&lt;int&gt;
+</code></pre>
+<p>推荐的方式是总是使用直接列表初始化（不带<code>=</code>的花括号）来初始化变量和对象。</p>
+<h2 id="85-十六进制浮点字面值"><a class="header" href="#85-十六进制浮点字面值">8.5 十六进制浮点字面值</a></h2>
+<p>C++17标准化了十六进制的浮点值字面值（有些编译器早已在C++17之前就支持了）。这种方式尤其适用于要求精确的浮点表示（对于双精度浮点值，没法保证精确值的存在）。</p>
+<p>举个例子：</p>
+<pre><code class="language-cpp">// lang/hexfloat.cpp
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+int main() {
+  // init list of floating-point values:
+  std::initializer_list&lt;double&gt; values{
+      0x1p4, // 16
+      0xA, // 10
+      0xAp2, // 40
+      5e0, // 5
+      0x1.4p+2, // 5
+      1e5, // 100000
+      0x1.86Ap+16, // 100000
+      0xC.68p+2, // 49.625
+  };
+  
+  // print all values both as decimal and hexadecimal value:
+  for (double d : values) {
+    std::cout &lt;&lt; &quot;dec: &quot; &lt;&lt; std::setw(6) &lt;&lt; std::defaultfloat &lt;&lt; d
+              &lt;&lt; &quot; hex: &quot; &lt;&lt; std::hexfloat &lt;&lt; d &lt;&lt; '\n';
+  }
+}
+</code></pre>
+<p>这个程序使用不同的方式定义了不同的浮点值，其中包括使用十六进制浮点记法。新的记法是base为2的科学表示法：</p>
+<ul>
+<li>significant/mantissa写作十六进制方式</li>
+<li>exponent写作数值方式，解释为base为2</li>
+</ul>
+<p>比如说，<code>0xAp2</code>是指定数值40（10乘以2的次方）。这个值也可以表示为<code>0x1.4p+5</code>，表示1.25乘以32（0.4是十六进制的四分之一，2的5次方是32）。</p>
+<p>程序输出如下：</p>
+<pre><code>dec: 16     hex: 0x1p+4
+dec: 10     hex: 0x1.4p+3
+dec: 40     hex: 0x1.4p+5
+dec: 5      hex: 0x1.4p+2
+dec: 5      hex: 0x1.4p+2
+dec: 100000 hex: 0x1.86ap+16
+dec: 100000 hex: 0x1.86ap+16
+dec: 49.625 hex: 0x1.8dp+5
+</code></pre>
+<p>如你说见，这个例子的浮点记法早已在C++11的<code>std::hexfloat</code>操作符上就已经支持了。</p>
+<h2 id="86-utf-8字符串字面值"><a class="header" href="#86-utf-8字符串字面值">8.6 UTF-8字符串字面值</a></h2>
+<p>C++11支持以u8前缀表示的UTF-8字符串字面值。然而，这个前缀对于字符是不支持的。C++17修复了这个问题，你现在可以这样写：</p>
+<pre><code class="language-cpp">char c = u8'6'; // character 6 with UTF-8 encoding value
+</code></pre>
+<p>样可以保证字符值是UTF-8中字符‘6’的值。你可以使用所有的7bits US-ASCII字符，对于这些字符，UTF-8代码具有相同的值。换句话说，用这个指定的值和US-ASCII、ISO Latin-1、ISO-8859-15和基本Windows字符集的值都是一样的。通常，你的源代码的字符都会被解释为US-ASCII/UTF-8，所以前缀不是很重要。变量c的值几乎总是54（十六进制的36）。</p>
+<p>对于源码中的字符和字符串字面值，C++标准化了你可以使用哪些字符，但是没有标准化这些字符对应的值。这些值取决于源代码字符集。当编译器生成可执行程序时，它会使用运行时字符集。源代码字符集集合总是7bits的US-ASCII，并且运行时字符集通常和源代码字符集一样。对于任何C++程序，有没有u8前缀这些字符和字符串字面值都是一样的。但是在很少见的情况下，可能不是这样。比如老式的IBM主机，仍然使用EBCDIC字符集，在这个字符集中字符‘6’的值是246（十六进制F6）。如果程序使用EBCDIC字符集，那么c的值将会是246而不是54，并且在UTF-8编码的平台上运行该程序时可能输出&quot;¨o&quot;，因为它对应ASCII值的246.在这种情况下前缀可能是必要的。</p>
+<p>注意u8只能用于单个字符和UTF-8单字节字符。下面的初始化：
+<img src="part1/../../public/fig8-1.jpg" alt="" />
+是不被允许的，因为这个德语字符在UTF-8是双字节，即195和182（十六进制C3 B6）。</p>
+<p>总结来熟哦，所有允许的字符和字符串字面值如下：</p>
+<ul>
+<li>单字节US-ASCII和UTF-8可以使用<strong>u8</strong></li>
+<li>双字节的UTF-16可以使用<strong>u</strong></li>
+<li>四字节的UTF-32可以使用<strong>U</strong></li>
+<li>没有指定编码的宽字符可以使用<strong>l</strong>，它可能是两字节也可能是四字节</li>
+</ul>
+<h2 id="87-异常声明成为类型的一部分"><a class="header" href="#87-异常声明成为类型的一部分">8.7 异常声明成为类型的一部分</a></h2>
+<p>C++17开始异常处理声明成为一个函数的类型的一部分。也就是说，下面的两个函数现在有不同的类型：</p>
+<pre><code class="language-cpp">void f1();
+void f2() noexcept; // different type
+</code></pre>
+<p>在C++17之前，这两个函数的类型是相同的。</p>
+<p>这样的后果是，现在的编译器会检查是否你将不抛异常的函数传递给抛异常的函数指针：</p>
+<pre><code class="language-cpp">void (*fp)() noexcept;  // pointer to function that doesn’t throw
+fp = f2;                // OK
+fp = f1;                // ERROR since C++17
+</code></pre>
+<p>给抛异常的函数指针传递不抛异常的函数仍然有效：</p>
+<pre><code class="language-cpp">void (*fp2)();  // pointer to function that might throw
+fp2 = f2;       // OK
+fp2 = f1;       // OK
+</code></pre>
+<p>所以，这个新的特性不会破坏哪些没有使用noexcept作为函数指针的一部分的那些程序。</p>
+<p>异常声明有无不能作为重载函数的依据：</p>
+<pre><code class="language-cpp">void f3();
+void f3() noexcept; // ERROR
+</code></pre>
+<p>注意，其他规则是不受影响的。举个例子，下面的代码中你还是不能忽略基类noexcept声明：</p>
+<pre><code class="language-cpp">class Base {
+public:
+    virtual void foo() noexcept;
+    ...
+};
+
+class Derived : public Base {
+public:
+    void foo() override; // ERROR: does not override
+    ...
+};
+</code></pre>
+<p>子类的<code>foo()</code>的类型与基类的<code>foo()</code>类型不一致，所以不允许重载，这个代码不能通过编译。即便没有指定override修饰符，还是不能编译，因为我们不能用更宽松的抛异常的版本来重载不抛异常的严格版本。</p>
+<h4 id="使用条件异常声明"><a class="header" href="#使用条件异常声明">使用条件异常声明</a></h4>
+<p>当使用条件异常声明时，函数的类型取决于条件为true还是false：</p>
+<pre><code class="language-cpp">void f1();
+void f2() noexcept;
+void f3() noexcept(sizeof(int)&lt;4); // same type as either f1() or f2()
+void f4() noexcept(sizeof(int)&gt;=4); // different type than f3()
+</code></pre>
+<p>在这里，当代码编译时<code>f3()</code>的类型取决于条件：</p>
+<ul>
+<li>如果<code>sizeof(int)</code>为4（或者更多），最终的签名是</li>
+</ul>
+<pre><code class="language-cpp">void f3() noexcept(false);    // same type as f1()
+</code></pre>
+<ul>
+<li>如果<code>sizeof(int)</code>小于4，最终签名是：</li>
+</ul>
+<pre><code class="language-cpp">void f3() noexcept(true);     // same type as f2()
+</code></pre>
+<p>因为<code>f4()</code>的异常条件与<code>f3()</code>相反，所以<code>f4()</code>的类型总是与<code>f3()</code>不一样（即保证<code>f3()</code>抛异常它就不抛，<code>f3()</code>不抛它就抛）。</p>
+<p>老式的空异常声明仍然可以使用，但是C++17已经标为废弃：</p>
+<pre><code class="language-cpp">void f5() throw(); // same as void f5() noexcept but deprecated
+</code></pre>
+<p>动态的异常声明已经不再支持（它们在C++11时已经标为废弃）：</p>
+<pre><code class="language-cpp">void f6() throw(std::bad_alloc); // ERROR: invalid since C++17
+</code></pre>
+<h4 id="对泛型库的影响"><a class="header" href="#对泛型库的影响">对泛型库的影响</a></h4>
+<p>让noexcept成为类型的一部分可能对一些泛型库造成影响。</p>
+<p>比如，下面的程序截止C++14是有效的，但是在C++17中无法编译：</p>
+<pre><code class="language-cpp">// lang/noexceptcalls.cpp
+#include &lt;iostream&gt;
+
+template&lt;typename T&gt;
+void call(T op1, T op2)
+{
+    op1();
+    op2();
+}
+
+void f1() {
+    std::cout &lt;&lt; &quot;f1()\n&quot;; 
+}
+
+void f2() noexcept {
+    std::cout &lt;&lt; &quot;f2()\n&quot;; 
+}
+
+int main()
+{
+    call(f1, f2); // ERROR since C++17
+}
+</code></pre>
+<p>原因是C++17中<code>f1()</code>和<code>f2()</code>的类型不一样，编译器在实例化模板调用<code>call()</code>的时候不能为两个类型找到相同的类型T。</p>
+<p>在C++17下，你不得不用两个类型：</p>
+<pre><code class="language-cpp">template&lt;typename T1, typename T2&gt;
+void call(T1 op1, T2 op2)
+{
+  op1();
+  op2();
+}
+</code></pre>
+<p>如果你想，或者不得不重载所有可能的函数类型，你需要付出双倍。来看<code>std::is_function&lt;&gt;</code>，主要的函数模板定义如下，通常T不是函数：</p>
+<pre><code class="language-cpp">// primary template (in general type T is no function):
+template&lt;typename T&gt; struct is_function : std::false_type { };
+</code></pre>
+<p>这个模板继承自<code>std::false_type</code>，所以<code>is_function&lt;T&gt;::value</code>通常产生false。</p>
+<p>对于那些的确是函数的类型，需要偏特化，它继承自<code>std::true_type</code>，所以成员value的值是true：</p>
+<pre><code class="language-cpp">// partial specializations for all function types:
+template&lt;typename Ret, typename... Params&gt;
+struct is_function&lt;Ret (Params...)&gt; : std::true_type { };
+template&lt;typename Ret, typename... Params&gt;
+struct is_function&lt;Ret (Params...) const&gt; : std::true_type { };
+template&lt;typename Ret, typename... Params&gt;
+struct is_function&lt;Ret (Params...) &amp;&gt; : std::true_type { };
+template&lt;typename Ret, typename... Params&gt;
+struct is_function&lt;Ret (Params...) const &amp;&gt; : std::true_type { };
+</code></pre>
+<p>C++17之前，它已经有24个偏特化来，因为函数可能有const和volatile修饰符，也可能有lvalue和rvalue引用修饰符，你重载的函数需要可变参数模板类型。</p>
+<p>C++17后，偏特化的数量将会翻倍，因为有了新的noexcept修饰符，所以现在有48个：</p>
+<pre><code class="language-cpp">...
+// partial specializations for all function types with noexcept:
+template&lt;typename Ret, typename... Params&gt;
+struct is_function&lt;Ret (Params...) noexcept&gt; : std::true_type { };
+template&lt;typename Ret, typename... Params&gt;
+struct is_function&lt;Ret (Params...) const noexcept&gt; : std::true_type { };
+template&lt;typename Ret, typename... Params&gt;
+struct is_function&lt;Ret (Params...) &amp; noexcept&gt; : std::true_type { };
+template&lt;typename Ret, typename... Params&gt;
+struct is_function&lt;Ret (Params...) const&amp; noexcept&gt; : std::true_type { };
+</code></pre>
+<p>没有实现noexcept重载的库可能编译不了一些代码，因为它们可能用了noexcept。</p>
+<h2 id="88-单参数的static_assert"><a class="header" href="#88-单参数的static_assert">8.8 单参数的static_assert</a></h2>
+<p>C++17开始，之前<code>static_assert()</code>必须传的错误消息参数现在变成可选了。这意味着最后的诊断性消息完全平台特定。比如：</p>
+<pre><code class="language-cpp">#include &lt;type_traits&gt;
+
+template&lt;typename T&gt;
+class C {
+  // OK since C++11:
+  static_assert(std::is_default_constructible&lt;T&gt;::value,
+                &quot;class C: elements must be default-constructible&quot;);
+                // OK since C++17:
+  static_assert(std::is_default_constructible_v&lt;T&gt;);
+  ...
+};
+</code></pre>
+<p>没有传消息的断言使用了新的type trait后缀<code>_v</code>。</p>
+<h2 id="89-预处理条件__has_include"><a class="header" href="#89-预处理条件__has_include">8.9 预处理条件<code>__has_include</code></a></h2>
+<p>C++17扩展了预处理起，可以检查一个特定的头文件是否被include。比如：</p>
+<pre><code class="language-cpp">#if __has_include(&lt;filesystem&gt;)
+# include &lt;filesystem&gt;
+# define HAS_FILESYSTEM 1
+#elif __has_include(&lt;experimental/filesystem&gt;)
+# include &lt;experimental/filesystem&gt;
+# define HAS_FILESYSTEM 1
+# define FILESYSTEM_IS_EXPERIMENTAL 1
+#elif __has_include(&quot;filesystem.hpp&quot;) # include &quot;filesystem.hpp&quot; # define HAS_FILESYSTEM 1
+# define FILESYSTEM_IS_EXPERIMENTAL 1
+#else
+# define HAS_FILESYSTEM #if __has_include(&lt;filesystem&gt;)
+# include &lt;filesystem&gt;
+# define HAS_FILESYSTEM 1
+#elif __has_include(&lt;experimental/filesystem&gt;)
+# include &lt;experimental/filesystem&gt;
+# define HAS_FILESYSTEM 1
+# define FILESYSTEM_IS_EXPERIMENTAL 1
+#elif __has_include(&quot;filesystem.hpp&quot;) # include &quot;filesystem.hpp&quot; # define HAS_FILESYSTEM 1
+# define FILESYSTEM_IS_EXPERIMENTAL 1
+#else
+# define HAS_FILESYSTEM 0
+#endif0
+#endif
+</code></pre>
+<p>如果<code>#include</code>成功则<code>__has_include(...)</code>会求值为1(true)。如果不成功则没有什么影响。</p>
+<h2 id="810-后记"><a class="header" href="#810-后记">8.10 后记</a></h2>
+<p>嵌套namespace定义最初由Jon Jagger在2003年于<a href="https://wg21.link/n1524">https://wg21.link/n1524</a>提出。Robert Kawulak在2014年于<a href="https://wg21.link/n4026">https://wg21.link/n4026</a>提出了新的提案。最后这个特性的公认措辞是由Robert Kawulak 和 Andrew Tomazos在<a href="https://wg21.link/n4230">https://wg21.link/n4230</a>中给出。</p>
+<p>重新定义后的求值顺序最初由Gabriel Dos Reis, Herb Sutter和Jonathan Caves在<a href="https://wg21.link/n4228">https://wg21.link/n4228</a>中提出。最后这个特性的公认措辞是由Gabriel Dos Reis, Herb Sutter和Jonathan Caves在<a href="https://wg21.link/p0145r3">https://wg21.link/p0145r3</a>中给出。</p>
+<p>更宽松的枚举初始化最初由Gabriel Dos Reis在<a href="https://wg21.link/p0138r0">https://wg21.link/p0138r0</a>中提出。最后这个特性的公认措辞是由Gabriel Dos Reis在<a href="https://wg21.link/p0138r2">https://wg21.link/p0138r2</a>中给出。</p>
+<p>修复带auto和直接列表初始化一起使用产生的矛盾行为最初由Ville Voutilainen在<a href="https://wg21.link/n3681"> https://wg21.link/n3681</a>和<a href="https://wg21.link/3912">https://wg21.link/3912</a>中提出。最后这个特性的公认措辞是由 James Dennett在<a href="https://wg21.link/n3681">https://wg21.link/n3681</a>中给出。</p>
+<p>十六进制浮点值最初由Thomas Koppe在<a href="https://wg21.link/p0245r0">https://wg21.link/p0245r0</a>中提出。最后这个特性的公认措辞是由Thomas Koppe在<a href="https://wg21.link/p0245r1">https://wg21.link/p0245r1</a>中给出。</p>
+<p>UTF-8字符串字面值最初由 Richard Smith在<a href="https://wg21.link/n4197">https://wg21.link/n4197</a>中提出。最后这个特性的公认措辞是由 Richard Smith在<a href="https://wg21.link/n4267">https://wg21.link/n4267</a>中给出。</p>
+<p>异常声明成为类型的一部分最初由Jens Maurer在<a href="https://wg21.link/n4320">https://wg21.link/n4320</a>中提出。最后这个特性的公认措辞是由Jens Maurer在<a href="https://wg21.link/p0012r1">https://wg21.link/p0012r1</a>中给出。</p>
+<p>单参数的static_assert的公认措辞是由Walter E. Brown在<a href="https://wg21.link/n3928">https://wg21.link/n3928</a>中给出。</p>
+<p>预处理条件<code>__has_include</code>最初由Clark Nelson和RichardSmith在<a href="https://wg21.link/p0061r0">https://wg21.link/p0061r0</a>中作为其中一部分提出。最后这个特性的公认措辞是由Clark Nelson和RichardSmith在<a href="https://wg21.link/p0061r1">https://wg21.link/p0061r1</a>中给出。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第二部分"><a class="header" href="#第二部分">第二部分</a></h1>
+<h1 id="模板特性"><a class="header" href="#模板特性">模板特性</a></h1>
+<p>这一部分介绍C++17泛型编程相关特性。</p>
+<p>我们从类型模板参数推导开始，它影响了模板的使用，后面的篇章介绍了范型代码相关特性</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第九章-类模板参数推导"><a class="header" href="#第九章-类模板参数推导">第九章 类模板参数推导</a></h1>
+<p>C++17之前，你必须显式指定类模板的所有模板参数类型。比如，你不能忽略这里的double：</p>
+<pre><code class="language-cpp">std::complex&lt;double&gt; c{5.1,3.3};
+</code></pre>
+<p>也不能忽略第二次的<code>std::mutex</code>：</p>
+<pre><code class="language-cpp">std::mutex mx;
+std::lock_guard&lt;std::mutex&gt; lg(mx);
+</code></pre>
+<p>C++17开始，必须显式指定类模板的所有模板参数类型这个限制变得宽松了。有了类模板参数推导（class template argument deduction，CTAD）技术，如果构造函数可以推导出所有模板参数，那么你可以跳过显式指定模板实参。</p>
+<p>比如：</p>
+<ul>
+<li>你可以这样声明：</li>
+</ul>
+<pre><code class="language-cpp">std::complex c{5.1,3.3}; // OK: std::complex&lt;double&gt; deduced
+</code></pre>
+<ul>
+<li>你可以这样实现：</li>
+</ul>
+<pre><code class="language-cpp">std::mutex mx;
+std::lock_guard lg{mx}; // OK: std::lock_guard&lt;std_mutex&gt; deduced
+</code></pre>
+<ul>
+<li>你甚至可以让容器推导其元素的类型：</li>
+</ul>
+<pre><code class="language-cpp">std::vector v1 {1, 2, 3} // OK: std::vector&lt;int&gt; deduced
+std::vector v2 {&quot;hello&quot;, &quot;world&quot;}; // OK: std::vector&lt;const char*&gt; deduced
+</code></pre>
+<h2 id="91-使用类模板参数推导"><a class="header" href="#91-使用类模板参数推导">9.1 使用类模板参数推导</a></h2>
+<p>只要传给构造函数的实参可以用来推导类型模板参数，那么就可以使用类模板参数推导技术。该技术支持所有初始化方式：</p>
+<pre><code class="language-cpp">std::complex c1{1.1, 2.2}; // deduces std::complex&lt;double&gt;
+std::complex c2(2.2, 3.3); // deduces std::complex&lt;double&gt;
+std::complex c3 = 3.3; // deduces std::complex&lt;double&gt;
+std::complex c4 = {4.4}; // deduces std::complex&lt;double&gt;
+</code></pre>
+<p>c3和c4的初始化方式是可行的，因为你可以传递一个值来初始化<code>std::complex&lt;&gt;</code>，这对于推导出模板参数T来说足够了，它会被用于实数和虚数部分：</p>
+<pre><code class="language-cpp">namespace std {
+  template&lt;typename T&gt;
+  class complex {
+    constexpr complex(const T&amp; re = T(), const T&amp; im = T());
+  ...
+  }
+};
+</code></pre>
+<p>假设有如下声明</p>
+<pre><code class="language-cpp">std::complex c1{1.1, 2.2};
+</code></pre>
+<p>编译器会在调用的地方找到构造函数</p>
+<pre><code class="language-cpp">constexpr complex(const T&amp; re = T(), const T&amp; im = T());
+</code></pre>
+<p>因为两个参数T都是double，所以编译器推导出T是double，然后编译下面的代码：</p>
+<pre><code class="language-cpp">complex&lt;double&gt;::complex(const double&amp; re = double(),
+                         const double&amp; im = double());
+</code></pre>
+<p>注意模板参数必须是无歧义、可推导的。因此，下面的初始化是有问题的：</p>
+<pre><code class="language-cpp">std::complex c5{5,3.3}; // ERROR: attempts to int and double as T
+</code></pre>
+<p>对于模板来说，不会在推导模板参数的时候做类型转换。</p>
+<p>对于可变参数模板的类模板参数推导也是支持的。比如，<code>std::tuple&lt;&gt;</code>定义如下：</p>
+<pre><code class="language-cpp">namespace std {
+  template&lt;typename... Types&gt;
+  class tuple;
+    public:
+    constexpr tuple(const Types&amp;...);
+    ...
+  };
+};
+</code></pre>
+<p>这个声明：</p>
+<pre><code class="language-cpp">std::tuple t{42, 'x', nullptr};
+</code></pre>
+<p>推导出的类型是<code>std::tuple&lt;int, char, std::nullptr_t&gt;</code>。</p>
+<p>你也可以推导出非类型模板参数。举个例子，像下面例子中传递一个数组，在推导模板参数的时候可以同时推导出元素类型和数组大小：</p>
+<pre><code class="language-cpp">template&lt;typename T, int SZ&gt;
+class MyClass {
+public:
+  MyClass (T(&amp;)[SZ]) {
+    ...
+  }
+};
+MyClass mc(&quot;hello&quot;); // deduces T as const char and SZ as 6
+</code></pre>
+<p>SZ推导为6，因为模板参数类型传递了一个六个字符的字符串字面值。</p>
+<p>你甚至可以推导出<strong>用作基类的lambda</strong>的类型，或者推导出<strong>auto模板参数</strong>类型。</p>
+<h3 id="911-默认拷贝"><a class="header" href="#911-默认拷贝">9.1.1 默认拷贝</a></h3>
+<p>如果类模板参数推导发现一个行为更像是拷贝初始化，它就倾向于这么认为。比如，在用一个元素初始化<code>std::vector</code>后：</p>
+<pre><code class="language-cpp">std::vector v1{42}; // vector&lt;int&gt; with one element
+</code></pre>
+<p>用这个vector去初始化另一个vector：</p>
+<pre><code class="language-cpp">std::vector v2{v1}; // v2 also is vector&lt;int&gt;
+</code></pre>
+<p>v2会被解释为<code>vector&lt;int&gt;</code>而不是<code>vector&lt;vector&lt;int&gt;&gt;</code></p>
+<p>又比如，这个规则适用于下面所有初始化形式：</p>
+<pre><code class="language-cpp">std::vector v3(v1); // v3 also is vector&lt;int&gt;
+std::vector v4 = {v1}; // v4 also is vector&lt;int&gt;
+auto v5 = std::vector{v1}; // v5 also is vector&lt;int&gt;
+</code></pre>
+<p>如果传递多个元素时，就不能被解释为拷贝初始化，此时initializer list的类型会成为新vector的元素类型：</p>
+<pre><code class="language-cpp">std::vector vv{v, v}; // vv is vector&lt;vector&lt;int&gt;&gt;
+</code></pre>
+<p>那么问题来了，如果传递可变参数模板，那么类模板参数推导会发生什么：</p>
+<pre><code class="language-cpp">template&lt;typename... Args&gt;
+auto make_vector(const Args&amp;... elems) {
+  return std::vector{elems...};
+}
+
+std::vector&lt;int&gt; v{1, 2, 3};
+auto x1 = make_vector(v, v); // vector&lt;vector&lt;int&gt;&gt;
+auto x2 = make_vector(v); // vector&lt;int&gt; or vector&lt;vector&lt;int&gt;&gt; ?
+</code></pre>
+<p>当前，不同的编译器有不同的处理方式，这个问题还在讨论中。</p>
+<h3 id="912-推导lambda的类型"><a class="header" href="#912-推导lambda的类型">9.1.2 推导lambda的类型</a></h3>
+<p>有了类模板参数推导，我们现在终于可以用lambda的类型实例化类模板类。举个例子，我们可以提供一个泛型类，然后包装一下callback，并统计调用了多少次callback：</p>
+<pre><code class="language-cpp">// tmpl/classarglambda.hpp
+#include &lt;utility&gt; // for std::forward()
+
+template&lt;typename CB&gt;
+class CountCalls
+{
+private:
+  CB callback; // callback to call
+  long calls = 0; // counter for calls
+public:
+  CountCalls(CB cb) : callback(cb) {
+  }
+  template&lt;typename... Args&gt;
+  auto operator() (Args&amp;&amp;... args) {
+    ++calls;
+    return callback(std::forward&lt;Args&gt;(args)...);
+  }
+  long count() const {
+    return calls;
+  }
+};
+</code></pre>
+<p>这里，构造函数接受一个callback，然后包装一下，用它的类型来推导出模板参数CB。比如，我们可以传一个lambda：</p>
+<pre><code class="language-cpp">CountCalls sc([](auto x, auto y) {
+                   return x &gt; y;
+             });
+</code></pre>
+<p>这意味着sc的类型被推导为<code>CountCalls&lt;TypeOfTheLambda&gt;</code>。</p>
+<p>通过这种方式，我们可以计算传递给排序函数的sc的调用次数：</p>
+<pre><code class="language-cpp">std::sort(v.begin(), v.end(),
+          td::ref(sc));
+std::cout &lt;&lt; &quot;sorted with &quot; &lt;&lt; sc.count() &lt;&lt; &quot; calls\n&quot;;
+</code></pre>
+<p>包装后的lambda通过引用的方式传递给排序函数，因为如若不然<code>std::sort()</code>只会计算传递给他的lambda的拷贝的调用，毕竟是传值的方式。</p>
+<p>然而，我没可以传递包装后的lambda给<code>std::for_each</code>，因为这个算法可以返回传递给他的callback的拷贝：</p>
+<pre><code class="language-cpp">auto fo = std::for_each(v.begin(), v.end(),
+                        CountCalls([](auto i) {
+                                      std::cout &lt;&lt; &quot;elem: &quot; &lt;&lt; i &lt;&lt; '\n';
+                        }));
+std::cout &lt;&lt; &quot;output with &quot; &lt;&lt; fo.count() &lt;&lt; &quot; calls\n&quot;;
+</code></pre>
+<h3 id="913-非部分类模板参数推导"><a class="header" href="#913-非部分类模板参数推导">9.1.3 非部分类模板参数推导</a></h3>
+<p>不像函数模板那样，类模板参数不能部分推导（显示模板参数的一部分）。比如：</p>
+<pre><code class="language-cpp">template&lt;typename T1, typename T2, typename T3 = T2&gt;
+class C {
+public:
+  C (T1 x = T1{}, T2 y = T2{}, T3 z = T3{}) {
+    ...
+  }
+  ...
+};
+// all deduced:
+C c1(22, 44.3, &quot;hi&quot;); // OK: T1 is int, T2 is double, T3 is const char*
+C c2(22, 44.3); // OK: T1 is int, T2 and T3 are double
+C c3(&quot;hi&quot;, &quot;guy&quot;); // OK: T1, T2, and T3 are const char*
+// only some deduced:
+C&lt;string&gt; c4(&quot;hi&quot;, &quot;my&quot;); // ERROR: only T1 explicitly defined
+C&lt;&gt; c5(22, 44.3); // ERROR: neither T1 not T2 explicitly defined
+C&lt;&gt; c6(22, 44.3, 42); // ERROR: neither T1 nor T2 explicitly defined
+// all specified:
+C&lt;string,string,int&gt; c7; // OK: T1,T2 are string, T3 is int
+C&lt;int,string&gt; c8(52, &quot;my&quot;); // OK: T1 is int,T2 and T3 are strings
+C&lt;string,string&gt; c9(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;); // OK: T1,T2,T3 are strings
+</code></pre>
+<p>因为第三个模板参数类型有默认值，所以如果已经指定了第二个就可以省略第三个。</p>
+<p>如果i想知道为什么不支持偏特化，下面是造成这个抉择的原因：</p>
+<pre><code class="language-cpp">std::tuple&lt;int&gt; t(42, 43); // still ERROR
+</code></pre>
+<p><code>std::tuple</code>是一个可变参数模板，所以你可以指定任意数量的参数。在这种情况下，到底是认为这是只指定了一个类型的而导致的错误还是有意为之很难说清。看起来是有问题的。后期有更多考量后，偏特化也有可能加入C++标准。尽管目前没有。</p>
+<p>不幸的是，缺少部分特化就不能解决一个常见代码需求。对于关联容器的排序规则，或者无序容器的hash函数，我们仍然不能简单的传一个lambda：</p>
+<pre><code class="language-cpp">std::set&lt;Cust&gt; coll([](const Cust&amp; x, const Cust&amp; y) { // still ERROR
+  return x.name() &gt; y.name();
+});
+</code></pre>
+<p>我们还是得指定lambda的类型，因此需要像下面这样写：</p>
+<pre><code class="language-cpp">auto sortcrit = [](const Cust&amp; x, const Cust&amp; y) {
+  return x.name() &gt; y.name();
+};
+std::set&lt;Cust, decltype(sortcrit)&gt; coll(sortcrit); // OK
+</code></pre>
+<h3 id="914-类模板参数推导代替便捷的工具函数"><a class="header" href="#914-类模板参数推导代替便捷的工具函数">9.1.4 类模板参数推导代替便捷的工具函数。</a></h3>
+<p>有了类模板参数推导，我们可以不再使用那些目的仅是推导传的参数的类型的便捷工具函数。</p>
+<p>最明显的是<code>make_pair</code>，他允许我们不指定传的参数的类型。比如，对于v：</p>
+<pre><code class="language-cpp">std::vector&lt;int&gt; v;
+</code></pre>
+<p>我们可以使用</p>
+<pre><code class="language-cpp">auto p = std::make_pair(v.begin(), v.end());
+</code></pre>
+<p>来代替</p>
+<pre><code class="language-cpp">std::pair&lt;typename std::vector&lt;int&gt;::iterator,typename std::vector&lt;int&gt;::iterator&gt; p(v.begin(), v.end());
+</code></pre>
+<p>现在，<code>make_pair()</code>不再需要了，可以直接这么写：</p>
+<pre><code class="language-cpp">std::pair p(v.begin(), v.end());
+</code></pre>
+<p>然而，<code>std::make_pair()</code>也是一个很好的例子，它说明了有时候工具函数不只是做模板参数推导一件事情。事实上，<code>std::make_pair()</code>也会类型退化，这意味着传入的string字面值会转换为<code>const char*</code>：</p>
+<pre><code class="language-cpp">auto q = std::make_pair(&quot;hi&quot;, &quot;world&quot;); // pair of pointers
+</code></pre>
+<p>在这个例子中，q的类型是<code>std::pair&lt;const char*, const char*&gt;</code>。</p>
+<p>使用类模板参数推导，情况变得更复杂。让我们看看一个简单的类声明，它有点像<code>std::pair</code>：</p>
+<pre><code class="language-cpp">template&lt;typename T1, typename T2&gt;
+struct Pair1 {
+  T1 first;
+  T2 second;
+  Pair1(const T1&amp; x, const T2&amp; y) : first{x}, second{y} {
+  }
+};
+</code></pre>
+<p>重点是元素通过引用传递。根据语言规则，当使用引用传递一个模板类型的实参时，形参不会_类型退化_，所谓类型退化是指将原生数组类型转换为原生指针类型这样一种机制。所以，当这样调用的时候：</p>
+<pre><code class="language-cpp">Pair1p1{&quot;hi&quot;,&quot;world&quot;};//deduces pair of arrays of different size, but...
+</code></pre>
+<p>T1被推导为<code>char[3]</code>，T2被推导为<code>char[6]</code>。基本上，这个推导是有效地。然而，当我们使用T1和T2类型去声明成员<strong>first</strong>和<strong>second</strong>时，结果是，它们被声明为：</p>
+<pre><code class="language-cpp">char first[3];
+char second[6];
+</code></pre>
+<p>并且从一个左值数组初始化出新数组是不被允许的。编译过程就像这样：</p>
+<pre><code class="language-cpp">const char x[3] = &quot;hi&quot;;
+const char y[6] = &quot;world&quot;;
+char first[3] {x}; // ERROR
+char second[6] {y}; // ERROR
+</code></pre>
+<p>注意如果直接使用值传递，然后用它的类型来声明成员就不会有这个问题：</p>
+<pre><code class="language-cpp">template&lt;typename T1, typename T2&gt;
+struct Pair2 {
+  T1 first;
+  T2 second;
+  Pair2(T1 x, T2 y) : first{x}, second{y} {
+  }
+};
+</code></pre>
+<p>如果我们这样调用：</p>
+<pre><code class="language-cpp">Pair2 p2{&quot;hi&quot;, &quot;world&quot;}; // deduces pair of pointers
+</code></pre>
+<p>T1和T2将会被推导为<code>const char*</code>。
+因为类<code>std::pair&lt;&gt;</code>被声明，所以构造函数使用引用传参，你可能期望看到下面的初始化代码不会被编译：</p>
+<pre><code class="language-cpp">std::pair p{&quot;hi&quot;, &quot;world&quot;}; // seems to deduce pair of arrays of different size, but...
+</code></pre>
+<p>但是它可以编。原因是我们用到了<strong>推导规则</strong></p>
+<h2 id="92-推导规则"><a class="header" href="#92-推导规则">9.2 推导规则</a></h2>
+<p>你可以定义特定的<strong>推导规则</strong>来提供额外的类模板实参推导能力，或者修复已经存在的、由构造函数定义的推导。举个例子，你可以定义一个规则，无论何时Pair3被推导，类型推导看起来就像在操作值传递的参数一样：</p>
+<pre><code class="language-cpp">template&lt;typename T1, typename T2&gt;
+struct Pair3 {
+  T1 first;
+  T2 second;
+  Pair3(const T1&amp; x, const T2&amp; y) : first{x}, second{y} {
+  }
+};
+// deduction guide for the constructor:
+template&lt;typename T1, typename T2&gt;
+Pair3(T1, T2) -&gt; Pair3&lt;T1, T2&gt;;
+</code></pre>
+<p>这里<code>-&gt;</code>左边是什么我们想推导什么。在这里例子中，我们想推导一个构造函数，其参数是值传递，类型是任意T1和T2。在<code>-&gt;</code>右边是我们想定义的推导结果。本例中，Pair3进行实例化。</p>
+<p>你可能争辩说，这不就是构造函数做的事情吗。然而，构造函数的参数是引用传递，这里是值传递，不一样。通常来说，即使在模板外面，值传递的实参也会_类型退化_，而引用传递的实参不会退化。_类型退化_意味着原始数组转换为指针，顶级修饰符，比如const和引用符号，会被忽略。</p>
+<p>没有类型推导规则，下面的声明：</p>
+<pre><code class="language-cpp">Pair3 p3{&quot;hi&quot;, &quot;world&quot;};
+</code></pre>
+<p>x的类型，即T1是<code>const char[3]</code>，y的类型，即T2是<code>const char[6]</code>。</p>
+<p>因为有类型推导，模板参数会类型华为，意味着传递的数组或者字符串字面值会退化为对应的指针类型。现在当我们声明：</p>
+<pre><code class="language-cpp">Pair3 p3{&quot;hi&quot;, &quot;world&quot;};
+</code></pre>
+<p>推导规则被应用，两个参数类型都是<code>const char*</code>。推导后的类型就像我们直接这样写：</p>
+<pre><code class="language-cpp">Pair3&lt;const char*, const char*&gt; p3{&quot;hi&quot;, &quot;world&quot;};
+</code></pre>
+<p>注意，此时构造函数仍然是引用传参。推导规则只影响模板类型的推导，不影响T1、T2被推导后的构造函数调用。</p>
+<h3 id="921-使用推导规则强制类型退化"><a class="header" href="#921-使用推导规则强制类型退化">9.2.1 使用推导规则强制类型退化</a></h3>
+<p>正如上面例子演示的那样，通常，这些重载规则的一个常见用途是确保一个模板参数T在推导过程中类型进行退化。考虑一个传统的类模板：</p>
+<pre><code class="language-cpp">template&lt;typename T&gt;
+struct C {
+  C(const T&amp;) {
+  }
+  ...
+};
+</code></pre>
+<p>如果我们这里传一个字符串字面值&quot;hello&quot;，T被推导为字符串字面值的类型，即<code>const char[6]</code>：</p>
+<pre><code class="language-cpp">C x{&quot;hello&quot;}; // T deduced as const char[6]
+</code></pre>
+<p>原因是当引用传值时，模板类型推导不会将它退化成对应的指针类型。
+带上一个简单的推导规则：</p>
+<pre><code class="language-cpp">template&lt;typename T&gt; C(T) -&gt; C&lt;T&gt;;
+</code></pre>
+<p>我们就修复了这个问题：</p>
+<pre><code class="language-cpp">C x{&quot;hello&quot;}; // T deduced as const char*
+</code></pre>
+<p>现在，因为推导规则是值传递，它的类型发生退化，所以&quot;hello&quot;的类型T最终是<code>const char*</code>。
+出于这个原因，对于任意类模板，其构造函数带引用传递的参数，都给出这样一个推导规则是很合理的。C++标准库为pair和tuple提供了对应的推导规则（参见9.2.6）。</p>
+<h3 id="922-非模板推导规则"><a class="header" href="#922-非模板推导规则">9.2.2 非模板推导规则</a></h3>
+<p>to translate</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第十章-编译期if"><a class="header" href="#第十章-编译期if">第十章 编译期if</a></h1>
+<p>通过语法<code>if constexpr(...)</code>，编译器使用编译时表达式在编译时决定是否使用then部分或者else部分。如果任一部分被抛弃，那部分代码就不会生成。但是，这不意味着被抛弃的部分完全被忽略了。它将像未使用模板的代码一样进行检查。
+比如：</p>
+<pre><code class="language-cpp">#include &lt;string&gt;
+template &lt;typename T&gt;
+std::string asString(T x)
+{
+    if constexpr(std::is_same_v&lt;T, std::string&gt;) {
+        return x; // statement invalid, if no conversion to string
+    }
+    else if constexpr(std::is_arithmetic_v&lt;T&gt;) {
+        return std::to_string(x); // statement invalid, if x is not numeric
+    }
+    else {
+        return std::string(x); // statement invalid, if no conversion to string
+    }
+}
+</code></pre>
+<p>这里我们用到了编译器if的特性。它在编译时决定我们是只返回一个字符串，还是说要调<code>std::to_string()</code>把数组转称字符串，又或者把传进来的参数转成<code>std::string</code>。因为无效的调用会被抛弃，下面的代码都可以编译：</p>
+<pre><code class="language-cpp">#include &quot;ifcomptime.hpp&quot;
+#include &lt;iostream&gt;
+
+int main()
+{
+    std::cout &lt;&lt; asString(42) &lt;&lt; '\n';
+    std::cout &lt;&lt; asString(std::string(&quot;hello&quot;)) &lt;&lt; '\n';
+    std::cout &lt;&lt; asString(&quot;hello&quot;) &lt;&lt; '\n';
+}
+</code></pre>
+<h2 id="101-存在编译期if的动机"><a class="header" href="#101-存在编译期if的动机">10.1 存在编译期if的动机</a></h2>
+<p>如果刚刚的例子中，我们用运行时if：</p>
+<pre><code class="language-cpp"> #include &lt;string&gt;
+template &lt;typename T&gt;
+std::string asString(T x)
+{
+    if (std::is_same_v&lt;T, std::string&gt;) {
+        return x; // ERROR, if no conversion to string
+    }
+    else if (std::is_numeric_v&lt;T&gt;) {
+        return std::to_string(x); // ERROR, if x is not numeric
+    }
+    else {
+        return std::string(x); // ERROR, if no conversion to string
+    }
+}
+</code></pre>
+<p>对应的调用代码肯定不能编译。这是因为函数模板有个规则，要么全编，要么完全不编。if的条件检查是一个运行时行为。即使编译期就知道条件一定是个false，then也必须编。所以，当传递一个<code>std::string</code>或者字符串字面值的时候，编译就出错了，因为对于传入的参数调用<code>std::string</code>是无效的。当传递数值时，编译也出错，因为第一个和第三个返回语句是无效的。</p>
+<p>注意，仅当使用编译期if的时候，then或者else没有被用到的才会被丢弃：</p>
+<ul>
+<li>当传<code>std::string</code>时，第一个if的else部分被丢弃</li>
+<li>当传一个数值时，第一个if的then部分和最后的else被丢弃</li>
+<li>当传递一个字符串字面值时（即类型<code>const char*</code>），then和第二个if被丢弃</li>
+</ul>
+<p>注意，被丢弃的语句不是说被忽略了。只是说当依赖模板参数时，它不会被实例化。语法必须正确，不依赖模板参数的调用也必须正确。事实上，在第一个翻译阶段（<strong>definition time</strong>）执行时，编译器会检查语法正确与否，使用的所有名字是否都不依赖模板参数。所有<code>static_assert</code>也必须正确，即使该分支不会被编译。比如</p>
+<pre><code class="language-cpp">template&lt;typename T&gt;
+void foo(T t)
+{
+    if constexpr(std::is_integral_v&lt;T&gt;) {
+        if (t &gt; 0) {
+            foo(t-1); // OK
+        }
+    }
+    else {
+        undeclared(t); // error if not declared and not discarded (i.e., T is not integral)
+        undeclared(); // error if not declared (even if discarded)
+        static_assert(false, &quot;no integral&quot;); // always asserts (even if discarded)
+    }
+}
+</code></pre>
+<p>只要是符合标准的编译器，这个例子都不会被编译，原因有两个：</p>
+<ul>
+<li>即使T是整数类型，这个</li>
+</ul>
+<pre><code class="language-cpp">undeclared(); // error if not declared (even if discarded)
+</code></pre>
+<p>没有声明的调用也是错的，因为它依赖模板参数</p>
+<ul>
+<li>这个静态断言</li>
+</ul>
+<pre><code class="language-cpp">static_assert(false, &quot;no integral&quot;);
+</code></pre>
+<p>总是失败，即使它所在的分支会被丢弃，原因还是因为它依赖一个模板参数。重复编译期条件的静态断言是可以的：</p>
+<pre><code class="language-cpp">static_assert(!std::is_integral_v&lt;T&gt;, &quot;no integral&quot;);
+</code></pre>
+<p>注意，一些编译器（比如Visual C++2013和1025）没有正确的实现两阶段模板翻译，它们推辞了绝大多第一阶段（<strong>definition time</strong>）该做的事情到第二阶段（<strong>instantiation time</strong>）所以无效的函数调用，或者甚至一些错误的语法也可能可以通过编译。</p>
+<h2 id="102-使用编译期if"><a class="header" href="#102-使用编译期if">10.2 使用编译期if</a></h2>
+<p>原则上，你可以使用编译器if做一些事情，看起来就像是运行时的if，只是条件是编译期的表达式。你也可以混用编译期间if和运行时if：</p>
+<pre><code class="language-cpp">if constexpr (std::is_integral_v&lt;std::remove_reference_t&lt;T&gt;&gt;) {
+    if (val &gt; 10) {
+        if constexpr (std::numeric_limits&lt;char&gt;::is_signed) {
+            ...
+        }
+        else {
+            ...
+        }
+    }
+    else {
+        ...
+    }
+}
+else {
+    ...
+}
+</code></pre>
+<p>注意你不能在函数体外面使用<code>if constexpr</code>。因此，你不能在用它代替条件预处理器。</p>
+<h3 id="1021-编译期if注意事项"><a class="header" href="#1021-编译期if注意事项">10.2.1 编译期if注意事项</a></h3>
+<p>即使有时看起来可以使用编译期if，有一些不明显的结果会出现，本小节会一一称述。</p>
+<h4 id="编译期if影响返回类型"><a class="header" href="#编译期if影响返回类型">编译期if影响返回类型</a></h4>
+<p>编译期if可能影响函数的返回类型。比如，下面的代码总是可以编译，但是返回类型可能是不同的：</p>
+<pre><code class="language-cpp">auto foo()
+{
+    if constexpr (sizeof(int) &gt; 4) {
+        return 42;
+    }
+    else {
+        return 42u;
+    }
+}
+</code></pre>
+<p>因为我们用了auto，返回类型取决于返回语句，返回语句又取决于int的大小：</p>
+<ul>
+<li>如果size大于4，只有一个有效的返回语句返回42，所以返回类型是_int_</li>
+<li>否则，只有一个有效的返回语句返回42u，所以返回类型是_unsigned int_</li>
+</ul>
+<p>事情还可能更魔幻。比如下面的例子，如果我们跳过else部分，返回类型可能是int或者void：</p>
+<pre><code class="language-cpp">auto foo() // return type might be int or void
+{
+    if constexpr (sizeof(int) &gt; 4) {
+        return 42;
+    }
+}
+</code></pre>
+<p>如果这里的if运行时if那代码就不能编译，因为两个返回语句都会被编译器考虑，最后得出的结论是返回类型存在二义性。</p>
+<h4 id="即便then返回了else也可能造成问题"><a class="header" href="#即便then返回了else也可能造成问题">即便then返回了，else也可能造成问题</a></h4>
+<p>对于运行时if语句，有一\种模式不适用于编译期if：如果then和else都有返回语句，而且能通过编译，你总是可以跳过运行时if的else部分。换句话说，下面这种代码：</p>
+<pre><code class="language-cpp">if (...) {
+    return a;
+}
+else {
+    return b;
+}
+</code></pre>
+<p>你总是可以改写为：</p>
+<pre><code class="language-cpp">if (...) {
+    return a;
+}
+return b;
+</code></pre>
+<p>这种模式不适用于编译期if，因为第二种形式的返回值取决于两个返回语句，而不是一个，可能会造成歧义。比如，改一下上面的例子，代码可能能编，也可能不能编：</p>
+<pre><code class="language-cpp">auto foo()
+{
+    if constexpr (sizeof(int) &gt; 4) {
+        return 42;
+    }
+    return 42u;
+}
+</code></pre>
+<p>如果条件是true，那么编译器推导出两个不同的返回类型，编不了。否则，只有一个返回语句，不会造成问题，所以可以编译。</p>
+<h4 id="编译期if的短路运算"><a class="header" href="#编译期if的短路运算">编译期if的短路运算</a></h4>
+<p>考虑下面的代码：</p>
+<pre><code class="language-cpp">template&lt;typename T&gt;
+constexpr auto foo(const T&amp; val)
+{
+    if constexpr (std::is_integral&lt;T&gt;::value) {
+        if constexpr (T{} &lt; 10) {
+            return val * 2;
+        }
+    }
+    return val;
+}
+</code></pre>
+<p>我们有两个编译期条件，来决定是否直接返回val，或者翻倍再返回。
+下面代码都可以编译：</p>
+<pre><code class="language-cpp">constexpr auto x1 = foo(42);   //产生84
+constexpr auto x2 = foo(&quot;hi&quot;); //可以的，产生&quot;hi&quot;
+</code></pre>
+<p>在运行时if中的条件可以进行短路运算。你可能期望编译其if也有这种能力：</p>
+<pre><code class="language-cpp">template&lt;typename T&gt;
+constexpr auto bar(const T&amp; val)
+{
+    if constexpr (std::is_integral&lt;T&gt;::value &amp;&amp; T{} &lt; 10) {
+        return val * 2;
+    }
+    return val;
+}
+</code></pre>
+<p>然而，编译期if的条件总是被实例化，需要作为整体来确定是否有效，所以传入一个不支持<code>&lt;10</code>判断的类型编不了：</p>
+<pre><code class="language-cpp">constexpr auto x2 = bar(&quot;hi&quot;); // compile-time ERROR
+</code></pre>
+<p>所以，编译期if是不会短路实例化的。如果编译期条件的有效性取决于更早期的编译期条件，你不得不嵌套一下，也就是说，你不得不这样写：</p>
+<pre><code class="language-cpp">if constexpr (std::is_same_v&lt;MyType, T&gt;) {
+    if constexpr (T::i == 42) {
+        ...
+    }
+}
+</code></pre>
+<p>而不是：</p>
+<pre><code class="language-cpp">if constexpr (std::is_same_v&lt;MyType, T&gt; &amp;&amp; T::i == 42) {
+    ...
+}
+</code></pre>
+<h3 id="1022-其他编译期if的例子"><a class="header" href="#1022-其他编译期if的例子">10.2.2 其他编译期if的例子</a></h3>
+<h4 id="返回完美转发"><a class="header" href="#返回完美转发">返回完美转发</a></h4>
+<p>一个编译期if的应用是返回值的完美转发。因为<code>decltype(auto)</code>不能被推导为void（因为void是不完全类型（incomplete type）），你必须这样写：</p>
+<pre><code class="language-cpp">#include &lt;functional&gt; // for std::forward()
+#include &lt;type_traits&gt; // for std::is_same&lt;&gt; and std::invoke_result&lt;&gt;
+
+template&lt;typename Callable, typename... Args&gt;
+decltype(auto) call(Callable op, Args&amp;&amp;... args)
+{
+
+    if constexpr(std::is_void_v&lt;std::invoke_result_t&lt;Callable, Args...&gt;&gt;) {
+        // return type is void:
+        op(std::forward&lt;Args&gt;(args)...);
+        ... // do something before we return
+        return;
+    }
+    else {
+        // return type is not void:
+        decltype(auto) ret{op(std::forward&lt;Args&gt;(args)...)};
+        ... // do something (with ret) before we return
+        return ret;
+    }
+}
+</code></pre>
+<h4 id="编译期的tag派发"><a class="header" href="#编译期的tag派发">编译期的tag派发</a></h4>
+<p>编译期if的一个传统应用是tag派发。在C++17之前，你必为你希望处理的类型提供完整的函数重载集合。现在有了编译期if，你可以把所有逻辑放到一个函数里面。举个例子，你可以不用像下面这样写一堆重载函数来实现<code>std::advance()</code>算法：</p>
+<pre><code class="language-cpp">template&lt;typename Iterator, typename Distance&gt;
+void advance(Iterator&amp; pos, Distance n) {
+    using cat = std::iterator_traits&lt;Iterator&gt;::iterator_category;
+    advanceImpl(pos, n, cat); // tag dispatch over iterator category
+}
+template&lt;typename Iterator, typename Distance&gt;
+void advanceImpl(Iterator&amp; pos, Distance n,
+    std::random_access_iterator_tag) {
+    pos += n;
+}
+template&lt;typename Iterator, typename Distance&gt;
+void advanceImpl(Iterator&amp; pos, Distance n,
+                 std::bidirectional_iterator_tag) {
+    if (n &gt;= 0) {
+        while (n--) {
+            ++pos;
+        }
+    }
+    else {
+        while (n++) {
+            --pos;
+        }
+    }
+}
+template&lt;typename Iterator, typename Distance&gt;
+void advanceImpl(Iterator&amp; pos, Distance n,                 std::input_iterator_tag) {
+    while (n--) {
+        ++pos;
+    }
+}
+</code></pre>
+<p>而是将所有行为在一个函数里面实现：</p>
+<pre><code class="language-cpp">template&lt;typename Iterator, typename Distance&gt;
+void advance(Iterator&amp; pos, Distance n) {
+    using cat = std::iterator_traits&lt;Iterator&gt;::iterator_category;
+    
+    if constexpr (std::is_same_v&lt;cat,                       std::random_access_iterator_tag&gt;) {
+        pos += n;
+    }
+    else if constexpr (std::is_same_v&lt;cat,
+                       std::bidirectional_access_iterator_tag&gt;) {
+        if (n &gt;= 0) {
+            while (n--) {
+                ++pos;
+            }
+        }
+        else {
+            while (n++) {
+                --pos;
+            }
+        }
+    }
+    else { // input_iterator_tag
+        while (n--) {
+            ++pos;
+        }
+    }
+}
+</code></pre>
+<p>在某种程度上，我们现在有一个编译期switch，虽然不同case是通过<code>if constexpr</code>来表达。注意，这里有一个区别：</p>
+<ul>
+<li>重载函数集合给你最佳匹配（best match）语意</li>
+<li>编译期if给你第一匹配（fisrt match）语意</li>
+</ul>
+<p>另一个tag派发的例子是第一章里面使用编译期if的<code>get&lt;&gt;()</code>重载。
+第三个例子是第十六章里面处理不同类型的<code>std::variant&lt;&gt;()</code>访问器。</p>
+<h2 id="103-编译期if初始化"><a class="header" href="#103-编译期if初始化">10.3 编译期if初始化</a></h2>
+<p>注意编译期if也可以用于新的带初始化的if语法中。比如，如果有个constexpr函数<code>foo()</code>，你可以使用：</p>
+<pre><code class="language-cpp">template&lt;typename T&gt;
+void bar(const T x)
+{
+    if constexpr (auto obj = foo(x); std::is_same_v&lt;decltype(obj), T&gt;) {
+        std::cout &lt;&lt; &quot;foo(x) yields same type\n&quot;;
+        ...
+    }
+    else {
+        std::cout &lt;&lt; &quot;foo(x) yields different type\n&quot;;
+        ...
+    }
+}
+</code></pre>
+<p>你可以像上面一样让bar根据foo产生结果的值的类型是否与T相同，来产生不同的行为。
+要根据<code>foo(x)</code>返回的值本身来决定不同行为，你可以这样：</p>
+<pre><code class="language-cpp">constexpr auto c = ...;
+if constexpr (constexpr auto obj = foo(c); obj == 0) {
+    std::cout &lt;&lt; &quot;foo() == 0\n&quot;;
+    ...
+}
+</code></pre>
+<p><code>obj</code>必须声明为constexpr，因为要在条件中使用它的值。</p>
+<h2 id="104-在模板外面使用编译期if"><a class="header" href="#104-在模板外面使用编译期if">10.4 在模板外面使用编译期if</a></h2>
+<p><code>if constexpr</code>可以被用于任何函数，不仅仅局限于模板。我们只需要编译期表达式产生的结果可以转换为bool值。然而，在那种情况下then和else的中的所有语句都必须是有效地，即便它们可能被抛弃。</p>
+<p>比如，下面的代码总是不能编译，因为即便char是signed、else被抛弃，<code>undeclared()</code>这个调用也必须有效才行：</p>
+<pre><code class="language-cpp">#include &lt;limits&gt;
+
+template&lt;typename T&gt;
+void foo(T t);
+
+int main()
+{
+    if constexpr(std::numeric_limits&lt;char&gt;::is_signed) {
+        foo(42); // OK
+    }
+    else {
+        undeclared(42); // ALWAYS ERROR if not declared (even if discarded)
+    }
+}
+</code></pre>
+<p>下面的代码也不能编译，因为其中一个静态断言总是会失败：</p>
+<pre><code class="language-cpp">if constexpr(std::numeric_limits&lt;char&gt;::is_signed) {
+    static_assert(std::numeric_limits&lt;char&gt;::is_signed);
+}
+else {
+    static_assert(!std::numeric_limits&lt;char&gt;::is_signed);
+}
+</code></pre>
+<p>在模板代码外面使用编译期if唯一的好处是那些被抛弃的语句（必须有效）不需要编到最后的二进制代码中，减小了可执行程序的体积。比如下面的程序：</p>
+<pre><code class="language-cpp">#include &lt;limits&gt;
+#include &lt;string&gt;
+#include &lt;array&gt;
+int main()
+{
+    if (!std::numeric_limits&lt;char&gt;::is_signed) {
+        static std::array&lt;std::string,1000&gt; arr1;
+        ...
+    }
+    else {
+        static std::array&lt;std::string,1000&gt; arr2;
+        ...
+    }
+}
+</code></pre>
+<p>arr1或者arr2是最终可执行程序的一部分，但不会都是。</p>
+<h2 id="105-后记"><a class="header" href="#105-后记">10.5 后记</a></h2>
+<p>编译期if最初由Walter Bright，Herb Sutter和Andrei Alexandrescu在<a href="https://wg21.link/n3329">https://wg21.link/n3329</a>中提出。Ville Voutilainen在<a href="https://wg21.link/n446">https://wg21.link/n4461</a>提出了static if语言特性。在<a href="https://wg21.link/p0128r0">https://wg21.link/p0128r0</a>中Ville Voutilainen第一次提出了constexpr_if（这个feature名字的起源）。最后的公认措辞是由Jens Maurer在<a href="https://wg21.link/p0292r2">https://wg21.link/p0292r2</a>中给出。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第十一章-折叠表达式"><a class="header" href="#第十一章-折叠表达式">第十一章 折叠表达式</a></h1>
+<p>自C++17起, 其特性有支持带一个(可带有初始值的)参数包(parameter pack)的所有实参能使用二元操作符并计算结果.</p>
+<p>例如, 下列的函数能返回所有传入实参的和:</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSum(T... args) {
+    return (... + args); // ((arg1 + arg2) + arg3)...
+}
+</code></pre>
+<p>注意, return 表达式里的括号是折叠表达式的一部分并且不能省略.</p>
+<p>函数调用 <code>foldSum(47, 11, val, -1);</code> 使模版实例化并执行: <code>return 47 + 11 + val + -1;</code>.</p>
+<p>函数调用 <code>foldSum(std::string(&quot;hello&quot;), &quot;world&quot;, &quot;!&quot;);</code> 使模版实例化为: <code>return std::string(&quot;hello&quot;) + &quot;world&quot; + &quot;!&quot;;</code></p>
+<p>还要注意, 折叠表达式实参的次序可以不同并且效果也不一样 (可能看起有点反直觉): 例如写成 <code>(... + args)</code> 的结果则是 <code>((arg1 + arg2) + arg3)...</code>, 该含义是重复地“往后添加”(post-adds)东西. 你也可以写成 <code>(args + ...)</code>, 该含义是重复地“往前添加”(pre-adds)东西, 因此其结果为: <code>(arg1 + (arg2 + arg3))...</code>.</p>
+<h2 id="111-折叠表达式的目的"><a class="header" href="#111-折叠表达式的目的">11.1 折叠表达式的目的</a></h2>
+<p>折叠表达式避免了需要递归地去实例化模版并作用于一个参数包的所有形参. 在 C++17 之前, 你必须这样实现:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+auto foldSumRec(T arg) {
+    return arg;
+}
+template &lt;typename T1, typename ...Ts&gt;
+auto foldSumRec(T1 arg1, Ts... otherArgs) {
+    return arg1 + foldSumRec(otherArgs...);
+}
+</code></pre>
+<p>这样的一种实现不仅写起来繁琐, 并且它也给 C++ 编译器造成负担. 使用</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSum(T... args) {
+    return (... + args); // ((arg1 + arg2) + arg3)...
+}
+</code></pre>
+<p>对于程序员和编译器双方的工作明显有所减少.</p>
+<h2 id="112-折叠表达式的使用"><a class="header" href="#112-折叠表达式的使用">11.2 折叠表达式的使用</a></h2>
+<p>给定形参 <code>args</code> 和一个操作符 <code>op</code>, C++17 允许我们写成</p>
+<ul>
+<li>要么是<strong>一元左折叠</strong>(unary left fold)
+<code>( ... op args)</code>, 它将展开为: <code>(...(arg1 op arg2) op ... argN-1) op argN)</code></li>
+<li>要么是<strong>一元右折叠</strong>(unary right fold)
+<code>(args op ...)</code>, 它将展开为: <code>(arg1 op (arg2 op ... (argN-1 op argN)...)</code></li>
+</ul>
+<p>其中括号是必需的. 但是, 括号和省略号 (...) 不必用空格隔开.</p>
+<p>比起知道左和右折叠表达式的预期结果, 理解两者的差别更重要. 例如, 甚至在使用 <code>+</code> 操作符时就有可能出现不同的效果. 在使用左折叠表达式时:</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSumL(T... args) {
+    return (... + args); // ((arg1 + arg2) + arg3)...
+}
+</code></pre>
+<p>调用 <code>foldSumL(1, 2, 3)</code> 则计算出 <code>((1 + 2) + 3)</code>. 这也意味着下列示例代码是能被编译的:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; foldSumL(std::string(&quot;hello&quot;), &quot;world&quot;, &quot;!&quot;) &lt;&lt; &quot;\n&quot;; // 编译通过.
+</code></pre>
+<p>记住操作符 <code>+</code> 用于标准字符串类型则至少有一个操作数是 <code>std::string</code> 类型. 因为使用了左折叠表达式, 则函数第一次调用将计算 <code>std::string(&quot;hello&quot;) + &quot;world&quot;</code>, 其返回结果为一个 <code>std::string</code> 类型的字符串, 因此再加上字面形式的字符串 <code>&quot;!&quot;</code> 也是有效的.</p>
+<p>然而, 以下的函数调用:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; foldSumL(&quot;hello&quot;, &quot;world&quot;, std::string(&quot;!&quot;)) &lt;&lt; &quot;\n&quot;; // 编译报错.
+</code></pre>
+<p>将不能被编译, 因为其计算得到 <code>((&quot;hello&quot; + &quot;world&quot;) + std::string(&quot;!&quot;))</code>, 而两个字面形式的字符串是不允许用操作符 <code>+</code> 进行拼接的. </p>
+<p>然而, 我们可以将实现改成:</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSumL(T... args) {
+    return (args + ...); // (arg1 + (arg2 + arg3))...
+}
+</code></pre>
+<p>调用 <code>foldSumL(1, 2, 3)</code> 则计算出 <code>(1 + (2 + 3))</code>. 这意味着下列示例代码就不再能被编译:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; foldSumL(std::string(&quot;hello&quot;), &quot;world&quot;, &quot;!&quot;) &lt;&lt; &quot;\n&quot;; // 编译报错.
+</code></pre>
+<p>而以下的函数调用现在能被编译:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; foldSumL(&quot;hello&quot;, &quot;world&quot;, std::string(&quot;!&quot;)) &lt;&lt; &quot;\n&quot;; // 编译通过.
+</code></pre>
+<p>因为几乎在所有情况下, 计算的次序都是从左至右, 通常, 参数包的左折叠语法(参数在末尾)应该更受青睐(除非它没有作用):</p>
+<pre><code class="language-cpp">(... + args); // 更受青睐的折叠表达式语法
+</code></pre>
+<h3 id="1121-空参数包的处理"><a class="header" href="#1121-空参数包的处理">11.2.1 空参数包的处理</a></h3>
+<p>如果一个折叠表达式使用了空参数包, 则应用以下规则:</p>
+<ul>
+<li>如果使用了操作符 <code>&amp;&amp;</code>, 则其值为 <code>true</code>.</li>
+<li>如果使用了操作符 <code>||</code>, 则其值为 <code>false</code>.</li>
+<li>如果使用了操作符 <code>,</code>, 则其值是 <code>void()</code>.</li>
+<li>其他操作符的调用则是不良形式 (ill-formed).</li>
+</ul>
+<p>对于所有其他情况 (一般而言) 你可以添加一个初始值: 给定一个参数包 <code>args</code>, 一个初始值 <code>value</code> 和一个操作符 <code>op</code>, C++17 也允许我们写成:</p>
+<ul>
+<li>要么一个<strong>二元左折叠</strong>(binary left fold)
+<code>(value op ... op args)</code>, 它将展开为: <code>((...((value op arg1) op arg2) op ... op argN-1) op argN)</code>
+— 要么一个<strong>二元右折叠</strong>(binary right fold)
+<code>(args op ... op value)</code>, 它将展开为: <code>(arg1 op (arg2 op ... op (argN-1 op (argN op value))...))</code></li>
+</ul>
+<p>在省略号两边的操作符 <code>op</code> 必须相同.</p>
+<p>例如, 下列定义允许传递一个空参数包</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSum(T... s) {
+    return (0 + ... + s); // sizeof...(s) == 0 的情况也可行
+}
+</code></pre>
+<p>在概念上, 不论我们添加 <code>0</code> 作为首个操作数或最后一个操作数应该都无所谓. </p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSum(T... s) {
+    return (s + ... + 0); // sizeof...(s) == 0 的情况也可行
+}
+</code></pre>
+<p>但对于一元折叠表达式<strong>其不同的计算次序则比预期结果更重要</strong>, 而二元左折叠表达式则更受青睐:</p>
+<pre><code class="language-cpp">(value + ... + args); // 更受青睐的二元折叠表达式语法
+</code></pre>
+<p>还有, 首个操作数可能是特别的, 比如这个例子:</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+void print(const T&amp;... args)
+{
+    (std::cout &lt;&lt; ... &lt;&lt; args) &lt;&lt; &quot;\n&quot;;
+}
+</code></pre>
+<p>这里, 重要的是首次调用是传递给 <code>print()</code> 的第一个实参的输出, 其返回的输出流作用于其它输出的调用. 其它实现可能无法编译甚至得到发生无法预料的事情. 例如, 使用</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; (args &lt;&lt; ... &lt;&lt; &quot;\n&quot;);
+</code></pre>
+<p>调用<code>print(1)</code> 将编译通过但打印出的值 <code>1</code> 会向左移10位 (<code>'\n'</code> 的值通常为 <code>10</code>), 因此输出的结果为 <code>1024</code>.</p>
+<p>注意, 在这个例子 <code>print()</code> 中没有空格分隔参数包的各个元素. 这样的调用 <code>print(&quot;hello&quot;, 42, &quot;world&quot;)</code> 将会打印 <code>hello42world</code>.</p>
+<p>为了用空格将传入的元素分隔开, 你需要一个helper函数以确保除了第一个实参之外在打印前加上空格. 例如, 用以下 helper 函数模版 <code>spaceBefore()</code> 可以办到:</p>
+<pre><code class="language-cpp">// tmpl/addspace.hpp
+template &lt;typename T&gt;
+const T&amp; spaceBefore(const T&amp; arg) {
+    std::cout &lt;&lt; ' ';
+    return arg;
+}
+
+template &lt;typename First, typename... Args&gt;
+void print(const First&amp; firstarg, const Args&amp;... args) {
+    std::cout &lt;&lt; firstarg;
+    (std::cout &lt;&lt; ... &lt;&lt; spaceBefore(args)) &lt;&lt; '\n';
+}
+</code></pre>
+<p>这里, <code>(std::cout &lt;&lt; ... &lt;&lt; spaceBefore(args))</code> 这个折叠表达式展开成: <code>(std::cout &lt;&lt; spaceBefore(arg1) &lt;&lt; spaceBefore(arg2) &lt;&lt; ...)</code></p>
+<p>因此, 在参数包 <code>args</code> 中每个元素都调用一个helper函数, 在返回被传递的实参之前打印出一个空格字符, 写入输出流 <code>std::cout</code> 里. 为了确保这不会应用到第一个实参, 我们添加了额外的首个形参并且不对其使用 <code>spaceBefore()</code>.</p>
+<p>注意, 参数包的输出的计算需要所有输出在左边.</p>
+<p>我们也能在<code>print()</code>里面使用lambda来定义<code>spaceBefore()</code>:</p>
+<pre><code class="language-cpp">template &lt;typename First, typename ...Args&gt;
+void print(const First&amp; firstarg, const Args&amp;... args) {
+    std::cout &lt;&lt; firstarg;
+    auto spaceBefore = [](const auto&amp; arg) {
+        std::cout &lt;&lt; '';
+        return arg;
+    };
+    (std::cout &lt;&lt; ... &lt;&lt; spaceBefore(args)) &lt;&lt; '\n';
+}
+</code></pre>
+<p>然而, 注意 lambda 通过值返回对象, 这意味着将创建传入实参的没必要的拷贝. 避免不必要拷贝的方式是通过显式声明lambda的返回类型要为<code>const auto&amp;</code>或<code>decltype(auto)</code>:</p>
+<pre><code class="language-cpp">template &lt;typename First, typename ...Args&gt;
+void print(const First&amp; firstarg, const Args&amp;... args) {
+    std::cout &lt;&lt; firstarg;
+    auto spaceBefore = [](const auto&amp; arg) -&gt; const auto&amp; {
+        std::cout &lt;&lt; '';
+        return arg;
+    };
+    (std::cout &lt;&lt; ... &lt;&lt; spaceBefore(args)) &lt;&lt; '\n';
+}
+</code></pre>
+<p>如果你不能够将这些语句组合成这样一条语句, 那你用的C++就不能称为真正的C++:</p>
+<pre><code class="language-cpp">template &lt;typename First, typename ...Args&gt;
+void print(const First&amp; firstarg, const Args&amp; ...args) {
+    std::cout &lt;&lt; firstarg;
+    (std::cout &lt;&lt; ... &lt;&lt; [](const auto&amp; arg) -&gt; decltype(auto) {
+                             std::cout &lt;&lt; ' ';
+                             return arg;
+                          }(args)) &lt;&lt; '\n';
+}
+</code></pre>
+<p>不过, 一种更简单实现<code>print()</code>的方式是使用一个lambda打印空格和实参并将其传递给一个一元折叠表达式(脚注: 感谢 Barry Revzin 提出来):</p>
+<pre><code class="language-cpp">template &lt;typename First, typename ...Args&gt;
+void print(First first, const Args&amp; ...args) {
+    std::cout &lt;&lt; first;
+    auto outWithSpace = [](const auto&amp; arg) {
+                            std::cout &lt;&lt; ' ' &lt;&lt; arg;
+                        };
+    (..., outWithSpace(args));
+    std::cout &lt;&lt; '\n';
+}
+</code></pre>
+<p>通过使用一个额外的用**<code>auto</code>声明的模版参数**, 我们可以使<code>print()</code>更灵活地将字符类型的分隔符, 字符串或任意其它可打印的类型参数化.</p>
+<h3 id="1122-已支持的操作符"><a class="header" href="#1122-已支持的操作符">11.2.2 已支持的操作符</a></h3>
+<p>除了<code>.</code>, <code>-&gt;</code>, 和 <code>[]</code> 这些操作符之外, 你可以使用所有二元操作符作用于折叠表达式.</p>
+<h4 id="折叠的函数调用"><a class="header" href="#折叠的函数调用">折叠的函数调用</a></h4>
+<p>折叠表达式</p>
+<pre><code class="language-cpp">// tmpl/foldcalls.cpp
+#include &lt;iostream&gt;
+
+// 可变数目的基类模版
+template &lt;typename ...Bases&gt;
+class MultiBase : private Bases...
+{
+public:
+    void print() {
+        // 调用所有基类的 print()
+        (..., Bases::print());
+    }
+};
+
+struct A {
+    void print() { std::cout &lt;&lt; &quot;A::print()\n&quot;; }  
+};
+
+struct B {
+    void print() { std::cout &lt;&lt; &quot;B::print()\n&quot;; }
+};
+
+struct C {
+    void print() { std::cout &lt;&lt; &quot;C::print()\n&quot;; }
+};
+
+int main()
+{
+    MultiBase&lt;A, B, C&gt; mb;
+    mb.print();
+}
+</code></pre>
+<p>这里,</p>
+<pre><code class="language-cpp">template &lt;typename ...Bases&gt;
+class MultiBase : private Bases...
+{
+    ...
+};
+</code></pre>
+<p>允许我们用可变数目的基类初始化对象: </p>
+<pre><code class="language-cpp">MultiBase&lt;A, B, C&gt; mb;
+</code></pre>
+<p>并且使用</p>
+<pre><code class="language-cpp">(..., Base::print());
+</code></pre>
+<p>这个折叠表达式被展开为调用每一个基类的<code>print</code>. 这个折叠表达式展开后如下所示:</p>
+<pre><code class="language-cpp">(A::print(), B::print(), C::print());
+</code></pre>
+<p>然而, 注意到<code>,</code>操作符的性质与我们使用左折叠表达式或右折叠表达式没什么关系. 这些函数总是从左往右被调用. 使用</p>
+<pre><code class="language-cpp">(Base::print(), ...);
+</code></pre>
+<p>这个括号只是将调用组合起来, 因此第一个<code>print()</code>和其它两个<code>print()</code>的结果组合了一起如下所示:</p>
+<pre><code class="language-cpp">A::print(), (B::print(), C::print());
+</code></pre>
+<p>但因为<code>,</code>操作符的计算次序总是从左向右, 仍然是在括号里面两个为一组的函数调用之前先调用第一个函数, 并且仍然是中间的函数在右边函数之前调用.</p>
+<p>尽管如此, 这就像左表达式的结果并且能跟其计算次序匹配上, 还是建议在折叠多个函数调用时使用左折叠表达式.</p>
+<h4 id="组合hash函数"><a class="header" href="#组合hash函数">组合Hash函数</a></h4>
+<p>一个使用<code>,</code>操作符组合Hash值的例子. 这个例子如下:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+void hashCombine(std::size_t&amp; seed, const T&amp; val)
+{
+    seed ^= std::hash&lt;T&gt;()(val) + 0x9e3779b9 + (seed &lt;&lt; 6) + (seed &gt;&gt; 2);
+}
+
+template &lt;typename ...Type&gt;
+std::size_t combineHashValue(const Type&amp; ...args)
+{
+    std::size_t seed = 0;           // 初始种子
+    (..., hashCombine(seed, args)); // hashCombine() 调用链
+    return seed;
+}
+</code></pre>
+<p>通过调用</p>
+<pre><code class="language-cpp">std::size_t combinedHashValue(&quot;Hello&quot;, &quot;World&quot;, 42);
+</code></pre>
+<p>中间的这条语句展开成:</p>
+<pre><code class="language-cpp">(hashCombine(seed, &quot;Hello&quot;), hashCombine(seed, &quot;World&quot;)), hashCombine(seed, 42));
+</code></pre>
+<p>使用这个定义, 我们可以容易地为一个某个类型的对象定义一个新的Hash函数, 例如 <code>Customer</code>:</p>
+<pre><code class="language-cpp">struct CustomerHash
+{
+    std::size_t operator()(const Customer&amp; c) const {
+        return combineHashValue(c.getFirstname(), c.getLastname(), c.getValue());
+    }
+};
+</code></pre>
+<p>这样我们就可以将 <code>Customers</code> 放入一个 <code>std::unordered_set</code> 的容器:</p>
+<pre><code class="language-cpp">std::unordered_set&lt;Customer, CustomerHash&gt; coll;
+</code></pre>
+<h4 id="折叠的路径遍历"><a class="header" href="#折叠的路径遍历">折叠的路径遍历</a></h4>
+<p>你也可以使用折叠表达式去遍历一个二叉树的路径通过操作符<code>-&gt;*</code>:</p>
+<pre><code class="language-cpp">// tmpl/foldtraverse.cpp
+// 定义二叉树结构和用于遍历的helper函数.
+struct Node {
+    int value;
+    Node* left;
+    Node* right;
+    Node(int i = 0) : value(i), left(nullptr), right(nullptr) {}
+    ...
+};
+auto left = &amp;Node::left;
+auto right = &amp;Node::right;
+
+// 使用折叠表达式遍历树:
+template &lt;typename T, typename ...TP&gt;
+Node* traverse(T np, TP... paths) {
+    return (np -&gt;* ... -&gt;* paths); // np -&gt;* path1 -&gt;* path2 ...
+}
+
+int main()
+{
+    // 初始二叉树的结构:
+    Node* root = new Node{0};
+    root-&gt;left = new Node{1};
+    root-&gt;left-&gt;right = new Node{2};
+    ...
+    // 遍历二叉树:
+    Node* node = traverse(root, left, right);
+    ...
+}
+</code></pre>
+<p>这里,</p>
+<pre><code class="language-cpp">(np -&gt;* ... -&gt;* paths)
+</code></pre>
+<p>使用一个折叠表达式从<code>np</code>开始去遍历可变数目的<code>paths</code>的元素. 当调用:</p>
+<pre><code class="language-cpp">traverse(root, left, right);
+</code></pre>
+<p>这个折叠表达式的调用展开成:</p>
+<pre><code class="language-cpp">root-&gt;left-&gt;right
+</code></pre>
+<h3 id="1123-使用折叠表达式作用于类型"><a class="header" href="#1123-使用折叠表达式作用于类型">11.2.3 使用折叠表达式作用于类型</a></h3>
+<pre><code class="language-cpp">// tmpl/ishomogeneous.hpp
+#include &lt;type_traits&gt;
+
+// 检查传递的类型是否为同一类:
+template &lt;typename T1, typename ...TN&gt;
+struct IsHomogeneous {
+    static constexpr bool value = (std::is_same&lt;T1, TN&gt;::value &amp;&amp; ...);
+};
+
+// 检查传递的实参是否有相同类型:
+template &lt;typename T1, typename ...TN&gt;
+constexpr bool isHomogeneous(T1, TN...)
+{
+    return (std::is_same&lt;T1, TN&gt;::value &amp;&amp; ...);
+}
+</code></pre>
+<p>这个类型 trait <code>IsHomogeneous&lt;&gt;</code> 可被使用如下:</p>
+<pre><code class="language-cpp">IsHomogeneous&lt;int, Size, decltype(42)&gt;::value
+</code></pre>
+<p>此情况下, 这个初始化成员变量<code>value</code>的折叠表达式展开成:</p>
+<pre><code class="language-cpp">std::is_same&lt;int, MyType&gt;::value &amp;&amp; std::is_same&lt;int, decltype(42)&gt;::value
+</code></pre>
+<p>这个函数模版<code>isHomogeneous&lt;&gt;()</code> 可被使用如下:</p>
+<pre><code class="language-cpp">isHomogeneous(43, -1, &quot;hello&quot;, nullptr)
+</code></pre>
+<p>此情况下, 这个初始化成员变量<code>value</code>的折叠表达式展开成:</p>
+<pre><code class="language-cpp">std::is_same&lt;int, int&gt;::value &amp;&amp; std::is_same&lt;int, const char*&gt;::value &amp;&amp; std::is_same&lt;int, std::nullptr_t&gt;::value
+</code></pre>
+<p>通常, 操作符<code>&amp;&amp;</code>是短路的(第一<code>false</code>则终止计算).</p>
+<p>在标准库里的**<code>std::arary&lt;&gt;</code>的推导规则**使用这种特性.</p>
+<h2 id="113-后记"><a class="header" href="#113-后记">11.3 后记</a></h2>
+<p>折叠表达式最初由Andrew Sutton和Richard Smith在<a href="https://wg21.link/n4191">https://wg21.link/n4191</a>中提出. 最后这个特性的公认措辞由Andrew Sutton和Richard Smith在<a href="https://wg21.link/n4295">https://wg21.link/n4295</a>中制定的. Thibaut Le Jehan 在 <a href="https://wg21.link/n0036">https://wg21.link/n0036</a> 中提出了删除对操作符<code>*</code>, <code>+</code>, <code>&amp;</code>和<code>|</code>支持空参数包的情况.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第十二章-string作为模板参数"><a class="header" href="#第十二章-string作为模板参数">第十二章 String作为模板参数</a></h1>
+<p>一直以来，C++对于哪些类型可以用于模板参数的规则在逐渐放松，C++17更是如此。即使在当前作用域外定义的模板，也可以使用它作为模板参数。</p>
+<h2 id="121-在模板中使用string"><a class="header" href="#121-在模板中使用string">12.1 在模板中使用string</a></h2>
+<p>非类型模板参数只能是整数类型（包括枚举），指向对象、函数、成员的指针，对象或者函数的左值引用，以及<code>std::nullptr_t</code>（nullptr的类型）。</p>
+<p>对于指针，链接是必须的，这意味着你不能直接传递字符串字面值。然而，从C++11（译注：这里原文是C++17，可能是笔误）开始，你可以传一个内部链接（internal linkage）的指针。比如</p>
+<pre><code class="language-cpp">template&lt;const char* str&gt;
+class Message {
+    ...
+};
+extern const char hello[] = &quot;Hello World!&quot;; // external linkage
+const char hello11[] = &quot;Hello World!&quot;; // internal linkage
+
+void foo()
+{
+    Message&lt;hello&gt; msg; // OK (all C++ versions)
+    Message&lt;hello11&gt; msg11; // OK since C++11
+    static const char hello17[] = &quot;Hello World!&quot;; // no linkage
+    Message&lt;hello17&gt; msg17; // OK since C++17
+}
+</code></pre>
+<p>也就是说，从C++17开始，你仍然需要写两行代码来传字符串字面值给模板，但是现在第一行可以放到和类实例化相同的作用域。
+这种能力解决了一个很不幸的约束：从C++11开始你可以传指针给类模板：</p>
+<pre><code class="language-cpp">template&lt;int* p&gt; struct A {
+};
+
+int num;
+A&lt;&amp;num&gt; a; // OK since C++11
+</code></pre>
+<p>但你不能使用返回一个地址的编译时函数作为模板参数，但是C++17开始允许这么做了：</p>
+<pre><code class="language-cpp">int num;
+...
+
+constexpr int* pNum() {
+    return &amp;num;
+}
+A&lt;pNum()&gt; b; // ERROR before C++17, now OK
+</code></pre>
+<h2 id="122-后记"><a class="header" href="#122-后记">12.2 后记</a></h2>
+<p>对于所有非类型模板参数允许常量求值这种能力首先由Richard Smith在<a href="https://wg21.link/n4198">https://wg21.link/n4198</a>中提出。最后的公认措辞是由Richard Smith在<a href="https://wg21.link/n4268">https://wg21.link/n4268</a>中给出。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第十三章-auto作为模板参数占位符"><a class="header" href="#第十三章-auto作为模板参数占位符">第十三章 auto作为模板参数占位符</a></h1>
+<p>从C++17开始，你可以使用占位符类型（<code>auto</code>和<code>decltype(auto)</code>作为非类型模板参数。这意味着我们可以针对不同类型的非模板参数写泛型代码。</p>
+<h2 id="131-使用auto作为模板参数"><a class="header" href="#131-使用auto作为模板参数">13.1 使用auto作为模板参数</a></h2>
+<p>从C++17开始，你可以使用auto来声明一个非类型模板参数。比如：</p>
+<pre><code class="language-cpp">template&lt;auto N&gt; class S {
+    ...
+};
+</code></pre>
+<p>这允许我们针对不同类型都可以实例化非类型模板参数N：</p>
+<pre><code class="language-cpp">S&lt;42&gt; s1; // OK: type of N in S is int
+S&lt;'a'&gt; s2; // OK: type of N in S is char
+</code></pre>
+<p>然而，对于那些规则不允许的类型作为模板类型，这个特性仍然是没用的，即不会实例化成功：</p>
+<pre><code class="language-cpp">S&lt;2.5&gt; s3; // ERROR: template parameter type still cannot be double
+</code></pre>
+<p>我们甚至在偏特化中可以写具体类型：</p>
+<pre><code class="language-cpp">template&lt;int N&gt; class S&lt;N&gt; {
+    ...
+};
+</code></pre>
+<p>甚至支持类模板参数推导。比如：</p>
+<pre><code class="language-cpp">template&lt;typename T, auto N&gt;
+class A {
+public:
+    A(const std::array&lt;T,N&gt;&amp;) {
+    }
+    A(T(&amp;)[N]) {
+    }
+    ...
+};
+</code></pre>
+<p>可以推导T的类型，N的类型，N的值。：</p>
+<pre><code class="language-cpp">A a2{&quot;hello&quot;}; // OK, deduces A&lt;const char, 6&gt; with N being int
+
+std::array&lt;double,10&gt; sa1;
+A a1{sa1}; // OK, deduces A&lt;double, 10&gt; with N being std::size_t
+</code></pre>
+<p>你也可以修饰<code>auto</code>，比如，要求模板参数的类型是一个指针：</p>
+<pre><code class="language-cpp">template&lt;const auto* P&gt; struct S;
+</code></pre>
+<p>使用可变参数模板，你可以参数化模板，使用一堆同构模板参数：</p>
+<pre><code class="language-cpp">template&lt;auto... VS&gt; class HeteroValueList {
+};
+</code></pre>
+<p>或者一堆异构模板参数：</p>
+<pre><code class="language-cpp">template&lt;auto V1, decltype(V1)... VS&gt; class HomoValueList {
+};
+</code></pre>
+<p>比如：</p>
+<pre><code class="language-cpp">HeteroValueList&lt;1, 2, 3&gt; vals1; // OK
+HeteroValueList&lt;1, 'a', true&gt; vals2; // OK
+HomoValueList&lt;1, 2, 3&gt; vals3; // OK
+HomoValueList&lt;1, 'a', true&gt; vals4; // ERROR
+</code></pre>
+<h3 id="1311-参数化模板以适用字符和字符串"><a class="header" href="#1311-参数化模板以适用字符和字符串">13.1.1 参数化模板以适用字符和字符串</a></h3>
+<p>使用该特性的一种应用是允许同时传入字符和字符串作为模板参数。比如我们可以使用折叠表达式输出任意数量的参数的个数：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+template&lt;auto Sep = ' ', typename First, typename... Args&gt;
+void print(const First&amp; first, const Args&amp;... args) {
+    std::cout &lt;&lt; first;
+    auto outWithSep = [](const auto&amp; arg) {
+                        std::cout &lt;&lt; Sep &lt;&lt; arg;
+                      };
+    (... , outWithSep(args));
+    std::cout &lt;&lt; '\n';
+}
+</code></pre>
+<p>使用空格作为模板参数的一个默认参数，我们可以输出带空格分隔的参数：</p>
+<pre><code class="language-cpp">template&lt;auto Sep = ' ', typename First, typename... Args&gt;
+void print (const First&amp; firstarg, const Args&amp;... args) {
+    ...
+}
+</code></pre>
+<p>我们仍然可以调用：</p>
+<pre><code class="language-cpp">std::string s{&quot;world&quot;};
+print(7.5, &quot;hello&quot;, s); // prints: 7.5 hello world
+</code></pre>
+<p>但是有了参数化的<code>print()</code>，而且带分隔符<strong>Sep</strong>，我们现在可以显式的传递一个不同的字符作为第一个模板参数：</p>
+<pre><code class="language-cpp">print&lt;' '&gt;(7.5, &quot;hello&quot;, s); // prints: 7.5-hello-world
+</code></pre>
+<p>因为用了<code>auto</code>，我们甚至可以传一个字符串字面值，但这样的话就不得不声明一个没有链接（linkage）的对象：</p>
+<pre><code class="language-cpp">static const char sep[] = &quot;, &quot;;
+print&lt;sep&gt;(7.5, &quot;hello&quot;, s); // prints: 7.5, hello, world
+</code></pre>
+<p>或者我们可以传一个分隔符，只要类型是允许作为模板参数的：</p>
+<pre><code class="language-cpp">print&lt;-11&gt;(7.5, &quot;hello&quot;, s); // prints: 7.5-11hello-11world
+</code></pre>
+<h2 id="1312-定义元编程常量"><a class="header" href="#1312-定义元编程常量">13.1.2 定义元编程常量</a></h2>
+<p>另一个auto这个特性的使用是更容易的定义编译时常量。你不必这样定义：</p>
+<pre><code class="language-cpp">template&lt;typename T, T v&gt;
+struct constant
+{
+    static constexpr T value = v;
+};
+
+using i = constant&lt;int, 42&gt;;
+using c = constant&lt;char, 'x'&gt;;
+using b = constant&lt;bool, true&gt;;
+</code></pre>
+<p>现在你可以这样子做：</p>
+<pre><code class="language-cpp">template&lt;auto v&gt;
+struct constant
+{
+    static constexpr auto value = v;
+};
+
+using i = constant&lt;42&gt;;
+using c = constant&lt;'x'&gt;;
+using b = constant&lt;true&gt;;
+</code></pre>
+<p>也不必：</p>
+<pre><code class="language-cpp">template&lt;typename T, T... Elements&gt;
+struct sequence {
+};
+
+using indexes = sequence&lt;int, 0, 3, 4&gt;;
+</code></pre>
+<p>可以这样：</p>
+<pre><code class="language-cpp">template&lt;auto... Elements&gt;
+struct sequence {
+};
+
+using indexes = sequence&lt;0, 3, 4&gt;;
+</code></pre>
+<p>现在你甚至可以定义编译时对象来代表一系列异构类型的值：（有点像condensed tuple（译注：这里没理解condensed tuple啥意思，所以保留原文））</p>
+<pre><code class="language-cpp">using tuple = sequence&lt;0, 'h', true&gt;;
+</code></pre>
+<h2 id="132-使用auto作为变量模板参数"><a class="header" href="#132-使用auto作为变量模板参数">13.2 使用auto作为变量模板参数</a></h2>
+<p>你也可以使用auto作为带变量模板（不要被变量模板（variable template）所困扰，它指的是模板化的变量，并且是可变参数模板，即带有任意数量的参数）的模板参数。比如。下面的声明，可能在一个头文件里，它定义一个变量模板，这个模板是元素类型和元素个数已经被参数化后的：</p>
+<pre><code class="language-cpp">template&lt;typename T, auto N&gt; std::array&lt;T,N&gt; arr;
+</code></pre>
+<p>在每个翻译单元中，所有使用<code>arr&lt;int,10&gt;</code>的地方都共享一个全局对象，而<code>arr&lt;long,10&gt;</code>和<code>arr&lt;int,10u&gt;</code>将会是不同的全局对象。</p>
+<p>下面的头文件将展示一个完整的例子：</p>
+<pre><code class="language-cpp">#ifndef VARTMPLAUTO_HPP
+#define VARTMPLAUTO_HPP
+
+#include &lt;array&gt;
+
+template&lt;typename T, auto N&gt; std::array&lt;T,N&gt; arr{};
+
+void printArr();
+
+#endif // VARTMPLAUTO_HPP
+</code></pre>
+<p>一个翻译单元可以修改这个变量模板的两个不同实例的值：</p>
+<pre><code class="language-cpp">#include &quot;vartmplauto.hpp&quot;
+
+int main()
+{
+    arr&lt;int,5&gt;[0] = 17;
+    arr&lt;int,5&gt;[3] = 42;
+    arr&lt;int,5u&gt;[1] = 11;
+    arr&lt;int,5u&gt;[3] = 33;
+    printArr();
+}
+</code></pre>
+<p>另一个翻译单元可以打印这两个变量：</p>
+<pre><code class="language-cpp">#include &quot;vartmplauto.hpp&quot;
+#include &lt;iostream&gt;
+
+void printArr()
+{
+    std::cout &lt;&lt; &quot;arr&lt;int,5&gt;: &quot;;
+    for (const auto&amp; elem : arr&lt;int,5&gt;) {
+        std::cout &lt;&lt; elem &lt;&lt; ' ';
+    }
+    std::cout &lt;&lt; &quot;\narr&lt;int,5u&gt;: &quot;;
+    for (const auto&amp; elem : arr&lt;int,5u&gt;) {
+        std::cout &lt;&lt; elem &lt;&lt; ' ';
+    }
+    std::cout &lt;&lt; '\n';
+}
+</code></pre>
+<p>输入结果如下：</p>
+<pre><code class="language-cpp">arr&lt;int,5&gt;: 17 0 0 42 0
+arr&lt;int,5u&gt;: 0 11 0 33 0
+</code></pre>
+<p>与之相同的方式，你可以声明一个常量，其类型是从初始值推导出来的：</p>
+<pre><code class="language-cpp">template&lt;auto N&gt; constexpr auto val = N; // OK since C++17
+</code></pre>
+<p>然后后面使用它，比如，像下面一样：</p>
+<pre><code class="language-cpp">auto v1 = val&lt;5&gt;; // v1 == 5, v1 is int
+auto v2 = val&lt;true&gt;; // v2 == true, v2 is bool
+auto v3 = val&lt;'a'&gt;; // v3 == ’a’, v3 is char
+</code></pre>
+<p>为了说明发生了什么，可以看看下面的例子：</p>
+<pre><code class="language-cpp">std::is_same_v&lt;decltype(val&lt;5&gt;), int&gt; // yields false
+std::is_same_v&lt;decltype(val&lt;5&gt;), const int&gt; // yields true
+std::is_same_v&lt;decltype(v1), int&gt;; // yields true (because auto decays)
+</code></pre>
+<h2 id="133-使用decltypeauto作为模板参数"><a class="header" href="#133-使用decltypeauto作为模板参数">13.3 使用decltype(auto)作为模板参数</a></h2>
+<p>你可以使用另一种占位符类型，由C++14引入的<code>decltype(auto)</code>。注意，这个东西对于类型是如何推导的有非常特殊的规则。根据<code>decltype</code>的规则，如果传了个表达式而不是名字，它会根据表达式的值范畴(参见5.3)来推导类型：</p>
+<ul>
+<li>prvalue的类型是<code>type</code>（比如临时变量）</li>
+<li>lvalue的类型是<code>type&amp;</code>（比如对象名字）</li>
+<li>xvalue的类型是<code>type&amp;&amp;</code>（比如通过<code>std::move()</code>将对象转换为右值引用）</li>
+</ul>
+<p>这意味着，你可以很容易的把参数模板推导成引用，其结果可能出乎意料：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+template&lt;decltype(auto) N&gt;
+
+struct S {
+    void printN() const {
+        std::cout &lt;&lt; &quot;N: &quot; &lt;&lt; N &lt;&lt; '\n';
+    }
+};
+
+static const int c = 42;
+static int v = 42;
+
+int main()
+{
+    S&lt;c&gt; s1; // deduces N as const int 42
+    S&lt;(c)&gt; s2; // deduces N as const int&amp; referring to c
+    s1.printN();
+    s2.printN();
+
+    S&lt;(v)&gt; s3; // deduces N as int&amp; referring to v
+    v = 77;
+    s3.printN(); // prints: N: 77
+}
+</code></pre>
+<h2 id="134-后记"><a class="header" href="#134-后记">13.4 后记</a></h2>
+<p>对于费类型模板参数可以使用占位符类型首先由James Touton和Michael Spertus在<a href="https://wg21.link/n4469">https://wg21.link/n4469</a>中作为其一部分提出。最后的公认措辞是由James Touton和Michael Spertus在<a href="https://wg21.link/p0127r2">https://wg21.link/p0127r2</a>中给出。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第十四章-扩展using声明"><a class="header" href="#第十四章-扩展using声明">第十四章 扩展Using声明</a></h1>
+<p>扩展的using声明可以使用逗号分隔一系列声明，允许它们打包写到一起，后面会自动展开。
+比如，你可以这样编程：</p>
+<pre><code class="language-cpp">class Base {
+    public:
+        void a();
+        void b();
+        void c();
+};
+
+class Derived : private Base {
+    public:
+        using Base::a, Base::b, Base::c;
+};
+</code></pre>
+<p>C++17之前，你得写三行using声明代替。</p>
+<h2 id="141-使用可变参数using声明"><a class="header" href="#141-使用可变参数using声明">14.1 使用可变参数using声明</a></h2>
+<p>逗号分隔的using声明提供一种能力</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第十五章-stdoptional"><a class="header" href="#第十五章-stdoptional">第十五章 <code>std::optional&lt;&gt;</code></a></h1>
+<p>编程的时候我们经常遇到的一个情况是<strong>可能</strong>需要返回/传递/使用某个对象。也就是说，我们可能要获取某个类型的值，也可能完全不获取。因此，我们需要一种方式来模拟这种类似指针的语义，当不需要值的时候给它传<strong>nullptr</strong>。处理这种情况的通常方式是定义一个类型，里面包含了值本身，同时还带一个布尔值的成员（或者说flag）来标示值是否存在。</p>
+<p>**可空对象(Optional objects)**就是这样的，它的内部内存主要包含一个对象加上一个布尔类型的flag。因此，它的大小通常是比包含的对象要大一个字节。对于某些包含的对象，鉴于额外的信息可以放到包含的对象里面，可空对象本身甚至可以做到零额外开销。不会分配内存。可空对象和被包含的对象完全一致。</p>
+<p>然而，可空对象不仅仅是在结构布局上比普通对象多了个布尔值的flag。举个例子，如果没有值，那么被包含对象的构造函数也不会被调用（因此，这种情况下你可以给这些对象填充一个默认的状态）。</p>
+<p>如同<code>std::variant&lt;&gt;</code>和<code>std::any</code>对象一样，可控对象也有值语义。也即是说，拷贝操作的底层实现是<em>深拷贝</em>，会创建一个完全不同的被包含的对象的副本以及布尔flag。拷贝不带包含值的<code>std::optional&lt;&gt;</code>可选对象开销非常小。拷贝一个带包含值的<code>std::optional&lt;&gt;</code>开销大不大完全取决于拷贝这个包含值。另外可空对象也支持移动语义。</p>
+<h2 id="151-使用stdoptional"><a class="header" href="#151-使用stdoptional">15.1 使用<code>std::optional&lt;&gt;</code></a></h2>
+<p><code>std::optional&lt;&gt;</code>塑造了一个可容纳类型的、可空的对象。这个对象可以是成员，也可以是实参，又或者返回值。你也可以说<code>std::optional&lt;&gt;</code>是一个容器，容纳最多一个元素（译注：最少零个）。</p>
+<h3 id="1511-可空的返回值"><a class="header" href="#1511-可空的返回值">15.1.1 可空的返回值</a></h3>
+<p>下面的程序演示了<code>std::optional&lt;&gt;</code>用来作为返回值的能力：</p>
+<pre><code class="language-cpp">#include &lt;optional&gt;
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+
+// convert string to int if possible:
+std::optional&lt;int&gt; asInt(const std::string&amp; s)
+{
+    try {
+        return std::stoi(s);
+    }
+    catch (...) {
+        return std::nullopt;
+    }
+}
+int main()
+{
+    for (auto s : {&quot;42&quot;, &quot; 077&quot;, &quot;hello&quot;, &quot;0x33&quot;} ) {
+        // try to convert s to int and print the result if possible:
+        std::optional&lt;int&gt; oi = asInt(s);
+        if (oi) {
+            std::cout &lt;&lt; &quot;convert '&quot; &lt;&lt; s &lt;&lt; &quot;' to int: &quot; &lt;&lt; *oi &lt;&lt; &quot;\n&quot;;
+        }
+        else {
+            std::cout &lt;&lt; &quot;can't convert '&quot; &lt;&lt; s &lt;&lt; &quot;' to int\n&quot;;
+        }
+    }
+}
+</code></pre>
+<p>程序里面<code>asInt()</code>这个函数将传过来的字符串转换为一个int值。然而，这可能会失败。出于这个原因，我们用<code>std::optional&lt;&gt;</code>，这样我们就可以返回“无int”并且避免了用一个特殊int值表示失败或者给调用者抛一个异常。</p>
+<p>因此，我们既可以调用<code>stoi()</code>来初始化可空对象，也可以返回<code>std::nullopt</code>，告诉调用者我们没有int要返回给你。我们可以用下面的代码实现相同的行为：</p>
+<pre><code class="language-cpp">std::optional&lt;int&gt; asInt(const std::string&amp; s)
+{
+    std::optional&lt;int&gt; ret; // initially no value
+    try {
+        ret = std::stoi(s);
+    }
+    catch (...) {
+    }
+    return ret;
+}
+</code></pre>
+<p>在<code>main()</code>中我们调用这个函数，然后传给它不同的字符串：</p>
+<pre><code class="language-cpp">for (auto s : {&quot;42&quot;, &quot; 077&quot;, &quot;hello&quot;, &quot;0x33&quot;} ) {
+    // convert s to int and use the result if possible:
+    std::optional&lt;int&gt; oi = asInt(s);
+    ...
+}
+</code></pre>
+<p>对于每个返回的<code>std::optional&lt;int&gt; oi</code>，我们都要检查一下是否有值（通过查布尔flag得知）然后通过对可空对象“解引用”来访问被包含的对象：</p>
+<pre><code class="language-cpp">if (oi) {
+    std::cout &lt;&lt; &quot;convert '&quot; &lt;&lt; s &lt;&lt; &quot;' to int: &quot; &lt;&lt; *oi &lt;&lt; &quot;\n&quot;;
+}
+</code></pre>
+<p>注意字符串“0x33”调用<code>asInt()</code>拿到了0，因为<code>stoi()</code>不对十六进制字符串做解析。
+还有一只可选的方式来实现返回值处理：</p>
+<pre><code class="language-cpp">if (oi.has_value()) {
+    std::cout &lt;&lt; &quot;convert '&quot; &lt;&lt; s &lt;&lt; &quot;' to int: &quot; &lt;&lt; oi.value() &lt;&lt; &quot;\n&quot;;
+}
+</code></pre>
+<p>这里，<code>has_value()</code>用于检查可空对象是否包含值，然后用<code>value()</code>访问值。<code>value()</code>比<code>operator *</code>更安全：如果没有值，它抛出异常（译注：而不是对空对象解引用产生段错误）。<code>operator *</code>应该只被用于那种你非常确信可空对象不是空的的场景。否则你的程序将产生<strong>未定义行为(undefined behavior)</strong>。
+注意我们也可以使用新标准库类型<code>std::string_view</code>来优化<code>asInt()</code>。</p>
+<h3 id="1512-可空对象作为实参和对象成员"><a class="header" href="#1512-可空对象作为实参和对象成员">15.1.2 可空对象作为实参和对象成员</a></h3>
+<p>另一个使用<code>std::optional&lt;&gt;</code>的例子是传实参并且/或者将它作为对象的数据成员：</p>
+<pre><code class="language-cpp">#include &lt;string&gt;
+#include &lt;optional&gt;
+#include &lt;iostream&gt;
+
+class Name
+{
+    private:
+        std::string first;
+        std::optional&lt;std::string&gt; middle;
+        std::string last;
+    public:
+        Name (std::string f,
+              std::optional&lt;std::string&gt; m,
+              std::string l)
+          : first{std::move(f)}, middle{std::move(m)}, last{std::move(l)} {
+        }
+        friend std::ostream&amp; operator &lt;&lt; (std::ostream&amp; strm, const Name&amp; n) {
+            strm &lt;&lt; n.first &lt;&lt; ' ';
+            if (n.middle) {
+                strm &lt;&lt; *n.middle &lt;&lt; ' ';
+            }
+            return strm &lt;&lt; n.last;
+        }
+};
+
+int main()
+{
+    Name n{&quot;Jim&quot;, std::nullopt, &quot;Knopf&quot;};
+    std::cout &lt;&lt; n &lt;&lt; '\n';
+    Name m{&quot;Donald&quot;, &quot;Ervin&quot;, &quot;Knuth&quot;};
+    std::cout &lt;&lt; m &lt;&lt; '\n';
+}
+</code></pre>
+<p>类<strong>Name</strong>表示名字，由<strong>first name</strong>、<strong>middle name</strong>和<strong>last name</strong>三个成员组成。由于<strong>middle name</strong>有可能不存在，因此它被定义为可空对象，这样构造函数就可以传一个<code>std::nullopt</code>来表示没有<strong>middle name</strong>。这和<strong>middle name</strong>是空字符串是不一样的。</p>
+<p>注意通常类型都带值语义，定义一个初始化对应成员的构造函数的最好方式是实参值传递，然后构造函数里面移动形参到成员。</p>
+<p>还有一点也要注意，<code>std::optional&lt;&gt;</code>改变了<strong>middle name</strong>的访问方式。将<strong>middle</strong>作为布尔表达式可以知道是否存在<strong>middle name</strong>，不过要想访问它的值还是得<code>*middle</code>（如果有的话）。</p>
+<p>另一种访问可空对象包含的值的方式是使用成员函数<code>value_or()</code>，它可以指定一个备选值，当可空对象真的空的时候这个备选值将作为结果。举个例子，我们可以这样做：</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; middle.value_or(&quot;&quot;); // print middle name or nothing
+</code></pre>
+<h2 id="152-stdoptional类型和操作"><a class="header" href="#152-stdoptional类型和操作">15.2 <code>std::optional&lt;&gt;</code>类型和操作</a></h2>
+<p>这一小节描述了<code>std::optional&lt;&gt;</code>的类型和操作细节。</p>
+<h3 id="1521-stdoptional类型"><a class="header" href="#1521-stdoptional类型">15.2.1 <code>std::optional&lt;&gt;</code>类型</a></h3>
+<p>在C++标准库头文件<code>&lt;optional&gt;</code>使用下面的形式定义<code>std::optional&lt;&gt;</code>：</p>
+<pre><code class="language-cpp">namespace std{
+    template&lt;typename T&gt; class optional;
+}
+</code></pre>
+<p>另外，还定义了下面的对象和对象：</p>
+<ul>
+<li>定义了<strong>nullopt</strong>对象，它的类型是<code>std::nullopt_t</code>，它表示可空对象没有值</li>
+<li>定义了异常类<code>std::bad_optional_access</code>，继承自<code>std::exception</code>，如果访问空的可空对象将引发此异常。</li>
+</ul>
+<h3 id="1522-stdoptional操作"><a class="header" href="#1522-stdoptional操作">15.2.2 <code>std::optional&lt;&gt;</code>操作</a></h3>
+<p>下表列出了针对<code>std::optional&lt;&gt;</code>的所有操作。</p>
+<h4 id="构造"><a class="header" href="#构造">构造</a></h4>
+<p>特殊的构造函数可以直接传递包含的值作为构造函数参数：</p>
+<ul>
+<li>你可以创建一个空的可空对象。</li>
+</ul>
+<pre><code class="language-cpp">std::optional&lt;int&gt; o1;
+std::optional&lt;int&gt; o2(std::nullopt);
+</code></pre>
+<ul>
+<li>你可以传值来初始化可空对象里面包含的对象。因为<a href="part3/part2/cp9.html">类模板参数推导规则</a>，你不用非得指定包含对象的类型：</li>
+</ul>
+<pre><code class="language-cpp">std::optional o3{42}; // deduces optional&lt;int&gt;
+std::optional&lt;std::string&gt; o4{&quot;hello&quot;};
+std::optional o5{&quot;hello&quot;}; // deduces optional&lt;const char*&gt;
+</code></pre>
+<table><thead><tr><th style="text-align: center">操作</th><th style="text-align: center">效果</th></tr></thead><tbody>
+<tr><td style="text-align: center">构造</td><td style="text-align: center">创建一个可空对象（可能会调用包含的对象的构造函数）</td></tr>
+<tr><td style="text-align: center"><code>make_optional&lt;&gt;()</code></td><td style="text-align: center">创建一个可空对象（传值初始化它</td></tr>
+<tr><td style="text-align: center">析构函数</td><td style="text-align: center">销毁可空对象</td></tr>
+<tr><td style="text-align: center"><code>=</code></td><td style="text-align: center">赋新值</td></tr>
+<tr><td style="text-align: center"><code>emplace()</code></td><td style="text-align: center">给包含的对象赋新值</td></tr>
+<tr><td style="text-align: center"><code>reset()</code></td><td style="text-align: center">销毁值（让可空对象变空）</td></tr>
+<tr><td style="text-align: center"><code>has_value()</code></td><td style="text-align: center">可空对象是否为空</td></tr>
+<tr><td style="text-align: center">强制类型转换为bool</td><td style="text-align: center">可空对象是否为空</td></tr>
+<tr><td style="text-align: center"><code>*</code></td><td style="text-align: center">访问被包含的值（如果可空对象为空的时候执行该操作会产生未定义行为）</td></tr>
+<tr><td style="text-align: center"><code>-&gt;</code></td><td style="text-align: center">访问被包含的值（如果可空对象为空的时候执行该操作会产生未定义行为）</td></tr>
+<tr><td style="text-align: center"><code>value()</code></td><td style="text-align: center">访问被包含的值（如果可空对象为空的时候执行该操作会引发异常）</td></tr>
+<tr><td style="text-align: center"><code>value_or()</code></td><td style="text-align: center">访问被包含的值（如果可空对象为空的时候执行该操作会返回备选值）</td></tr>
+<tr><td style="text-align: center"><code>swap()</code></td><td style="text-align: center">交换两个可空对象</td></tr>
+<tr><td style="text-align: center"><code>==,!=,&lt;,&lt;=,&gt;,&gt;=</code></td><td style="text-align: center">比较两个可空对象</td></tr>
+<tr><td style="text-align: center"><code>hash&lt;&gt;</code></td><td style="text-align: center">计算两个可空对象的哈希值</td></tr>
+</tbody></table>
+<ul>
+<li>要用多个值初始化可空对象，你必须直接创建该对象，或者<code>std::in_place</code>作为第一个参数然后传递剩下的值（因为被包含的类型不能推导）：</li>
+</ul>
+<pre><code class="language-cpp">std::optional o6{std::complex{3.0, 4.0}};
+std::optional&lt;std::complex&lt;double&gt;&gt; o7{std::in_place, 3.0, 4.0};
+</code></pre>
+<p>注意第二种形式避免了临时对象的创建。使用这种形式你甚至可以传递一个initializer list再加上额外的参数：</p>
+<pre><code class="language-cpp">// initialize set with lambda as sorting criterion:
+auto sc = [] (int x, int y) {
+    return std::abs(x) &lt; std::abs(y);
+};
+std::optional&lt;std::set&lt;int,decltype(sc)&gt;&gt; o8    {std::in_place,
+                                                {4, 8, -7, -2, 0, 5},
+                                                sc};
+</code></pre>
+<ul>
+<li>你可以拷贝可空对象</li>
+</ul>
+<pre><code class="language-cpp">std::optional o5{&quot;hello&quot;}; // deduces optional&lt;const char*&gt;
+std::optional&lt;std::string&gt; o9{o5}; // OK
+</code></pre>
+<p>注意还有一个便捷函数<code>make_optional&lt;&gt;()</code>，它允许你用一个或者多个参数初始化可空对象（不需要<code>in_place</code>作为第一个参数）。通常用<code>make...</code>系列函数都会导致类型退化（译注：decay）：</p>
+<pre><code class="language-cpp">auto o10 = std::make_optional(3.0); // optional&lt;double&gt;
+auto o11 = std::make_optional(&quot;hello&quot;); // optional&lt;const char*&gt;
+auto o12 = std::make_optional&lt;std::complex&lt;double&gt;&gt;(3.0, 4.0);
+</code></pre>
+<p>但是请注意没有构造函数可以根据一个参数来推导他的类型，不管可空对象初始化带不带值。因此，必须使用<code>operator ？</code>。举个例子：</p>
+<pre><code class="language-cpp">std::multimap&lt;std::string, std::string&gt; englishToGerman;
+...
+auto pos = englishToGerman.find(&quot;wisdom&quot;);
+auto o13 = pos != englishToGerman.end()
+            ? std::optional{pos-&gt;second}
+            : std::nullopt;
+</code></pre>
+<p>因为<a href="part3/part2/cp9.html">类模板参数推导规则</a>，<code>std::optional{pos-&gt;second}</code>将<strong>o13</strong>被初始化为<code>std::optional&lt;std::string&gt;</code>类型。对于<code>std::nullopt</code>，模板类型推导无法正常工作，但是在推导表达式最终类型的时候<code>operator ?</code>可以将它转换为这个类型。</p>
+<h4 id="访问值"><a class="header" href="#访问值">访问值</a></h4>
+<p>要检查可空对象是不是空的，你可以将它作为布尔表达式或者调用<code>has_value()</code>函数：</p>
+<pre><code class="language-cpp">std::optional o{42};
+
+if (o) ... // true
+if (!o) ... // false
+if (o.has_value()) ... // true
+</code></pre>
+<p>接下来要访问值，可以用类似指针的语法。你可以直接用<code>operator *</code>访问包含的对象，用<code>operator-&gt;</code>访问包含的对象的成员：</p>
+<pre><code class="language-cpp">std::optional o{std::pair{42, &quot;hello&quot;}};
+
+auto p = *o; // initializes p as pair&lt;int,string&gt;
+std::cout &lt;&lt; o-&gt;first; // prints 42
+</code></pre>
+<p>注意这些操作都要求可空对象本身不为空。如果可空对象为空又执行这些操作将会产生未定义行为：</p>
+<pre><code class="language-cpp">std::optional&lt;std::string&gt; o{&quot;hello&quot;};
+std::cout &lt;&lt; *o; // OK: prints &quot;hello&quot;
+o = std::nullopt;
+std::cout &lt;&lt; *o; // undefined behavior
+</code></pre>
+<p>虽然第二个是未定义行为，但是实践中它很可能会通过编译并且执行结果和第一个一样，都输出&quot;hello&quot;，因为可空对象管理的内存没有被修改。
+然而，你不能，也不应该依赖这个。如果你不知道可空对象是不是空的，那么请事先检查：</p>
+<pre><code class="language-cpp">if (o) std::cout &lt;&lt; *o; // OK (might output nothing)
+</code></pre>
+<p>或者你可以用<code>value()</code>检查，它会跑抛出<code>std::bad_optional_access_exception</code>：</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; o.value(); // OK (throws if no value)
+</code></pre>
+<p><code>std::bad_optional_access_exception</code>直接继承自<code>std::exception</code>。
+最后，你可以在检查是否为空的时候传一个备选值，如果可空对象真的是空的那么将返回这个备选值：</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; o.value_or(&quot;fallback&quot;); // OK (outputs fallback if no value)
+</code></pre>
+<p>备选值是通过右值引用的方式传递的，所以如果备选值没有被使用，整个传递过程零开销，如果被使用，走的是移动语义。</p>
+<p>请注意<code>operator *</code>和<code>value()</code>一样都是返回的被包含的对象的引用。因此，你必须小心操作这些临时返回值。比如：</p>
+<pre><code class="language-cpp">std::optional&lt;std::string&gt; getString();
+...
+auto a = getString().value(); // OK: copy of contained object
+auto b = *getString(); // ERROR: undefined behavior if std::nullopt
+const auto&amp; r1 = getString().value(); // ERROR: reference to deleted contained object
+auto&amp;&amp; r2 = getString().value(); // ERROR: reference to deleted contained object
+</code></pre>
+<p>有时候你可能会像下面一样把它用于range-based循环中：</p>
+<pre><code class="language-cpp">std::optional&lt;std::vector&lt;int&gt;&gt; getVector();
+...
+for (int i : getVector().value()) { // ERROR: iterate over deleted vector
+    std::cout &lt;&lt; i &lt;&lt; '\n';
+}
+</code></pre>
+<p>返回int的vector，然后迭代它是可以的。所以不要轻易的将<code>foo()</code>返回值类型改变成对应的可空类型，而应该调用<code>foo().value()</code>。</p>
+<h4 id="比较"><a class="header" href="#比较">比较</a></h4>
+<p>你可以使用普通的比较运算符。操作数可以是一个可空对象、被包含的对象、<code>std::nullopt</code>。</p>
+<ul>
+<li>如果操作数都是不为空的可空对象，将会比较被包含的值</li>
+<li>如果操作数都是空的可空对象，那么比较运算会认为它们相等（<code>==</code>产生true值，其他比较运算符产生false值）</li>
+<li>如果一个操作数为空，一个不为空，为空的那个操作数将会被认为是小于不为空的那个操作数</li>
+</ul>
+<p>比如：</p>
+<pre><code class="language-cpp">std::optional&lt;int&gt; o0;
+std::optional&lt;int&gt; o1{42};
+
+    o0 == std::nullopt // yields true
+    o0 == 42 // yields false
+    o0 &lt; 42 // yields true
+    o0 &gt; 42 // yields false
+    o1 == 42 // yields true
+    o0 &lt; o1 // yields true
+</code></pre>
+<p>这意味着对于包含unsigned int的可空对象，它可以小于零，对于包含bool的可空对象，它也可以小于零：</p>
+<pre><code class="language-cpp">std::optional&lt;unsigned&gt; uo;
+    uo &lt; 0 // yields true
+std::optional&lt;bool&gt; bo;
+    bo &lt; false // yields true
+</code></pre>
+<p>再次强调，包含类型的隐式类型转换是支持的：</p>
+<pre><code class="language-cpp">std::optional&lt;int&gt; o1{42};
+std::optional&lt;double&gt; o2{42.0};
+
+o2 == 42 // yields true
+o1 == o2 // yields true
+</code></pre>
+<p>另外包含bool或者原生指针的可空对象在这里会产生一些令人意外的结果。</p>
+<h4 id="修改值"><a class="header" href="#修改值">修改值</a></h4>
+<p>赋值操作和<code>emplace()</code>操作与初始化对应：</p>
+<pre><code class="language-cpp">std::optional&lt;std::complex&lt;double&gt;&gt; o; // has no value
+std::optional ox{77}; // optional&lt;int&gt; with value 77
+
+o = 42; // value becomes complex(42.0, 0.0)
+o = {9.9, 4.4}; // value becomes complex(9.9, 4.4)
+o = ox; // OK, because int converts to complex&lt;double&gt;
+o = std::nullopt; // o no longer has a value
+o.emplace(5.5, 7.7); // value becomes complex(5.5, 7.7)
+</code></pre>
+<p>给可空对象赋<code>std::nullopt</code>会移除原来的包含值，即调用原包含值的析构函数。你可以用<code>reset()</code>实现一样的效果：</p>
+<pre><code class="language-cpp">o.reset();  // o no longer has a value
+</code></pre>
+<p>或者赋给它一个<code>{}</code>：</p>
+<pre><code class="language-cpp">o = {}; // o no longer has a value
+</code></pre>
+<p>最后，我们也可以用<code>operator *</code>修改值，因为它产生包含值的引用。然而注意前提是可空对象得有值存在：</p>
+<pre><code class="language-cpp">std::optional&lt;std::complex&lt;double&gt;&gt; o;
+*o = 42; // undefined behavior
+...
+if (o) {
+    *o = 88; // OK: value becomes complex(88.0, 0.0)
+    *o = {1.2, 3.4}; // OK: value becomes complex(1.2, 3.4)
+}
+</code></pre>
+<h4 id="移动语义-1"><a class="header" href="#移动语义-1">移动语义</a></h4>
+<p><code>std::optional&lt;&gt;</code>也支持移动语义。如果你将整个对象移动，状态会随之被复制，被包含的值（如果有的话）也会被移动。
+结果就是，移动后的对象状态仍然还保留，但是被包含的值已经不在了。
+但是你可以将一个值移动到被包含对象里面，或者从被包含对象里面移出去。比如：</p>
+<pre><code class="language-cpp">std::optional&lt;std::string&gt; os;
+std::string s = &quot;a very very very long string&quot;;
+os = std::move(s); // OK, moves
+std::string s2 = *os; // OK copies
+std::string s3 = std::move(*os); // OK, moves
+</code></pre>
+<p>执行完最后一行，<strong>os</strong>仍然还有字符串的值，但是通常来说移动后的对象的值都是不存在的（译注：原文是unspecified）。因此，
+你仍然可以使用它，前提是你不要对它是什么做任何假设。你甚至可以给它赋一个新字符串。</p>
+<h4 id="哈希"><a class="header" href="#哈希">哈希</a></h4>
+<p>可空对象的哈希值是被包含对象的哈希值（如果存在的话）。</p>
+<h2 id="153-特殊情况"><a class="header" href="#153-特殊情况">15.3 特殊情况</a></h2>
+<p>可空对象包含特定的类型可能产生令人意想不到的结果甚至未定义行为。</p>
+<h3 id="1531-包含布尔值或原生指针"><a class="header" href="#1531-包含布尔值或原生指针">15.3.1 包含布尔值或原生指针</a></h3>
+<p>对可空对象使用比较运算符和将它视作布尔值有不同的雨衣。如果可空对象包含布尔值或者原生指针可能会产生一些困扰：比如：</p>
+<pre><code class="language-cpp">std::optional&lt;bool&gt; ob{false}; // has value, which is false
+if (!ob) ... // yields false
+if (ob == false) ... // yields true
+
+std::optional&lt;int*&gt; op{nullptr};
+if (!op) ... // yields false
+if (op == nullptr) ... // yields true
+</code></pre>
+<h3 id="1532-可空对象里面包含可空对象"><a class="header" href="#1532-可空对象里面包含可空对象">15.3.2 可空对象里面包含可空对象</a></h3>
+<p>原则上，你可以定义包含可空对象的可空对象：</p>
+<pre><code class="language-cpp">std::optional&lt;std::optional&lt;std::string&gt;&gt; oos1;
+std::optional&lt;std::optional&lt;std::string&gt;&gt; oos2 = &quot;hello&quot;;
+std::optional&lt;std::optional&lt;std::string&gt;&gt;
+    oos3{std::in_place, std::in_place, &quot;hello&quot;};
+
+std::optional&lt;std::optional&lt;std::complex&lt;double&gt;&gt;&gt;
+    ooc{std::in_place, std::in_place, 4.2, 5.3};
+</code></pre>
+<p>你也可以借助隐式转换给它赋一个新值：</p>
+<pre><code class="language-cpp">oos1 = &quot;hello&quot;; // OK: assign new value
+ooc.emplace(std::in_place, 7.2, 8.3);
+</code></pre>
+<p>两层可空对象都没有值，但是最外层可空对象和最内层可空对象有没有值有待商榷：</p>
+<pre><code class="language-cpp">*oos1 = std::nullopt; // inner optional has no value
+oos1 = std::nullopt; // outer optional has no value
+</code></pre>
+<p>你必须小心谨慎处理这些特殊例子：</p>
+<pre><code class="language-cpp">if (!oos1) std::cout &lt;&lt; &quot;no value\n&quot;;
+if (oos1 &amp;&amp; !*oos1) std::cout &lt;&lt; &quot;no inner value\n&quot;;
+if (oos1 &amp;&amp; *oos1) std::cout &lt;&lt; &quot;value: &quot; &lt;&lt; **oos1 &lt;&lt; '\n';
+</code></pre>
+<p>因为这个语义上不仅仅是说一个有两种状态的值表示没有值，使用<code>std::variant&lt;&gt;</code>包裹两个bool或者用<code>std::monostate</code>可能是更合适的选择。</p>
+<h2 id="154-后记"><a class="header" href="#154-后记">15.4 后记</a></h2>
+<p>可空对象首先由Fernando Cacciola在2005的<a href="https://wg21.link/n1878">https://wg21.link/n1878</a>中提出。Fernando Cacciola和Andrzej Krzemienski提出新提案<a href="https://wg21.link/n3793">https://wg21.link/n3793</a>被Library Fundamentals TS接受</p>
+<p>Beman Dawes和Alisdair Meredith的新提案<a href="https://wg21.link/p0220r1">https://wg21.link/p0220r1</a>被其他C++17组件接受。</p>
+<p>Tony van Eerd极大的改进了比较操作的语义，提案参见[https://
+wg21.link/n3765](https://
+wg21.link/n3765)和<a href="https://wg21.link/p0307r2">https://wg21.link/p0307r2</a>。 Vicente J. Botet Escriba 优化了std::optional&lt;&gt;
+、std::variant&lt;&gt;和std::anyAPI，提案参见https://wg21.link/p0032r3。Jonathan Wakely修复了in_place的行为，提案参见https://wg21.link/p0504r0。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+    </body>
+</html>

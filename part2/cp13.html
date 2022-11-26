@@ -1,0 +1,406 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第十三章 auto作为模板参数占位符 - C++ 17 The Complete Guide</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../part1/index.html">第一部分 基本语言特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part1/cp1.html">第一章 结构化绑定</a></li><li class="chapter-item "><a href="../part1/cp2.html">第二章 带初始化的if和switch</a></li><li class="chapter-item "><a href="../part1/cp3.html">第三章 内联变量</a></li><li class="chapter-item "><a href="../part1/cp4.html">第四章 聚合扩展</a></li><li class="chapter-item "><a href="../part1/cp5.html">第五章 强制拷贝消除或者传递未具体化对象</a></li><li class="chapter-item "><a href="../part1/cp6.html">第六章 Lambda扩展</a></li><li class="chapter-item "><a href="../part1/cp7.html">第七章 新属性和属性相关特性</a></li><li class="chapter-item "><a href="../part1/cp8.html">第八章 其他语言特性</a></li></ol></li><li class="chapter-item expanded "><a href="../part2/index.html">第二部分 模板特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part2/cp9.html">第九章 类模板参数推导</a></li><li class="chapter-item "><a href="../part2/cp10.html">第十章 编译期if</a></li><li class="chapter-item "><a href="../part2/cp11.html">第十一章 折叠表达式</a></li><li class="chapter-item "><a href="../part2/cp12.html">第十二章 String作为模板参数</a></li><li class="chapter-item expanded "><a href="../part2/cp13.html" class="active">第十三章 auto作为模板参数占位符</a></li><li class="chapter-item "><a href="../part2/cp14.html">第十四章 扩展Using声明</a></li></ol></li><li class="chapter-item expanded "><div>第三部分 新的标准库组件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part3/cp15.html">第十五章 std::optional&lt;&gt;</a></li><li class="chapter-item "><div>第十六章 std::variant&lt;&gt;</div></li><li class="chapter-item "><div>第十七章 std::any</div></li><li class="chapter-item "><div>第十八章 std::byte</div></li><li class="chapter-item "><div>第十九章 String View</div></li><li class="chapter-item "><div>第二十章 文件系统库</div></li></ol></li><li class="chapter-item expanded "><div>第四部分 标准库扩展和修改</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十一章 Type Trait扩展</div></li><li class="chapter-item "><div>第二十二章 并行STL算法</div></li><li class="chapter-item "><div>第二十三章 子字符串和子序列搜索</div></li><li class="chapter-item "><div>第二十四章 其他工具函数和算法</div></li><li class="chapter-item "><div>第二十五章 容器扩展</div></li><li class="chapter-item "><div>第二十六章 多线程和兵法</div></li></ol></li><li class="chapter-item expanded "><div>第五部分 专业工具</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十七章 多态类型资源（PMR）</div></li><li class="chapter-item "><div>第二十八章 对齐数据上的new和delete</div></li><li class="chapter-item "><div>第二十九章 其他专业库的改动</div></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">C++ 17 The Complete Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/CnTransGroup/Cpp17TheCompleteGuideChinese" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第十三章-auto作为模板参数占位符"><a class="header" href="#第十三章-auto作为模板参数占位符">第十三章 auto作为模板参数占位符</a></h1>
+<p>从C++17开始，你可以使用占位符类型（<code>auto</code>和<code>decltype(auto)</code>作为非类型模板参数。这意味着我们可以针对不同类型的非模板参数写泛型代码。</p>
+<h2 id="131-使用auto作为模板参数"><a class="header" href="#131-使用auto作为模板参数">13.1 使用auto作为模板参数</a></h2>
+<p>从C++17开始，你可以使用auto来声明一个非类型模板参数。比如：</p>
+<pre><code class="language-cpp">template&lt;auto N&gt; class S {
+    ...
+};
+</code></pre>
+<p>这允许我们针对不同类型都可以实例化非类型模板参数N：</p>
+<pre><code class="language-cpp">S&lt;42&gt; s1; // OK: type of N in S is int
+S&lt;'a'&gt; s2; // OK: type of N in S is char
+</code></pre>
+<p>然而，对于那些规则不允许的类型作为模板类型，这个特性仍然是没用的，即不会实例化成功：</p>
+<pre><code class="language-cpp">S&lt;2.5&gt; s3; // ERROR: template parameter type still cannot be double
+</code></pre>
+<p>我们甚至在偏特化中可以写具体类型：</p>
+<pre><code class="language-cpp">template&lt;int N&gt; class S&lt;N&gt; {
+    ...
+};
+</code></pre>
+<p>甚至支持类模板参数推导。比如：</p>
+<pre><code class="language-cpp">template&lt;typename T, auto N&gt;
+class A {
+public:
+    A(const std::array&lt;T,N&gt;&amp;) {
+    }
+    A(T(&amp;)[N]) {
+    }
+    ...
+};
+</code></pre>
+<p>可以推导T的类型，N的类型，N的值。：</p>
+<pre><code class="language-cpp">A a2{&quot;hello&quot;}; // OK, deduces A&lt;const char, 6&gt; with N being int
+
+std::array&lt;double,10&gt; sa1;
+A a1{sa1}; // OK, deduces A&lt;double, 10&gt; with N being std::size_t
+</code></pre>
+<p>你也可以修饰<code>auto</code>，比如，要求模板参数的类型是一个指针：</p>
+<pre><code class="language-cpp">template&lt;const auto* P&gt; struct S;
+</code></pre>
+<p>使用可变参数模板，你可以参数化模板，使用一堆同构模板参数：</p>
+<pre><code class="language-cpp">template&lt;auto... VS&gt; class HeteroValueList {
+};
+</code></pre>
+<p>或者一堆异构模板参数：</p>
+<pre><code class="language-cpp">template&lt;auto V1, decltype(V1)... VS&gt; class HomoValueList {
+};
+</code></pre>
+<p>比如：</p>
+<pre><code class="language-cpp">HeteroValueList&lt;1, 2, 3&gt; vals1; // OK
+HeteroValueList&lt;1, 'a', true&gt; vals2; // OK
+HomoValueList&lt;1, 2, 3&gt; vals3; // OK
+HomoValueList&lt;1, 'a', true&gt; vals4; // ERROR
+</code></pre>
+<h3 id="1311-参数化模板以适用字符和字符串"><a class="header" href="#1311-参数化模板以适用字符和字符串">13.1.1 参数化模板以适用字符和字符串</a></h3>
+<p>使用该特性的一种应用是允许同时传入字符和字符串作为模板参数。比如我们可以使用折叠表达式输出任意数量的参数的个数：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+template&lt;auto Sep = ' ', typename First, typename... Args&gt;
+void print(const First&amp; first, const Args&amp;... args) {
+    std::cout &lt;&lt; first;
+    auto outWithSep = [](const auto&amp; arg) {
+                        std::cout &lt;&lt; Sep &lt;&lt; arg;
+                      };
+    (... , outWithSep(args));
+    std::cout &lt;&lt; '\n';
+}
+</code></pre>
+<p>使用空格作为模板参数的一个默认参数，我们可以输出带空格分隔的参数：</p>
+<pre><code class="language-cpp">template&lt;auto Sep = ' ', typename First, typename... Args&gt;
+void print (const First&amp; firstarg, const Args&amp;... args) {
+    ...
+}
+</code></pre>
+<p>我们仍然可以调用：</p>
+<pre><code class="language-cpp">std::string s{&quot;world&quot;};
+print(7.5, &quot;hello&quot;, s); // prints: 7.5 hello world
+</code></pre>
+<p>但是有了参数化的<code>print()</code>，而且带分隔符<strong>Sep</strong>，我们现在可以显式的传递一个不同的字符作为第一个模板参数：</p>
+<pre><code class="language-cpp">print&lt;' '&gt;(7.5, &quot;hello&quot;, s); // prints: 7.5-hello-world
+</code></pre>
+<p>因为用了<code>auto</code>，我们甚至可以传一个字符串字面值，但这样的话就不得不声明一个没有链接（linkage）的对象：</p>
+<pre><code class="language-cpp">static const char sep[] = &quot;, &quot;;
+print&lt;sep&gt;(7.5, &quot;hello&quot;, s); // prints: 7.5, hello, world
+</code></pre>
+<p>或者我们可以传一个分隔符，只要类型是允许作为模板参数的：</p>
+<pre><code class="language-cpp">print&lt;-11&gt;(7.5, &quot;hello&quot;, s); // prints: 7.5-11hello-11world
+</code></pre>
+<h2 id="1312-定义元编程常量"><a class="header" href="#1312-定义元编程常量">13.1.2 定义元编程常量</a></h2>
+<p>另一个auto这个特性的使用是更容易的定义编译时常量。你不必这样定义：</p>
+<pre><code class="language-cpp">template&lt;typename T, T v&gt;
+struct constant
+{
+    static constexpr T value = v;
+};
+
+using i = constant&lt;int, 42&gt;;
+using c = constant&lt;char, 'x'&gt;;
+using b = constant&lt;bool, true&gt;;
+</code></pre>
+<p>现在你可以这样子做：</p>
+<pre><code class="language-cpp">template&lt;auto v&gt;
+struct constant
+{
+    static constexpr auto value = v;
+};
+
+using i = constant&lt;42&gt;;
+using c = constant&lt;'x'&gt;;
+using b = constant&lt;true&gt;;
+</code></pre>
+<p>也不必：</p>
+<pre><code class="language-cpp">template&lt;typename T, T... Elements&gt;
+struct sequence {
+};
+
+using indexes = sequence&lt;int, 0, 3, 4&gt;;
+</code></pre>
+<p>可以这样：</p>
+<pre><code class="language-cpp">template&lt;auto... Elements&gt;
+struct sequence {
+};
+
+using indexes = sequence&lt;0, 3, 4&gt;;
+</code></pre>
+<p>现在你甚至可以定义编译时对象来代表一系列异构类型的值：（有点像condensed tuple（译注：这里没理解condensed tuple啥意思，所以保留原文））</p>
+<pre><code class="language-cpp">using tuple = sequence&lt;0, 'h', true&gt;;
+</code></pre>
+<h2 id="132-使用auto作为变量模板参数"><a class="header" href="#132-使用auto作为变量模板参数">13.2 使用auto作为变量模板参数</a></h2>
+<p>你也可以使用auto作为带变量模板（不要被变量模板（variable template）所困扰，它指的是模板化的变量，并且是可变参数模板，即带有任意数量的参数）的模板参数。比如。下面的声明，可能在一个头文件里，它定义一个变量模板，这个模板是元素类型和元素个数已经被参数化后的：</p>
+<pre><code class="language-cpp">template&lt;typename T, auto N&gt; std::array&lt;T,N&gt; arr;
+</code></pre>
+<p>在每个翻译单元中，所有使用<code>arr&lt;int,10&gt;</code>的地方都共享一个全局对象，而<code>arr&lt;long,10&gt;</code>和<code>arr&lt;int,10u&gt;</code>将会是不同的全局对象。</p>
+<p>下面的头文件将展示一个完整的例子：</p>
+<pre><code class="language-cpp">#ifndef VARTMPLAUTO_HPP
+#define VARTMPLAUTO_HPP
+
+#include &lt;array&gt;
+
+template&lt;typename T, auto N&gt; std::array&lt;T,N&gt; arr{};
+
+void printArr();
+
+#endif // VARTMPLAUTO_HPP
+</code></pre>
+<p>一个翻译单元可以修改这个变量模板的两个不同实例的值：</p>
+<pre><code class="language-cpp">#include &quot;vartmplauto.hpp&quot;
+
+int main()
+{
+    arr&lt;int,5&gt;[0] = 17;
+    arr&lt;int,5&gt;[3] = 42;
+    arr&lt;int,5u&gt;[1] = 11;
+    arr&lt;int,5u&gt;[3] = 33;
+    printArr();
+}
+</code></pre>
+<p>另一个翻译单元可以打印这两个变量：</p>
+<pre><code class="language-cpp">#include &quot;vartmplauto.hpp&quot;
+#include &lt;iostream&gt;
+
+void printArr()
+{
+    std::cout &lt;&lt; &quot;arr&lt;int,5&gt;: &quot;;
+    for (const auto&amp; elem : arr&lt;int,5&gt;) {
+        std::cout &lt;&lt; elem &lt;&lt; ' ';
+    }
+    std::cout &lt;&lt; &quot;\narr&lt;int,5u&gt;: &quot;;
+    for (const auto&amp; elem : arr&lt;int,5u&gt;) {
+        std::cout &lt;&lt; elem &lt;&lt; ' ';
+    }
+    std::cout &lt;&lt; '\n';
+}
+</code></pre>
+<p>输入结果如下：</p>
+<pre><code class="language-cpp">arr&lt;int,5&gt;: 17 0 0 42 0
+arr&lt;int,5u&gt;: 0 11 0 33 0
+</code></pre>
+<p>与之相同的方式，你可以声明一个常量，其类型是从初始值推导出来的：</p>
+<pre><code class="language-cpp">template&lt;auto N&gt; constexpr auto val = N; // OK since C++17
+</code></pre>
+<p>然后后面使用它，比如，像下面一样：</p>
+<pre><code class="language-cpp">auto v1 = val&lt;5&gt;; // v1 == 5, v1 is int
+auto v2 = val&lt;true&gt;; // v2 == true, v2 is bool
+auto v3 = val&lt;'a'&gt;; // v3 == ’a’, v3 is char
+</code></pre>
+<p>为了说明发生了什么，可以看看下面的例子：</p>
+<pre><code class="language-cpp">std::is_same_v&lt;decltype(val&lt;5&gt;), int&gt; // yields false
+std::is_same_v&lt;decltype(val&lt;5&gt;), const int&gt; // yields true
+std::is_same_v&lt;decltype(v1), int&gt;; // yields true (because auto decays)
+</code></pre>
+<h2 id="133-使用decltypeauto作为模板参数"><a class="header" href="#133-使用decltypeauto作为模板参数">13.3 使用decltype(auto)作为模板参数</a></h2>
+<p>你可以使用另一种占位符类型，由C++14引入的<code>decltype(auto)</code>。注意，这个东西对于类型是如何推导的有非常特殊的规则。根据<code>decltype</code>的规则，如果传了个表达式而不是名字，它会根据表达式的值范畴(参见5.3)来推导类型：</p>
+<ul>
+<li>prvalue的类型是<code>type</code>（比如临时变量）</li>
+<li>lvalue的类型是<code>type&amp;</code>（比如对象名字）</li>
+<li>xvalue的类型是<code>type&amp;&amp;</code>（比如通过<code>std::move()</code>将对象转换为右值引用）</li>
+</ul>
+<p>这意味着，你可以很容易的把参数模板推导成引用，其结果可能出乎意料：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+template&lt;decltype(auto) N&gt;
+
+struct S {
+    void printN() const {
+        std::cout &lt;&lt; &quot;N: &quot; &lt;&lt; N &lt;&lt; '\n';
+    }
+};
+
+static const int c = 42;
+static int v = 42;
+
+int main()
+{
+    S&lt;c&gt; s1; // deduces N as const int 42
+    S&lt;(c)&gt; s2; // deduces N as const int&amp; referring to c
+    s1.printN();
+    s2.printN();
+
+    S&lt;(v)&gt; s3; // deduces N as int&amp; referring to v
+    v = 77;
+    s3.printN(); // prints: N: 77
+}
+</code></pre>
+<h2 id="134-后记"><a class="header" href="#134-后记">13.4 后记</a></h2>
+<p>对于费类型模板参数可以使用占位符类型首先由James Touton和Michael Spertus在<a href="https://wg21.link/n4469">https://wg21.link/n4469</a>中作为其一部分提出。最后的公认措辞是由James Touton和Michael Spertus在<a href="https://wg21.link/p0127r2">https://wg21.link/p0127r2</a>中给出。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../part2/cp12.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../part2/cp14.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../part2/cp12.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../part2/cp14.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第三章 内联变量 - C++ 17 The Complete Guide</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../part1/index.html">第一部分 基本语言特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part1/cp1.html">第一章 结构化绑定</a></li><li class="chapter-item "><a href="../part1/cp2.html">第二章 带初始化的if和switch</a></li><li class="chapter-item expanded "><a href="../part1/cp3.html" class="active">第三章 内联变量</a></li><li class="chapter-item "><a href="../part1/cp4.html">第四章 聚合扩展</a></li><li class="chapter-item "><a href="../part1/cp5.html">第五章 强制拷贝消除或者传递未具体化对象</a></li><li class="chapter-item "><a href="../part1/cp6.html">第六章 Lambda扩展</a></li><li class="chapter-item "><a href="../part1/cp7.html">第七章 新属性和属性相关特性</a></li><li class="chapter-item "><a href="../part1/cp8.html">第八章 其他语言特性</a></li></ol></li><li class="chapter-item expanded "><a href="../part2/index.html">第二部分 模板特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part2/cp9.html">第九章 类模板参数推导</a></li><li class="chapter-item "><a href="../part2/cp10.html">第十章 编译期if</a></li><li class="chapter-item "><a href="../part2/cp11.html">第十一章 折叠表达式</a></li><li class="chapter-item "><a href="../part2/cp12.html">第十二章 String作为模板参数</a></li><li class="chapter-item "><a href="../part2/cp13.html">第十三章 auto作为模板参数占位符</a></li><li class="chapter-item "><a href="../part2/cp14.html">第十四章 扩展Using声明</a></li></ol></li><li class="chapter-item expanded "><div>第三部分 新的标准库组件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part3/cp15.html">第十五章 std::optional&lt;&gt;</a></li><li class="chapter-item "><div>第十六章 std::variant&lt;&gt;</div></li><li class="chapter-item "><div>第十七章 std::any</div></li><li class="chapter-item "><div>第十八章 std::byte</div></li><li class="chapter-item "><div>第十九章 String View</div></li><li class="chapter-item "><div>第二十章 文件系统库</div></li></ol></li><li class="chapter-item expanded "><div>第四部分 标准库扩展和修改</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十一章 Type Trait扩展</div></li><li class="chapter-item "><div>第二十二章 并行STL算法</div></li><li class="chapter-item "><div>第二十三章 子字符串和子序列搜索</div></li><li class="chapter-item "><div>第二十四章 其他工具函数和算法</div></li><li class="chapter-item "><div>第二十五章 容器扩展</div></li><li class="chapter-item "><div>第二十六章 多线程和兵法</div></li></ol></li><li class="chapter-item expanded "><div>第五部分 专业工具</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十七章 多态类型资源（PMR）</div></li><li class="chapter-item "><div>第二十八章 对齐数据上的new和delete</div></li><li class="chapter-item "><div>第二十九章 其他专业库的改动</div></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">C++ 17 The Complete Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/CnTransGroup/Cpp17TheCompleteGuideChinese" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第三章-内联变量"><a class="header" href="#第三章-内联变量">第三章 内联变量</a></h1>
+<p>C++的一个优点是它支持header-only（译注：即只有头文件）的库。然而，截止C++17，header-only的库也不能有全局变量或者对象出现。</p>
+<p>C++17后，你可以在头文件中使用inline定义变量，如果这个变量被多个翻译单元（translation unit）使用，它们都会指向相同对象：</p>
+<pre><code class="language-cpp">class MyClass {
+  static inline std::string name = &quot;&quot;; // OK since C++17
+  ...
+};
+inline MyClass myGlobalObj; // OK even if included/defined by multiple CPP files
+</code></pre>
+<h2 id="31-内联变量的动机"><a class="header" href="#31-内联变量的动机">3.1 内联变量的动机</a></h2>
+<p>C++不允许在class内部初始化非const静态成员：</p>
+<pre><code class="language-cpp">class MyClass {
+  static std::string name = &quot;&quot;;  // Compile-Time ERROR
+  ...
+};
+</code></pre>
+<p>在class外面定义这个变量定义这个变量，且变量定义是在头文件中，多个CPP文件包含它，仍然会引发错误：</p>
+<pre><code class="language-cpp">class MyClass {
+  static std::string name; // OK
+  ...
+};
+MyClass::name = &quot;&quot;; // Link ERROR if included by multiple CPP files
+</code></pre>
+<p>根据一处定义规则（one definition 入了，ODR），每个翻译单元只能定义变量最多一次。</p>
+<p>即便有预处理保护（译注：也叫头文件保护，header guard）也没有用：</p>
+<pre><code class="language-cpp">#ifndef MYHEADER_HPP
+#define MYHEADER_HPP
+class MyClass {
+  static std::string name; // OK
+  ...
+};
+MyClass.name = &quot;&quot;; // Link ERROR if included by multiple CPP files
+#endif
+</code></pre>
+<p>不是因为头文件可能被包含多次，问题是两个不同的CPP如果都包含这个头文件，那么<code>MyClass.name</code>可能定义两次。</p>
+<p>同样的原因，如果你在头文件中定义一个变量，你会得到一个链接时错误：</p>
+<pre><code class="language-cpp">class MyClass {
+  ...
+};
+MyClass myGlobalObject; // Link ERROR if included by multiple CPP files
+</code></pre>
+<h4 id="临时解决方案"><a class="header" href="#临时解决方案">临时解决方案</a></h4>
+<p>这里有一些临时的应对措施：</p>
+<ul>
+<li>你可以在class/struct内初始化一个static const整型数据成员：</li>
+</ul>
+<pre><code class="language-cpp">class MyClass {
+  static const bool trace = false;
+  ...
+};
+</code></pre>
+<ul>
+<li>你可以定义一个返回局部static对象的内联函数：</li>
+</ul>
+<pre><code class="language-cpp">inline std::string getName() {
+  static std::string name = &quot;initial value&quot;;
+  return name;
+}
+</code></pre>
+<ul>
+<li>你可以定义一个static成员函数返回它的值：</li>
+</ul>
+<pre><code class="language-cpp">std::string getMyGlobalObject() {
+  static std::string myGlobalObject = &quot;initial value&quot;;
+  return myGlobalObject;
+}
+</code></pre>
+<ul>
+<li>你可以使用变量模板（C++14及以后）：</li>
+</ul>
+<pre><code class="language-cpp">template&lt;typename T = std::string&gt;
+T myGlobalObject = &quot;initial value&quot;;
+</code></pre>
+<ul>
+<li>你可以继承一个包含static成员的类模板：</li>
+</ul>
+<pre><code class="language-cpp">template&lt;typename Dummy&gt;
+class MyClassStatics
+{
+  static std::string name;
+};
+template&lt;typename Dummy&gt;
+std::string MyClassStatics&lt;Dummy&gt;::name = &quot;initial value&quot;;
+class MyClass : public MyClassStatics&lt;void&gt; {
+  ...
+};
+</code></pre>
+<p>但是这些方法都有不小的负载，可读性也比较差，想要使用全局变量也比较困难。除此之外，全局变量的初始化可能会推迟到它第一次使用的时候，这使得应用程序不能在启动的时候把对象初始化好。（比如用一个对象监控进程）。</p>
+<h2 id="32-使用内联变量"><a class="header" href="#32-使用内联变量">3.2 使用内联变量</a></h2>
+<p>现在，有了inline，你可以在头文件中定义一个全局可用的变量，它可以被多个CPP文件包含：</p>
+<pre><code class="language-cpp">class MyClass {
+  static inline std::string name = &quot;&quot;; // OK since C++17
+  ...
+};
+inline MyClass myGlobalObj; // OK even if included/defined by multiple CPP files
+</code></pre>
+<p>初始化发生在第一个包含该头文件的翻译单元。</p>
+<p>形式化来说，在变量前使用inline和将函数声明为inline有相同的语义：</p>
+<ul>
+<li>如果每个定义都是相同的，那么它可以在多个翻译单元定义</li>
+<li>它必须在使用它的每个翻译单元中定义</li>
+</ul>
+<p>两者都是通过包含来自同一头文件的定义来实现的。最终程序的行为就像是只有一个变量。</p>
+<p>你甚至可以在头文件中定义原子类型的变量：</p>
+<pre><code class="language-cpp">inline std::atomic&lt;bool&gt; ready{false};
+</code></pre>
+<p>注意，对于<code>std::atomic</code>，通常在定义它的时候你还得初始化它。</p>
+<p>这意味着，你仍然必须保证在你初始化它之前类型是完全的（complete）。比如，如果一个struct或者class有一个static成员，类型是自身，那么该成员只能在该类型被声明后才能使用。</p>
+<pre><code class="language-cpp">struct MyType {
+  int value;
+  MyType(int i) : value{i} {
+  }
+// one static object to hold the maximum value of this type:
+  static MyType max; // can only be declared here
+  ...
+};
+inline MyType MyType::max{0};
+</code></pre>
+<p>参见另一个使用内联变量的例子，它会<strong>使用头文件跟踪所有new调用</strong>。</p>
+<h2 id="33-constexpr隐式包含inline"><a class="header" href="#33-constexpr隐式包含inline">3.3 constexpr隐式包含inline</a></h2>
+<p>对于static数据成员，constexpr现在隐式包含inline的语义，所以下面的声明在C++17后会<strong>定义</strong>static数据成员n：</p>
+<pre><code class="language-cpp">struct D {
+  static constexpr int n = 5; // C++11/C++14: declaration
+                              // since C++17: definition
+};
+</code></pre>
+<p>换句话说，它与下面的代码一样：</p>
+<pre><code class="language-cpp">struct D {
+  inline static constexpr int n = 5;
+};
+</code></pre>
+<p>在C++17之前,有时候你也可以只声明不定义。考虑下面的声明：</p>
+<pre><code class="language-cpp">struct D {
+  static constexpr int n = 5;
+};
+</code></pre>
+<p>如果不需要<code>D::n</code>的定义，这就足够了，例如，<code>D::n</code>只通过值传递的话：</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; D::n; // OK (ostream::operator&lt;&lt;(int) gets D::n by value)
+</code></pre>
+<p>如果<code>D::n</code>是传引用到非内联函数，并且/或者函数调用没有优化，那么就是无效的。比如：</p>
+<pre><code class="language-cpp">int inc(const int&amp; i);
+std::cout &lt;&lt; inc(D::n); // usually an ERROR
+</code></pre>
+<p>这段代码违背了一处定义规则（ODR）。当使用带优化的编译器构建时，它可能正常工作，或者抛出链接时错误指出缺少定义。当使用不带优化的编译器时，几乎可以确定这段代码会由于缺少<code>D::n</code>的定义而拒绝编译：</p>
+<p>因此，在C++17前，你不得不在相同的翻译单元定义<code>D::n</code>：</p>
+<pre><code class="language-cpp">constexpr int D::n; // C++11/C++14: definition
+                    // since C++17: redundant declaration (deprecated)
+</code></pre>
+<p>当使用C++17构建，在class中的声明本身就是一个定义，所以这段代码就算没有前面的定义也是有效的。前面的定义也是可以的，但是已经废弃。</p>
+<h2 id="34-内联变量和thread_local"><a class="header" href="#34-内联变量和thread_local">3.4 内联变量和thread_local</a></h2>
+<p>使用thread_local你可以让每个线程拥有一个内联变量：</p>
+<pre><code class="language-cpp">struct ThreadData {
+  inline static thread_local std::string name; // unique name per thread
+...
+};
+
+inline thread_local std::vector&lt;std::string&gt; cache; // one cache per thread
+</code></pre>
+<p>为了演示一个完整的例子，考虑下面的头文件：</p>
+<pre><code class="language-cpp">// lang/inlinethreadlocal.hpp
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+
+struct MyData {
+  inline static std::string gName = &quot;global&quot;; // unique in program
+  inline static thread_local std::string tName = &quot;tls&quot;; // unique per thread
+  std::string lName = &quot;local&quot;; // for each object
+  ...
+  void print(const std::string&amp; msg) const {
+    std::cout &lt;&lt; msg &lt;&lt; '\n';
+    std::cout &lt;&lt; &quot;- gName: &quot; &lt;&lt; gName &lt;&lt; '\n';
+    std::cout &lt;&lt; &quot;- tName: &quot; &lt;&lt; tName &lt;&lt; '\n';
+    std::cout &lt;&lt; &quot;- lName: &quot; &lt;&lt; lName &lt;&lt; '\n'; }
+};
+
+inline thread_local MyData myThreadData; // one object per thread
+</code></pre>
+<p>你可以在有<code>main()</code>的翻译单元使用它：</p>
+<pre><code class="language-cpp">// lang/inlinethreadlocal1.cpp
+#include &quot;inlinethreadlocal.hpp&quot; 
+#include &lt;thread&gt;
+void foo();
+
+int main()
+{
+  myThreadData.print(&quot;main() begin:&quot;);
+  myThreadData.gName = &quot;thread1 name&quot;;
+  myThreadData.tName = &quot;thread1 name&quot;;
+  myThreadData.lName = &quot;thread1 name&quot;;
+  myThreadData.print(&quot;main() later:&quot;);
+  std::thread t(foo);
+  t.join();
+  myThreadData.print(&quot;main() end:&quot;);
+}
+</code></pre>
+<p>你可以在另一个定义<code>foo()</code>的翻译单元使用头文件，其中<code>foo()</code>被不同的线程调用：</p>
+<pre><code class="language-cpp">// lang/inlinethreadlocal2.cpp
+#include &quot;inlinethreadlocal.hpp&quot;
+
+void foo()
+{
+  myThreadData.print(&quot;foo() begin:&quot;);
+  myThreadData.gName = &quot;thread2 name&quot;;
+  myThreadData.tName = &quot;thread2 name&quot;;
+  myThreadData.lName = &quot;thread2 name&quot;;
+  myThreadData.print(&quot;foo() end:&quot;);
+}
+</code></pre>
+<p>程序的输出如下：</p>
+<pre><code class="language-text">main() begin:
+- gName: global
+- tName: tls
+- lName: local
+main() later:
+- gName: thread1 name
+- tName: thread1 name
+- lName: thread1 name
+foo() begin:
+- gName: thread1 name
+- tName: tls
+- lName: local
+foo() end:
+- gName: thread2 name
+- tName: thread2 name
+- lName: thread2 name
+main() end:
+- gName: thread2 name
+- tName: thread1 name
+- lName: thread1 name
+</code></pre>
+<h2 id="35-后记"><a class="header" href="#35-后记">3.5 后记</a></h2>
+<p>David Krauss的文档<a href="https://wg21.link/n4147">https://wg21.link/n4147</a>是内联变量产生的动机。内联变量最初由Hal Finkel和Richard Smith在<a href="https://wg21.link/n4424">https://wg21.link/n4424</a>中提出。最后这个特性的公认措辞是由Hal Finkel和Richard Smith在<a href="https://wg21.link/p0386r2"> https://wg21.link/p0386r2</a>中给出。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../part1/cp2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../part1/cp4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../part1/cp2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../part1/cp4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

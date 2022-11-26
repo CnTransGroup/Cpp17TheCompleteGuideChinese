@@ -1,0 +1,689 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第一章 结构化绑定 - C++ 17 The Complete Guide</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../part1/index.html">第一部分 基本语言特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part1/cp1.html" class="active">第一章 结构化绑定</a></li><li class="chapter-item "><a href="../part1/cp2.html">第二章 带初始化的if和switch</a></li><li class="chapter-item "><a href="../part1/cp3.html">第三章 内联变量</a></li><li class="chapter-item "><a href="../part1/cp4.html">第四章 聚合扩展</a></li><li class="chapter-item "><a href="../part1/cp5.html">第五章 强制拷贝消除或者传递未具体化对象</a></li><li class="chapter-item "><a href="../part1/cp6.html">第六章 Lambda扩展</a></li><li class="chapter-item "><a href="../part1/cp7.html">第七章 新属性和属性相关特性</a></li><li class="chapter-item "><a href="../part1/cp8.html">第八章 其他语言特性</a></li></ol></li><li class="chapter-item expanded "><a href="../part2/index.html">第二部分 模板特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part2/cp9.html">第九章 类模板参数推导</a></li><li class="chapter-item "><a href="../part2/cp10.html">第十章 编译期if</a></li><li class="chapter-item "><a href="../part2/cp11.html">第十一章 折叠表达式</a></li><li class="chapter-item "><a href="../part2/cp12.html">第十二章 String作为模板参数</a></li><li class="chapter-item "><a href="../part2/cp13.html">第十三章 auto作为模板参数占位符</a></li><li class="chapter-item "><a href="../part2/cp14.html">第十四章 扩展Using声明</a></li></ol></li><li class="chapter-item expanded "><div>第三部分 新的标准库组件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part3/cp15.html">第十五章 std::optional&lt;&gt;</a></li><li class="chapter-item "><div>第十六章 std::variant&lt;&gt;</div></li><li class="chapter-item "><div>第十七章 std::any</div></li><li class="chapter-item "><div>第十八章 std::byte</div></li><li class="chapter-item "><div>第十九章 String View</div></li><li class="chapter-item "><div>第二十章 文件系统库</div></li></ol></li><li class="chapter-item expanded "><div>第四部分 标准库扩展和修改</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十一章 Type Trait扩展</div></li><li class="chapter-item "><div>第二十二章 并行STL算法</div></li><li class="chapter-item "><div>第二十三章 子字符串和子序列搜索</div></li><li class="chapter-item "><div>第二十四章 其他工具函数和算法</div></li><li class="chapter-item "><div>第二十五章 容器扩展</div></li><li class="chapter-item "><div>第二十六章 多线程和兵法</div></li></ol></li><li class="chapter-item expanded "><div>第五部分 专业工具</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十七章 多态类型资源（PMR）</div></li><li class="chapter-item "><div>第二十八章 对齐数据上的new和delete</div></li><li class="chapter-item "><div>第二十九章 其他专业库的改动</div></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">C++ 17 The Complete Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/CnTransGroup/Cpp17TheCompleteGuideChinese" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第一章--结构化绑定"><a class="header" href="#第一章--结构化绑定">第一章  结构化绑定</a></h1>
+<p>结构化绑定允许你使用对象的成员或者说元素来初始化多个变量。</p>
+<p>举个例子，假如你定义了一个包含两个不同成员的结构：</p>
+<pre><code class="language-cpp">struct MyStruct {
+  int i = 0;
+  std::string s;
+};
+
+MyStruct ms;
+</code></pre>
+<p>只需使用下面的声明，你就可以将这个结构体的成员直接绑定到新名字上</p>
+<pre><code class="language-cpp">auto [u,v] = ms;
+</code></pre>
+<p>在这里，名字u和v就被称为结构化绑定（structured bindings）。在某种程度上，它们分解了对象并用来初始化自己（在有些地方它们也被称为分解声明（decompose  declarations））。</p>
+<p>结构化绑定对于那些返回结构体或者数组的函数来说尤其有用。举个例子，假设你有一个返回结构体的函数：</p>
+<pre><code class="language-cpp">MyStruct getStruct() {
+  return MyStruct{42, &quot;hello&quot;};
+}
+</code></pre>
+<p>你可以直接为函数返回的数据成员赋予两个局部名字：</p>
+<pre><code class="language-cpp">auto[id,val] = getStruct(); // id and val name i and s of returned struct
+</code></pre>
+<p>在这里，id和val分别表示返回的数据成员i和s。它们的类型分别是int和<code>std::string</code> ，可以当新变量使用。</p>
+<pre><code class="language-cpp">if (id &gt; 30) {
+  std::cout &lt;&lt; val;
+}
+</code></pre>
+<p>使用结构化绑定的好处是可以直接通过名字访问值，并且由于名字可以传递语义信息，使得代码可读性也大大提高。</p>
+<p>下面的示例展示了结构化绑定如何改善代码可读性。在没有结构化绑定的时候，要想迭代处理<code>std::map&lt;&gt;</code>的所有元素，需要这么写：</p>
+<pre><code class="language-cpp">for (const auto&amp; elem : mymap) {
+  std::cout &lt;&lt; elem.first &lt;&lt; &quot;: &quot; &lt;&lt; elem.second &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>代码中的elem是表示键和值的<code>std::pair</code>，它们在<code>std::pair</code>中分别用first和second表示，你可以使用这两个名字去访问键和值。使用结构化绑定后，代码可读性大大提高：</p>
+<pre><code class="language-cpp">for (const auto&amp; [key,val] : mymap) {
+  std::cout &lt;&lt; key &lt;&lt; &quot;: &quot; &lt;&lt; val &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>我们可以直接使用每个元素的键和值，key和value清晰的表示了它们的语义。</p>
+<h2 id="11-结构化绑定的细节"><a class="header" href="#11-结构化绑定的细节">1.1 结构化绑定的细节</a></h2>
+<p>为了理解结构化绑定，了解其中设计的一个匿名变量是很重要的。结构化绑定引入的新名字都是指代的这个匿名变量的成员/元素的。</p>
+<h3 id="绑定到匿名变量"><a class="header" href="#绑定到匿名变量">绑定到匿名变量</a></h3>
+<p>初始化代码的最精确的行为：</p>
+<pre><code class="language-cpp">auto [u,v] = ms;
+</code></pre>
+<p>可以看成我们初始化一个匿名变量e，然后让结构化绑定u和v成为这个新对象的别名，类似下面：</p>
+<pre><code class="language-cpp">auto e = ms;
+aliasname u = e.i;
+aliasname v = e.s;
+</code></pre>
+<p>注意u和v不是<code>e.i</code>和<code>e.s</code>的引用。它们只是这两个成员的别名。因此，<code>decltype(u)</code>的类型与成员i的类型一致，<code>decltype(v)</code>的类型与成员s的类型一致。因为匿名变量e没有名字，所以我们不能直接访问这个已经初始化的变量。所以</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; u &lt;&lt; ' ' &lt;&lt; v &lt;&lt; ✬\n✬;
+</code></pre>
+<p>输出<code>e.i</code>和<code>e.s</code>的值，它们是<code>ms.i</code>和<code>ms.s</code>的一份拷贝。</p>
+<p>e和结构化绑定的存活时间一样长，当结构化绑定离开作用域时，e也会析构。</p>
+<p>这样做的后果，除非使用引用，否则修改通过结构化绑定的值不会影响到初始化它的对象（反之亦然）：</p>
+<pre><code class="language-cpp">MyStruct ms{42,&quot;hello&quot;};
+auto [u,v] = ms;
+ms.i = 77;
+std::cout &lt;&lt; u;    // prints 42
+u = 99;
+std::cout &lt;&lt; ms.i; // prints 77
+</code></pre>
+<p>u和<code>ms.i</code>地址是不一样的。</p>
+<p>当对返回值使用结构化绑定的时候，上面的规则一样成立。下面代码的初始化：</p>
+<pre><code class="language-cpp">auto [u,v] = getStruct();
+</code></pre>
+<p>和我们使用<code>getStruct()</code>的返回值初始化匿名变量e，然后用u和v作为e的成员别名效果一样，类似下面：</p>
+<pre><code class="language-cpp">auto e = getStruct();
+aliasname u = e.i;
+aliasname v = e.s;
+</code></pre>
+<p>换句话说，结构化绑定将绑定到一个新的对象，它由返回值初始化，而不是直接绑定到返回值本身。</p>
+<p>对于匿名变量e，内存地址和对齐也是存在的，以至于如果成员有对齐，结构化绑定也会有对齐。比如：</p>
+<pre><code class="language-cpp">auto [u,v] = ms;
+assert(&amp;((MyStruct*)&amp;u)-&gt;s == &amp;v); // OK
+</code></pre>
+<p><code>((MyStruct*)&amp;u)</code>会产生一个指向匿名变量的指针。</p>
+<h3 id="使用修饰符"><a class="header" href="#使用修饰符">使用修饰符</a></h3>
+<p>我们在结构化绑定过程中使用一些修饰符，如const和引用。再次强调，这些修饰符修饰的是匿名变量e。虽说是对匿名变量使用修饰符，但是通常也可以看作对结构化绑定使用修饰符，尽管存在一些额例外。</p>
+<p>下面的例子中，我们对结构化绑定使用const引用：</p>
+<pre><code class="language-cpp">const auto&amp; [u,v] = ms; // a reference, so that u/v refer to ms.i/ms.s
+</code></pre>
+<p>这里，匿名变量被声明为const引用，这意味着对ms使用const引用修饰，然后再将u和v作为i和s的别名。后续对ms成员的修改会直接影响到u和v：</p>
+<pre><code class="language-cpp">ms.i = 77;      // affects the value of u
+std::cout &lt;&lt; u; // prints 77
+</code></pre>
+<p>如果使用非const引用，你甚至可以通过对结构化绑定的修改，影响到初始化它的对象：</p>
+<pre><code class="language-cpp">MyStruct ms{42,&quot;hello&quot;};
+auto&amp; [u,v] = ms;       // the initialized entity is a reference to ms
+ms.i = 77;              // affects the value of u
+std::cout &lt;&lt; u;         // prints 77
+u = 99;                 // modifies ms.i
+std::cout &lt;&lt; ms.i;      // prints 99
+</code></pre>
+<p>如果初始化对象是临时变量，对它使用结构化绑定，此时临时值的生命周期会扩展：</p>
+<pre><code class="language-cpp">MyStruct getStruct();
+...
+const auto&amp; [a,b] = getStruct();
+std::cout &lt;&lt; &quot;a: &quot; &lt;&lt; a &lt;&lt; '\n'; // OK
+</code></pre>
+<h3 id="修饰符并非修饰结构化绑定"><a class="header" href="#修饰符并非修饰结构化绑定">修饰符并非修饰结构化绑定</a></h3>
+<p>如题，修饰符修饰的是匿名变量。它们没必要修饰结构化绑定。事实上：</p>
+<pre><code class="language-cpp">const auto&amp; [u,v] = ms;  // a reference, so that u/v refer to ms.i/ms.s
+</code></pre>
+<p>u和v都没有声明为引用。上面只是对匿名变量e的引用。u和v的类型需要ms的成员一致。根据我们最开始的定义可以知道，<code>decltype(u)</code>是int，<code>decltype(v)</code>是<code>std::string</code>。</p>
+<p>当指定对齐宽度的时候也有一些不同。</p>
+<pre><code class="language-cpp">alignas(16) auto [u,v] = ms;
+</code></pre>
+<p>在这里，我们将初始化后的匿名对象对齐而不是结构化绑定u和v。这意味着u作为第一个成员，被强制对齐到16位，而v不是。</p>
+<p>同样的原因，尽管使用了auto，结构化绑定的类型也不会类型退化（术语退化（decay）描述的是当参数值传递的时候发生的类型转换，这意味着数组会转换为指针，最外面的修饰符如const和引用会被忽略）。例如，如果我们有一个包含多个原生数组的结构体：</p>
+<pre><code class="language-cpp">struct S{
+    const char x[6];
+    const char y[3];
+};
+</code></pre>
+<p>然后</p>
+<pre><code class="language-cpp">S s1{};
+auto [a, b] = s1; // a and b get the exact member types
+</code></pre>
+<p>a的类型仍然是<code>const char[6]</code>。原因仍然是修饰符并非修饰结构化绑定而是修饰初始化结构化绑定的对象。这一点和使用auto初始化新对象很不一样，它会发生类型退化：</p>
+<pre><code class="language-cpp">auto a2 = a;    // a2 gets decayed type of a
+</code></pre>
+<h3 id="移动语义"><a class="header" href="#移动语义">移动语义</a></h3>
+<p>即将介绍到，结构化绑定也支持移动语义。在下面的声明中：</p>
+<pre><code class="language-cpp">MyStruct ms = { 42, &quot;Jim&quot; };
+auto&amp;&amp; [v,n] = std::move(ms);  // entity is rvalue reference to ms
+</code></pre>
+<p>结构化绑定v和n指向匿名变量中的成员，该匿名变量是ms的右值引用。ms仍然持有它的值:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; &quot;ms.s: &quot; &lt;&lt; ms.s &lt;&lt; '\n'; // prints &quot;Jim&quot;
+</code></pre>
+<p>但是你可以移动赋值n，它与<code>ms.s</code>关联：</p>
+<pre><code class="language-cpp">std::string s = std::move(n); // moves ms.s to s
+std::cout &lt;&lt; &quot;ms.s: &quot; &lt;&lt; ms.s &lt;&lt; '\n'; // prints unspecified value
+std::cout &lt;&lt; &quot;n: &quot; &lt;&lt; n &lt;&lt; '\n'; // prints unspecified value
+std::cout &lt;&lt; &quot;s: &quot; &lt;&lt; s &lt;&lt; '\n'; // prints &quot;Jim&quot;
+</code></pre>
+<p>通常，移动后的对象的状态是有效的，只是包含了未指定的值（unspecified value）。因此，输出它的值是没有问题的，但是不能断言输出的东西一定是什么。</p>
+<p>这一点和直接移动ms的值给匿名变量稍有不同：</p>
+<pre><code class="language-cpp">MyStruct ms = { 42, &quot;Jim&quot; };
+auto [v,n] = std::move(ms); // new entity with moved-from values from ms
+</code></pre>
+<p>此时匿名对象是一个新对象，它用移动后的ms的值来初始化。所以ms失去了他们的值：</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; &quot;ms.s: &quot; &lt;&lt; ms.s &lt;&lt; '\n'; // prints unspecified value
+std::cout &lt;&lt; &quot;n: &quot; &lt;&lt; n &lt;&lt; '\n'; // prints &quot;Jim&quot;
+</code></pre>
+<p>你仍然可以移动n并赋值，或者用它赋予一个新的值，但是不会影响<code>ms.s</code>：</p>
+<pre><code class="language-cpp">std::string s = std::move(n); // moves n to s
+n = &quot;Lara&quot;;
+std::cout &lt;&lt; &quot;ms.s: &quot; &lt;&lt; ms.s &lt;&lt; '\n'; // prints unspecified value
+std::cout &lt;&lt; &quot;n: &quot; &lt;&lt; n &lt;&lt; '\n'; // prints &quot;Lara&quot;
+std::cout &lt;&lt; &quot;s: &quot; &lt;&lt; s &lt;&lt; '\n'; // prints &quot;Jim&quot;
+</code></pre>
+<h2 id="12-结构化绑定可以在哪使用"><a class="header" href="#12-结构化绑定可以在哪使用">1.2 结构化绑定可以在哪使用</a></h2>
+<p>原则上，结构化绑定可以用于公有成员，原始C-style数组，以及“似若tuple”的对象：</p>
+<ul>
+<li>如果结构体或者类中，所有非静态数据成员都是public，那么你可以使用结构化绑定来绑定非静态数据成员</li>
+<li>对于原生数组，你可以使用结构化绑定来绑定每个元素</li>
+<li>对于任何类型，你都可以使用似若tuple的API来进行绑定。对于类型type，API可以粗糙的概括为下列内容：
+<ul>
+<li><code>std::tuple_size&lt;type&gt;::value</code>返回元素数量</li>
+<li><code>std::tupel_element&lt;idx,type&gt;::type</code>返回第idx个元素的类型</li>
+<li>一个全局的或者成员函数<code>get&lt;idx&gt;()</code>返回第idx个元素的值</li>
+</ul>
+</li>
+</ul>
+<p>如果结构体或者累提供这些似若tuple的API，那么就可以使用它们。</p>
+<p>任何情况下都要求元素或者数据成员的数量必须匹配结构化绑定的名字的个数。你不能跳过任何一个元素，也不能使用同一个名字两次。但是你可以看使用非常段的名字如&quot;_&quot;（很多程序员倾向于用下划线，但是也有些人讨厌它，不允许它出现在全局命名空间中），但是在一个作用域它也只能出现一次：</p>
+<pre><code class="language-cpp">auto [_,val1] = getStruct(); // OK
+auto [_,val2] = getStruct(); // ERROR: name _ already used
+</code></pre>
+<p>嵌套或者非平坦的对象分解是不支持的。（译注：指的是形如OCaml等语言的这种<code>let a,(b,c) = (3,(4,2));;</code>模式匹配能力）</p>
+<p>接下来的章节讨论本节列表提到的各种情况。</p>
+<h3 id="121-结构体和类"><a class="header" href="#121-结构体和类">1.2.1 结构体和类</a></h3>
+<p>到目前为止，已经演示了很多关于结构体和类的简单示例了。</p>
+<p>如果类和结构体用到了继承，那么结构化绑定的使用就很受限了。所有非静态数据成员必须出现在同一个类。（换句话说，这些数据成员要么全是该类的，要么全是基类的）。</p>
+<pre><code class="language-cpp">struct B {
+  int a = 1;
+  int b = 2;
+};
+
+struct D1 : B {
+};
+auto [x, y] = D1{}; // OK
+
+struct D2 : B {
+  int c = 3;
+};
+
+auto [i, j, k] = D2{}; // Compile-Time ERROR
+</code></pre>
+<h3 id="121-原生数组"><a class="header" href="#121-原生数组">1.2.1 原生数组</a></h3>
+<p>下面的代码使用有两个元素的C-style数组初始化x和y：</p>
+<pre><code class="language-cpp">int arr[] = { 47, 11 };
+auto [x, y] = arr; // x and y are ints initialized by elems of arr
+auto [z] = arr; // ERROR: number of elements doesn’t fit
+</code></pre>
+<p>这种方式只能出现在数组长度已知的情况下。如果将数组作为参数传递，这样写就行不通，因为数组作为参数传递会发生类型退化，变成指针类型。</p>
+<p>C++允许我们返回带长度的数组引用，如果有函数返回这种带长度的数组引用，那么也可以使用结构化绑定：</p>
+<pre><code class="language-cpp">auto getArr() -&gt; int(&amp;)[2]; // getArr() returns reference to raw int array
+...
+auto [x, y] = getArr(); // x and y are ints initialized by elems of returned array
+</code></pre>
+<p>你也可以对<code>std::array</code>使用结构化绑定，但是这需要使用似若tuple的API，这也是下一节的内容。</p>
+<h3 id="123-stdpairstdtuple和stdarray"><a class="header" href="#123-stdpairstdtuple和stdarray">1.2.3 <code>std::pair</code>,<code>std::tuple</code>和<code>std::array</code></a></h3>
+<p>结构化绑定是可扩展的，你可以为任何类型添加结构化绑定机制。标准库为<code>std::pair</code>,<code>std::tuple</code>和<code>std::array</code>都添加了该机制。</p>
+<h4 id="stdarray"><a class="header" href="#stdarray"><code>std::array</code></a></h4>
+<p>举个例子，下面的<code>getArray()</code>将返回四个元素的<code>std::array&lt;&gt;</code>，并用它初始化i，j，k和l。</p>
+<pre><code class="language-cpp">std::array&lt;int,4&gt; getArray();
+...
+auto [i,j,k,l] = getArray(); // i,j,k,l name the 4 elements of the copied return value
+</code></pre>
+<p>i，j，k和l分别绑定到<code>getArray()</code>返回的四个元素上。</p>
+<p>写操作也是支持的，但这要求用来初始化结构化绑定的值不是一个临时的返回值：</p>
+<pre><code class="language-cpp">std::array&lt;int,4&gt; stdarr { 1, 2, 3, 4 };
+...
+auto&amp; [i,j,k,l] = stdarr;
+i += 10; // modifies std::array[0]
+</code></pre>
+<h4 id="stdtuple"><a class="header" href="#stdtuple"><code>std::tuple</code></a></h4>
+<p>下面的代码使用<code>getTuple()</code>返回有三个元素的<code>std::tuple&lt;&gt;</code>来初始化a，b和c：</p>
+<pre><code class="language-cpp">std::tuple&lt;char,float,std::string&gt; getTuple();
+...
+auto [a,b,c] = getTuple();    // a,b,c have types and values of returned tuple
+</code></pre>
+<h4 id="stdpair"><a class="header" href="#stdpair"><code>std::pair</code></a></h4>
+<p>另一个例子是处理关联型/无序型容器的<code>insert()</code>调用的返回值，使用结构化绑定使代码可读性更强，可以清晰的表达自己的意图，而不是依赖于<code>std::tuple</code>通用的first和second：</p>
+<pre><code class="language-cpp">std::map&lt;std::string, int&gt; coll;
+...
+auto [pos,ok] = coll.insert({&quot;new&quot;,42});
+if (!ok) {
+  // if insert failed, handle error using iterator pos:
+  ...
+}
+</code></pre>
+<p>在C++17之前，必须使用下面的代码检查返回数据：</p>
+<pre><code class="language-cpp">auto ret = coll.insert({&quot;new&quot;,42});
+if (!ret.second){
+  // if insert failed, handle error using iterator ret.first
+  ...
+}
+</code></pre>
+<p>注意，在这个例子中，C++17甚至还提供一种表达力更强的带初始化的if：</p>
+<h4 id="为pair和tuple的结构化绑定赋值"><a class="header" href="#为pair和tuple的结构化绑定赋值">为pair和tuple的结构化绑定赋值</a></h4>
+<p>在声明了结构化绑定之后，通常你不能一次性修改全部结构化绑定，因为结构化绑定是一次性声明所有而不是一次性使用所有。然而，如果重新赋的值是<code>std::pair&lt;&gt;</code>或者<code>std::tuple&lt;&gt;</code>那么你可以使用<code>std::tie()</code>。</p>
+<p>也就是说，你可以写出下面的代码：</p>
+<pre><code class="language-cpp">std::tuple&lt;char,float,std::string&gt; getTuple();
+...
+auto [a,b,c] = getTuple(); // a,b,c have types and values of returned tuple
+...
+std::tie(a,b,c) = getTuple(); // a,b,c get values of next returned tuple
+</code></pre>
+<p>这种方式在实现循环调用且每次循环赋予一对返回值的过程中尤其有用，比如下面子啊循环中使用searcher的代码：</p>
+<pre><code class="language-cpp">std::boyer_moore_searcher bm{sub.begin(), sub.end()};
+for (auto [beg, end] = bm(text.begin(), text.end());
+  beg != text.end();
+  std::tie(beg,end) = bm(end, text.end())) {
+  ...
+}
+</code></pre>
+<h2 id="13-为结构化绑定提供似若tuple的api"><a class="header" href="#13-为结构化绑定提供似若tuple的api">1.3 为结构化绑定提供似若tuple的API</a></h2>
+<p>前面提到过，只要你的类型实现了似若tuple的API，那么就可以针对该类型使用结构化绑定，就和标准库的<code>std::pair&lt;&gt;</code>,<code>std::tuple&lt;&gt;</code>和<code>std::array&lt;&gt;</code>意义。</p>
+<h4 id="只读结构化绑定"><a class="header" href="#只读结构化绑定">只读结构化绑定</a></h4>
+<p>下面的代码展示了如何为类型Customer添加结构化绑定功能，Customer的定义如下</p>
+<pre><code class="language-cpp">// lang/customer1.hpp
+#include &lt;string&gt;
+#include &lt;utility&gt; // for std::move()
+class Customer {
+private:
+  std::string first;
+  std::string last;
+  long val;
+public:
+  Customer (std::string f, std::string l, long v)
+      : first(std::move(f)), last(std::move(l)), val(v) {
+  }
+  std::string getFirst() const {
+    return first;
+  }
+  std::string getLast() const {
+    return last;
+  }
+  long getValue() const {
+    return val;
+  }
+};
+</code></pre>
+<p>我们可以提供似若tuple的API：</p>
+<pre><code class="language-cpp">// lang/structbind1.hpp
+#include &quot;customer1.hpp&quot; #include &lt;utility&gt; // for tuple-like API
+// provide a tuple-like API for class Customer for structured bindings:
+template&lt;&gt;
+struct std::tuple_size&lt;Customer&gt; {
+  static constexpr int value = 3; // we have 3 attributes
+};
+template&lt;&gt;
+struct std::tuple_element&lt;2, Customer&gt; {
+  using type = long; // last attribute is a long
+};
+template&lt;std::size_t Idx&gt;
+struct std::tuple_element&lt;Idx, Customer&gt; {
+  using type = std::string; // the other attributes are strings
+};
+// define specific getters:
+template&lt;std::size_t&gt; auto get(const Customer&amp; c);
+template&lt;&gt; auto get&lt;0&gt;(const Customer&amp; c) { return c.getFirst(); }
+template&lt;&gt; auto get&lt;1&gt;(const Customer&amp; c) { return c.getLast(); }
+template&lt;&gt; auto get&lt;2&gt;(const Customer&amp; c) { return c.getValue(); }
+</code></pre>
+<p>代码Customer有三个成员，还有为三个成员准备的getter：</p>
+<ul>
+<li>表示first name的成员，<code>std::string</code>类型</li>
+<li>表示last nane的成员，<code>std::string</code>类型</li>
+<li>表示value的成员，long类型</li>
+</ul>
+<p>获取Customer成员个数的函数是<code>std::tuple_size</code>的特化：</p>
+<pre><code class="language-cpp">template&lt;&gt;
+struct std::tuple_size&lt;Customer&gt; {
+  static constexpr int value = 3; // we have 3 attributes
+};
+</code></pre>
+<p>获取成员类型的函数是<code>std::tuple_element</code>的特化：</p>
+<pre><code class="language-cpp">template&lt;&gt;
+struct std::tuple_element&lt;2, Customer&gt; {
+  using type = long; // last attribute is a long
+};
+template&lt;std::size_t Idx&gt;
+struct std::tuple_element&lt;Idx, Customer&gt; {
+  using type = std::string; // the other attributes are strings
+};
+</code></pre>
+<p>第三个成员类型是long，需要为它（index 2）编写全特化代码。其它成员是<code>std::stinrg</code>类型，部分特化（比全特化优先级低）即可。这里指定的类型与<code>decltype</code>产生的类型一致。</p>
+<p>最终，我们在同一个命名空间为Customer类型定义相应的<code>get&lt;&gt;()</code>函数重载：</p>
+<pre><code class="language-cpp">template&lt;std::size_t&gt; auto get(const Customer&amp; c);
+template&lt;&gt; auto get&lt;0&gt;(const Customer&amp; c) { return c.getFirst(); }
+template&lt;&gt; auto get&lt;1&gt;(const Customer&amp; c) { return c.getLast(); }
+template&lt;&gt; auto get&lt;2&gt;(const Customer&amp; c) { return c.getValue(); }
+</code></pre>
+<p>在这里，我们声明了模板函数，然后为所有情况都写出来对应的全特化形式。</p>
+<p>注意，模板函数的全特化必须与模板函数的签名一致（也包括一致的返回类型）。原因是我们只提供了特定的“实现”，而不是声明新的函数。下面的代码不能通过编译：</p>
+<pre><code class="language-cpp">template&lt;std::size_t&gt; auto get(const Customer&amp; c);
+template&lt;&gt; std::string get&lt;0&gt;(const Customer&amp; c) { return c.getFirst(); }
+template&lt;&gt; std::string get&lt;1&gt;(const Customer&amp; c) { return c.getLast(); }
+template&lt;&gt; long get&lt;2&gt;(const Customer&amp; c) { return c.getValue(); }
+</code></pre>
+<p>通过使用新的<strong>编译时if特性</strong>，我们可以所有特化形式的<code>get&lt;&gt;()</code>组合到一个函数里面：</p>
+<pre><code class="language-cpp">template&lt;std::size_t I&gt; auto get(const Customer&amp; c) {
+  static_assert(I &lt; 3);
+  if constexpr (I == 0) {
+    return c.getFirst();
+  }
+  else if constexpr (I == 1) {
+    return c.getLast();
+  }
+  else { // I == 2
+    return c.getValue();
+  } 
+}
+</code></pre>
+<p>有了这些API，就能对Customer的对象使用结构化绑定了：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+int main()
+{
+  Customer c(&quot;Tim&quot;, &quot;Starr&quot;, 42);
+  auto [f, l, v] = c;
+  std::cout &lt;&lt; &quot;f/l/v: &quot; &lt;&lt; f &lt;&lt; ' ' &lt;&lt; l &lt;&lt; ' ' &lt;&lt; v &lt;&lt; '\n';
+// modify structured bindings:
+  std::string s = std::move(f);
+  l = &quot;Waters&quot;;
+  v += 10;
+  std::cout &lt;&lt; &quot;f/l/v: &quot; &lt;&lt; f &lt;&lt; ' ' &lt;&lt; l &lt;&lt; ' ' &lt;&lt; v &lt;&lt;'\n';
+  std::cout &lt;&lt; &quot;c: &quot; &lt;&lt; c.getFirst() &lt;&lt; ' '
+  &lt;&lt; c.getLast() &lt;&lt; ' ' &lt;&lt; c.getValue() &lt;&lt; '\n';
+  std::cout &lt;&lt; &quot;s: &quot; &lt;&lt; s &lt;&lt; '\n';
+}
+</code></pre>
+<p>和往常一样，结构化绑定f，l和v是新的匿名变量的成员的别名，新的匿名变量经由c初始化。初始化为每个成员调用相应的getter函数。因此，在初始化后，修改c不会影响到结构化绑定（反之亦然）。所以，程序的输出如下：</p>
+<pre><code class="language-cpp">f/l/v: Tim Starr 42
+f/l/v:  Waters 52
+c: Tim Starr 42
+s: Tim
+</code></pre>
+<p>你也可以在迭代一个由Customer元素构成的vector的过程中使用结构化绑定：</p>
+<pre><code class="language-cpp">std::vector&lt;Customer&gt; coll;
+...
+for (const auto&amp; [first, last, val] : coll) {
+  std::cout &lt;&lt; first &lt;&lt; ' ' &lt;&lt; last &lt;&lt; &quot;: &quot; &lt;&lt; val &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>对结构化绑定使用<code>decltype</code>仍然回产出它的类型，而不是匿名变量的类型。这意味着<code>decltype(first)</code>是<code>const std::string</code>。</p>
+<h4 id="允许针对结构化绑定的写操作"><a class="header" href="#允许针对结构化绑定的写操作">允许针对结构化绑定的写操作</a></h4>
+<p>似若tuple的API可以可以使用产生引用的函数。这使得我们可以允许针对结构化绑定的写操作发生。考虑下面的代码，它为Customer提供了读取和修改成员的API：</p>
+<pre><code class="language-cpp">// lang/customer2.hpp
+#include &lt;string&gt;
+#include &lt;utility&gt; // for std::move()
+class Customer {
+private:
+  std::string first;
+  std::string last;
+  long val;
+public:
+  Customer (std::string f, std::string l, long v)
+      : first(std::move(f)), last(std::move(l)), val(v) {
+  }
+  const std::string&amp; firstname() const {
+    return first;
+  }
+  std::string&amp; firstname() {
+    return first;
+  }
+  const std::string&amp; lastname() const {
+    return last;
+  }
+  std::string&amp; lastname() {
+    return last;
+  }
+  long value() const {
+    return val;
+  }
+  long&amp; value() {
+    return val;
+  }
+};
+</code></pre>
+<p>要支持读写操作，我们还得为常量引用和非常量引用准备getter重载：</p>
+<pre><code class="language-cpp">// lang/structbind2.hpp
+#include &quot;customer2.hpp&quot; 
+#include &lt; utility&gt; // for tuple-like API
+// provide a tuple-like API for class Customer for structured bindings:
+template &lt;&gt; struct std::tuple_size&lt;Customer&gt; {
+  static constexpr int value = 3; // we have 3 attributes
+};
+template &lt;&gt; struct std::tuple_element&lt;2, Customer&gt; {
+  using type = long; // last attribute is a long
+};
+template &lt;std::size_t Idx&gt; struct std::tuple_element&lt;Idx, Customer&gt; {
+  using type = std::string; // the other attributes are strings
+};
+// define specific getters:
+template &lt;std::size_t I&gt; decltype(auto) get(Customer &amp;c) {
+  static_assert(I &lt; 3);
+  if constexpr (I == 0) {
+    return c.firstname();
+  } else if constexpr (I == 1) {
+    return c.lastname();
+  } else { // I == 2
+    return c.value();
+  }
+}
+template &lt;std::size_t I&gt; decltype(auto) get(const Customer &amp;c) {
+  static_assert(I &lt; 3);
+  if constexpr (I == 0) {
+    return c.firstname();
+  } else if constexpr (I == 1) {
+    return c.lastname();
+  } else { // I == 2
+    return c.value();
+  }
+}
+template &lt;std::size_t I&gt; decltype(auto) get(Customer &amp;&amp;c) {
+  static_assert(I &lt; 3);
+  if constexpr (I == 0) {
+    return std::move(c.firstname());
+  } else if constexpr (I == 1) {
+    return std::move(c.lastname());
+  } else { // I == 2
+    return c.value();
+  }
+}
+</code></pre>
+<p>你应该写出这三个重载，来处理常量对象，非常量对象，以及可移动对象。为了返回引用，你应该使用<code>decltype(auto)</code>。</p>
+<p>还是之前那样，我们可以使用新的<strong>编译时if特性</strong>，来简化我们的实现，尤其是getter的返回类型不一样时，它更有用。没有编译时if特性，我们只能写出所有的全特化：</p>
+<pre><code class="language-cpp">template&lt;std::size_t&gt; decltype(auto) get(Customer&amp; c);
+template&lt;&gt; decltype(auto) get&lt;0&gt;(Customer&amp; c) { return c.firstname(); }
+template&lt;&gt; decltype(auto) get&lt;1&gt;(Customer&amp; c) { return c.lastname(); }
+template&lt;&gt; decltype(auto) get&lt;2&gt;(Customer&amp; c) { return c.value(); }
+</code></pre>
+<p>模板函数声明的签名必须与全特化的一致（包括返回类型）。下面的代码不能编译：</p>
+<pre><code class="language-cpp">template&lt;std::size_t&gt; decltype(auto) get(Customer&amp; c);
+template&lt;&gt; std::string&amp; get&lt;0&gt;(Customer&amp; c) { return c.firstname(); }
+template&lt;&gt; std::string&amp; get&lt;1&gt;(Customer&amp; c) { return c.lastname(); }
+template&lt;&gt; long&amp; get&lt;2&gt;(Customer&amp; c) { return c.value(); }
+</code></pre>
+<p>做完这些后，你就能使用结构化绑定读取或者修改Customer的成员了：</p>
+<pre><code class="language-cpp">#include &quot;structbind2.hpp&quot; 
+#include &lt;iostream&gt;
+int main() {
+  Customer c(&quot;Tim&quot;, &quot;Starr&quot;, 42);
+  auto [f, l, v] = c;
+  std::cout &lt;&lt; &quot;f/l/v: &quot; &lt;&lt; f &lt;&lt; ' ' &lt;&lt; l &lt;&lt; ' ' &lt;&lt; v &lt;&lt; '\n';
+  // modify structured bindings via references:
+  auto &amp;&amp;[f2, l2, v2] = c;
+  std::string s = std::move(f2);
+  f2 = &quot;Ringo&quot;;
+  v2 += 10;
+  std::cout &lt;&lt; &quot;f2/l2/v2: &quot; &lt;&lt; f2 &lt;&lt; ' ' &lt;&lt; l2 &lt;&lt; ' ' &lt;&lt; v2 &lt;&lt; '\n';
+  std::cout &lt;&lt; &quot;c: &quot; &lt;&lt; c.firstname() &lt;&lt; ' ' &lt;&lt; c.lastname() &lt;&lt; ✬ ✬ &lt;&lt; c.value() &lt;&lt; '\n';
+  std::cout &lt;&lt; &quot;s: &quot; &lt;&lt; s &lt;&lt; '\n'; 
+}
+</code></pre>
+<p>它会输出：</p>
+<pre><code class="language-bash">f/l/v: Tim Starr 42
+f2/l2/v2: Ringo Starr 52
+c: Ringo Starr 52
+s: Tim
+</code></pre>
+<h2 id="14-后记"><a class="header" href="#14-后记">1.4 后记</a></h2>
+<p>结构化绑定最初由Herb Sutter，Bjarne Stroustrup和Gabriel Dos Reis在<a href="https://wg21.link/p0144r0">https://wg21.link/p0144r0</a>中提出，当时使用花括号而不是方括号。最后这个特性的公认措辞是由Jens Maurer在<a href="https://wg21.link/p0217r3">https://wg21.link/p0217r3</a>中给出。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../part1/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../part1/cp2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../part1/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../part1/cp2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

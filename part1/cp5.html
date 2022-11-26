@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第五章 强制拷贝消除或者传递未具体化对象 - C++ 17 The Complete Guide</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../part1/index.html">第一部分 基本语言特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part1/cp1.html">第一章 结构化绑定</a></li><li class="chapter-item "><a href="../part1/cp2.html">第二章 带初始化的if和switch</a></li><li class="chapter-item "><a href="../part1/cp3.html">第三章 内联变量</a></li><li class="chapter-item "><a href="../part1/cp4.html">第四章 聚合扩展</a></li><li class="chapter-item expanded "><a href="../part1/cp5.html" class="active">第五章 强制拷贝消除或者传递未具体化对象</a></li><li class="chapter-item "><a href="../part1/cp6.html">第六章 Lambda扩展</a></li><li class="chapter-item "><a href="../part1/cp7.html">第七章 新属性和属性相关特性</a></li><li class="chapter-item "><a href="../part1/cp8.html">第八章 其他语言特性</a></li></ol></li><li class="chapter-item expanded "><a href="../part2/index.html">第二部分 模板特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part2/cp9.html">第九章 类模板参数推导</a></li><li class="chapter-item "><a href="../part2/cp10.html">第十章 编译期if</a></li><li class="chapter-item "><a href="../part2/cp11.html">第十一章 折叠表达式</a></li><li class="chapter-item "><a href="../part2/cp12.html">第十二章 String作为模板参数</a></li><li class="chapter-item "><a href="../part2/cp13.html">第十三章 auto作为模板参数占位符</a></li><li class="chapter-item "><a href="../part2/cp14.html">第十四章 扩展Using声明</a></li></ol></li><li class="chapter-item expanded "><div>第三部分 新的标准库组件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part3/cp15.html">第十五章 std::optional&lt;&gt;</a></li><li class="chapter-item "><div>第十六章 std::variant&lt;&gt;</div></li><li class="chapter-item "><div>第十七章 std::any</div></li><li class="chapter-item "><div>第十八章 std::byte</div></li><li class="chapter-item "><div>第十九章 String View</div></li><li class="chapter-item "><div>第二十章 文件系统库</div></li></ol></li><li class="chapter-item expanded "><div>第四部分 标准库扩展和修改</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十一章 Type Trait扩展</div></li><li class="chapter-item "><div>第二十二章 并行STL算法</div></li><li class="chapter-item "><div>第二十三章 子字符串和子序列搜索</div></li><li class="chapter-item "><div>第二十四章 其他工具函数和算法</div></li><li class="chapter-item "><div>第二十五章 容器扩展</div></li><li class="chapter-item "><div>第二十六章 多线程和兵法</div></li></ol></li><li class="chapter-item expanded "><div>第五部分 专业工具</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十七章 多态类型资源（PMR）</div></li><li class="chapter-item "><div>第二十八章 对齐数据上的new和delete</div></li><li class="chapter-item "><div>第二十九章 其他专业库的改动</div></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">C++ 17 The Complete Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/CnTransGroup/Cpp17TheCompleteGuideChinese" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第五章-强制拷贝消除或者传递unmaterialized对象"><a class="header" href="#第五章-强制拷贝消除或者传递unmaterialized对象">第五章 强制拷贝消除或者传递unmaterialized对象</a></h1>
+<p>本章的主题可以从两个角度来看：</p>
+<ul>
+<li>C++17引入了新的规则，在确定条件下可以强制消除拷贝：以前临时对象传值或者返回临时对象期间发生的拷贝操作的消除是可选的，现在是强制的。</li>
+<li>因此，我们处理传递未具体化对象的值以进行初始化
+我将从技术上介绍这个特性，然后讨论具体化（materialization）的效果和相关术语。</li>
+</ul>
+<h2 id="51-临时量强制拷贝消除的动机"><a class="header" href="#51-临时量强制拷贝消除的动机">5.1 临时量强制拷贝消除的动机</a></h2>
+<p>标准伊始，C++就明确允许一些拷贝操作可以被省略（消除），不调用拷贝构造函数会失去可能存在的副作用，从而可能影响程序的行为，即便这样也在所不惜。强制拷贝消除的场景之一是使用临时对象初始化新对象。这个情况经常发生，尤其是以值传递方式将临时对象传递给一个函数，或者函数返回临时对象。举个例子：</p>
+<pre><code class="language-cpp">class MyClass
+{
+  ...
+};
+void foo(MyClass param) { // param is initialized by passed argument
+  ...
+}
+MyClass bar() {
+  return MyClass(); // returns temporary
+}
+
+int main()
+{
+  foo(MyClass());       // pass temporary to initialize param
+  MyClass x = bar();    // use returned temporary to initialize x
+  foo(bar());           // use returned temporary to initialize param
+}
+</code></pre>
+<p>但是，由于这些拷贝消除优化不是强制的，要拷贝的对象必须提供隐式或显式的拷贝或移动构造函数。也就是说，尽管拷贝/移动构造函数一般不会调用，但是也必须存在。如果没有定义拷贝/移动构造函数，那么代码不能通过编译。</p>
+<p>因此，下面MyClass的定义的代码编译不了：</p>
+<pre><code class="language-cpp">class MyClass
+{
+public:
+  ...
+  // no copy/move constructor defined:
+  MyClass(const MyClass&amp;) = delete;
+  MyClass(MyClass&amp;&amp;) = delete;
+  ...
+};
+</code></pre>
+<p>这里没有拷贝构造函数就足够了，因为仅当没有用户声明的拷贝构造（或者拷贝赋值运算符）时移动构造函数才隐式可用。</p>
+<p>C++17后，临时变量初始化新对象期间发生的拷贝是强制消除的。事实上，在后面我们会看到，我们简单的传值作为实参初始化或者返回一个值，该值会接下来用于具体化（materalize）一个新对象。</p>
+<p>这意味着就算MyClass类完全没有表示启用拷贝操作，上面的例子也能通过编译。</p>
+<p>然而，请注意其他可选的拷贝消除仍然是可选的，仍然要求一个可调用的拷贝或者移动构造函数，比如：</p>
+<pre><code class="language-cpp">MyClass foo()
+{
+  MyClass obj;
+  ...
+  return obj;    // still requires copy/move support
+}
+</code></pre>
+<p>在这里，<code>foo()</code>里面的obj是一个带名字的变量（即左值（lvalue））。所以会发生命名的返回值优化（named return value optimization，NRVO），它要求类型支持拷贝或者移动操作。即便obj是一个参数也仍然如此：</p>
+<pre><code class="language-cpp">MyClass bar(MyClass obj) // copy elision for passed temporaries
+{
+  ...
+  return obj; // still requires copy/move support
+}
+</code></pre>
+<p>传递一个临时量（即纯右值（prvalue））到函数作为实参，不会发生拷贝/移动操作，但是返回这个参数仍然需要拷贝/移动操作，因为返回的对象有名字。</p>
+<p>作为这一改变的部分，值范畴（value categories）修改和新增了很多术语。</p>
+<h2 id="52-临时量强制拷贝消除的好处"><a class="header" href="#52-临时量强制拷贝消除的好处">5.2 临时量强制拷贝消除的好处</a></h2>
+<p>强制拷贝消除的一个好处是，很明显，如果拷贝操作开心较大时会得到更好的性能。虽然移动语言显著减少了拷贝开销，但是完全不执行拷贝能极大的提示性能。这可能会减少使用出参（译注：所谓出参即可out parameter，是指使用参数来传递返回信息，通常是一个指针或者引用）代替返回一个值（假设这个值是由返回语句创建的）的需求。</p>
+<p>另一个好处是现在只要写一个工厂函数它总是能工作，因为现在的工厂函数可以返回对象，即便对象不允许拷贝/移动。比如，考虑下面的泛型工厂函数：</p>
+<pre><code class="language-cpp">// lang/factory.hpp
+#include &lt;utility&gt;
+template &lt;typename T, typename... Args&gt;
+T create(Args&amp;&amp;... args)
+{
+  ...
+  return T{std::forward&lt;Args&gt;(args)...};
+}
+</code></pre>
+<p>这个函数现在甚至可以用于<code>std::atomic&lt;&gt;</code>这种类型，该类型既没有定义拷贝构造函数也没有定义移动构造函数：</p>
+<pre><code class="language-cpp">// lang/factory.cpp
+#include &quot;factory.hpp&quot; 
+#include &lt;memory&gt;
+#include &lt;atomic&gt;
+
+int main() {
+    int i = create&lt;int&gt;(42);
+    std::unique_ptr&lt;int&gt; up = create&lt;std::unique_ptr&lt;int&gt;&gt;(new int{42});
+    std::atomic&lt;int&gt; ai = create&lt;std::atomic&lt;int&gt;&gt;(42);
+}
+</code></pre>
+<p>这个特性带来的另一个效果是，如果类有显式delete的移动构造函数，你现在可以返回临时值，然后用它初始化对象：</p>
+<pre><code class="language-cpp">class CopyOnly {
+public:
+    CopyOnly() {
+    }
+    CopyOnly(int) {
+    }
+    CopyOnly(const CopyOnly&amp;) = default;
+    CopyOnly(CopyOnly&amp;&amp;) = delete; // explicitly deleted
+};
+
+CopyOnly ret() {
+    return CopyOnly{}; // OK since C++17
+}
+
+CopyOnly x = 42; // OK since C++17
+</code></pre>
+<p>x的初始化代码在C++17之前是无效的，因为拷贝初始化需要将42转换为一个临时对象，然后临时对象原则上需要提供一个移动构造函数，尽管不会用到它。（）</p>
+<h2 id="53-值范畴的解释"><a class="header" href="#53-值范畴的解释">5.3 值范畴的解释</a></h2>
+<p>强制拷贝消除带来的额外工作是值范畴（value categories）的一些修改。</p>
+<h3 id="531-值范畴"><a class="header" href="#531-值范畴">5.3.1 值范畴</a></h3>
+<p>在C++中的每个表达式都有一个值范畴。这个值范畴描述了表达式可以做什么。</p>
+<h4 id="值范畴的历史"><a class="header" href="#值范畴的历史">值范畴的历史</a></h4>
+<p>从C语言历史的角度来看，在赋值语句中只有lvalue（左值）和rvalue（右值）：</p>
+<pre><code class="language-cpp">  x = 42;
+</code></pre>
+<p>表达式x是lvalue，因为它可以出现在赋值语句的左边，表达式42是rvalue，因为它只能出现在赋值语句的右边。但是因为ANSI-C，事情变得更复杂一些，因为x如果声明为<code>const int</code>就不能在赋值语句的左边了，但是它仍然是个（不具可修改性的）lvalue。</p>
+<p>C++11我们有了可移动的对象，这些对象在语义上是只能出现在赋值语句右边，但是可以被修改，因为赋值语句可以盗取它们的值。基于这个原因，新的值范畴xvalue被引入，并且之前的值范畴rvalue有了新名字即prvalue。</p>
+<h4 id="c11的值范畴"><a class="header" href="#c11的值范畴">C++11的值范畴</a></h4>
+<p>C++11后，值范畴如图5.1描述的那样：我们的核心值范畴是lvalue，prvalue（pure rvalue，纯右值），xvalue（eXpiring value，将亡值）。组合得到的值范畴有：glvalue（generalized lvalue，泛化左值，是lvalue和xvalue的结合）以及rvalue（是xvalue和prvalue的结合）。</p>
+<img src="../../public/fig5-1.jpg" align="center"/>
+<p align="center">图5.1 C++11后的值范畴</p>
+<p>lvalue的例子有：</p>
+<ul>
+<li>一个表达式只包含变量，函数或者成员的名字</li>
+<li>一个表达式是字符串字面值</li>
+<li>内置一元操作符<code>*</code>的结果（即对原生指针解引用）</li>
+<li>返回左值引用（<code>type&amp;</code>）的函数的返回值</li>
+</ul>
+<p>prvalue的例子有：</p>
+<ul>
+<li>除字符串字面值外的其他字面值（或者用户定义的字面值，其中与之关联的字面值操作符的返回类型标示值的范畴）</li>
+<li>内置一元操作符<code>&amp;</code>的结果（即获取表达式地址）</li>
+<li>内置算术运算符的结果</li>
+<li>返回值的函数的返回值</li>
+</ul>
+<p>xvalue的例子有：</p>
+<ul>
+<li>返回右值引用（<code>type&amp;&amp;</code>，尤其是返回<code>std::move()</code>）的函数的返回值</li>
+<li>右值引用到对象类型的转换</li>
+</ul>
+<p>大概来说：</p>
+<ul>
+<li>所有使用名字的表达式是lvalue</li>
+<li>所有字符串字面值表达式是lvalue</li>
+<li>所有其他字面值（4.2，true，nullptr）是prvalue</li>
+<li>所有临时变量（尤其是返回值的函数返回的对象）是prvalue</li>
+<li><code>std::move()</code>的结果是xvalue</li>
+</ul>
+<p>举个例子：</p>
+<pre><code class="language-cpp">class X {
+};
+
+X v;
+const X c;
+
+void f(const X&amp;);   // accepts an expression of any value category
+void f(X&amp;&amp;);        // accepts prvalues and xvalues only, but is a better match
+
+f(v);               // passes a modifiable lvalue to the first f()
+f(c);               // passes a non-modifiable lvalue to the first f()
+f(X());             // passes a prvalue to the second f()
+f(std::move(v));    // passes an xvalue to the second f()
+</code></pre>
+<p>值得强调的是，严格来说，glvalue，prvalue和xvalue是针对表达式的， 不是针对值的（这意味着这些值用词不当）。举个例子，一个变量本身不是一个lvalue，只有一个变量放到表达式里才标示这个变量是lvalue：</p>
+<pre><code class="language-cpp">int x = 3; // x here is a variable, not an lvalue
+int y = x; // x here is an lvalue
+</code></pre>
+<p>第一个语句中3是prvalue，它用来初始化变量x（不是lvalue）。第二个语句中x是lvalue（对它求值会会发现它包含值3）。然后作为lvallue的x转换为prvalue，用来初始化变量y。</p>
+<h3 id="532-c17的值范畴"><a class="header" href="#532-c17的值范畴">5.3.2 C++17的值范畴</a></h3>
+<p>C++17没有改变既有的值范畴，但是阐述了它们的语义（如图5.2所示）</p>
+<img src="../../public/fig5-2.jpg" align="center"/>
+<p align="center">图5.1 C++17后的值范畴</p>
+<p>现在解释值范畴的主要方式是认为我们有两类表达式：</p>
+<ul>
+<li>glvalue：对象/函数位置的表达式</li>
+<li>prvalue：初始化表达式
+xvalue被认为是一个特殊的位置，表示有一个变量它的资源可以重用（通常因为它接近它的生命周期结尾）。</li>
+</ul>
+<p>C++17引入了一个新术语，具体化（materialization），表示在某个时刻一个prvalue成为临时对象。因此，临时变量具体化转换（temporary materialization conversion）是指prvalue到xvalue的转换。</p>
+<p>任何时刻，期待出现glvalue（lvalue或xvalue）的地方出现prvalue都是有效的，创建一个临时变量并通过prvalue初始化，然后prvallue被替换为xvalue。因此在上面的例子中，严格来说：</p>
+<pre><code class="language-cpp">void f(const X&amp; p); // accepts an expression of any value category,
+                    // but expects a glvalue
+f(X());             // passes a prvalue materialized as xvalue
+</code></pre>
+<p>因为例子中的<code>f()</code>有一个引用参数，它期待一个glvalue实参。然而，表达式<code>X()</code>是一个prvalue。临时具体化规则因此生效，表达式<code>X()</code>转换为一个xvalue并使用默认构造函数初始化临时变量。</p>
+<p>注意具体化不意味着我们创建了一个新的/不同的对象。lvalue引用仍然绑定xvalue和prvalue，虽然后者总是转换到xvalue。</p>
+<p>在这些改变后，拷贝消除意义非凡，因为prvalue不再要求可移动，我们只传递一个初始值，这个值迟早会具体化然后初始化一个对象。</p>
+<h2 id="54-未具体化返回值传递"><a class="header" href="#54-未具体化返回值传递">5.4 未具体化返回值传递</a></h2>
+<p>未具体化返回值传递是指所有形式的返回临时对象（prvalue）的值：</p>
+<ul>
+<li>当返回一个不是字符串字面值的字面值：</li>
+</ul>
+<pre><code class="language-cpp">int f1() {    // return int by value
+  return 42;
+}
+</code></pre>
+<ul>
+<li>当返回类型为临时变量的值或者使用auto：</li>
+</ul>
+<pre><code class="language-cpp">auto f2() {   // return deduced type by value
+  ...
+  return MyType{...};
+}
+</code></pre>
+<ul>
+<li>当返回临时对象，并且类型用<code>decltype(auto)</code>推导：</li>
+</ul>
+<pre><code class="language-cpp">decltype(auto) f3() {   // return temporary from return statement by value
+  ...
+  return MyType{...};
+}
+</code></pre>
+<p>记住如果用于初始化的表达式（这里是返回语句）会创建一个临时变量（prvalue），那么用<code>decltype(auto)</code>声明的类型是值。</p>
+<p>上述所有形式我们都返回一个prvalue的值，我们不需要任何拷贝/移动的支持。</p>
+<h2 id="55-后记"><a class="header" href="#55-后记">5.5 后记</a></h2>
+<p>强制拷贝消除最初由Richard Smith在<a href="https://wg21.link/p0135r0">https://wg21.link/p0135r0</a>中提出。最后这个特性的公认措辞是由Richard Smith在<a href="https://wg21.link/p0135r1">https://wg21.link/p0135r1</a>中给出。</p>
+<blockquote>
+<p>这一章翻译的不好，后面我会修订</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../part1/cp4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../part1/cp6.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../part1/cp4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../part1/cp6.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第十一章 折叠表达式 - C++ 17 The Complete Guide</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../part1/index.html">第一部分 基本语言特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part1/cp1.html">第一章 结构化绑定</a></li><li class="chapter-item "><a href="../part1/cp2.html">第二章 带初始化的if和switch</a></li><li class="chapter-item "><a href="../part1/cp3.html">第三章 内联变量</a></li><li class="chapter-item "><a href="../part1/cp4.html">第四章 聚合扩展</a></li><li class="chapter-item "><a href="../part1/cp5.html">第五章 强制拷贝消除或者传递未具体化对象</a></li><li class="chapter-item "><a href="../part1/cp6.html">第六章 Lambda扩展</a></li><li class="chapter-item "><a href="../part1/cp7.html">第七章 新属性和属性相关特性</a></li><li class="chapter-item "><a href="../part1/cp8.html">第八章 其他语言特性</a></li></ol></li><li class="chapter-item expanded "><a href="../part2/index.html">第二部分 模板特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part2/cp9.html">第九章 类模板参数推导</a></li><li class="chapter-item "><a href="../part2/cp10.html">第十章 编译期if</a></li><li class="chapter-item expanded "><a href="../part2/cp11.html" class="active">第十一章 折叠表达式</a></li><li class="chapter-item "><a href="../part2/cp12.html">第十二章 String作为模板参数</a></li><li class="chapter-item "><a href="../part2/cp13.html">第十三章 auto作为模板参数占位符</a></li><li class="chapter-item "><a href="../part2/cp14.html">第十四章 扩展Using声明</a></li></ol></li><li class="chapter-item expanded "><div>第三部分 新的标准库组件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part3/cp15.html">第十五章 std::optional&lt;&gt;</a></li><li class="chapter-item "><div>第十六章 std::variant&lt;&gt;</div></li><li class="chapter-item "><div>第十七章 std::any</div></li><li class="chapter-item "><div>第十八章 std::byte</div></li><li class="chapter-item "><div>第十九章 String View</div></li><li class="chapter-item "><div>第二十章 文件系统库</div></li></ol></li><li class="chapter-item expanded "><div>第四部分 标准库扩展和修改</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十一章 Type Trait扩展</div></li><li class="chapter-item "><div>第二十二章 并行STL算法</div></li><li class="chapter-item "><div>第二十三章 子字符串和子序列搜索</div></li><li class="chapter-item "><div>第二十四章 其他工具函数和算法</div></li><li class="chapter-item "><div>第二十五章 容器扩展</div></li><li class="chapter-item "><div>第二十六章 多线程和兵法</div></li></ol></li><li class="chapter-item expanded "><div>第五部分 专业工具</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十七章 多态类型资源（PMR）</div></li><li class="chapter-item "><div>第二十八章 对齐数据上的new和delete</div></li><li class="chapter-item "><div>第二十九章 其他专业库的改动</div></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">C++ 17 The Complete Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/CnTransGroup/Cpp17TheCompleteGuideChinese" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第十一章-折叠表达式"><a class="header" href="#第十一章-折叠表达式">第十一章 折叠表达式</a></h1>
+<p>自C++17起, 其特性有支持带一个(可带有初始值的)参数包(parameter pack)的所有实参能使用二元操作符并计算结果.</p>
+<p>例如, 下列的函数能返回所有传入实参的和:</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSum(T... args) {
+    return (... + args); // ((arg1 + arg2) + arg3)...
+}
+</code></pre>
+<p>注意, return 表达式里的括号是折叠表达式的一部分并且不能省略.</p>
+<p>函数调用 <code>foldSum(47, 11, val, -1);</code> 使模版实例化并执行: <code>return 47 + 11 + val + -1;</code>.</p>
+<p>函数调用 <code>foldSum(std::string(&quot;hello&quot;), &quot;world&quot;, &quot;!&quot;);</code> 使模版实例化为: <code>return std::string(&quot;hello&quot;) + &quot;world&quot; + &quot;!&quot;;</code></p>
+<p>还要注意, 折叠表达式实参的次序可以不同并且效果也不一样 (可能看起有点反直觉): 例如写成 <code>(... + args)</code> 的结果则是 <code>((arg1 + arg2) + arg3)...</code>, 该含义是重复地“往后添加”(post-adds)东西. 你也可以写成 <code>(args + ...)</code>, 该含义是重复地“往前添加”(pre-adds)东西, 因此其结果为: <code>(arg1 + (arg2 + arg3))...</code>.</p>
+<h2 id="111-折叠表达式的目的"><a class="header" href="#111-折叠表达式的目的">11.1 折叠表达式的目的</a></h2>
+<p>折叠表达式避免了需要递归地去实例化模版并作用于一个参数包的所有形参. 在 C++17 之前, 你必须这样实现:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+auto foldSumRec(T arg) {
+    return arg;
+}
+template &lt;typename T1, typename ...Ts&gt;
+auto foldSumRec(T1 arg1, Ts... otherArgs) {
+    return arg1 + foldSumRec(otherArgs...);
+}
+</code></pre>
+<p>这样的一种实现不仅写起来繁琐, 并且它也给 C++ 编译器造成负担. 使用</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSum(T... args) {
+    return (... + args); // ((arg1 + arg2) + arg3)...
+}
+</code></pre>
+<p>对于程序员和编译器双方的工作明显有所减少.</p>
+<h2 id="112-折叠表达式的使用"><a class="header" href="#112-折叠表达式的使用">11.2 折叠表达式的使用</a></h2>
+<p>给定形参 <code>args</code> 和一个操作符 <code>op</code>, C++17 允许我们写成</p>
+<ul>
+<li>要么是<strong>一元左折叠</strong>(unary left fold)
+<code>( ... op args)</code>, 它将展开为: <code>(...(arg1 op arg2) op ... argN-1) op argN)</code></li>
+<li>要么是<strong>一元右折叠</strong>(unary right fold)
+<code>(args op ...)</code>, 它将展开为: <code>(arg1 op (arg2 op ... (argN-1 op argN)...)</code></li>
+</ul>
+<p>其中括号是必需的. 但是, 括号和省略号 (...) 不必用空格隔开.</p>
+<p>比起知道左和右折叠表达式的预期结果, 理解两者的差别更重要. 例如, 甚至在使用 <code>+</code> 操作符时就有可能出现不同的效果. 在使用左折叠表达式时:</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSumL(T... args) {
+    return (... + args); // ((arg1 + arg2) + arg3)...
+}
+</code></pre>
+<p>调用 <code>foldSumL(1, 2, 3)</code> 则计算出 <code>((1 + 2) + 3)</code>. 这也意味着下列示例代码是能被编译的:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; foldSumL(std::string(&quot;hello&quot;), &quot;world&quot;, &quot;!&quot;) &lt;&lt; &quot;\n&quot;; // 编译通过.
+</code></pre>
+<p>记住操作符 <code>+</code> 用于标准字符串类型则至少有一个操作数是 <code>std::string</code> 类型. 因为使用了左折叠表达式, 则函数第一次调用将计算 <code>std::string(&quot;hello&quot;) + &quot;world&quot;</code>, 其返回结果为一个 <code>std::string</code> 类型的字符串, 因此再加上字面形式的字符串 <code>&quot;!&quot;</code> 也是有效的.</p>
+<p>然而, 以下的函数调用:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; foldSumL(&quot;hello&quot;, &quot;world&quot;, std::string(&quot;!&quot;)) &lt;&lt; &quot;\n&quot;; // 编译报错.
+</code></pre>
+<p>将不能被编译, 因为其计算得到 <code>((&quot;hello&quot; + &quot;world&quot;) + std::string(&quot;!&quot;))</code>, 而两个字面形式的字符串是不允许用操作符 <code>+</code> 进行拼接的. </p>
+<p>然而, 我们可以将实现改成:</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSumL(T... args) {
+    return (args + ...); // (arg1 + (arg2 + arg3))...
+}
+</code></pre>
+<p>调用 <code>foldSumL(1, 2, 3)</code> 则计算出 <code>(1 + (2 + 3))</code>. 这意味着下列示例代码就不再能被编译:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; foldSumL(std::string(&quot;hello&quot;), &quot;world&quot;, &quot;!&quot;) &lt;&lt; &quot;\n&quot;; // 编译报错.
+</code></pre>
+<p>而以下的函数调用现在能被编译:</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; foldSumL(&quot;hello&quot;, &quot;world&quot;, std::string(&quot;!&quot;)) &lt;&lt; &quot;\n&quot;; // 编译通过.
+</code></pre>
+<p>因为几乎在所有情况下, 计算的次序都是从左至右, 通常, 参数包的左折叠语法(参数在末尾)应该更受青睐(除非它没有作用):</p>
+<pre><code class="language-cpp">(... + args); // 更受青睐的折叠表达式语法
+</code></pre>
+<h3 id="1121-空参数包的处理"><a class="header" href="#1121-空参数包的处理">11.2.1 空参数包的处理</a></h3>
+<p>如果一个折叠表达式使用了空参数包, 则应用以下规则:</p>
+<ul>
+<li>如果使用了操作符 <code>&amp;&amp;</code>, 则其值为 <code>true</code>.</li>
+<li>如果使用了操作符 <code>||</code>, 则其值为 <code>false</code>.</li>
+<li>如果使用了操作符 <code>,</code>, 则其值是 <code>void()</code>.</li>
+<li>其他操作符的调用则是不良形式 (ill-formed).</li>
+</ul>
+<p>对于所有其他情况 (一般而言) 你可以添加一个初始值: 给定一个参数包 <code>args</code>, 一个初始值 <code>value</code> 和一个操作符 <code>op</code>, C++17 也允许我们写成:</p>
+<ul>
+<li>要么一个<strong>二元左折叠</strong>(binary left fold)
+<code>(value op ... op args)</code>, 它将展开为: <code>((...((value op arg1) op arg2) op ... op argN-1) op argN)</code>
+— 要么一个<strong>二元右折叠</strong>(binary right fold)
+<code>(args op ... op value)</code>, 它将展开为: <code>(arg1 op (arg2 op ... op (argN-1 op (argN op value))...))</code></li>
+</ul>
+<p>在省略号两边的操作符 <code>op</code> 必须相同.</p>
+<p>例如, 下列定义允许传递一个空参数包</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSum(T... s) {
+    return (0 + ... + s); // sizeof...(s) == 0 的情况也可行
+}
+</code></pre>
+<p>在概念上, 不论我们添加 <code>0</code> 作为首个操作数或最后一个操作数应该都无所谓. </p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+auto foldSum(T... s) {
+    return (s + ... + 0); // sizeof...(s) == 0 的情况也可行
+}
+</code></pre>
+<p>但对于一元折叠表达式<strong>其不同的计算次序则比预期结果更重要</strong>, 而二元左折叠表达式则更受青睐:</p>
+<pre><code class="language-cpp">(value + ... + args); // 更受青睐的二元折叠表达式语法
+</code></pre>
+<p>还有, 首个操作数可能是特别的, 比如这个例子:</p>
+<pre><code class="language-cpp">template &lt;typename ...T&gt;
+void print(const T&amp;... args)
+{
+    (std::cout &lt;&lt; ... &lt;&lt; args) &lt;&lt; &quot;\n&quot;;
+}
+</code></pre>
+<p>这里, 重要的是首次调用是传递给 <code>print()</code> 的第一个实参的输出, 其返回的输出流作用于其它输出的调用. 其它实现可能无法编译甚至得到发生无法预料的事情. 例如, 使用</p>
+<pre><code class="language-cpp">std::cout &lt;&lt; (args &lt;&lt; ... &lt;&lt; &quot;\n&quot;);
+</code></pre>
+<p>调用<code>print(1)</code> 将编译通过但打印出的值 <code>1</code> 会向左移10位 (<code>'\n'</code> 的值通常为 <code>10</code>), 因此输出的结果为 <code>1024</code>.</p>
+<p>注意, 在这个例子 <code>print()</code> 中没有空格分隔参数包的各个元素. 这样的调用 <code>print(&quot;hello&quot;, 42, &quot;world&quot;)</code> 将会打印 <code>hello42world</code>.</p>
+<p>为了用空格将传入的元素分隔开, 你需要一个helper函数以确保除了第一个实参之外在打印前加上空格. 例如, 用以下 helper 函数模版 <code>spaceBefore()</code> 可以办到:</p>
+<pre><code class="language-cpp">// tmpl/addspace.hpp
+template &lt;typename T&gt;
+const T&amp; spaceBefore(const T&amp; arg) {
+    std::cout &lt;&lt; ' ';
+    return arg;
+}
+
+template &lt;typename First, typename... Args&gt;
+void print(const First&amp; firstarg, const Args&amp;... args) {
+    std::cout &lt;&lt; firstarg;
+    (std::cout &lt;&lt; ... &lt;&lt; spaceBefore(args)) &lt;&lt; '\n';
+}
+</code></pre>
+<p>这里, <code>(std::cout &lt;&lt; ... &lt;&lt; spaceBefore(args))</code> 这个折叠表达式展开成: <code>(std::cout &lt;&lt; spaceBefore(arg1) &lt;&lt; spaceBefore(arg2) &lt;&lt; ...)</code></p>
+<p>因此, 在参数包 <code>args</code> 中每个元素都调用一个helper函数, 在返回被传递的实参之前打印出一个空格字符, 写入输出流 <code>std::cout</code> 里. 为了确保这不会应用到第一个实参, 我们添加了额外的首个形参并且不对其使用 <code>spaceBefore()</code>.</p>
+<p>注意, 参数包的输出的计算需要所有输出在左边.</p>
+<p>我们也能在<code>print()</code>里面使用lambda来定义<code>spaceBefore()</code>:</p>
+<pre><code class="language-cpp">template &lt;typename First, typename ...Args&gt;
+void print(const First&amp; firstarg, const Args&amp;... args) {
+    std::cout &lt;&lt; firstarg;
+    auto spaceBefore = [](const auto&amp; arg) {
+        std::cout &lt;&lt; '';
+        return arg;
+    };
+    (std::cout &lt;&lt; ... &lt;&lt; spaceBefore(args)) &lt;&lt; '\n';
+}
+</code></pre>
+<p>然而, 注意 lambda 通过值返回对象, 这意味着将创建传入实参的没必要的拷贝. 避免不必要拷贝的方式是通过显式声明lambda的返回类型要为<code>const auto&amp;</code>或<code>decltype(auto)</code>:</p>
+<pre><code class="language-cpp">template &lt;typename First, typename ...Args&gt;
+void print(const First&amp; firstarg, const Args&amp;... args) {
+    std::cout &lt;&lt; firstarg;
+    auto spaceBefore = [](const auto&amp; arg) -&gt; const auto&amp; {
+        std::cout &lt;&lt; '';
+        return arg;
+    };
+    (std::cout &lt;&lt; ... &lt;&lt; spaceBefore(args)) &lt;&lt; '\n';
+}
+</code></pre>
+<p>如果你不能够将这些语句组合成这样一条语句, 那你用的C++就不能称为真正的C++:</p>
+<pre><code class="language-cpp">template &lt;typename First, typename ...Args&gt;
+void print(const First&amp; firstarg, const Args&amp; ...args) {
+    std::cout &lt;&lt; firstarg;
+    (std::cout &lt;&lt; ... &lt;&lt; [](const auto&amp; arg) -&gt; decltype(auto) {
+                             std::cout &lt;&lt; ' ';
+                             return arg;
+                          }(args)) &lt;&lt; '\n';
+}
+</code></pre>
+<p>不过, 一种更简单实现<code>print()</code>的方式是使用一个lambda打印空格和实参并将其传递给一个一元折叠表达式(脚注: 感谢 Barry Revzin 提出来):</p>
+<pre><code class="language-cpp">template &lt;typename First, typename ...Args&gt;
+void print(First first, const Args&amp; ...args) {
+    std::cout &lt;&lt; first;
+    auto outWithSpace = [](const auto&amp; arg) {
+                            std::cout &lt;&lt; ' ' &lt;&lt; arg;
+                        };
+    (..., outWithSpace(args));
+    std::cout &lt;&lt; '\n';
+}
+</code></pre>
+<p>通过使用一个额外的用**<code>auto</code>声明的模版参数**, 我们可以使<code>print()</code>更灵活地将字符类型的分隔符, 字符串或任意其它可打印的类型参数化.</p>
+<h3 id="1122-已支持的操作符"><a class="header" href="#1122-已支持的操作符">11.2.2 已支持的操作符</a></h3>
+<p>除了<code>.</code>, <code>-&gt;</code>, 和 <code>[]</code> 这些操作符之外, 你可以使用所有二元操作符作用于折叠表达式.</p>
+<h4 id="折叠的函数调用"><a class="header" href="#折叠的函数调用">折叠的函数调用</a></h4>
+<p>折叠表达式</p>
+<pre><code class="language-cpp">// tmpl/foldcalls.cpp
+#include &lt;iostream&gt;
+
+// 可变数目的基类模版
+template &lt;typename ...Bases&gt;
+class MultiBase : private Bases...
+{
+public:
+    void print() {
+        // 调用所有基类的 print()
+        (..., Bases::print());
+    }
+};
+
+struct A {
+    void print() { std::cout &lt;&lt; &quot;A::print()\n&quot;; }  
+};
+
+struct B {
+    void print() { std::cout &lt;&lt; &quot;B::print()\n&quot;; }
+};
+
+struct C {
+    void print() { std::cout &lt;&lt; &quot;C::print()\n&quot;; }
+};
+
+int main()
+{
+    MultiBase&lt;A, B, C&gt; mb;
+    mb.print();
+}
+</code></pre>
+<p>这里,</p>
+<pre><code class="language-cpp">template &lt;typename ...Bases&gt;
+class MultiBase : private Bases...
+{
+    ...
+};
+</code></pre>
+<p>允许我们用可变数目的基类初始化对象: </p>
+<pre><code class="language-cpp">MultiBase&lt;A, B, C&gt; mb;
+</code></pre>
+<p>并且使用</p>
+<pre><code class="language-cpp">(..., Base::print());
+</code></pre>
+<p>这个折叠表达式被展开为调用每一个基类的<code>print</code>. 这个折叠表达式展开后如下所示:</p>
+<pre><code class="language-cpp">(A::print(), B::print(), C::print());
+</code></pre>
+<p>然而, 注意到<code>,</code>操作符的性质与我们使用左折叠表达式或右折叠表达式没什么关系. 这些函数总是从左往右被调用. 使用</p>
+<pre><code class="language-cpp">(Base::print(), ...);
+</code></pre>
+<p>这个括号只是将调用组合起来, 因此第一个<code>print()</code>和其它两个<code>print()</code>的结果组合了一起如下所示:</p>
+<pre><code class="language-cpp">A::print(), (B::print(), C::print());
+</code></pre>
+<p>但因为<code>,</code>操作符的计算次序总是从左向右, 仍然是在括号里面两个为一组的函数调用之前先调用第一个函数, 并且仍然是中间的函数在右边函数之前调用.</p>
+<p>尽管如此, 这就像左表达式的结果并且能跟其计算次序匹配上, 还是建议在折叠多个函数调用时使用左折叠表达式.</p>
+<h4 id="组合hash函数"><a class="header" href="#组合hash函数">组合Hash函数</a></h4>
+<p>一个使用<code>,</code>操作符组合Hash值的例子. 这个例子如下:</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+void hashCombine(std::size_t&amp; seed, const T&amp; val)
+{
+    seed ^= std::hash&lt;T&gt;()(val) + 0x9e3779b9 + (seed &lt;&lt; 6) + (seed &gt;&gt; 2);
+}
+
+template &lt;typename ...Type&gt;
+std::size_t combineHashValue(const Type&amp; ...args)
+{
+    std::size_t seed = 0;           // 初始种子
+    (..., hashCombine(seed, args)); // hashCombine() 调用链
+    return seed;
+}
+</code></pre>
+<p>通过调用</p>
+<pre><code class="language-cpp">std::size_t combinedHashValue(&quot;Hello&quot;, &quot;World&quot;, 42);
+</code></pre>
+<p>中间的这条语句展开成:</p>
+<pre><code class="language-cpp">(hashCombine(seed, &quot;Hello&quot;), hashCombine(seed, &quot;World&quot;)), hashCombine(seed, 42));
+</code></pre>
+<p>使用这个定义, 我们可以容易地为一个某个类型的对象定义一个新的Hash函数, 例如 <code>Customer</code>:</p>
+<pre><code class="language-cpp">struct CustomerHash
+{
+    std::size_t operator()(const Customer&amp; c) const {
+        return combineHashValue(c.getFirstname(), c.getLastname(), c.getValue());
+    }
+};
+</code></pre>
+<p>这样我们就可以将 <code>Customers</code> 放入一个 <code>std::unordered_set</code> 的容器:</p>
+<pre><code class="language-cpp">std::unordered_set&lt;Customer, CustomerHash&gt; coll;
+</code></pre>
+<h4 id="折叠的路径遍历"><a class="header" href="#折叠的路径遍历">折叠的路径遍历</a></h4>
+<p>你也可以使用折叠表达式去遍历一个二叉树的路径通过操作符<code>-&gt;*</code>:</p>
+<pre><code class="language-cpp">// tmpl/foldtraverse.cpp
+// 定义二叉树结构和用于遍历的helper函数.
+struct Node {
+    int value;
+    Node* left;
+    Node* right;
+    Node(int i = 0) : value(i), left(nullptr), right(nullptr) {}
+    ...
+};
+auto left = &amp;Node::left;
+auto right = &amp;Node::right;
+
+// 使用折叠表达式遍历树:
+template &lt;typename T, typename ...TP&gt;
+Node* traverse(T np, TP... paths) {
+    return (np -&gt;* ... -&gt;* paths); // np -&gt;* path1 -&gt;* path2 ...
+}
+
+int main()
+{
+    // 初始二叉树的结构:
+    Node* root = new Node{0};
+    root-&gt;left = new Node{1};
+    root-&gt;left-&gt;right = new Node{2};
+    ...
+    // 遍历二叉树:
+    Node* node = traverse(root, left, right);
+    ...
+}
+</code></pre>
+<p>这里,</p>
+<pre><code class="language-cpp">(np -&gt;* ... -&gt;* paths)
+</code></pre>
+<p>使用一个折叠表达式从<code>np</code>开始去遍历可变数目的<code>paths</code>的元素. 当调用:</p>
+<pre><code class="language-cpp">traverse(root, left, right);
+</code></pre>
+<p>这个折叠表达式的调用展开成:</p>
+<pre><code class="language-cpp">root-&gt;left-&gt;right
+</code></pre>
+<h3 id="1123-使用折叠表达式作用于类型"><a class="header" href="#1123-使用折叠表达式作用于类型">11.2.3 使用折叠表达式作用于类型</a></h3>
+<pre><code class="language-cpp">// tmpl/ishomogeneous.hpp
+#include &lt;type_traits&gt;
+
+// 检查传递的类型是否为同一类:
+template &lt;typename T1, typename ...TN&gt;
+struct IsHomogeneous {
+    static constexpr bool value = (std::is_same&lt;T1, TN&gt;::value &amp;&amp; ...);
+};
+
+// 检查传递的实参是否有相同类型:
+template &lt;typename T1, typename ...TN&gt;
+constexpr bool isHomogeneous(T1, TN...)
+{
+    return (std::is_same&lt;T1, TN&gt;::value &amp;&amp; ...);
+}
+</code></pre>
+<p>这个类型 trait <code>IsHomogeneous&lt;&gt;</code> 可被使用如下:</p>
+<pre><code class="language-cpp">IsHomogeneous&lt;int, Size, decltype(42)&gt;::value
+</code></pre>
+<p>此情况下, 这个初始化成员变量<code>value</code>的折叠表达式展开成:</p>
+<pre><code class="language-cpp">std::is_same&lt;int, MyType&gt;::value &amp;&amp; std::is_same&lt;int, decltype(42)&gt;::value
+</code></pre>
+<p>这个函数模版<code>isHomogeneous&lt;&gt;()</code> 可被使用如下:</p>
+<pre><code class="language-cpp">isHomogeneous(43, -1, &quot;hello&quot;, nullptr)
+</code></pre>
+<p>此情况下, 这个初始化成员变量<code>value</code>的折叠表达式展开成:</p>
+<pre><code class="language-cpp">std::is_same&lt;int, int&gt;::value &amp;&amp; std::is_same&lt;int, const char*&gt;::value &amp;&amp; std::is_same&lt;int, std::nullptr_t&gt;::value
+</code></pre>
+<p>通常, 操作符<code>&amp;&amp;</code>是短路的(第一<code>false</code>则终止计算).</p>
+<p>在标准库里的**<code>std::arary&lt;&gt;</code>的推导规则**使用这种特性.</p>
+<h2 id="113-后记"><a class="header" href="#113-后记">11.3 后记</a></h2>
+<p>折叠表达式最初由Andrew Sutton和Richard Smith在<a href="https://wg21.link/n4191">https://wg21.link/n4191</a>中提出. 最后这个特性的公认措辞由Andrew Sutton和Richard Smith在<a href="https://wg21.link/n4295">https://wg21.link/n4295</a>中制定的. Thibaut Le Jehan 在 <a href="https://wg21.link/n0036">https://wg21.link/n0036</a> 中提出了删除对操作符<code>*</code>, <code>+</code>, <code>&amp;</code>和<code>|</code>支持空参数包的情况.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../part2/cp10.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../part2/cp12.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../part2/cp10.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../part2/cp12.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

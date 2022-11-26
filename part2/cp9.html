@@ -1,0 +1,479 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>第九章 类模板参数推导 - C++ 17 The Complete Guide</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../part1/index.html">第一部分 基本语言特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part1/cp1.html">第一章 结构化绑定</a></li><li class="chapter-item "><a href="../part1/cp2.html">第二章 带初始化的if和switch</a></li><li class="chapter-item "><a href="../part1/cp3.html">第三章 内联变量</a></li><li class="chapter-item "><a href="../part1/cp4.html">第四章 聚合扩展</a></li><li class="chapter-item "><a href="../part1/cp5.html">第五章 强制拷贝消除或者传递未具体化对象</a></li><li class="chapter-item "><a href="../part1/cp6.html">第六章 Lambda扩展</a></li><li class="chapter-item "><a href="../part1/cp7.html">第七章 新属性和属性相关特性</a></li><li class="chapter-item "><a href="../part1/cp8.html">第八章 其他语言特性</a></li></ol></li><li class="chapter-item expanded "><a href="../part2/index.html">第二部分 模板特性</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../part2/cp9.html" class="active">第九章 类模板参数推导</a></li><li class="chapter-item "><a href="../part2/cp10.html">第十章 编译期if</a></li><li class="chapter-item "><a href="../part2/cp11.html">第十一章 折叠表达式</a></li><li class="chapter-item "><a href="../part2/cp12.html">第十二章 String作为模板参数</a></li><li class="chapter-item "><a href="../part2/cp13.html">第十三章 auto作为模板参数占位符</a></li><li class="chapter-item "><a href="../part2/cp14.html">第十四章 扩展Using声明</a></li></ol></li><li class="chapter-item expanded "><div>第三部分 新的标准库组件</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../part3/cp15.html">第十五章 std::optional&lt;&gt;</a></li><li class="chapter-item "><div>第十六章 std::variant&lt;&gt;</div></li><li class="chapter-item "><div>第十七章 std::any</div></li><li class="chapter-item "><div>第十八章 std::byte</div></li><li class="chapter-item "><div>第十九章 String View</div></li><li class="chapter-item "><div>第二十章 文件系统库</div></li></ol></li><li class="chapter-item expanded "><div>第四部分 标准库扩展和修改</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十一章 Type Trait扩展</div></li><li class="chapter-item "><div>第二十二章 并行STL算法</div></li><li class="chapter-item "><div>第二十三章 子字符串和子序列搜索</div></li><li class="chapter-item "><div>第二十四章 其他工具函数和算法</div></li><li class="chapter-item "><div>第二十五章 容器扩展</div></li><li class="chapter-item "><div>第二十六章 多线程和兵法</div></li></ol></li><li class="chapter-item expanded "><div>第五部分 专业工具</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><div>第二十七章 多态类型资源（PMR）</div></li><li class="chapter-item "><div>第二十八章 对齐数据上的new和delete</div></li><li class="chapter-item "><div>第二十九章 其他专业库的改动</div></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">C++ 17 The Complete Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/CnTransGroup/Cpp17TheCompleteGuideChinese" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="第九章-类模板参数推导"><a class="header" href="#第九章-类模板参数推导">第九章 类模板参数推导</a></h1>
+<p>C++17之前，你必须显式指定类模板的所有模板参数类型。比如，你不能忽略这里的double：</p>
+<pre><code class="language-cpp">std::complex&lt;double&gt; c{5.1,3.3};
+</code></pre>
+<p>也不能忽略第二次的<code>std::mutex</code>：</p>
+<pre><code class="language-cpp">std::mutex mx;
+std::lock_guard&lt;std::mutex&gt; lg(mx);
+</code></pre>
+<p>C++17开始，必须显式指定类模板的所有模板参数类型这个限制变得宽松了。有了类模板参数推导（class template argument deduction，CTAD）技术，如果构造函数可以推导出所有模板参数，那么你可以跳过显式指定模板实参。</p>
+<p>比如：</p>
+<ul>
+<li>你可以这样声明：</li>
+</ul>
+<pre><code class="language-cpp">std::complex c{5.1,3.3}; // OK: std::complex&lt;double&gt; deduced
+</code></pre>
+<ul>
+<li>你可以这样实现：</li>
+</ul>
+<pre><code class="language-cpp">std::mutex mx;
+std::lock_guard lg{mx}; // OK: std::lock_guard&lt;std_mutex&gt; deduced
+</code></pre>
+<ul>
+<li>你甚至可以让容器推导其元素的类型：</li>
+</ul>
+<pre><code class="language-cpp">std::vector v1 {1, 2, 3} // OK: std::vector&lt;int&gt; deduced
+std::vector v2 {&quot;hello&quot;, &quot;world&quot;}; // OK: std::vector&lt;const char*&gt; deduced
+</code></pre>
+<h2 id="91-使用类模板参数推导"><a class="header" href="#91-使用类模板参数推导">9.1 使用类模板参数推导</a></h2>
+<p>只要传给构造函数的实参可以用来推导类型模板参数，那么就可以使用类模板参数推导技术。该技术支持所有初始化方式：</p>
+<pre><code class="language-cpp">std::complex c1{1.1, 2.2}; // deduces std::complex&lt;double&gt;
+std::complex c2(2.2, 3.3); // deduces std::complex&lt;double&gt;
+std::complex c3 = 3.3; // deduces std::complex&lt;double&gt;
+std::complex c4 = {4.4}; // deduces std::complex&lt;double&gt;
+</code></pre>
+<p>c3和c4的初始化方式是可行的，因为你可以传递一个值来初始化<code>std::complex&lt;&gt;</code>，这对于推导出模板参数T来说足够了，它会被用于实数和虚数部分：</p>
+<pre><code class="language-cpp">namespace std {
+  template&lt;typename T&gt;
+  class complex {
+    constexpr complex(const T&amp; re = T(), const T&amp; im = T());
+  ...
+  }
+};
+</code></pre>
+<p>假设有如下声明</p>
+<pre><code class="language-cpp">std::complex c1{1.1, 2.2};
+</code></pre>
+<p>编译器会在调用的地方找到构造函数</p>
+<pre><code class="language-cpp">constexpr complex(const T&amp; re = T(), const T&amp; im = T());
+</code></pre>
+<p>因为两个参数T都是double，所以编译器推导出T是double，然后编译下面的代码：</p>
+<pre><code class="language-cpp">complex&lt;double&gt;::complex(const double&amp; re = double(),
+                         const double&amp; im = double());
+</code></pre>
+<p>注意模板参数必须是无歧义、可推导的。因此，下面的初始化是有问题的：</p>
+<pre><code class="language-cpp">std::complex c5{5,3.3}; // ERROR: attempts to int and double as T
+</code></pre>
+<p>对于模板来说，不会在推导模板参数的时候做类型转换。</p>
+<p>对于可变参数模板的类模板参数推导也是支持的。比如，<code>std::tuple&lt;&gt;</code>定义如下：</p>
+<pre><code class="language-cpp">namespace std {
+  template&lt;typename... Types&gt;
+  class tuple;
+    public:
+    constexpr tuple(const Types&amp;...);
+    ...
+  };
+};
+</code></pre>
+<p>这个声明：</p>
+<pre><code class="language-cpp">std::tuple t{42, 'x', nullptr};
+</code></pre>
+<p>推导出的类型是<code>std::tuple&lt;int, char, std::nullptr_t&gt;</code>。</p>
+<p>你也可以推导出非类型模板参数。举个例子，像下面例子中传递一个数组，在推导模板参数的时候可以同时推导出元素类型和数组大小：</p>
+<pre><code class="language-cpp">template&lt;typename T, int SZ&gt;
+class MyClass {
+public:
+  MyClass (T(&amp;)[SZ]) {
+    ...
+  }
+};
+MyClass mc(&quot;hello&quot;); // deduces T as const char and SZ as 6
+</code></pre>
+<p>SZ推导为6，因为模板参数类型传递了一个六个字符的字符串字面值。</p>
+<p>你甚至可以推导出<strong>用作基类的lambda</strong>的类型，或者推导出<strong>auto模板参数</strong>类型。</p>
+<h3 id="911-默认拷贝"><a class="header" href="#911-默认拷贝">9.1.1 默认拷贝</a></h3>
+<p>如果类模板参数推导发现一个行为更像是拷贝初始化，它就倾向于这么认为。比如，在用一个元素初始化<code>std::vector</code>后：</p>
+<pre><code class="language-cpp">std::vector v1{42}; // vector&lt;int&gt; with one element
+</code></pre>
+<p>用这个vector去初始化另一个vector：</p>
+<pre><code class="language-cpp">std::vector v2{v1}; // v2 also is vector&lt;int&gt;
+</code></pre>
+<p>v2会被解释为<code>vector&lt;int&gt;</code>而不是<code>vector&lt;vector&lt;int&gt;&gt;</code></p>
+<p>又比如，这个规则适用于下面所有初始化形式：</p>
+<pre><code class="language-cpp">std::vector v3(v1); // v3 also is vector&lt;int&gt;
+std::vector v4 = {v1}; // v4 also is vector&lt;int&gt;
+auto v5 = std::vector{v1}; // v5 also is vector&lt;int&gt;
+</code></pre>
+<p>如果传递多个元素时，就不能被解释为拷贝初始化，此时initializer list的类型会成为新vector的元素类型：</p>
+<pre><code class="language-cpp">std::vector vv{v, v}; // vv is vector&lt;vector&lt;int&gt;&gt;
+</code></pre>
+<p>那么问题来了，如果传递可变参数模板，那么类模板参数推导会发生什么：</p>
+<pre><code class="language-cpp">template&lt;typename... Args&gt;
+auto make_vector(const Args&amp;... elems) {
+  return std::vector{elems...};
+}
+
+std::vector&lt;int&gt; v{1, 2, 3};
+auto x1 = make_vector(v, v); // vector&lt;vector&lt;int&gt;&gt;
+auto x2 = make_vector(v); // vector&lt;int&gt; or vector&lt;vector&lt;int&gt;&gt; ?
+</code></pre>
+<p>当前，不同的编译器有不同的处理方式，这个问题还在讨论中。</p>
+<h3 id="912-推导lambda的类型"><a class="header" href="#912-推导lambda的类型">9.1.2 推导lambda的类型</a></h3>
+<p>有了类模板参数推导，我们现在终于可以用lambda的类型实例化类模板类。举个例子，我们可以提供一个泛型类，然后包装一下callback，并统计调用了多少次callback：</p>
+<pre><code class="language-cpp">// tmpl/classarglambda.hpp
+#include &lt;utility&gt; // for std::forward()
+
+template&lt;typename CB&gt;
+class CountCalls
+{
+private:
+  CB callback; // callback to call
+  long calls = 0; // counter for calls
+public:
+  CountCalls(CB cb) : callback(cb) {
+  }
+  template&lt;typename... Args&gt;
+  auto operator() (Args&amp;&amp;... args) {
+    ++calls;
+    return callback(std::forward&lt;Args&gt;(args)...);
+  }
+  long count() const {
+    return calls;
+  }
+};
+</code></pre>
+<p>这里，构造函数接受一个callback，然后包装一下，用它的类型来推导出模板参数CB。比如，我们可以传一个lambda：</p>
+<pre><code class="language-cpp">CountCalls sc([](auto x, auto y) {
+                   return x &gt; y;
+             });
+</code></pre>
+<p>这意味着sc的类型被推导为<code>CountCalls&lt;TypeOfTheLambda&gt;</code>。</p>
+<p>通过这种方式，我们可以计算传递给排序函数的sc的调用次数：</p>
+<pre><code class="language-cpp">std::sort(v.begin(), v.end(),
+          td::ref(sc));
+std::cout &lt;&lt; &quot;sorted with &quot; &lt;&lt; sc.count() &lt;&lt; &quot; calls\n&quot;;
+</code></pre>
+<p>包装后的lambda通过引用的方式传递给排序函数，因为如若不然<code>std::sort()</code>只会计算传递给他的lambda的拷贝的调用，毕竟是传值的方式。</p>
+<p>然而，我没可以传递包装后的lambda给<code>std::for_each</code>，因为这个算法可以返回传递给他的callback的拷贝：</p>
+<pre><code class="language-cpp">auto fo = std::for_each(v.begin(), v.end(),
+                        CountCalls([](auto i) {
+                                      std::cout &lt;&lt; &quot;elem: &quot; &lt;&lt; i &lt;&lt; '\n';
+                        }));
+std::cout &lt;&lt; &quot;output with &quot; &lt;&lt; fo.count() &lt;&lt; &quot; calls\n&quot;;
+</code></pre>
+<h3 id="913-非部分类模板参数推导"><a class="header" href="#913-非部分类模板参数推导">9.1.3 非部分类模板参数推导</a></h3>
+<p>不像函数模板那样，类模板参数不能部分推导（显示模板参数的一部分）。比如：</p>
+<pre><code class="language-cpp">template&lt;typename T1, typename T2, typename T3 = T2&gt;
+class C {
+public:
+  C (T1 x = T1{}, T2 y = T2{}, T3 z = T3{}) {
+    ...
+  }
+  ...
+};
+// all deduced:
+C c1(22, 44.3, &quot;hi&quot;); // OK: T1 is int, T2 is double, T3 is const char*
+C c2(22, 44.3); // OK: T1 is int, T2 and T3 are double
+C c3(&quot;hi&quot;, &quot;guy&quot;); // OK: T1, T2, and T3 are const char*
+// only some deduced:
+C&lt;string&gt; c4(&quot;hi&quot;, &quot;my&quot;); // ERROR: only T1 explicitly defined
+C&lt;&gt; c5(22, 44.3); // ERROR: neither T1 not T2 explicitly defined
+C&lt;&gt; c6(22, 44.3, 42); // ERROR: neither T1 nor T2 explicitly defined
+// all specified:
+C&lt;string,string,int&gt; c7; // OK: T1,T2 are string, T3 is int
+C&lt;int,string&gt; c8(52, &quot;my&quot;); // OK: T1 is int,T2 and T3 are strings
+C&lt;string,string&gt; c9(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;); // OK: T1,T2,T3 are strings
+</code></pre>
+<p>因为第三个模板参数类型有默认值，所以如果已经指定了第二个就可以省略第三个。</p>
+<p>如果i想知道为什么不支持偏特化，下面是造成这个抉择的原因：</p>
+<pre><code class="language-cpp">std::tuple&lt;int&gt; t(42, 43); // still ERROR
+</code></pre>
+<p><code>std::tuple</code>是一个可变参数模板，所以你可以指定任意数量的参数。在这种情况下，到底是认为这是只指定了一个类型的而导致的错误还是有意为之很难说清。看起来是有问题的。后期有更多考量后，偏特化也有可能加入C++标准。尽管目前没有。</p>
+<p>不幸的是，缺少部分特化就不能解决一个常见代码需求。对于关联容器的排序规则，或者无序容器的hash函数，我们仍然不能简单的传一个lambda：</p>
+<pre><code class="language-cpp">std::set&lt;Cust&gt; coll([](const Cust&amp; x, const Cust&amp; y) { // still ERROR
+  return x.name() &gt; y.name();
+});
+</code></pre>
+<p>我们还是得指定lambda的类型，因此需要像下面这样写：</p>
+<pre><code class="language-cpp">auto sortcrit = [](const Cust&amp; x, const Cust&amp; y) {
+  return x.name() &gt; y.name();
+};
+std::set&lt;Cust, decltype(sortcrit)&gt; coll(sortcrit); // OK
+</code></pre>
+<h3 id="914-类模板参数推导代替便捷的工具函数"><a class="header" href="#914-类模板参数推导代替便捷的工具函数">9.1.4 类模板参数推导代替便捷的工具函数。</a></h3>
+<p>有了类模板参数推导，我们可以不再使用那些目的仅是推导传的参数的类型的便捷工具函数。</p>
+<p>最明显的是<code>make_pair</code>，他允许我们不指定传的参数的类型。比如，对于v：</p>
+<pre><code class="language-cpp">std::vector&lt;int&gt; v;
+</code></pre>
+<p>我们可以使用</p>
+<pre><code class="language-cpp">auto p = std::make_pair(v.begin(), v.end());
+</code></pre>
+<p>来代替</p>
+<pre><code class="language-cpp">std::pair&lt;typename std::vector&lt;int&gt;::iterator,typename std::vector&lt;int&gt;::iterator&gt; p(v.begin(), v.end());
+</code></pre>
+<p>现在，<code>make_pair()</code>不再需要了，可以直接这么写：</p>
+<pre><code class="language-cpp">std::pair p(v.begin(), v.end());
+</code></pre>
+<p>然而，<code>std::make_pair()</code>也是一个很好的例子，它说明了有时候工具函数不只是做模板参数推导一件事情。事实上，<code>std::make_pair()</code>也会类型退化，这意味着传入的string字面值会转换为<code>const char*</code>：</p>
+<pre><code class="language-cpp">auto q = std::make_pair(&quot;hi&quot;, &quot;world&quot;); // pair of pointers
+</code></pre>
+<p>在这个例子中，q的类型是<code>std::pair&lt;const char*, const char*&gt;</code>。</p>
+<p>使用类模板参数推导，情况变得更复杂。让我们看看一个简单的类声明，它有点像<code>std::pair</code>：</p>
+<pre><code class="language-cpp">template&lt;typename T1, typename T2&gt;
+struct Pair1 {
+  T1 first;
+  T2 second;
+  Pair1(const T1&amp; x, const T2&amp; y) : first{x}, second{y} {
+  }
+};
+</code></pre>
+<p>重点是元素通过引用传递。根据语言规则，当使用引用传递一个模板类型的实参时，形参不会_类型退化_，所谓类型退化是指将原生数组类型转换为原生指针类型这样一种机制。所以，当这样调用的时候：</p>
+<pre><code class="language-cpp">Pair1p1{&quot;hi&quot;,&quot;world&quot;};//deduces pair of arrays of different size, but...
+</code></pre>
+<p>T1被推导为<code>char[3]</code>，T2被推导为<code>char[6]</code>。基本上，这个推导是有效地。然而，当我们使用T1和T2类型去声明成员<strong>first</strong>和<strong>second</strong>时，结果是，它们被声明为：</p>
+<pre><code class="language-cpp">char first[3];
+char second[6];
+</code></pre>
+<p>并且从一个左值数组初始化出新数组是不被允许的。编译过程就像这样：</p>
+<pre><code class="language-cpp">const char x[3] = &quot;hi&quot;;
+const char y[6] = &quot;world&quot;;
+char first[3] {x}; // ERROR
+char second[6] {y}; // ERROR
+</code></pre>
+<p>注意如果直接使用值传递，然后用它的类型来声明成员就不会有这个问题：</p>
+<pre><code class="language-cpp">template&lt;typename T1, typename T2&gt;
+struct Pair2 {
+  T1 first;
+  T2 second;
+  Pair2(T1 x, T2 y) : first{x}, second{y} {
+  }
+};
+</code></pre>
+<p>如果我们这样调用：</p>
+<pre><code class="language-cpp">Pair2 p2{&quot;hi&quot;, &quot;world&quot;}; // deduces pair of pointers
+</code></pre>
+<p>T1和T2将会被推导为<code>const char*</code>。
+因为类<code>std::pair&lt;&gt;</code>被声明，所以构造函数使用引用传参，你可能期望看到下面的初始化代码不会被编译：</p>
+<pre><code class="language-cpp">std::pair p{&quot;hi&quot;, &quot;world&quot;}; // seems to deduce pair of arrays of different size, but...
+</code></pre>
+<p>但是它可以编。原因是我们用到了<strong>推导规则</strong></p>
+<h2 id="92-推导规则"><a class="header" href="#92-推导规则">9.2 推导规则</a></h2>
+<p>你可以定义特定的<strong>推导规则</strong>来提供额外的类模板实参推导能力，或者修复已经存在的、由构造函数定义的推导。举个例子，你可以定义一个规则，无论何时Pair3被推导，类型推导看起来就像在操作值传递的参数一样：</p>
+<pre><code class="language-cpp">template&lt;typename T1, typename T2&gt;
+struct Pair3 {
+  T1 first;
+  T2 second;
+  Pair3(const T1&amp; x, const T2&amp; y) : first{x}, second{y} {
+  }
+};
+// deduction guide for the constructor:
+template&lt;typename T1, typename T2&gt;
+Pair3(T1, T2) -&gt; Pair3&lt;T1, T2&gt;;
+</code></pre>
+<p>这里<code>-&gt;</code>左边是什么我们想推导什么。在这里例子中，我们想推导一个构造函数，其参数是值传递，类型是任意T1和T2。在<code>-&gt;</code>右边是我们想定义的推导结果。本例中，Pair3进行实例化。</p>
+<p>你可能争辩说，这不就是构造函数做的事情吗。然而，构造函数的参数是引用传递，这里是值传递，不一样。通常来说，即使在模板外面，值传递的实参也会_类型退化_，而引用传递的实参不会退化。_类型退化_意味着原始数组转换为指针，顶级修饰符，比如const和引用符号，会被忽略。</p>
+<p>没有类型推导规则，下面的声明：</p>
+<pre><code class="language-cpp">Pair3 p3{&quot;hi&quot;, &quot;world&quot;};
+</code></pre>
+<p>x的类型，即T1是<code>const char[3]</code>，y的类型，即T2是<code>const char[6]</code>。</p>
+<p>因为有类型推导，模板参数会类型华为，意味着传递的数组或者字符串字面值会退化为对应的指针类型。现在当我们声明：</p>
+<pre><code class="language-cpp">Pair3 p3{&quot;hi&quot;, &quot;world&quot;};
+</code></pre>
+<p>推导规则被应用，两个参数类型都是<code>const char*</code>。推导后的类型就像我们直接这样写：</p>
+<pre><code class="language-cpp">Pair3&lt;const char*, const char*&gt; p3{&quot;hi&quot;, &quot;world&quot;};
+</code></pre>
+<p>注意，此时构造函数仍然是引用传参。推导规则只影响模板类型的推导，不影响T1、T2被推导后的构造函数调用。</p>
+<h3 id="921-使用推导规则强制类型退化"><a class="header" href="#921-使用推导规则强制类型退化">9.2.1 使用推导规则强制类型退化</a></h3>
+<p>正如上面例子演示的那样，通常，这些重载规则的一个常见用途是确保一个模板参数T在推导过程中类型进行退化。考虑一个传统的类模板：</p>
+<pre><code class="language-cpp">template&lt;typename T&gt;
+struct C {
+  C(const T&amp;) {
+  }
+  ...
+};
+</code></pre>
+<p>如果我们这里传一个字符串字面值&quot;hello&quot;，T被推导为字符串字面值的类型，即<code>const char[6]</code>：</p>
+<pre><code class="language-cpp">C x{&quot;hello&quot;}; // T deduced as const char[6]
+</code></pre>
+<p>原因是当引用传值时，模板类型推导不会将它退化成对应的指针类型。
+带上一个简单的推导规则：</p>
+<pre><code class="language-cpp">template&lt;typename T&gt; C(T) -&gt; C&lt;T&gt;;
+</code></pre>
+<p>我们就修复了这个问题：</p>
+<pre><code class="language-cpp">C x{&quot;hello&quot;}; // T deduced as const char*
+</code></pre>
+<p>现在，因为推导规则是值传递，它的类型发生退化，所以&quot;hello&quot;的类型T最终是<code>const char*</code>。
+出于这个原因，对于任意类模板，其构造函数带引用传递的参数，都给出这样一个推导规则是很合理的。C++标准库为pair和tuple提供了对应的推导规则（参见9.2.6）。</p>
+<h3 id="922-非模板推导规则"><a class="header" href="#922-非模板推导规则">9.2.2 非模板推导规则</a></h3>
+<p>to translate</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../part2/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../part2/cp10.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../part2/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../part2/cp10.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

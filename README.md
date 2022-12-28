@@ -1,13 +1,9 @@
 # 《C++ 17 The Complete Guide》翻译
 
-> ! 2020.7开始更新<br/>
-> ! 对于“信雅达”，个人权重排序是“达雅信”<br/>
-> ! 这书章节比较多，但是大部分章节都比较短，语言简洁，代码明了，入厕必备读物，个人推荐<br/>
-> ！目录章节只是简单翻译一下，后期可能调整<br/>
-> ! 我没有版权，我没有版权，我没有版权<br/>
-> ！本书要求读者具有C++基础<br/>
-> ! [英文PDF版本下载](https://github.com/kelthuzadx/Cpp17TheCompleteGuideChinese/blob/master/public/Cpp17TheCompleteGuide.pdf),仅供翻译参考<br/>
-> ! [在线阅读](https://cntransgroup.github.io/Cpp17TheCompleteGuideChinese/)
+> + 对于“信雅达”，个人权重排序是“达雅信”<br/>
+> + 这书章节比较多，但是大部分章节都比较短，语言简洁，代码明了，入厕必备读物，个人推荐<br/>
+> + 本书要求读者具有C++基础<br/>
+> + **[在线阅读(推荐)](https://cntransgroup.github.io/Cpp17TheCompleteGuideChinese/)**
 
 # 目录
 + [第一部分 基本语言特性](src/part1/README.md)
@@ -48,15 +44,8 @@
 ## 贡献者
 
 感谢所有参与翻译/勘误/建议的贡献者们~
+
 <a href="https://github.com/kelthuzadx/Cpp17TheCompleteGuideChinese/graphs/contributors"><img src="https://opencollective.com/Cpp17TheCompleteGuideChinese/contributors.svg?width=890&button=false" /></a>
 
-## 赞助翻译
-
- 🙏 [[Become a backer](https://opencollective.com/Cpp17TheCompleteGuideChinese#backer)]
-
-<a href="https://opencollective.com/Cpp17TheCompleteGuideChinese#backers" target="_blank"><img src="https://opencollective.com/Cpp17TheCompleteGuideChinese/backers.svg?width=890"></a>
-
-## 译注
-+ 作为对原文的补充，译者会在某些位置写`（译注，）`；
-+ 原文中带跳转到另一章节的文字用`**word**`标注，并写上`（参考 x.x.x 节）`；
-+ 对于译者认为中文翻译容易给让造成困惑的地方，使用括号标出英文原文。
+## 免责声明
+译者纯粹出于学习目的与个人兴趣翻译本书，不追求任何经济利益。译者保留对此版本译文的署名权，其他权利以原作者和出版社的主张为准。本译文只供学习研究参考之用，不得公开传播发行或用于商业用途。有能力阅读英文书籍者请购买正版支持。

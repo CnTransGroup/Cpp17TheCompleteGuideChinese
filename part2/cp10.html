@@ -223,7 +223,7 @@ void foo(T t)
 <p>总是失败，即使它所在的分支会被丢弃，原因还是因为它依赖一个模板参数。重复编译期条件的静态断言是可以的：</p>
 <pre><code class="language-cpp">static_assert(!std::is_integral_v&lt;T&gt;, &quot;no integral&quot;);
 </code></pre>
-<p>注意，一些编译器（比如Visual C++2013和1025）没有正确的实现两阶段模板翻译，它们推辞了绝大多第一阶段（<strong>definition time</strong>）该做的事情到第二阶段（<strong>instantiation time</strong>）所以无效的函数调用，或者甚至一些错误的语法也可能可以通过编译。</p>
+<p>注意，一些编译器（比如Visual C++2013和1025）没有正确的实现两阶段模板翻译，它们把绝大多第一阶段（<strong>definition time</strong>）该做的事情推迟到第二阶段（<strong>instantiation time</strong>），所以无效的函数调用，甚至一些语法错误也可能通过编译。</p>
 <h2 id="102-使用编译期if"><a class="header" href="#102-使用编译期if">10.2 使用编译期if</a></h2>
 <p>原则上，你可以使用编译器if做一些事情，看起来就像是运行时的if，只是条件是编译期的表达式。你也可以混用编译期间if和运行时if：</p>
 <pre><code class="language-cpp">if constexpr (std::is_integral_v&lt;std::remove_reference_t&lt;T&gt;&gt;) {

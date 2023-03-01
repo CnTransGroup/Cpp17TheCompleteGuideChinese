@@ -24,7 +24,7 @@
   + [第十四章 扩展Using声明](src/part2/cp14.md)  **翻译中**
 + 第三部分 新的标准库组件
   + [第十五章 `std::optional<>`](src/part3/cp15.md)
-  + 第十六章 `std::variant<>`
+  + [第十六章 `std::variant<>`](src/part3/cp16.md)
   + 第十七章 `std::any`
   + 第十八章 `std::byte`
   + 第十九章 String View
